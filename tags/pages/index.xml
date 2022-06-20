@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>pages on Old Deuteronomy</title>
+    <title>pages on The Emacs Cat</title>
     <link>https://olddeuteronomy.github.io/tags/pages/</link>
-    <description>Recent content in pages on Old Deuteronomy</description>
+    <description>Recent content in pages on The Emacs Cat</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 17 Jun 2017 14:51:33 +0300</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/tags/pages/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <pubDate>Sat, 17 Jun 2017 14:51:33 +0300</pubDate>
       
       <guid>https://olddeuteronomy.github.io/about/</guid>
-      <description>&lt;h1 id=&#34;about-old-deuteronomy&#34;&gt;About Old Deuteronomy&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;about-the-emacs-cat&#34;&gt;About The Emacs Cat&lt;/h1&gt;
 &lt;p&gt;My first attempt to dive into the ocean of Emacs occurred in 1997,
 almost 25 years ago.&lt;/p&gt;</description>
     </item>
@@ -24,7 +24,7 @@ almost 25 years ago.&lt;/p&gt;</description>
       <pubDate>Sat, 17 Jun 2017 14:50:40 +0300</pubDate>
       
       <guid>https://olddeuteronomy.github.io/contact/</guid>
-      <description>&lt;h1 id=&#34;drop-a-message-to-old-deuteronomy&#34;&gt;Drop a message to Old Deuteronomy&lt;/h1&gt;</description>
+      <description>&lt;h1 id=&#34;drop-a-message-to-the-emacs-cat&#34;&gt;Drop a message to The Emacs Cat&lt;/h1&gt;</description>
     </item>
     
   </channel>
