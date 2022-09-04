@@ -6,7 +6,43 @@
     <description>Recent content in Tags on The Emacs Cat</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Jun 2022 14:11:33 +0300</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Sep 2022 01:46:36 +0300</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>emacs</title>
+      <link>https://olddeuteronomy.github.io/tags/emacs/</link>
+      <pubDate>Sat, 03 Sep 2022 01:46:36 +0300</pubDate>
+      
+      <guid>https://olddeuteronomy.github.io/tags/emacs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>packages</title>
+      <link>https://olddeuteronomy.github.io/tags/packages/</link>
+      <pubDate>Sat, 03 Sep 2022 01:46:36 +0300</pubDate>
+      
+      <guid>https://olddeuteronomy.github.io/tags/packages/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>writing</title>
+      <link>https://olddeuteronomy.github.io/tags/writing/</link>
+      <pubDate>Tue, 16 Aug 2022 15:08:36 +0300</pubDate>
+      
+      <guid>https://olddeuteronomy.github.io/tags/writing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>eshell</title>
+      <link>https://olddeuteronomy.github.io/tags/eshell/</link>
+      <pubDate>Fri, 22 Jul 2022 13:57:32 +0300</pubDate>
+      
+      <guid>https://olddeuteronomy.github.io/tags/eshell/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>calc</title>
       <link>https://olddeuteronomy.github.io/tags/calc/</link>
@@ -22,15 +58,6 @@
       <pubDate>Wed, 22 Jun 2022 14:11:33 +0300</pubDate>
       
       <guid>https://olddeuteronomy.github.io/tags/elisp/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>emacs</title>
-      <link>https://olddeuteronomy.github.io/tags/emacs/</link>
-      <pubDate>Wed, 22 Jun 2022 14:11:33 +0300</pubDate>
-      
-      <guid>https://olddeuteronomy.github.io/tags/emacs/</guid>
       <description></description>
     </item>
     

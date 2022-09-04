@@ -18,7 +18,7 @@
 		<meta itemprop="name" content="DMS To Decimal Degree Conversions And More">
 <meta itemprop="description" content="Elisp snippets for Degree/Minute/Second to decimal conversion in Emacs"><meta itemprop="datePublished" content="2022-06-22T14:11:33+03:00" />
 <meta itemprop="dateModified" content="2022-06-22T14:11:33+03:00" />
-<meta itemprop="wordCount" content="481">
+<meta itemprop="wordCount" content="482">
 <meta itemprop="keywords" content="emacs,elisp,snippets,calc," />
 		<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="DMS To Decimal Degree Conversions And More"/>
@@ -109,7 +109,7 @@
 angle value from the DMS notation (<em>degree@minute&rsquo;second&quot;</em>) to a decimal
 degree in the floating point number format and vice versa.</p>
 <h2 id="dms-to-decimal-degree">DMS to Decimal Degree</h2>
-<p>Indeed I want to do this directly in an Emacs buffer so I wrote a
+<p>Of course, I want to do this directly in an Emacs buffer, so I wrote a
 simple function that uses <code>deg</code> and <code>hms</code> functions provided by the
 built-in superb <strong>calc</strong> package.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun dms2deg (p1 p2)
@@ -128,9 +128,9 @@ built-in superb <strong>calc</strong> package.</p>
 </span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">message</span> <span style="color:#e6db74">&#34;No active region!&#34;</span>))
 </span></span><span style="display:flex;"><span>    )
 </span></span><span style="display:flex;"><span>  )
-</span></span></code></pre></div><p>I bound this function to the <code>Ctrl+F6</code> key chord (<code>C-f6</code> in the Emacs
-notation) globally. Of course you can use your own key combination.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(global-set-key [(control f6)] <span style="color:#e6db74">&#39;dms2deg</span>)
+</span></span></code></pre></div><p>I&rsquo;ve bound this function to the <code>Ctrl+F6</code> key chord (<code>C-f6</code> in the Emacs
+notation) globally. Of course, you can use your own key combination.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(global-set-key [(control f6)] <span style="color:#a6e22e">#&#39;</span>dms2deg)
 </span></span></code></pre></div><p>Now I can select a region in a buffer, press <code>C-f6</code> and <em>replace</em> the
 selection with its decimal value, so <code>30@15'54&quot;</code> becomes <code>30.265</code>.</p>
 <h2 id="decimal-degree-to-dms">Decimal Degree to DMS</h2>
@@ -153,14 +153,14 @@ point with the corresponding DMS string.</p>
 </span></span><span style="display:flex;"><span>    )
 </span></span><span style="display:flex;"><span>  )
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>(global-set-key [(shift f6)] <span style="color:#e6db74">&#39;deg2dms</span>)
+</span></span><span style="display:flex;"><span>(global-set-key [(shift f6)] <span style="color:#a6e22e">#&#39;</span>deg2dms)
 </span></span></code></pre></div><p>Now if you select a region in a buffer and then press <code>S-f6</code>, your <code>30.265</code>
 becomes <code>30@ 15' 54.&quot;</code></p>
 <h2 id="enhanced-version">Enhanced Version</h2>
 <p>After a while, I decided to enhance the first conversion function by
 adding an <em>&lsquo;inline calculator&rsquo;</em> feature. It works quite simple: if a
 selected region contains the &lsquo;@&rsquo; character, the region is considered
-as a coordinate (angle) value in the DMS notation and it should be <em>replaced</em>
+as a coordinate (angle) value in the DMS notation, and it should be <em>replaced</em>
 with its decimal value. Otherwise, the region is considered as an
 arithmetic expression (in terms of the Emacs&rsquo; calc) and its calculated
 value will be <em>inserted</em> just after the region.</p>
@@ -217,6 +217,20 @@ Mapping Tools</a> (GMT) toolbox.</p>
 </main>
 
 
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/post/i-am-back/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">I Am Back</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/post/eshell-aliases-and-prompt/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">Eshell Aliases, Prompt, And Colors</p>
+		</a>
+	</div>
+</nav>
 
 
 			</div>
@@ -233,7 +247,11 @@ Mapping Tools</a> (GMT) toolbox.</p>
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/reverso-context-in-emacs/">Reverso Context in Emacs</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/use-abbrev-to-enter-special-characters/">Use abbrev to Enter Special Characters</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/eshell-aliases-and-prompt/">Eshell Aliases, Prompt, And Colors</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/dms-decimal-degree-conversions/">DMS To Decimal Degree Conversions And More</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/i-am-back/">I Am Back</a></li>
 		</ul>
 	</div>
 </div>
@@ -243,8 +261,11 @@ Mapping Tools</a> (GMT) toolbox.</p>
 		<a class="widget-taglist__link widget__link btn" href="/tags/calc/" title="calc">calc</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/elisp/" title="elisp">elisp</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/emacs/" title="emacs">emacs</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/eshell/" title="eshell">eshell</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/packages/" title="packages">packages</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/pages/" title="pages">pages</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/snippets/" title="snippets">snippets</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/writing/" title="writing">writing</a>
 	</div>
 </div>
 <div class="widget-categories widget">

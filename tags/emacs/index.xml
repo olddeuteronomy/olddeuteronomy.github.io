@@ -6,7 +6,48 @@
     <description>Recent content in emacs on The Emacs Cat</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Jun 2022 14:11:33 +0300</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Sep 2022 01:46:36 +0300</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reverso Context in Emacs</title>
+      <link>https://olddeuteronomy.github.io/post/reverso-context-in-emacs/</link>
+      <pubDate>Sat, 03 Sep 2022 01:46:36 +0300</pubDate>
+      
+      <guid>https://olddeuteronomy.github.io/post/reverso-context-in-emacs/</guid>
+      <description>&lt;p&gt;If you are an emacser, you are probably already following the &lt;a href=&#34;https://sachachua.com/blog/&#34;&gt;Sacha
+Chua&amp;rsquo;s blog&lt;/a&gt;. If you are not, you should.
+Sacha maintains an incredible blog on Emacs-related news, upcoming
+events, Org Mode, configuration, new packages, and many other things
+from the Emacs world.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Use abbrev to Enter Special Characters</title>
+      <link>https://olddeuteronomy.github.io/post/use-abbrev-to-enter-special-characters/</link>
+      <pubDate>Tue, 16 Aug 2022 15:08:36 +0300</pubDate>
+      
+      <guid>https://olddeuteronomy.github.io/post/use-abbrev-to-enter-special-characters/</guid>
+      <description>&lt;p&gt;As it&amp;rsquo;s described in the GNU Emacs Manual, &lt;em&gt;an abbreviation or abbrev
+is a string of characters that may be expanded to a longer string. The
+user can insert the abbrev string and find it replaced automatically
+with the expansion of the abbrev. This saves typing&lt;/em&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Eshell Aliases, Prompt, And Colors</title>
+      <link>https://olddeuteronomy.github.io/post/eshell-aliases-and-prompt/</link>
+      <pubDate>Fri, 22 Jul 2022 13:57:32 +0300</pubDate>
+      
+      <guid>https://olddeuteronomy.github.io/post/eshell-aliases-and-prompt/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Do you use #Emacs to run shells or terminal emulators?
+Well, you should. With vterm you have a fast alternative to the
+builtin ansi-term. And if you prefer shells, you&amp;rsquo;ve got EShell and
+Shell Mode.
+And don&amp;rsquo;t forget serial-term for embedded programming.
+— Mickey Petersen (@mickeynp) on Twitter, July 18, 2022.&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
     <item>
       <title>DMS To Decimal Degree Conversions And More</title>
       <link>https://olddeuteronomy.github.io/post/dms-decimal-degree-conversions/</link>
