@@ -6,7 +6,21 @@
     <description>Recent content on The Emacs Cat</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 03 Sep 2022 01:46:36 +0300</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Sep 2022 15:26:36 +0300</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Emacs Keyboard Shortcuts</title>
+      <link>https://olddeuteronomy.github.io/post/emacs-shortcuts/</link>
+      <pubDate>Tue, 06 Sep 2022 15:26:36 +0300</pubDate>
+      
+      <guid>https://olddeuteronomy.github.io/post/emacs-shortcuts/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://irreal.org/blog/&#34;&gt;Irreal&lt;/a&gt; has recently published &lt;a href=&#34;https://irreal.org/blog/?p=10784&#34;&gt;a
+post&lt;/a&gt; with a reference to the Vernon
+Grant&amp;rsquo;s
+&lt;a href=&#34;https://github.com/VernonGrant/emacs-keyboard-shortcuts&#34;&gt;emacs-keyboard-shortcuts&lt;/a&gt;
+README that contains a list of Emacs keyboard shortcuts Vernon uses on
+a regular basis.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Reverso Context in Emacs</title>
       <link>https://olddeuteronomy.github.io/post/reverso-context-in-emacs/</link>
