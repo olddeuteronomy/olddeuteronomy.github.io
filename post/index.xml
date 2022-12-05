@@ -6,7 +6,22 @@
     <description>Recent content in Posts on The Emacs Cat</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Oct 2022 13:07:45 +0300</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Dec 2022 14:14:13 +0300</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A Simple tree-sitter Config That Works</title>
+      <link>https://olddeuteronomy.github.io/post/a-tree-sitter-config-that-works/</link>
+      <pubDate>Mon, 05 Dec 2022 14:14:13 +0300</pubDate>
+      
+      <guid>https://olddeuteronomy.github.io/post/a-tree-sitter-config-that-works/</guid>
+      <description>&lt;p&gt;Recently, I&amp;rsquo;ve discovered a number of posts on Reddit — like
+&lt;a href=&#34;https://www.reddit.com/r/emacs/comments/zc70m8/treesitterhlmode_does_not_do_anything/&#34;&gt;tree-sitter-hl-mode does not do
+anything&lt;/a&gt;
+or &lt;a href=&#34;https://www.reddit.com/r/emacs/comments/zbpa42/how_to_use_emacs_29_treesitter/&#34;&gt;How to use Emacs 29
+Tree-sitter?&lt;/a&gt;
+— and decided to share my simple &lt;code&gt;tree-sitter&lt;/code&gt; setup that
+seems to be working on my Emacs 28.2 like a charm.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>How to Clear the Eshell</title>
       <link>https://olddeuteronomy.github.io/post/how-to-clear-the-eshell/</link>
