@@ -150,7 +150,7 @@ anywhere, and changed its mode to <em>executable</em> by <code>chmod +x tree-sit
 </span></span><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;python-mode-hook</span> <span style="color:#a6e22e">#&#39;</span>tree-sitter-hl-mode)
 </span></span></code></pre></div><p>That&rsquo;s it. Quite simple, isn&rsquo;t it?</p>
 <p>Please pay attention to the last line. It seems that the <em>tree-sitter
-highligting mode</em> provided by <code>tree-sitter-hl-mode</code> is not activated when
+highlighting mode</em> provided by <code>tree-sitter-hl-mode</code> is not activated when
 you load a file into the buffer even if the <em>global tree sitter mode</em> is on.
 Adding the hook for the particular source code mode solves this problem.</p>
 <h2 id="result">Result</h2>
