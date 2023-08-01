@@ -6,7 +6,17 @@
     <description>Recent content in elisp on The Emacs Cat</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Jun 2022 14:11:33 +0300</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/tags/elisp/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Aug 2023 14:07:46 +0300</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/tags/elisp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Org Mode: Export Clock Tables</title>
+      <link>https://olddeuteronomy.github.io/post/org-export-clocktables/</link>
+      <pubDate>Tue, 01 Aug 2023 14:07:46 +0300</pubDate>
+      
+      <guid>https://olddeuteronomy.github.io/post/org-export-clocktables/</guid>
+      <description>&lt;p&gt;After reading a quite interesting post by Irreal on &lt;a href=&#34;https://irreal.org/blog/?p=11416&#34;&gt;Org mode clock tables&lt;/a&gt;,
+I decided to share my — a bit specific —  experience with the subject.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>DMS To Decimal Degree Conversions And More</title>
       <link>https://olddeuteronomy.github.io/post/dms-decimal-degree-conversions/</link>

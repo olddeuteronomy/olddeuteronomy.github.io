@@ -10,3 +10,9 @@ body {
 input {
     font-size: inherit;
 }
+
+figcaption h4 {
+    font-weight: 500;
+    font-size: 1rem;
+    font-style: italic;
+}

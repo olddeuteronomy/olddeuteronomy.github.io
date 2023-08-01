@@ -6,22 +6,40 @@
     <description>Recent content in Tags on The Emacs Cat</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 05 Dec 2022 14:14:13 +0300</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Aug 2023 14:07:46 +0300</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>config</title>
-      <link>https://olddeuteronomy.github.io/tags/config/</link>
-      <pubDate>Mon, 05 Dec 2022 14:14:13 +0300</pubDate>
+      <title>elisp</title>
+      <link>https://olddeuteronomy.github.io/tags/elisp/</link>
+      <pubDate>Tue, 01 Aug 2023 14:07:46 +0300</pubDate>
       
-      <guid>https://olddeuteronomy.github.io/tags/config/</guid>
+      <guid>https://olddeuteronomy.github.io/tags/elisp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>emacs</title>
       <link>https://olddeuteronomy.github.io/tags/emacs/</link>
-      <pubDate>Mon, 05 Dec 2022 14:14:13 +0300</pubDate>
+      <pubDate>Tue, 01 Aug 2023 14:07:46 +0300</pubDate>
       
       <guid>https://olddeuteronomy.github.io/tags/emacs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>org-mode</title>
+      <link>https://olddeuteronomy.github.io/tags/org-mode/</link>
+      <pubDate>Tue, 01 Aug 2023 14:07:46 +0300</pubDate>
+      
+      <guid>https://olddeuteronomy.github.io/tags/org-mode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>config</title>
+      <link>https://olddeuteronomy.github.io/tags/config/</link>
+      <pubDate>Mon, 05 Dec 2022 14:14:13 +0300</pubDate>
+      
+      <guid>https://olddeuteronomy.github.io/tags/config/</guid>
       <description></description>
     </item>
     
@@ -67,15 +85,6 @@
       <pubDate>Wed, 22 Jun 2022 14:11:33 +0300</pubDate>
       
       <guid>https://olddeuteronomy.github.io/tags/calc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>elisp</title>
-      <link>https://olddeuteronomy.github.io/tags/elisp/</link>
-      <pubDate>Wed, 22 Jun 2022 14:11:33 +0300</pubDate>
-      
-      <guid>https://olddeuteronomy.github.io/tags/elisp/</guid>
       <description></description>
     </item>
     
