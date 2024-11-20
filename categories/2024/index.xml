@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2024 on The Emacs Cat</title>
+    <link>https://olddeuteronomy.github.io/categories/2024/</link>
+    <description>Recent content in 2024 on The Emacs Cat</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 10 Nov 2024 11:52:19 +0100</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/categories/2024/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Some Excerpts From My Emacs Config</title>
+      <link>https://olddeuteronomy.github.io/post/some-excerpts-from-my-emacs-config/</link>
+      <pubDate>Sun, 10 Nov 2024 11:52:19 +0100</pubDate>
+      
+      <guid>https://olddeuteronomy.github.io/post/some-excerpts-from-my-emacs-config/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m happy to be back after one year away and it feels great.&lt;/p&gt;
+&lt;p&gt;Below are some chaotic mini/micro &amp;ndash; or even nano &amp;ndash; excerpts from my
+&lt;code&gt;~/.emacs&lt;/code&gt; file I have been tuning in for 12 years. These days, I&amp;rsquo;m
+running Emacs 29.4 on Ubuntu (Pop!_OS) 22.04 and, rarely, on macOS.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -14,6 +14,7 @@
 <meta property="article:published_time" content="2022-07-22T13:57:32+03:00" />
 <meta property="article:modified_time" content="2022-07-22T13:57:32+03:00" />
 
+
 		<meta itemprop="name" content="Eshell Aliases, Prompt, And Colors">
 <meta itemprop="description" content="How to configure and to use Emacs&#39; eshell aliases, prompt, and colors"><meta itemprop="datePublished" content="2022-07-22T13:57:32+03:00" />
 <meta itemprop="dateModified" content="2022-07-22T13:57:32+03:00" />
@@ -117,7 +118,7 @@ alias e find-file-other-window $1
 alias d dired $1
 alias gd magit-diff-unstaged
 alias gds magit-diff-staged
-alias gg git log --color --graph --oneline --abbrev-commit --decorate --all --date=short --pretty=format:&#34;%C(cyan)%h %C(yellow)%ad %C(bold green)%d %C(reset)%s&#34;
+alias gg git log --color --graph --oneline --abbrev-commit --decorate --all --date=short --pretty=format:&quot;%C(cyan)%h %C(yellow)%ad %C(bold green)%d %C(reset)%s&quot;
 </code></pre><p>Most of these aliases are obvious, e.g. <code>ll</code> prints extended directory
 listing, <code>ff somefile</code> opens <em>somefile</em> for editing in the same
 window, <code>e somefile</code> uses other window to edit <em>somefile</em>, <code>d</code> opens
@@ -131,35 +132,35 @@ the colorized one-line git log as shown below.</p>
 Reddit
 <a href="https://www.reddit.com/r/emacs/comments/6f0rkz/my_fancy_eshell_prompt/">post</a>
 with some colors optimized for the Solarized Dark theme.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(setq eshell-prompt-function
-</span></span><span style="display:flex;"><span>      (lambda ()
-</span></span><span style="display:flex;"><span>        (<span style="color:#a6e22e">concat</span>
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;┌─[&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> (<span style="color:#a6e22e">user-login-name</span>) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#dc322f&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;@&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> (<span style="color:#a6e22e">system-name</span>) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#268bd2&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;]──[&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> (<span style="color:#a6e22e">format-time-string</span> <span style="color:#e6db74">&#34;%H:%M&#34;</span> (<span style="color:#a6e22e">current-time</span>)) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#b58900&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;]──[&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> (<span style="color:#a6e22e">concat</span> (eshell/pwd)) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#93a1a1&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;]\n&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;└─&gt;&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> (if venv-current-name (<span style="color:#a6e22e">concat</span> <span style="color:#e6db74">&#34; (&#34;</span> venv-current-name <span style="color:#e6db74">&#34;)&#34;</span>)  <span style="color:#e6db74">&#34;&#34;</span>) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#00dc00&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> (if (<span style="color:#a6e22e">=</span> (<span style="color:#a6e22e">user-uid</span>) <span style="color:#ae81ff">0</span>) <span style="color:#e6db74">&#34; # &#34;</span> <span style="color:#e6db74">&#34; $ &#34;</span>) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
-</span></span><span style="display:flex;"><span>         )))
-</span></span></code></pre></div><p>In addition to the username, the current time, and the current
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp">(setq eshell-prompt-function
+      (lambda ()
+        (<span style="color:#a6e22e">concat</span>
+         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;┌─[&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
+         (<span style="color:#a6e22e">propertize</span> (<span style="color:#a6e22e">user-login-name</span>) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#dc322f&#34;</span>))
+         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;@&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
+         (<span style="color:#a6e22e">propertize</span> (<span style="color:#a6e22e">system-name</span>) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#268bd2&#34;</span>))
+         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;]──[&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
+         (<span style="color:#a6e22e">propertize</span> (<span style="color:#a6e22e">format-time-string</span> <span style="color:#e6db74">&#34;%H:%M&#34;</span> (<span style="color:#a6e22e">current-time</span>)) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#b58900&#34;</span>))
+         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;]──[&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
+         (<span style="color:#a6e22e">propertize</span> (<span style="color:#a6e22e">concat</span> (eshell/pwd)) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#93a1a1&#34;</span>))
+         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;]\n&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
+         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;└─&gt;&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
+         (<span style="color:#a6e22e">propertize</span> (if venv-current-name (<span style="color:#a6e22e">concat</span> <span style="color:#e6db74">&#34; (&#34;</span> venv-current-name <span style="color:#e6db74">&#34;)&#34;</span>)  <span style="color:#e6db74">&#34;&#34;</span>) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#00dc00&#34;</span>))
+         (<span style="color:#a6e22e">propertize</span> (if (<span style="color:#a6e22e">=</span> (<span style="color:#a6e22e">user-uid</span>) <span style="color:#ae81ff">0</span>) <span style="color:#e6db74">&#34; # &#34;</span> <span style="color:#e6db74">&#34; $ &#34;</span>) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
+         )))
+</code></pre></div><p>In addition to the username, the current time, and the current
 directory it also shows the current Python virtual environment name
 (in green).</p>
 <h2 id="eshell-colors">Eshell Colors</h2>
 <p>The often cited issue with eshell is the lack of color output even if
 it is explicitly specified in a command (e.g. <code>ls --color=always</code>).</p>
 <p>Adding this to your <code>~/.emacs</code> (or <code>init.el</code>)  DOES NOT solve the problem:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(setenv <span style="color:#e6db74">&#34;TERM&#34;</span> <span style="color:#e6db74">&#34;xterm-256color&#34;</span>)
-</span></span></code></pre></div><p>THIS DOES solve the problem with color output in eshell:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;eshell-mode-hook</span> (lambda () (setenv <span style="color:#e6db74">&#34;TERM&#34;</span> <span style="color:#e6db74">&#34;xterm-256color&#34;</span>)))
-</span></span></code></pre></div><p>Though to get the current directory listing in eshell I prefer to use the eshell
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp">(setenv <span style="color:#e6db74">&#34;TERM&#34;</span> <span style="color:#e6db74">&#34;xterm-256color&#34;</span>)
+</code></pre></div><p>THIS DOES solve the problem with color output in eshell:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp">(add-hook <span style="color:#e6db74">&#39;eshell-mode-hook</span> (lambda () (setenv <span style="color:#e6db74">&#34;TERM&#34;</span> <span style="color:#e6db74">&#34;xterm-256color&#34;</span>)))
+</code></pre></div><p>Though to get the current directory listing in eshell I prefer to use the eshell
 alias <code>d</code> (equivalent to <code>d .</code>), see the list of aliases above.</p>
-<p>More on Emacs&rsquo; eshell can be found
+<p>More on Emacs' eshell can be found
 <a href="https://www.masteringemacs.org/article/complete-guide-mastering-eshell">here</a>,
 thanks again, Mickey.</p>
 		</div>
@@ -211,11 +212,11 @@ thanks again, Mickey.</p>
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/some-excerpts-from-my-emacs-config/">Some Excerpts From My Emacs Config</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/org-export-clocktables/">Org Mode: Exporting Clock Tables</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/a-tree-sitter-config-that-works/">A Simple tree-sitter Config That Works</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/how-to-clear-the-eshell/">How to Clear the Eshell</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/emacs-shortcuts/">Emacs Keyboard Shortcuts</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/reverso-context-in-emacs/">Reverso Context in Emacs</a></li>
 		</ul>
 	</div>
 </div>
@@ -249,6 +250,10 @@ thanks again, Mickey.</p>
 				</li>
 			<li class="widget__item">
 				<a class="widget__link" href="/categories/2023/">2023</a>&nbsp;
+				<span class="widget__counter widget__counter--bubble">1</span>
+				</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/2024/">2024</a>&nbsp;
 				<span class="widget__counter widget__counter--bubble">1</span>
 				</li>
 		</ul>
@@ -295,7 +300,7 @@ thanks again, Mickey.</p>
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2023 The Emacs Cat.
+			&copy; 2024 The Emacs Cat.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>

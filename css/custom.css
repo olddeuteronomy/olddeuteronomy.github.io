@@ -16,3 +16,7 @@ figcaption h4 {
     font-size: 1rem;
     font-style: italic;
 }
+
+.required {
+    color: red;
+}
