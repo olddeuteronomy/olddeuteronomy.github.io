@@ -6,7 +6,32 @@
     <description>Recent content in Posts on The Emacs Cat</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Nov 2024 11:52:19 +0100</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Nov 2024 13:23:12 +0300</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Migration to Bluesky</title>
+      <link>https://olddeuteronomy.github.io/post/migration-to-bluesky/</link>
+      <pubDate>Fri, 22 Nov 2024 13:23:12 +0300</pubDate>
+      
+      <guid>https://olddeuteronomy.github.io/post/migration-to-bluesky/</guid>
+      <description>&lt;p&gt;After reading the quite interesting post &lt;a href=&#34;https://cestlaz.github.io/post/blue-sky/&#34;&gt;Blue Sky&lt;/a&gt;
+by &lt;a href=&#34;https://bsky.app/profile/zamansky.bsky.social&#34;&gt;Mike Zamansky&lt;/a&gt; I decided to begin
+my gentle migration to &lt;a href=&#34;https://bsky.app/&#34;&gt;Bluesky&lt;/a&gt;, a new and promising social media platform.&lt;/p&gt;
+&lt;p&gt;I completely agree with Mike&amp;rsquo;s opinion on Twitter as well as other
+social platforms. Like many of us, I migrated from
+&lt;a href=&#34;https://x.com/ODeuteronomy&#34;&gt;Twitter&lt;/a&gt; &amp;ndash; keeping my existing account
+there &amp;ndash; to &lt;a href=&#34;https://emacs.ch/@olddeuteronomy&#34;&gt;Mastodon&lt;/a&gt;.
+Unfortunately, Mastodon, largely due to its distributed architecture,
+seems to be more fragile than other platforms &amp;ndash; recently, I have been
+warned that &lt;a href=&#34;https://emacs.ch&#34;&gt;emacs.ch&lt;/a&gt;, a fediverse server I have been using for two
+years now, is about to shutdown in this December.&lt;/p&gt;
+&lt;p&gt;Sure, there is a (bit complex) way to transfer your Mastodon account
+to another server &amp;ndash; and here is &lt;a href=&#34;https://fedi.tips/transferring-your-mastodon-account-to-another-server/&#34;&gt;detailed explanation&lt;/a&gt;
+on how to do that. Perhaps, I will do that in the nearest future, but
+who can guarantee that the new server is immune from the same fate?&lt;/p&gt;
+&lt;p&gt;Anyway, Bluesky looks promising and I decided to give it a try.
+You can find me at &lt;a href=&#34;https://bsky.app/profile/olddeuteronomy.bsky.social&#34;&gt;@olddeuteronomy.bsky.social&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Some Excerpts From My Emacs Config</title>
       <link>https://olddeuteronomy.github.io/post/some-excerpts-from-my-emacs-config/</link>
