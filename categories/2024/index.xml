@@ -6,7 +6,25 @@
     <description>Recent content in 2024 on The Emacs Cat</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 22 Nov 2024 11:23:12 +0100</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/categories/2024/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 29 Nov 2024 11:45:17 +0100</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/categories/2024/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Some Excerpts From My Emacs Config - 2: Functions</title>
+      <link>https://olddeuteronomy.github.io/post/some-excerpts-from-config-2-functions/</link>
+      <pubDate>Fri, 29 Nov 2024 11:45:17 +0100</pubDate>
+      
+      <guid>https://olddeuteronomy.github.io/post/some-excerpts-from-config-2-functions/</guid>
+      <description>&lt;p&gt;In his comment on &lt;a href=&#34;https://irreal.org/blog/&#34;&gt;Irreal&lt;/a&gt;&amp;rsquo;s post
+&lt;a href=&#34;https://irreal.org/blog/?p=12595&#34;&gt;Some Configuration To Solve Common Problems&lt;/a&gt;,
+&lt;a href=&#34;https://disqus.com/by/gregbognar/&#34;&gt;gregbognar&lt;/a&gt; noted that some of my
+configuration &lt;em&gt;is seriously outdated&lt;/em&gt;. In some sense, he is absolutely
+correct &amp;ndash; I&amp;rsquo;ve been collecting Emacs settings/tweaks since 2012, and
+keeping them unmodified for 12+ years.&lt;/p&gt;
+&lt;p&gt;But on the other hand, it demonstrates how stable and powerful Emacs
+is &amp;ndash; everything is still working! &lt;em&gt;If something works, don&amp;rsquo;t fix it&lt;/em&gt;
+&amp;ndash; I&amp;rsquo;ve since tried to apply this rule wherever possible.&lt;/p&gt;
+&lt;p&gt;Here are a few functions/enhancements I found helpful.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Migration to Bluesky</title>
       <link>https://olddeuteronomy.github.io/post/migration-to-bluesky/</link>
