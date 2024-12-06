@@ -4,73 +4,25 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Migration to Bluesky - The Emacs Cat</title>
+	<title>Emacs Startup Screen - The Emacs Cat</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
-	<meta name="description" content="">
-		<meta property="og:title" content="Migration to Bluesky" />
-<meta property="og:description" content="After reading the quite interesting post Blue Sky
-by Mike Zamansky I decided to begin
-my gentle migration to Bluesky, a new and promising social media platform.
-I completely agree with Mike&rsquo;s opinion on Twitter as well as other
-social platforms. Like many of us, I migrated from
-Twitter &ndash; keeping my existing account
-there &ndash; to Mastodon.
-Unfortunately, Mastodon, largely due to its distributed architecture,
-seems to be more fragile than other platforms &ndash; recently, I have been
-warned that emacs.ch, a fediverse server I have been using for two
-years now, is about to shutdown in this December.
-Sure, there is a (bit complex) way to transfer your Mastodon account
-to another server &ndash; and here is detailed explanation
-on how to do that. Perhaps, I will do that in the nearest future, but
-who can guarantee that the new server is immune from the same fate?
-Anyway, Bluesky looks promising and I decided to give it a try.
-You can find me at @olddeuteronomy.bsky.social." />
+	<meta name="description" content="Constructing a custom startup screen">
+		<meta property="og:title" content="Emacs Startup Screen" />
+<meta property="og:description" content="Constructing a custom startup screen" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://olddeuteronomy.github.io/post/migration-to-bluesky/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2024-11-22T11:23:12+01:00" />
-<meta property="article:modified_time" content="2024-11-22T11:23:12+01:00" />
+<meta property="og:url" content="https://olddeuteronomy.github.io/post/emacs-startup-screen/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-12-06T18:40:56+01:00" />
+<meta property="article:modified_time" content="2024-12-06T18:40:56+01:00" />
 
 
-		<meta itemprop="name" content="Migration to Bluesky">
-<meta itemprop="description" content="After reading the quite interesting post Blue Sky
-by Mike Zamansky I decided to begin
-my gentle migration to Bluesky, a new and promising social media platform.
-I completely agree with Mike&rsquo;s opinion on Twitter as well as other
-social platforms. Like many of us, I migrated from
-Twitter &ndash; keeping my existing account
-there &ndash; to Mastodon.
-Unfortunately, Mastodon, largely due to its distributed architecture,
-seems to be more fragile than other platforms &ndash; recently, I have been
-warned that emacs.ch, a fediverse server I have been using for two
-years now, is about to shutdown in this December.
-Sure, there is a (bit complex) way to transfer your Mastodon account
-to another server &ndash; and here is detailed explanation
-on how to do that. Perhaps, I will do that in the nearest future, but
-who can guarantee that the new server is immune from the same fate?
-Anyway, Bluesky looks promising and I decided to give it a try.
-You can find me at @olddeuteronomy.bsky.social."><meta itemprop="datePublished" content="2024-11-22T11:23:12+01:00" />
-<meta itemprop="dateModified" content="2024-11-22T11:23:12+01:00" />
-<meta itemprop="wordCount" content="167">
-<meta itemprop="keywords" content="social," />
+		<meta itemprop="name" content="Emacs Startup Screen">
+<meta itemprop="description" content="Constructing a custom startup screen"><meta itemprop="datePublished" content="2024-12-06T18:40:56+01:00" />
+<meta itemprop="dateModified" content="2024-12-06T18:40:56+01:00" />
+<meta itemprop="wordCount" content="345">
+<meta itemprop="keywords" content="emacs,config,elisp," />
 		<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Migration to Bluesky"/>
-<meta name="twitter:description" content="After reading the quite interesting post Blue Sky
-by Mike Zamansky I decided to begin
-my gentle migration to Bluesky, a new and promising social media platform.
-I completely agree with Mike&rsquo;s opinion on Twitter as well as other
-social platforms. Like many of us, I migrated from
-Twitter &ndash; keeping my existing account
-there &ndash; to Mastodon.
-Unfortunately, Mastodon, largely due to its distributed architecture,
-seems to be more fragile than other platforms &ndash; recently, I have been
-warned that emacs.ch, a fediverse server I have been using for two
-years now, is about to shutdown in this December.
-Sure, there is a (bit complex) way to transfer your Mastodon account
-to another server &ndash; and here is detailed explanation
-on how to do that. Perhaps, I will do that in the nearest future, but
-who can guarantee that the new server is immune from the same fate?
-Anyway, Bluesky looks promising and I decided to give it a try.
-You can find me at @olddeuteronomy.bsky.social."/>
+<meta name="twitter:title" content="Emacs Startup Screen"/>
+<meta name="twitter:description" content="Constructing a custom startup screen"/>
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -129,33 +81,86 @@ You can find me at @olddeuteronomy.bsky.social."/>
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">Migration to Bluesky</h1>
+			<h1 class="post__title">Emacs Startup Screen</h1>
+			<p class="post__lead">Constructing a custom startup screen</p>
 			<div class="post__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">The Emacs Cat</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2024-11-22T11:23:12&#43;01:00">Friday, Nov 22, 2024</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/2024/" rel="category">2024</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2024-12-06T18:40:56&#43;01:00">Friday, Dec 6, 2024</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/2024/" rel="category">2024</a>
 	</span>
 </div></div>
 		</header>
 		<div class="content post__content clearfix">
-			<p>After reading the quite interesting post <a href="https://cestlaz.github.io/post/blue-sky/">Blue Sky</a>
-by <a href="https://bsky.app/profile/zamansky.bsky.social">Mike Zamansky</a> I decided to begin
-my gentle migration to <a href="https://bsky.app/">Bluesky</a>, a new and promising social media platform.</p>
-<p>I completely agree with Mike&rsquo;s opinion on Twitter as well as other
-social platforms. Like many of us, I migrated from
-<a href="https://x.com/ODeuteronomy">Twitter</a> &ndash; keeping my existing account
-there &ndash; to <a href="https://emacs.ch/@olddeuteronomy">Mastodon</a>.
-Unfortunately, Mastodon, largely due to its distributed architecture,
-seems to be more fragile than other platforms &ndash; recently, I have been
-warned that <a href="https://emacs.ch">emacs.ch</a>, a fediverse server I have been using for two
-years now, is about to shutdown in this December.</p>
-<p>Sure, there is a (bit complex) way to transfer your Mastodon account
-to another server &ndash; and here is <a href="https://fedi.tips/transferring-your-mastodon-account-to-another-server/">detailed explanation</a>
-on how to do that. Perhaps, I will do that in the nearest future, but
-who can guarantee that the new server is immune from the same fate?</p>
-<p>Anyway, Bluesky looks promising and I decided to give it a try.
-You can find me at <a href="https://bsky.app/profile/olddeuteronomy.bsky.social">@olddeuteronomy.bsky.social</a>.</p>
+			<p>Some time ago, I decided to customize my Emacs startup screen in order
+to display something helpful for me. Ultimately, after much
+consideration, I settled on the following items I just want to see on
+my startup screen: 1) 3-month calendar, 2) agenda, 3) diary, 4)
+something just for fun.</p>
+<p>No doubt, there are a number of packages that can assist you in making
+a pretty good-looking startup screen &ndash; like
+<a href="https://github.com/ichernyshovvv/enlight">enlight</a>, for instance.
+However, I decided to construct my own startup screen, a very simple
+one.</p>
+<p>It requires having two command line utilities installed on your
+system: <code>fortune</code> to print out a random epigram, and <code>calendar</code> to
+print out some of the events that have occurred on the current date in
+the past. If you, like me, are using Linux or macOS &ndash; it will not be
+difficult to install them.</p>
+<p>And this is what I got&hellip;</p>
+<h2 id="in-the-emacs-init-file">In the <code>.emacs</code> init file</h2>
+<p>First of all, disable the builtin startup screen.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp">(setq inhibit-startup-screen <span style="color:#66d9ef">t</span>)
+</code></pre></div><p>Then add a startup hook.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp">(add-hook <span style="color:#e6db74">&#39;emacs-startup-hook</span>
+  (lambda ()
+    (let* ((buffer-today (<span style="color:#a6e22e">get-buffer-create</span> <span style="color:#e6db74">&#34;*today*&#34;</span>))
+           (buffer-calendar <span style="color:#e6db74">&#34;*Calendar*&#34;</span>)
+           (buffer-agenda <span style="color:#e6db74">&#34;*Org Agenda*&#34;</span>)
+           (buffer-diary <span style="color:#e6db74">&#34;*Fancy Diary Entries*&#34;</span>))
+      <span style="color:#75715e">;; Call calendar first to obtain the current date</span>
+      <span style="color:#75715e">;; required to display the diary.</span>
+      (calendar)
+      (diary)
+      (org-agenda-list)
+      <span style="color:#75715e">;; Fill and show the Today Events buffer.</span>
+      <span style="color:#75715e">;; NOTE: requires `fortune&#39; and `calendar&#39; command line utilities.</span>
+      (switch-to-buffer buffer-today)
+      (<span style="color:#a6e22e">call-process</span> <span style="color:#e6db74">&#34;fortune&#34;</span> <span style="color:#66d9ef">nil</span> buffer-today)
+      (<span style="color:#a6e22e">insert</span> <span style="color:#e6db74">&#34;\n&#34;</span>)
+      (<span style="color:#a6e22e">call-process</span> <span style="color:#e6db74">&#34;calendar&#34;</span> <span style="color:#66d9ef">nil</span> buffer-today)
+      (<span style="color:#a6e22e">goto-char</span> <span style="color:#ae81ff">0</span>)
+      (toggle-truncate-lines)
+      <span style="color:#75715e">;; Maximize the Today Events window</span>
+      (delete-other-windows)
+      <span style="color:#75715e">;; Show Agenda in the lower left quadrant.</span>
+      (split-window-vertically)
+      (other-window <span style="color:#ae81ff">1</span>)
+      (switch-to-buffer (<span style="color:#a6e22e">get-buffer</span> buffer-agenda))
+      (split-window-horizontally)
+      <span style="color:#75715e">;; Try to show Diary in the lower right quadrant.</span>
+      (other-window <span style="color:#ae81ff">1</span>)
+      (if (<span style="color:#a6e22e">get-buffer</span> buffer-diary)
+          <span style="color:#75715e">;; If Diary exists then show it ...</span>
+          (switch-to-buffer (<span style="color:#a6e22e">get-buffer</span> buffer-diary))
+        <span style="color:#75715e">;; ... else show the scratch buffer.</span>
+        (let* ((buffer-scratch (switch-to-buffer (<span style="color:#a6e22e">get-buffer</span> <span style="color:#e6db74">&#34;*scratch*&#34;</span>))))
+          (<span style="color:#a6e22e">goto-char</span> (<span style="color:#a6e22e">point-max</span>))
+          (<span style="color:#a6e22e">insert</span> (<span style="color:#a6e22e">format-time-string</span> <span style="color:#e6db74">&#34;\n;; No diary entries for %A %d %b&#34;</span>)))
+        )
+      <span style="color:#75715e">;; Go back to the Today Events buffer.</span>
+      (other-window <span style="color:#ae81ff">-2</span>)
+      (split-window-horizontally)
+      <span style="color:#75715e">;; Show Calendar in the upper left quadrant.</span>
+      (switch-to-buffer (<span style="color:#a6e22e">get-buffer</span> buffer-calendar))
+      )))
+</code></pre></div><h2 id="the-startup-screen">The startup screen</h2>
+<figure><a href="/img/emacs-init-screen.png"><img src="/img/emacs-init-screen.png"/></a><figcaption>
+            <h4>Click or tap to view the full-size picture.</h4>
+        </figcaption>
+</figure>
+
+<p>Happy emacsing!</p>
 		</div>
 		<footer class="post__footer">
 			
@@ -163,7 +168,13 @@ You can find me at <a href="https://bsky.app/profile/olddeuteronomy.bsky.social"
 	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
 	<ul class="tags__list">
 		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/social/" rel="tag">social</a>
+			<a class="tags__link btn" href="/tags/emacs/" rel="tag">emacs</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/config/" rel="tag">config</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/elisp/" rel="tag">elisp</a>
 		</li>
 	</ul>
 </div>
@@ -174,14 +185,8 @@ You can find me at <a href="https://bsky.app/profile/olddeuteronomy.bsky.social"
 
 <nav class="pager flex">
 	<div class="pager__item pager__item--prev">
-		<a class="pager__link" href="/post/some-excerpts-from-my-emacs-config/" rel="prev">
+		<a class="pager__link" href="/post/some-excerpts-from-config-2-functions/" rel="prev">
 			<span class="pager__subtitle">«&thinsp;Previous</span>
-			<p class="pager__title">Some Excerpts From My Emacs Config</p>
-		</a>
-	</div>
-	<div class="pager__item pager__item--next">
-		<a class="pager__link" href="/post/some-excerpts-from-config-2-functions/" rel="next">
-			<span class="pager__subtitle">Next&thinsp;»</span>
 			<p class="pager__title">Some Excerpts From My Emacs Config - 2: Functions</p>
 		</a>
 	</div>
