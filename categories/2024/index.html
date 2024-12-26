@@ -81,6 +81,36 @@
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
+			<a href="/post/python-programming-in-emacs/" rel="bookmark">
+			Python Programming in Emacs
+			</a>
+		</h2>
+		<p class="list__lead post__lead">Making a lightweight and fast Python IDE in Emacs.</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">The Emacs Cat</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2024-12-26T10:01:05&#43;01:00">Thursday, Dec 26, 2024</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/2024/" rel="category">2024</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<p>Python is one of my programming languages I&rsquo;m using for both work and
+home life &ndash; no doubt, I&rsquo;d want to use Emacs as an IDE for Python
+programming. There is a certain set of features we&rsquo;d expect to have
+in any IDE: 1) code completion, 2) code navigation, 3) error checking.</p>
+<p>Thanks to the fact that both <code>eglot</code>, the Emacs client for the
+Language Server Protocol (LSP), and <code>tree-sitter</code>, a powerful parsing
+library, are now &ndash; since version 29 &ndash; the parts of Emacs, It should
+not be too hard to construct a lightweight and fast Python IDE.</p>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/python-programming-in-emacs/">Read more…</a>
+	</div>
+</article><article class="list__item post">
+	
+	<header class="list__header">
+		<h2 class="list__title post__title">
 			<a href="/post/emacs-startup-screen/" rel="bookmark">
 			Emacs Startup Screen
 			</a>
@@ -227,11 +257,11 @@ running Emacs 29.4 on Ubuntu (Pop!_OS) 22.04 and, rarely, on macOS.</p>
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/python-programming-in-emacs/">Python Programming in Emacs</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/emacs-startup-screen/">Emacs Startup Screen</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/some-excerpts-from-config-2-functions/">Some Excerpts From My Emacs Config - 2: Functions</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/migration-to-bluesky/">Migration to Bluesky</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/some-excerpts-from-my-emacs-config/">Some Excerpts From My Emacs Config</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/org-export-clocktables/">Org Mode: Exporting Clock Tables</a></li>
 		</ul>
 	</div>
 </div>
@@ -246,6 +276,7 @@ running Emacs 29.4 on Ubuntu (Pop!_OS) 22.04 and, rarely, on macOS.</p>
 		<a class="widget-taglist__link widget__link btn" href="/tags/org-mode/" title="org-mode">org-mode</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/packages/" title="packages">packages</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/pages/" title="pages">pages</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/python/" title="python">python</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/snippets/" title="snippets">snippets</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/social/" title="social">social</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/tree-sitter/" title="tree-sitter">tree-sitter</a>
@@ -270,7 +301,7 @@ running Emacs 29.4 on Ubuntu (Pop!_OS) 22.04 and, rarely, on macOS.</p>
 				</li>
 			<li class="widget__item">
 				<a class="widget__link" href="/categories/2024/">2024</a>&nbsp;
-				<span class="widget__counter widget__counter--bubble">4</span>
+				<span class="widget__counter widget__counter--bubble">5</span>
 				</li>
 		</ul>
 	</div>

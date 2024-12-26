@@ -6,7 +6,25 @@
     <description>Recent content in Tags on The Emacs Cat</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Dec 2024 18:40:56 +0100</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 26 Dec 2024 10:01:05 +0100</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>emacs</title>
+      <link>https://olddeuteronomy.github.io/tags/emacs/</link>
+      <pubDate>Thu, 26 Dec 2024 10:01:05 +0100</pubDate>
+      
+      <guid>https://olddeuteronomy.github.io/tags/emacs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://olddeuteronomy.github.io/tags/python/</link>
+      <pubDate>Thu, 26 Dec 2024 10:01:05 +0100</pubDate>
+      
+      <guid>https://olddeuteronomy.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>config</title>
       <link>https://olddeuteronomy.github.io/tags/config/</link>
@@ -22,15 +40,6 @@
       <pubDate>Fri, 06 Dec 2024 18:40:56 +0100</pubDate>
       
       <guid>https://olddeuteronomy.github.io/tags/elisp/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>emacs</title>
-      <link>https://olddeuteronomy.github.io/tags/emacs/</link>
-      <pubDate>Fri, 06 Dec 2024 18:40:56 +0100</pubDate>
-      
-      <guid>https://olddeuteronomy.github.io/tags/emacs/</guid>
       <description></description>
     </item>
     
