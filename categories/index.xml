@@ -4,44 +4,37 @@
     <title>Categories on The Emacs Cat</title>
     <link>https://olddeuteronomy.github.io/categories/</link>
     <description>Recent content in Categories on The Emacs Cat</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 26 Dec 2024 10:01:05 +0100</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 26 Dec 2024 10:01:05 +0100</lastBuildDate>
+    <atom:link href="https://olddeuteronomy.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2024</title>
       <link>https://olddeuteronomy.github.io/categories/2024/</link>
       <pubDate>Thu, 26 Dec 2024 10:01:05 +0100</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/categories/2024/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>2023</title>
       <link>https://olddeuteronomy.github.io/categories/2023/</link>
       <pubDate>Tue, 01 Aug 2023 14:07:46 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/categories/2023/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>2022</title>
       <link>https://olddeuteronomy.github.io/categories/2022/</link>
       <pubDate>Mon, 05 Dec 2022 14:14:13 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/categories/2022/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>2017</title>
       <link>https://olddeuteronomy.github.io/categories/2017/</link>
       <pubDate>Sat, 17 Jun 2017 14:51:33 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/categories/2017/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

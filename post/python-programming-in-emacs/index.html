@@ -7,22 +7,29 @@
 	<title>Python Programming in Emacs - The Emacs Cat</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="Making a lightweight and fast Python IDE in Emacs">
-		<meta property="og:title" content="Python Programming in Emacs" />
-<meta property="og:description" content="Making a lightweight and fast Python IDE in Emacs" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://olddeuteronomy.github.io/post/python-programming-in-emacs/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2024-12-26T10:01:05+01:00" />
-<meta property="article:modified_time" content="2024-12-26T10:01:05+01:00" />
+		<meta property="og:url" content="https://olddeuteronomy.github.io/post/python-programming-in-emacs/">
+  <meta property="og:site_name" content="The Emacs Cat">
+  <meta property="og:title" content="Python Programming in Emacs">
+  <meta property="og:description" content="Making a lightweight and fast Python IDE in Emacs">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-12-26T10:01:05+01:00">
+    <meta property="article:modified_time" content="2024-12-26T10:01:05+01:00">
+    <meta property="article:tag" content="Emacs">
+    <meta property="article:tag" content="Python">
 
-
-		<meta itemprop="name" content="Python Programming in Emacs">
-<meta itemprop="description" content="Making a lightweight and fast Python IDE in Emacs"><meta itemprop="datePublished" content="2024-12-26T10:01:05+01:00" />
-<meta itemprop="dateModified" content="2024-12-26T10:01:05+01:00" />
-<meta itemprop="wordCount" content="837">
-<meta itemprop="keywords" content="emacs,python," />
-		<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Python Programming in Emacs"/>
-<meta name="twitter:description" content="Making a lightweight and fast Python IDE in Emacs"/>
+		
+  <meta itemprop="name" content="Python Programming in Emacs">
+  <meta itemprop="description" content="Making a lightweight and fast Python IDE in Emacs">
+  <meta itemprop="datePublished" content="2024-12-26T10:01:05+01:00">
+  <meta itemprop="dateModified" content="2024-12-26T10:01:05+01:00">
+  <meta itemprop="wordCount" content="837">
+  <meta itemprop="keywords" content="Emacs,Python">
+		
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Python Programming in Emacs">
+  <meta name="twitter:description" content="Making a lightweight and fast Python IDE in Emacs">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -33,7 +40,7 @@
 	<link rel="stylesheet" href="/css/custom.css">
 
 	<link rel="shortcut icon" href="/favicon.ico">
-		
+        
 </head>
 <body class="body">
 	<div class="container container--outer">
@@ -147,11 +154,10 @@ book:</p>
 optional extra, so you must compile Emacs from source, or hope that
 someone else will do it for you.</p>
 <p>Neither tree-sitter nor Emacs come installed with language grammars.
-Just like kids' toys and batteries, they&rsquo;re sold separately. So you&rsquo;re
+Just like kids&rsquo; toys and batteries, they&rsquo;re sold separately. So you&rsquo;re
 required to download and compile the sources for each language grammar
 you want to use.</p>
-<p><em>&ndash; Mastering Emacs by Mickey Petersen.</em></p>
-</blockquote>
+<p><em>&ndash; Mastering Emacs by Mickey Petersen.</em></p></blockquote>
 <p>If you are &ndash; like me &ndash; on Linux, the best way to setup language
 grammars is to compile them from the source code; you can find all grammars
 available on the <a href="https://github.com/orgs/tree-sitter/repositories?type=all">tree-sitter repository</a>.
@@ -160,9 +166,9 @@ More details at <a href="https://www.masteringemacs.org/article/how-to-get-start
 <p>First of all, we need to install the following Python packages &ndash;
 <code>pyright</code> (the language server) and <code>jsonrpc</code> (the transport layer for
 the LSP).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#f92672">[</span>p3<span style="color:#f92672">]</span> $ pip install pyright
-<span style="color:#f92672">[</span>p3<span style="color:#f92672">]</span> $ pip install jsonrpc
-</code></pre></div><p>I&rsquo;m running Python in the virtual environment, &ldquo;p3&rdquo; in my case.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#f92672">[</span>p3<span style="color:#f92672">]</span> $ pip install pyright
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>p3<span style="color:#f92672">]</span> $ pip install jsonrpc
+</span></span></code></pre></div><p>I&rsquo;m running Python in the virtual environment, &ldquo;p3&rdquo; in my case.</p>
 <h2 id="error-checking-with-pyright">Error checking with Pyright</h2>
 <p>Eglot automatically finds a suitable LSP &ndash; Pyright in our case &ndash;
 when you are opening a Python file. I&rsquo;m using the default Pyright
@@ -171,39 +177,39 @@ settings, no extra tuning required.</p>
 <p>Flymake is a minor Emacs mode performing on-the-fly syntax checks. I&rsquo;m
 using the <code>flymake</code> built-in Emacs package as an Eglot front-end for
 syntax checks.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp">(require <span style="color:#e6db74">&#39;flymake</span>)
-</code></pre></div><p>My custom <code>my/flymake-toggle-diagnostics-buffer</code> function toggles the
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(require <span style="color:#e6db74">&#39;flymake</span>)
+</span></span></code></pre></div><p>My custom <code>my/flymake-toggle-diagnostics-buffer</code> function toggles the
 <em>Flymake diagnostics</em> buffer window.</p>
 <p>If there is the Flymake diagnostics buffer associated with a file in
 the current buffer, it shows the diagnostics buffer in the new window
 and switches to it. If the current buffer <em>is</em> the Flymake diagnostics
 buffer, it closes it. Otherwise it just shows the error message.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp">(defun my/flymake-toggle-diagnostics-buffer ()
-  (interactive)
-  <span style="color:#75715e">;; Check if we are in the diagnostics buffer.</span>
-  (if (string-search <span style="color:#e6db74">&#34;*Flymake diagnostics&#34;</span> (<span style="color:#a6e22e">buffer-name</span>))
-      (delete-window)
-    (progn
-      <span style="color:#75715e">;; Activate the Flymake diagnostics buffer.</span>
-      <span style="color:#75715e">;; and switch to it</span>
-      (flymake-show-buffer-diagnostics)
-      (let ((name (flymake--diagnostics-buffer-name)))
-        (if (<span style="color:#a6e22e">get-buffer</span> name)
-            (switch-to-buffer-other-window name)
-          (<span style="color:#a6e22e">error</span> <span style="color:#e6db74">&#34;No Flymake diagnostics buffer found&#34;</span>)
-          )))))
-</code></pre></div><p>I&rsquo;ve bound this function to the <code>F7</code> key globally since I&rsquo;m using <code>F7</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun my/flymake-toggle-diagnostics-buffer ()
+</span></span><span style="display:flex;"><span>  (interactive)
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; Check if we are in the diagnostics buffer.</span>
+</span></span><span style="display:flex;"><span>  (if (string-search <span style="color:#e6db74">&#34;*Flymake diagnostics&#34;</span> (<span style="color:#a6e22e">buffer-name</span>))
+</span></span><span style="display:flex;"><span>      (delete-window)
+</span></span><span style="display:flex;"><span>    (progn
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Activate the Flymake diagnostics buffer.</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; and switch to it</span>
+</span></span><span style="display:flex;"><span>      (flymake-show-buffer-diagnostics)
+</span></span><span style="display:flex;"><span>      (let ((name (flymake--diagnostics-buffer-name)))
+</span></span><span style="display:flex;"><span>        (if (<span style="color:#a6e22e">get-buffer</span> name)
+</span></span><span style="display:flex;"><span>            (switch-to-buffer-other-window name)
+</span></span><span style="display:flex;"><span>          (<span style="color:#a6e22e">error</span> <span style="color:#e6db74">&#34;No Flymake diagnostics buffer found&#34;</span>)
+</span></span><span style="display:flex;"><span>          )))))
+</span></span></code></pre></div><p>I&rsquo;ve bound this function to the <code>F7</code> key globally since I&rsquo;m using <code>F7</code>
 in other programming modes as well.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp">(global-set-key [(f7)] <span style="color:#a6e22e">#&#39;</span>my/flymake-toggle-diagnostics-buffer)
-
-<span style="color:#75715e">;; Additional bindings.</span>
-(global-set-key (kbd <span style="color:#e6db74">&#34;C-c f b&#34;</span>) <span style="color:#a6e22e">#&#39;</span>flymake-show-buffer-diagnostics)
-(global-set-key (kbd <span style="color:#e6db74">&#34;C-c f p&#34;</span>) <span style="color:#a6e22e">#&#39;</span>flymake-show-project-diagnostics)
-</code></pre></div><p>The screenshot below shows what happens if you press <code>F7</code> while
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(global-set-key [(f7)] <span style="color:#a6e22e">#&#39;</span>my/flymake-toggle-diagnostics-buffer)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Additional bindings.</span>
+</span></span><span style="display:flex;"><span>(global-set-key (kbd <span style="color:#e6db74">&#34;C-c f b&#34;</span>) <span style="color:#a6e22e">#&#39;</span>flymake-show-buffer-diagnostics)
+</span></span><span style="display:flex;"><span>(global-set-key (kbd <span style="color:#e6db74">&#34;C-c f p&#34;</span>) <span style="color:#a6e22e">#&#39;</span>flymake-show-project-diagnostics)
+</span></span></code></pre></div><p>The screenshot below shows what happens if you press <code>F7</code> while
 editing a Python file managed by Eglot + Flymake.</p>
-<figure><a href="/img/python-pyright.png"><img src="/img/python-pyright.png"/></a><figcaption>
-            <h4>Click or tap to view the full-size picture.</h4>
-        </figcaption>
+<figure><a href="/img/python-pyright.png"><img src="/img/python-pyright.png"></a><figcaption>
+      <h4>Click or tap to view the full-size picture.</h4>
+    </figcaption>
 </figure>
 
 <p>As you can see, Pyright can do much more than just type checks.</p>
@@ -211,25 +217,25 @@ editing a Python file managed by Eglot + Flymake.</p>
 <p>I&rsquo;m using the <a href="https://company-mode.github.io/"><code>company</code></a> package, a
 modular in-buffer completion framework for Emacs, as an Eglot
 front-end for code completion; it integrates with Eglot seamlessly.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp"><span style="color:#75715e">;;;; `COMPANY&#39;</span>
-(use-package company
-  :ensure <span style="color:#66d9ef">t</span>
-  :config
-  (setq company-idle-delay <span style="color:#ae81ff">0</span>)
-  (setq company-minimum-prefix-length <span style="color:#ae81ff">2</span>)
-  (setq company-show-numbers <span style="color:#66d9ef">t</span>)
-  <span style="color:#75715e">;; To prevent default down-casing.</span>
-  <span style="color:#75715e">;; https://emacs.stackexchange.com/questions/10837/how-to-make-company-mode-be-case-sensitive-on-plain-text</span>
-  (setq company-dabbrev-downcase <span style="color:#66d9ef">nil</span>)
-  <span style="color:#75715e">;; 2023-01-13 From a Reddit post on mixed case issue.</span>
-  (setq company-dabbrev-ignore-case <span style="color:#66d9ef">nil</span>)
-  (setq company-dabbrev-code-ignore-case <span style="color:#66d9ef">nil</span>))
-
-<span style="color:#75715e">;; Use `company&#39; everywhere.</span>
-(add-hook <span style="color:#e6db74">&#39;after-init-hook</span> <span style="color:#e6db74">&#39;global-company-mode</span>)
-</code></pre></div><figure><a href="/img/python-eglot.png"><img src="/img/python-eglot.png"/></a><figcaption>
-            <h4>Click or tap to view the full-size picture.</h4>
-        </figcaption>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;;;; `COMPANY&#39;</span>
+</span></span><span style="display:flex;"><span>(use-package company
+</span></span><span style="display:flex;"><span>  :ensure <span style="color:#66d9ef">t</span>
+</span></span><span style="display:flex;"><span>  :config
+</span></span><span style="display:flex;"><span>  (setq company-idle-delay <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>  (setq company-minimum-prefix-length <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>  (setq company-show-numbers <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; To prevent default down-casing.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; https://emacs.stackexchange.com/questions/10837/how-to-make-company-mode-be-case-sensitive-on-plain-text</span>
+</span></span><span style="display:flex;"><span>  (setq company-dabbrev-downcase <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; 2023-01-13 From a Reddit post on mixed case issue.</span>
+</span></span><span style="display:flex;"><span>  (setq company-dabbrev-ignore-case <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>  (setq company-dabbrev-code-ignore-case <span style="color:#66d9ef">nil</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Use `company&#39; everywhere.</span>
+</span></span><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;after-init-hook</span> <span style="color:#e6db74">&#39;global-company-mode</span>)
+</span></span></code></pre></div><figure><a href="/img/python-eglot.png"><img src="/img/python-eglot.png"></a><figcaption>
+      <h4>Click or tap to view the full-size picture.</h4>
+    </figcaption>
 </figure>
 
 <h2 id="code-navigation">Code navigation</h2>
@@ -245,16 +251,16 @@ front-end for code completion; it integrates with Eglot seamlessly.</p>
 <p>These functions are now powered by Eglot.</p>
 <h2 id="final-notes">Final notes</h2>
 <p>I can recommend to force using Eglot for Python explicitly &ndash;</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp">(require <span style="color:#e6db74">&#39;eglot</span>)
-(add-hook <span style="color:#e6db74">&#39;python-mode-hook</span> <span style="color:#e6db74">&#39;eglot-ensure</span>)
-</code></pre></div><h3 id="a-note-for-tree-sitter-users">A note for Tree-Sitter users</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(require <span style="color:#e6db74">&#39;eglot</span>)
+</span></span><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;python-mode-hook</span> <span style="color:#e6db74">&#39;eglot-ensure</span>)
+</span></span></code></pre></div><h3 id="a-note-for-tree-sitter-users">A note for Tree-Sitter users</h3>
 <p>If you are using Tree-Sitter for Python, it&rsquo;s recommended to <em>remap</em>
 the <code>python-mode</code> to the Tree-Sitter specific <code>python-ts-mode</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp">(add-to-list <span style="color:#e6db74">&#39;major-mode-remap-alist</span> <span style="color:#f92672">&#39;</span>(python-mode <span style="color:#f92672">.</span> python-ts-mode))
-</code></pre></div><p>If this is the case, do not forget to force using Eglot for this mode
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(add-to-list <span style="color:#e6db74">&#39;major-mode-remap-alist</span> <span style="color:#f92672">&#39;</span>(python-mode <span style="color:#f92672">.</span> python-ts-mode))
+</span></span></code></pre></div><p>If this is the case, do not forget to force using Eglot for this mode
 as well.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp">(add-hook <span style="color:#e6db74">&#39;python-ts-mode-hook</span> <span style="color:#e6db74">&#39;eglot-ensure</span>)
-</code></pre></div><p>Happy emacsing!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;python-ts-mode-hook</span> <span style="color:#e6db74">&#39;eglot-ensure</span>)
+</span></span></code></pre></div><p>Happy emacsing!</p>
 		</div>
 		<footer class="post__footer">
 			
@@ -274,6 +280,7 @@ as well.</p>
 </main>
 
 
+
 <nav class="pager flex">
 	<div class="pager__item pager__item--prev">
 		<a class="pager__link" href="/post/emacs-startup-screen/" rel="prev">
@@ -282,6 +289,29 @@ as well.</p>
 		</a>
 	</div>
 </nav>
+
+<section class="comments">
+	<div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "olddeuteronomy" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
 
 
 			</div>
@@ -309,19 +339,19 @@ as well.</p>
 <div class="widget-taglist widget">
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
-		<a class="widget-taglist__link widget__link btn" href="/tags/calc/" title="calc">calc</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/config/" title="config">config</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/elisp/" title="elisp">elisp</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/emacs/" title="emacs">emacs</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/eshell/" title="eshell">eshell</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/org-mode/" title="org-mode">org-mode</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/packages/" title="packages">packages</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pages/" title="pages">pages</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/python/" title="python">python</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/snippets/" title="snippets">snippets</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/social/" title="social">social</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tree-sitter/" title="tree-sitter">tree-sitter</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/writing/" title="writing">writing</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/calc/" title="Calc">Calc</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/config/" title="Config">Config</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/elisp/" title="Elisp">Elisp</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/emacs/" title="Emacs">Emacs</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/eshell/" title="Eshell">Eshell</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/org-mode/" title="Org-Mode">Org-Mode</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/packages/" title="Packages">Packages</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pages/" title="Pages">Pages</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/python/" title="Python">Python</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/snippets/" title="Snippets">Snippets</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/social/" title="Social">Social</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tree-sitter/" title="Tree-Sitter">Tree-Sitter</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/writing/" title="Writing">Writing</a>
 	</div>
 </div>
 <div class="widget-categories widget">
@@ -397,7 +427,7 @@ as well.</p>
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2024 The Emacs Cat.
+			&copy; 2025 The Emacs Cat.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>

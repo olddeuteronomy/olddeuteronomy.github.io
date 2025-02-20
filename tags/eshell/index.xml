@@ -1,38 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>eshell on The Emacs Cat</title>
+    <title>Eshell on The Emacs Cat</title>
     <link>https://olddeuteronomy.github.io/tags/eshell/</link>
-    <description>Recent content in eshell on The Emacs Cat</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Eshell on The Emacs Cat</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Oct 2022 13:07:45 +0300</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/tags/eshell/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 05 Oct 2022 13:07:45 +0300</lastBuildDate>
+    <atom:link href="https://olddeuteronomy.github.io/tags/eshell/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to Clear the Eshell</title>
       <link>https://olddeuteronomy.github.io/post/how-to-clear-the-eshell/</link>
       <pubDate>Wed, 05 Oct 2022 13:07:45 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/how-to-clear-the-eshell/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m a big fan of Eshell, but some things in Eshell look, hmm,
-a bit strange. One of such things is how the Eshell&amp;rsquo;s command &lt;code&gt;clear&lt;/code&gt; clears
-the screen.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I&amp;rsquo;m a big fan of Eshell, but some things in Eshell look, hmm,&#xA;a bit strange. One of such things is how the Eshell&amp;rsquo;s command &lt;code&gt;clear&lt;/code&gt; clears&#xA;the screen.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Eshell Aliases, Prompt, And Colors</title>
       <link>https://olddeuteronomy.github.io/post/eshell-aliases-and-prompt/</link>
       <pubDate>Fri, 22 Jul 2022 13:57:32 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/eshell-aliases-and-prompt/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;Do you use #Emacs to run shells or terminal emulators?
-Well, you should. With vterm you have a fast alternative to the
-builtin ansi-term. And if you prefer shells, you&amp;rsquo;ve got EShell and
-Shell Mode.
-And don&amp;rsquo;t forget serial-term for embedded programming.
-— Mickey Petersen (@mickeynp) on Twitter, July 18, 2022.&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;Do you use #Emacs to run shells or terminal emulators?&#xA;Well, you should. With vterm you have a fast alternative to the&#xA;builtin ansi-term. And if you prefer shells, you&amp;rsquo;ve got EShell and&#xA;Shell Mode.&#xA;And don&amp;rsquo;t forget serial-term for embedded programming.&#xA;— Mickey Petersen (@mickeynp) on Twitter, July 18, 2022.&lt;/p&gt;&lt;/blockquote&gt;</description>
     </item>
-    
   </channel>
 </rss>

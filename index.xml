@@ -4,235 +4,121 @@
     <title>The Emacs Cat</title>
     <link>https://olddeuteronomy.github.io/</link>
     <description>Recent content on The Emacs Cat</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 26 Dec 2024 10:01:05 +0100</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 26 Dec 2024 10:01:05 +0100</lastBuildDate>
+    <atom:link href="https://olddeuteronomy.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python Programming in Emacs</title>
       <link>https://olddeuteronomy.github.io/post/python-programming-in-emacs/</link>
       <pubDate>Thu, 26 Dec 2024 10:01:05 +0100</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/python-programming-in-emacs/</guid>
-      <description>&lt;p&gt;Python is one of my programming languages I&amp;rsquo;m using for both work and
-home life &amp;ndash; no doubt, I&amp;rsquo;d want to use Emacs as an IDE for Python
-programming. There is a certain set of features we&amp;rsquo;d expect to have
-in any IDE: 1) code completion, 2) code navigation, 3) error checking.&lt;/p&gt;
-&lt;p&gt;Thanks to the fact that both &lt;code&gt;eglot&lt;/code&gt;, the Emacs client for the
-Language Server Protocol (LSP), and &lt;code&gt;tree-sitter&lt;/code&gt;, a powerful parsing
-library, are now &amp;ndash; since version 29 &amp;ndash; the parts of Emacs, It should
-not be too hard to construct a lightweight and fast Python IDE.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Python is one of my programming languages I&amp;rsquo;m using for both work and&#xA;home life &amp;ndash; no doubt, I&amp;rsquo;d want to use Emacs as an IDE for Python&#xA;programming. There is a certain set of features we&amp;rsquo;d expect to have&#xA;in any IDE: 1) code completion, 2) code navigation, 3) error checking.&lt;/p&gt;&#xA;&lt;p&gt;Thanks to the fact that both &lt;code&gt;eglot&lt;/code&gt;, the Emacs client for the&#xA;Language Server Protocol (LSP), and &lt;code&gt;tree-sitter&lt;/code&gt;, a powerful parsing&#xA;library, are now &amp;ndash; since version 29 &amp;ndash; the parts of Emacs, It should&#xA;not be too hard to construct a lightweight and fast Python IDE.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Emacs Startup Screen</title>
       <link>https://olddeuteronomy.github.io/post/emacs-startup-screen/</link>
       <pubDate>Fri, 06 Dec 2024 18:40:56 +0100</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/emacs-startup-screen/</guid>
-      <description>&lt;p&gt;Some time ago, I decided to customize my Emacs startup screen in order
-to display something helpful for me. Ultimately, after much
-consideration, I settled on the following items I just want to see on
-my startup screen: 1) 3-month calendar, 2) agenda, 3) diary, 4)
-something just for fun.&lt;/p&gt;
-&lt;p&gt;No doubt, there are a number of packages that can assist you in making
-a pretty good-looking startup screen &amp;ndash; like
-&lt;a href=&#34;https://github.com/ichernyshovvv/enlight&#34;&gt;enlight&lt;/a&gt;, for instance.
-However, I decided to construct my own startup screen, a very simple
-one.&lt;/p&gt;
-&lt;p&gt;It requires having two command line utilities installed on your
-system: &lt;code&gt;fortune&lt;/code&gt; to print out a random epigram, and &lt;code&gt;calendar&lt;/code&gt; to
-print out some of the events that have occurred on the current date in
-the past. If you, like me, are using Linux or macOS &amp;ndash; it will not be
-difficult to install them.&lt;/p&gt;
-&lt;p&gt;And this is what I got&amp;hellip;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Some time ago, I decided to customize my Emacs startup screen in order&#xA;to display something helpful for me. Ultimately, after much&#xA;consideration, I settled on the following items I just want to see on&#xA;my startup screen: 1) 3-month calendar, 2) agenda, 3) diary, 4)&#xA;something just for fun.&lt;/p&gt;&#xA;&lt;p&gt;No doubt, there are a number of packages that can assist you in making&#xA;a pretty good-looking startup screen &amp;ndash; like&#xA;&lt;a href=&#34;https://github.com/ichernyshovvv/enlight&#34;&gt;enlight&lt;/a&gt;, for instance.&#xA;However, I decided to construct my own startup screen, a very simple&#xA;one.&lt;/p&gt;&#xA;&lt;p&gt;It requires having two command line utilities installed on your&#xA;system: &lt;code&gt;fortune&lt;/code&gt; to print out a random epigram, and &lt;code&gt;calendar&lt;/code&gt; to&#xA;print out some of the events that have occurred on the current date in&#xA;the past. If you, like me, are using Linux or macOS &amp;ndash; it will not be&#xA;difficult to install them.&lt;/p&gt;&#xA;&lt;p&gt;And this is what I got&amp;hellip;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Some Excerpts From My Emacs Config - 2: Functions</title>
       <link>https://olddeuteronomy.github.io/post/some-excerpts-from-config-2-functions/</link>
       <pubDate>Fri, 29 Nov 2024 11:45:17 +0100</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/some-excerpts-from-config-2-functions/</guid>
-      <description>&lt;p&gt;In his comment on &lt;a href=&#34;https://irreal.org/blog/&#34;&gt;Irreal&lt;/a&gt;&amp;rsquo;s post
-&lt;a href=&#34;https://irreal.org/blog/?p=12595&#34;&gt;Some Configuration To Solve Common Problems&lt;/a&gt;,
-&lt;a href=&#34;https://disqus.com/by/gregbognar/&#34;&gt;gregbognar&lt;/a&gt; noted that some of my
-configuration &lt;em&gt;is seriously outdated&lt;/em&gt;. In some sense, he is absolutely
-correct &amp;ndash; I&amp;rsquo;ve been collecting Emacs settings/tweaks since 2012, and
-keeping them unmodified for 12+ years.&lt;/p&gt;
-&lt;p&gt;But on the other hand, it demonstrates how stable and powerful Emacs
-is &amp;ndash; everything is still working! &lt;em&gt;If something works, don&amp;rsquo;t fix it&lt;/em&gt;
-&amp;ndash; I&amp;rsquo;ve since tried to apply this rule wherever possible.&lt;/p&gt;
-&lt;p&gt;Here are a few functions/enhancements I found helpful.&lt;/p&gt;</description>
+      <description>&lt;p&gt;In his comment on &lt;a href=&#34;https://irreal.org/blog/&#34;&gt;Irreal&lt;/a&gt;&amp;rsquo;s post&#xA;&lt;a href=&#34;https://irreal.org/blog/?p=12595&#34;&gt;Some Configuration To Solve Common Problems&lt;/a&gt;,&#xA;&lt;a href=&#34;https://disqus.com/by/gregbognar/&#34;&gt;gregbognar&lt;/a&gt; noted that some of my&#xA;configuration &lt;em&gt;is seriously outdated&lt;/em&gt;. In some sense, he is absolutely&#xA;correct &amp;ndash; I&amp;rsquo;ve been collecting Emacs settings/tweaks since 2012, and&#xA;keeping them unmodified for 12+ years.&lt;/p&gt;&#xA;&lt;p&gt;But on the other hand, it demonstrates how stable and powerful Emacs&#xA;is &amp;ndash; everything is still working! &lt;em&gt;If something works, don&amp;rsquo;t fix it&lt;/em&gt;&#xA;&amp;ndash; I&amp;rsquo;ve since tried to apply this rule wherever possible.&lt;/p&gt;&#xA;&lt;p&gt;Here are a few functions/enhancements I found helpful.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Migration to Bluesky</title>
       <link>https://olddeuteronomy.github.io/post/migration-to-bluesky/</link>
       <pubDate>Fri, 22 Nov 2024 11:23:12 +0100</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/migration-to-bluesky/</guid>
-      <description>&lt;p&gt;After reading the quite interesting post &lt;a href=&#34;https://cestlaz.github.io/post/blue-sky/&#34;&gt;Blue Sky&lt;/a&gt;
-by &lt;a href=&#34;https://bsky.app/profile/zamansky.bsky.social&#34;&gt;Mike Zamansky&lt;/a&gt; I decided to begin
-my gentle migration to &lt;a href=&#34;https://bsky.app/&#34;&gt;Bluesky&lt;/a&gt;, a new and promising social media platform.&lt;/p&gt;
-&lt;p&gt;I completely agree with Mike&amp;rsquo;s opinion on Twitter as well as other
-social platforms. Like many of us, I migrated from
-&lt;a href=&#34;https://x.com/ODeuteronomy&#34;&gt;Twitter&lt;/a&gt; &amp;ndash; keeping my existing account
-there &amp;ndash; to &lt;a href=&#34;https://emacs.ch/@olddeuteronomy&#34;&gt;Mastodon&lt;/a&gt;.
-Unfortunately, Mastodon, largely due to its distributed architecture,
-seems to be more fragile than other platforms &amp;ndash; recently, I have been
-warned that &lt;a href=&#34;https://emacs.ch&#34;&gt;emacs.ch&lt;/a&gt;, a fediverse server I have been using for two
-years now, is about to shutdown in this December.&lt;/p&gt;
-&lt;p&gt;Sure, there is a (bit complex) way to transfer your Mastodon account
-to another server &amp;ndash; and here is &lt;a href=&#34;https://fedi.tips/transferring-your-mastodon-account-to-another-server/&#34;&gt;detailed explanation&lt;/a&gt;
-on how to do that. Perhaps, I will do that in the nearest future, but
-who can guarantee that the new server is immune from the same fate?&lt;/p&gt;
-&lt;p&gt;Anyway, Bluesky looks promising and I decided to give it a try.
-You can find me at &lt;a href=&#34;https://bsky.app/profile/olddeuteronomy.bsky.social&#34;&gt;@olddeuteronomy.bsky.social&lt;/a&gt;.&lt;/p&gt;</description>
+      <description>&lt;p&gt;After reading the quite interesting post &lt;a href=&#34;https://cestlaz.github.io/post/blue-sky/&#34;&gt;Blue Sky&lt;/a&gt;&#xA;by &lt;a href=&#34;https://bsky.app/profile/zamansky.bsky.social&#34;&gt;Mike Zamansky&lt;/a&gt; I decided to begin&#xA;my gentle migration to &lt;a href=&#34;https://bsky.app/&#34;&gt;Bluesky&lt;/a&gt;, a new and promising social media platform.&lt;/p&gt;&#xA;&lt;p&gt;I completely agree with Mike&amp;rsquo;s opinion on Twitter as well as other&#xA;social platforms. Like many of us, I migrated from&#xA;&lt;a href=&#34;https://x.com/ODeuteronomy&#34;&gt;Twitter&lt;/a&gt; &amp;ndash; keeping my existing account&#xA;there &amp;ndash; to &lt;a href=&#34;https://emacs.ch/@olddeuteronomy&#34;&gt;Mastodon&lt;/a&gt;.&#xA;Unfortunately, Mastodon, largely due to its distributed architecture,&#xA;seems to be more fragile than other platforms &amp;ndash; recently, I have been&#xA;warned that &lt;a href=&#34;https://emacs.ch&#34;&gt;emacs.ch&lt;/a&gt;, a fediverse server I have been using for two&#xA;years now, is about to shutdown in this December.&lt;/p&gt;&#xA;&lt;p&gt;Sure, there is a (bit complex) way to transfer your Mastodon account&#xA;to another server &amp;ndash; and here is &lt;a href=&#34;https://fedi.tips/transferring-your-mastodon-account-to-another-server/&#34;&gt;detailed explanation&lt;/a&gt;&#xA;on how to do that. Perhaps, I will do that in the nearest future, but&#xA;who can guarantee that the new server is immune from the same fate?&lt;/p&gt;&#xA;&lt;p&gt;Anyway, Bluesky looks promising and I decided to give it a try.&#xA;You can find me at &lt;a href=&#34;https://bsky.app/profile/olddeuteronomy.bsky.social&#34;&gt;@olddeuteronomy.bsky.social&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Some Excerpts From My Emacs Config</title>
       <link>https://olddeuteronomy.github.io/post/some-excerpts-from-my-emacs-config/</link>
       <pubDate>Wed, 20 Nov 2024 11:52:19 +0100</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/some-excerpts-from-my-emacs-config/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m happy to be back after one year away and it feels great.&lt;/p&gt;
-&lt;p&gt;Below are some chaotic mini/micro &amp;ndash; or even nano &amp;ndash; excerpts from my
-&lt;code&gt;~/.emacs&lt;/code&gt; file I have been tuning in for 12 years. These days, I&amp;rsquo;m
-running Emacs 29.4 on Ubuntu (Pop!_OS) 22.04 and, rarely, on macOS.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I&amp;rsquo;m happy to be back after one year away and it feels great.&lt;/p&gt;&#xA;&lt;p&gt;Below are some chaotic mini/micro &amp;ndash; or even nano &amp;ndash; excerpts from my&#xA;&lt;code&gt;~/.emacs&lt;/code&gt; file I have been tuning in for 12 years. These days, I&amp;rsquo;m&#xA;running Emacs 29.4 on Ubuntu (Pop!_OS) 22.04 and, rarely, on macOS.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Org Mode: Exporting Clock Tables</title>
       <link>https://olddeuteronomy.github.io/post/org-export-clocktables/</link>
       <pubDate>Tue, 01 Aug 2023 14:07:46 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/org-export-clocktables/</guid>
-      <description>&lt;p&gt;After reading a quite interesting post by Irreal on &lt;a href=&#34;https://irreal.org/blog/?p=11416&#34;&gt;Org mode clock tables&lt;/a&gt;,
-I decided to share my — a bit specific —  experience with the subject.&lt;/p&gt;</description>
+      <description>&lt;p&gt;After reading a quite interesting post by Irreal on &lt;a href=&#34;https://irreal.org/blog/?p=11416&#34;&gt;Org mode clock tables&lt;/a&gt;,&#xA;I decided to share my — a bit specific —  experience with the subject.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>A Simple tree-sitter Config That Works</title>
       <link>https://olddeuteronomy.github.io/post/a-tree-sitter-config-that-works/</link>
       <pubDate>Mon, 05 Dec 2022 14:14:13 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/a-tree-sitter-config-that-works/</guid>
-      <description>&lt;p&gt;Recently, I&amp;rsquo;ve discovered a number of posts on Reddit — like
-&lt;a href=&#34;https://www.reddit.com/r/emacs/comments/zc70m8/treesitterhlmode_does_not_do_anything/&#34;&gt;tree-sitter-hl-mode does not do
-anything&lt;/a&gt;
-or &lt;a href=&#34;https://www.reddit.com/r/emacs/comments/zbpa42/how_to_use_emacs_29_treesitter/&#34;&gt;How to use Emacs 29
-Tree-sitter?&lt;/a&gt;
-— and decided to share my simple &lt;code&gt;tree-sitter&lt;/code&gt; setup that
-seems to be working on my Emacs 28.2 like a charm.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Recently, I&amp;rsquo;ve discovered a number of posts on Reddit — like&#xA;&lt;a href=&#34;https://www.reddit.com/r/emacs/comments/zc70m8/treesitterhlmode_does_not_do_anything/&#34;&gt;tree-sitter-hl-mode does not do&#xA;anything&lt;/a&gt;&#xA;or &lt;a href=&#34;https://www.reddit.com/r/emacs/comments/zbpa42/how_to_use_emacs_29_treesitter/&#34;&gt;How to use Emacs 29&#xA;Tree-sitter?&lt;/a&gt;&#xA;— and decided to share my simple &lt;code&gt;tree-sitter&lt;/code&gt; setup that&#xA;seems to be working on my Emacs 28.2 like a charm.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>How to Clear the Eshell</title>
       <link>https://olddeuteronomy.github.io/post/how-to-clear-the-eshell/</link>
       <pubDate>Wed, 05 Oct 2022 13:07:45 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/how-to-clear-the-eshell/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m a big fan of Eshell, but some things in Eshell look, hmm,
-a bit strange. One of such things is how the Eshell&amp;rsquo;s command &lt;code&gt;clear&lt;/code&gt; clears
-the screen.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I&amp;rsquo;m a big fan of Eshell, but some things in Eshell look, hmm,&#xA;a bit strange. One of such things is how the Eshell&amp;rsquo;s command &lt;code&gt;clear&lt;/code&gt; clears&#xA;the screen.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Emacs Keyboard Shortcuts</title>
       <link>https://olddeuteronomy.github.io/post/emacs-shortcuts/</link>
       <pubDate>Tue, 06 Sep 2022 15:26:36 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/emacs-shortcuts/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://irreal.org/blog/&#34;&gt;Irreal&lt;/a&gt; has recently published &lt;a href=&#34;https://irreal.org/blog/?p=10784&#34;&gt;a
-post&lt;/a&gt; with a reference to the Vernon
-Grant&amp;rsquo;s
-&lt;a href=&#34;https://github.com/VernonGrant/emacs-keyboard-shortcuts&#34;&gt;emacs-keyboard-shortcuts&lt;/a&gt;
-README that contains a list of Emacs keyboard shortcuts Vernon uses on
-a regular basis.&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://irreal.org/blog/&#34;&gt;Irreal&lt;/a&gt; has recently published &lt;a href=&#34;https://irreal.org/blog/?p=10784&#34;&gt;a&#xA;post&lt;/a&gt; with a reference to the Vernon&#xA;Grant&amp;rsquo;s&#xA;&lt;a href=&#34;https://github.com/VernonGrant/emacs-keyboard-shortcuts&#34;&gt;emacs-keyboard-shortcuts&lt;/a&gt;&#xA;README that contains a list of Emacs keyboard shortcuts Vernon uses on&#xA;a regular basis.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Reverso Context in Emacs</title>
       <link>https://olddeuteronomy.github.io/post/reverso-context-in-emacs/</link>
       <pubDate>Sat, 03 Sep 2022 01:46:36 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/reverso-context-in-emacs/</guid>
-      <description>&lt;p&gt;If you are an emacser, you are probably already following the &lt;a href=&#34;https://sachachua.com/blog/&#34;&gt;Sacha
-Chua&amp;rsquo;s blog&lt;/a&gt;. If you are not, you should.
-Sacha maintains an incredible blog on Emacs-related news, upcoming
-events, Org Mode, configuration, new packages, and many other things
-from the Emacs world.&lt;/p&gt;</description>
+      <description>&lt;p&gt;If you are an emacser, you are probably already following the &lt;a href=&#34;https://sachachua.com/blog/&#34;&gt;Sacha&#xA;Chua&amp;rsquo;s blog&lt;/a&gt;. If you are not, you should.&#xA;Sacha maintains an incredible blog on Emacs-related news, upcoming&#xA;events, Org Mode, configuration, new packages, and many other things&#xA;from the Emacs world.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Use abbrev to Enter Special Characters</title>
       <link>https://olddeuteronomy.github.io/post/use-abbrev-to-enter-special-characters/</link>
       <pubDate>Tue, 16 Aug 2022 15:08:36 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/use-abbrev-to-enter-special-characters/</guid>
-      <description>&lt;p&gt;As it&amp;rsquo;s described in the GNU Emacs Manual, &lt;em&gt;an abbreviation or abbrev
-is a string of characters that may be expanded to a longer string. The
-user can insert the abbrev string and find it replaced automatically
-with the expansion of the abbrev. This saves typing&lt;/em&gt;.&lt;/p&gt;</description>
+      <description>&lt;p&gt;As it&amp;rsquo;s described in the GNU Emacs Manual, &lt;em&gt;an abbreviation or abbrev&#xA;is a string of characters that may be expanded to a longer string. The&#xA;user can insert the abbrev string and find it replaced automatically&#xA;with the expansion of the abbrev. This saves typing&lt;/em&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Eshell Aliases, Prompt, And Colors</title>
       <link>https://olddeuteronomy.github.io/post/eshell-aliases-and-prompt/</link>
       <pubDate>Fri, 22 Jul 2022 13:57:32 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/eshell-aliases-and-prompt/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;Do you use #Emacs to run shells or terminal emulators?
-Well, you should. With vterm you have a fast alternative to the
-builtin ansi-term. And if you prefer shells, you&amp;rsquo;ve got EShell and
-Shell Mode.
-And don&amp;rsquo;t forget serial-term for embedded programming.
-— Mickey Petersen (@mickeynp) on Twitter, July 18, 2022.&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;Do you use #Emacs to run shells or terminal emulators?&#xA;Well, you should. With vterm you have a fast alternative to the&#xA;builtin ansi-term. And if you prefer shells, you&amp;rsquo;ve got EShell and&#xA;Shell Mode.&#xA;And don&amp;rsquo;t forget serial-term for embedded programming.&#xA;— Mickey Petersen (@mickeynp) on Twitter, July 18, 2022.&lt;/p&gt;&lt;/blockquote&gt;</description>
     </item>
-    
     <item>
       <title>DMS To Decimal Degree Conversions And More</title>
       <link>https://olddeuteronomy.github.io/post/dms-decimal-degree-conversions/</link>
       <pubDate>Wed, 22 Jun 2022 14:11:33 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/dms-decimal-degree-conversions/</guid>
-      <description>&lt;p&gt;Working with satellite data I often have to convert a coordinate value or an
-angle value from the DMS notation (&lt;em&gt;degree@minute&amp;rsquo;second&amp;quot;&lt;/em&gt;) to a decimal
-degree in the floating point number format and vice versa.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Working with satellite data I often have to convert a coordinate value or an&#xA;angle value from the DMS notation (&lt;em&gt;degree@minute&amp;rsquo;second&amp;quot;&lt;/em&gt;) to a decimal&#xA;degree in the floating point number format and vice versa.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>I Am Back</title>
       <link>https://olddeuteronomy.github.io/post/i-am-back/</link>
       <pubDate>Tue, 21 Jun 2022 02:45:58 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/i-am-back/</guid>
-      <description>I started this blog in 2017. After a long break, I decided to continue blogging about various things related to Emacs. And not just to Emacs.
-Also, I&amp;rsquo;ve switched from Jekyll to Hugo for a variety of reasons, mainly because of the Mainroad theme.</description>
+      <description>&lt;p&gt;I started this blog in 2017. After a long break, I decided to continue&#xA;blogging about various things related to Emacs. And not just to Emacs.&lt;/p&gt;&#xA;&lt;p&gt;Also, I&amp;rsquo;ve switched from Jekyll to Hugo for a variety of reasons, mainly&#xA;because of the Mainroad theme.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>About</title>
       <link>https://olddeuteronomy.github.io/about/</link>
       <pubDate>Sat, 17 Jun 2017 14:51:33 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/about/</guid>
-      <description>&lt;h1 id=&#34;about-the-emacs-cat&#34;&gt;About The Emacs Cat&lt;/h1&gt;
-&lt;p&gt;My first attempt to dive into the ocean of Emacs occurred in 1997,
-more than 25 years ago.&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;about-the-emacs-cat&#34;&gt;About The Emacs Cat&lt;/h1&gt;&#xA;&lt;p&gt;My first attempt to dive into the ocean of Emacs occurred in 1997,&#xA;more than 25 years ago.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Contact</title>
       <link>https://olddeuteronomy.github.io/contact/</link>
       <pubDate>Sat, 17 Jun 2017 14:50:40 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/contact/</guid>
       <description>&lt;h1 id=&#34;drop-a-message-to-the-emacs-cat&#34;&gt;Drop A Message To The Emacs Cat&lt;/h1&gt;</description>
     </item>
-    
   </channel>
 </rss>

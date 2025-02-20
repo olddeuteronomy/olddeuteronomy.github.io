@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>tree-sitter on The Emacs Cat</title>
+    <title>Tree-Sitter on The Emacs Cat</title>
     <link>https://olddeuteronomy.github.io/tags/tree-sitter/</link>
-    <description>Recent content in tree-sitter on The Emacs Cat</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Tree-Sitter on The Emacs Cat</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 05 Dec 2022 14:14:13 +0300</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/tags/tree-sitter/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Dec 2022 14:14:13 +0300</lastBuildDate>
+    <atom:link href="https://olddeuteronomy.github.io/tags/tree-sitter/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A Simple tree-sitter Config That Works</title>
       <link>https://olddeuteronomy.github.io/post/a-tree-sitter-config-that-works/</link>
       <pubDate>Mon, 05 Dec 2022 14:14:13 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/a-tree-sitter-config-that-works/</guid>
-      <description>&lt;p&gt;Recently, I&amp;rsquo;ve discovered a number of posts on Reddit — like
-&lt;a href=&#34;https://www.reddit.com/r/emacs/comments/zc70m8/treesitterhlmode_does_not_do_anything/&#34;&gt;tree-sitter-hl-mode does not do
-anything&lt;/a&gt;
-or &lt;a href=&#34;https://www.reddit.com/r/emacs/comments/zbpa42/how_to_use_emacs_29_treesitter/&#34;&gt;How to use Emacs 29
-Tree-sitter?&lt;/a&gt;
-— and decided to share my simple &lt;code&gt;tree-sitter&lt;/code&gt; setup that
-seems to be working on my Emacs 28.2 like a charm.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Recently, I&amp;rsquo;ve discovered a number of posts on Reddit — like&#xA;&lt;a href=&#34;https://www.reddit.com/r/emacs/comments/zc70m8/treesitterhlmode_does_not_do_anything/&#34;&gt;tree-sitter-hl-mode does not do&#xA;anything&lt;/a&gt;&#xA;or &lt;a href=&#34;https://www.reddit.com/r/emacs/comments/zbpa42/how_to_use_emacs_29_treesitter/&#34;&gt;How to use Emacs 29&#xA;Tree-sitter?&lt;/a&gt;&#xA;— and decided to share my simple &lt;code&gt;tree-sitter&lt;/code&gt; setup that&#xA;seems to be working on my Emacs 28.2 like a charm.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

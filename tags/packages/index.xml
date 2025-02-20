@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>packages on The Emacs Cat</title>
+    <title>Packages on The Emacs Cat</title>
     <link>https://olddeuteronomy.github.io/tags/packages/</link>
-    <description>Recent content in packages on The Emacs Cat</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Packages on The Emacs Cat</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 03 Sep 2022 01:46:36 +0300</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/tags/packages/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Sep 2022 01:46:36 +0300</lastBuildDate>
+    <atom:link href="https://olddeuteronomy.github.io/tags/packages/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reverso Context in Emacs</title>
       <link>https://olddeuteronomy.github.io/post/reverso-context-in-emacs/</link>
       <pubDate>Sat, 03 Sep 2022 01:46:36 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/reverso-context-in-emacs/</guid>
-      <description>&lt;p&gt;If you are an emacser, you are probably already following the &lt;a href=&#34;https://sachachua.com/blog/&#34;&gt;Sacha
-Chua&amp;rsquo;s blog&lt;/a&gt;. If you are not, you should.
-Sacha maintains an incredible blog on Emacs-related news, upcoming
-events, Org Mode, configuration, new packages, and many other things
-from the Emacs world.&lt;/p&gt;</description>
+      <description>&lt;p&gt;If you are an emacser, you are probably already following the &lt;a href=&#34;https://sachachua.com/blog/&#34;&gt;Sacha&#xA;Chua&amp;rsquo;s blog&lt;/a&gt;. If you are not, you should.&#xA;Sacha maintains an incredible blog on Emacs-related news, upcoming&#xA;events, Org Mode, configuration, new packages, and many other things&#xA;from the Emacs world.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

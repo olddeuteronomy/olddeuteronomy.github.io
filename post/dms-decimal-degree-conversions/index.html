@@ -7,22 +7,31 @@
 	<title>DMS To Decimal Degree Conversions And More - The Emacs Cat</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="Elisp snippets for Degree/Minute/Second to decimal conversion in Emacs">
-		<meta property="og:title" content="DMS To Decimal Degree Conversions And More" />
-<meta property="og:description" content="Elisp snippets for Degree/Minute/Second to decimal conversion in Emacs" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://olddeuteronomy.github.io/post/dms-decimal-degree-conversions/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-06-22T14:11:33+03:00" />
-<meta property="article:modified_time" content="2022-06-22T14:11:33+03:00" />
+		<meta property="og:url" content="https://olddeuteronomy.github.io/post/dms-decimal-degree-conversions/">
+  <meta property="og:site_name" content="The Emacs Cat">
+  <meta property="og:title" content="DMS To Decimal Degree Conversions And More">
+  <meta property="og:description" content="Elisp snippets for Degree/Minute/Second to decimal conversion in Emacs">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-06-22T14:11:33+03:00">
+    <meta property="article:modified_time" content="2022-06-22T14:11:33+03:00">
+    <meta property="article:tag" content="Emacs">
+    <meta property="article:tag" content="Elisp">
+    <meta property="article:tag" content="Snippets">
+    <meta property="article:tag" content="Calc">
 
-
-		<meta itemprop="name" content="DMS To Decimal Degree Conversions And More">
-<meta itemprop="description" content="Elisp snippets for Degree/Minute/Second to decimal conversion in Emacs"><meta itemprop="datePublished" content="2022-06-22T14:11:33+03:00" />
-<meta itemprop="dateModified" content="2022-06-22T14:11:33+03:00" />
-<meta itemprop="wordCount" content="482">
-<meta itemprop="keywords" content="emacs,elisp,snippets,calc," />
-		<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="DMS To Decimal Degree Conversions And More"/>
-<meta name="twitter:description" content="Elisp snippets for Degree/Minute/Second to decimal conversion in Emacs"/>
+		
+  <meta itemprop="name" content="DMS To Decimal Degree Conversions And More">
+  <meta itemprop="description" content="Elisp snippets for Degree/Minute/Second to decimal conversion in Emacs">
+  <meta itemprop="datePublished" content="2022-06-22T14:11:33+03:00">
+  <meta itemprop="dateModified" content="2022-06-22T14:11:33+03:00">
+  <meta itemprop="wordCount" content="482">
+  <meta itemprop="keywords" content="Emacs,Elisp,Snippets,Calc">
+		
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="DMS To Decimal Degree Conversions And More">
+  <meta name="twitter:description" content="Elisp snippets for Degree/Minute/Second to decimal conversion in Emacs">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -33,7 +42,7 @@
 	<link rel="stylesheet" href="/css/custom.css">
 
 	<link rel="shortcut icon" href="/favicon.ico">
-		
+        
 </head>
 <body class="body">
 	<div class="container container--outer">
@@ -112,49 +121,49 @@ degree in the floating point number format and vice versa.</p>
 <p>Of course, I want to do this directly in an Emacs buffer, so I wrote a
 simple function that uses <code>deg</code> and <code>hms</code> functions provided by the
 built-in superb <strong>calc</strong> package.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp">(defun dms2deg (p1 p2)
-  <span style="color:#e6db74">&#34;Converts a region from the DMS (dd@mm&#39;ss\&#34;)
-</span><span style="color:#e6db74">  to a decimal degree.
-</span><span style="color:#e6db74">  P1,P2 are the beginning and the end of the region
-</span><span style="color:#e6db74">  (selection) respectively.&#34;</span>
-  (interactive <span style="color:#e6db74">&#34;r&#34;</span>)
-  (let (s)
-    (if (region-active-p)
-        (progn
-          (setq s (calc-eval
-              (<span style="color:#a6e22e">concat</span> <span style="color:#e6db74">&#34;deg(&#34;</span> (<span style="color:#a6e22e">buffer-substring-no-properties</span> p1 p2) <span style="color:#e6db74">&#34;)&#34;</span>)))
-          (delete-active-region)
-          (<span style="color:#a6e22e">insert</span> s))
-      (<span style="color:#a6e22e">message</span> <span style="color:#e6db74">&#34;No active region!&#34;</span>))
-    )
-  )
-</code></pre></div><p>I&rsquo;ve bound this function to the <code>Ctrl+F6</code> key chord (<code>C-f6</code> in the Emacs
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun dms2deg (p1 p2)
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Converts a region from the DMS (dd@mm&#39;ss\&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  to a decimal degree.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  P1,P2 are the beginning and the end of the region
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  (selection) respectively.&#34;</span>
+</span></span><span style="display:flex;"><span>  (interactive <span style="color:#e6db74">&#34;r&#34;</span>)
+</span></span><span style="display:flex;"><span>  (let (s)
+</span></span><span style="display:flex;"><span>    (if (region-active-p)
+</span></span><span style="display:flex;"><span>        (progn
+</span></span><span style="display:flex;"><span>          (setq s (calc-eval
+</span></span><span style="display:flex;"><span>              (<span style="color:#a6e22e">concat</span> <span style="color:#e6db74">&#34;deg(&#34;</span> (<span style="color:#a6e22e">buffer-substring-no-properties</span> p1 p2) <span style="color:#e6db74">&#34;)&#34;</span>)))
+</span></span><span style="display:flex;"><span>          (delete-active-region)
+</span></span><span style="display:flex;"><span>          (<span style="color:#a6e22e">insert</span> s))
+</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">message</span> <span style="color:#e6db74">&#34;No active region!&#34;</span>))
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>  )
+</span></span></code></pre></div><p>I&rsquo;ve bound this function to the <code>Ctrl+F6</code> key chord (<code>C-f6</code> in the Emacs
 notation) globally. Of course, you can use your own key combination.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp">(global-set-key [(control f6)] <span style="color:#a6e22e">#&#39;</span>dms2deg)
-</code></pre></div><p>Now I can select a region in a buffer, press <code>C-f6</code> and <em>replace</em> the
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(global-set-key [(control f6)] <span style="color:#a6e22e">#&#39;</span>dms2deg)
+</span></span></code></pre></div><p>Now I can select a region in a buffer, press <code>C-f6</code> and <em>replace</em> the
 selection with its decimal value, so <code>30@15'54&quot;</code> becomes <code>30.265</code>.</p>
 <h2 id="decimal-degree-to-dms">Decimal Degree to DMS</h2>
 <p>The inverse function (bound to <code>S-f6</code> or <code>Shift+F6</code>) <em>replaces</em> a floating
 point with the corresponding DMS string.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp">(defun deg2dms (p1 p2)
-  <span style="color:#e6db74">&#34;Converts a region from a decimal degree
-</span><span style="color:#e6db74">  to the DMS format (dd@ mm&#39; ss\&#34;).
-</span><span style="color:#e6db74">  P1,P2 - beginning and end of the region
-</span><span style="color:#e6db74">  (selection) respectively.&#34;</span>
-  (interactive <span style="color:#e6db74">&#34;r&#34;</span>)
-  (let (s)
-    (if (region-active-p)
-        (progn
-          (setq s (calc-eval
-              (<span style="color:#a6e22e">concat</span> <span style="color:#e6db74">&#34;hms(&#34;</span> (<span style="color:#a6e22e">buffer-substring-no-properties</span> p1 p2) <span style="color:#e6db74">&#34;)&#34;</span>)))
-          (delete-active-region)
-          (<span style="color:#a6e22e">insert</span> s))
-      (<span style="color:#a6e22e">message</span> <span style="color:#e6db74">&#34;No active region!&#34;</span>))
-    )
-  )
-
-(global-set-key [(shift f6)] <span style="color:#a6e22e">#&#39;</span>deg2dms)
-</code></pre></div><p>Now if you select a region in a buffer and then press <code>S-f6</code>, your <code>30.265</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun deg2dms (p1 p2)
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Converts a region from a decimal degree
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  to the DMS format (dd@ mm&#39; ss\&#34;).
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  P1,P2 - beginning and end of the region
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  (selection) respectively.&#34;</span>
+</span></span><span style="display:flex;"><span>  (interactive <span style="color:#e6db74">&#34;r&#34;</span>)
+</span></span><span style="display:flex;"><span>  (let (s)
+</span></span><span style="display:flex;"><span>    (if (region-active-p)
+</span></span><span style="display:flex;"><span>        (progn
+</span></span><span style="display:flex;"><span>          (setq s (calc-eval
+</span></span><span style="display:flex;"><span>              (<span style="color:#a6e22e">concat</span> <span style="color:#e6db74">&#34;hms(&#34;</span> (<span style="color:#a6e22e">buffer-substring-no-properties</span> p1 p2) <span style="color:#e6db74">&#34;)&#34;</span>)))
+</span></span><span style="display:flex;"><span>          (delete-active-region)
+</span></span><span style="display:flex;"><span>          (<span style="color:#a6e22e">insert</span> s))
+</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">message</span> <span style="color:#e6db74">&#34;No active region!&#34;</span>))
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(global-set-key [(shift f6)] <span style="color:#a6e22e">#&#39;</span>deg2dms)
+</span></span></code></pre></div><p>Now if you select a region in a buffer and then press <code>S-f6</code>, your <code>30.265</code>
 becomes <code>30@ 15' 54.&quot;</code></p>
 <h2 id="enhanced-version">Enhanced Version</h2>
 <p>After a while, I decided to enhance the first conversion function by
@@ -162,32 +171,32 @@ adding an <em>&lsquo;inline calculator&rsquo;</em> feature. It works quite simpl
 selected region contains the &lsquo;@&rsquo; character, the region is considered
 as a coordinate (angle) value in the DMS notation, and it should be <em>replaced</em>
 with its decimal value. Otherwise, the region is considered as an
-arithmetic expression (in terms of the Emacs' calc) and its calculated
+arithmetic expression (in terms of the Emacs&rsquo; calc) and its calculated
 value will be <em>inserted</em> just after the region.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp">(defun avs/calc-region (p1 p2)
-  <span style="color:#e6db74">&#34;Calculates a region or converts DMS to decimal.
-</span><span style="color:#e6db74">   P1,P2 - beginning and end of the region
-</span><span style="color:#e6db74">   respectively.&#34;</span>
-  (interactive <span style="color:#e6db74">&#34;r&#34;</span>)
-  (if (region-active-p)
-      (let ((b (<span style="color:#a6e22e">buffer-substring-no-properties</span> p1 p2)))
-        (cond ((string-match-p <span style="color:#e6db74">&#34;@&#34;</span> b) <span style="color:#75715e">; convert DMS to decimal ...</span>
-               (delete-active-region)
-               (<span style="color:#a6e22e">insert</span> (calc-eval (<span style="color:#a6e22e">concat</span> <span style="color:#e6db74">&#34;deg(&#34;</span> b <span style="color:#e6db74">&#34;)&#34;</span>))))
-              (<span style="color:#66d9ef">t</span> <span style="color:#75715e">; ... otherwise calculate a region</span>
-               (<span style="color:#a6e22e">goto-char</span> (<span style="color:#a6e22e">region-end</span>))
-               (pop-mark)
-               (<span style="color:#a6e22e">insert</span> <span style="color:#e6db74">&#34; = &#34;</span> (calc-eval b))))
-        )
-    (<span style="color:#a6e22e">message</span> <span style="color:#e6db74">&#34;No active region!&#34;</span>))
-  )
-
-(global-set-key [(f6)] <span style="color:#e6db74">&#39;avs/calc-region</span>)
-</code></pre></div><p>The enhanced function is bound to <code>f6</code>. So now if you press <code>F6</code>,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun avs/calc-region (p1 p2)
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Calculates a region or converts DMS to decimal.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   P1,P2 - beginning and end of the region
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   respectively.&#34;</span>
+</span></span><span style="display:flex;"><span>  (interactive <span style="color:#e6db74">&#34;r&#34;</span>)
+</span></span><span style="display:flex;"><span>  (if (region-active-p)
+</span></span><span style="display:flex;"><span>      (let ((b (<span style="color:#a6e22e">buffer-substring-no-properties</span> p1 p2)))
+</span></span><span style="display:flex;"><span>        (cond ((string-match-p <span style="color:#e6db74">&#34;@&#34;</span> b) <span style="color:#75715e">; convert DMS to decimal ...</span>
+</span></span><span style="display:flex;"><span>               (delete-active-region)
+</span></span><span style="display:flex;"><span>               (<span style="color:#a6e22e">insert</span> (calc-eval (<span style="color:#a6e22e">concat</span> <span style="color:#e6db74">&#34;deg(&#34;</span> b <span style="color:#e6db74">&#34;)&#34;</span>))))
+</span></span><span style="display:flex;"><span>              (<span style="color:#66d9ef">t</span> <span style="color:#75715e">; ... otherwise calculate a region</span>
+</span></span><span style="display:flex;"><span>               (<span style="color:#a6e22e">goto-char</span> (<span style="color:#a6e22e">region-end</span>))
+</span></span><span style="display:flex;"><span>               (pop-mark)
+</span></span><span style="display:flex;"><span>               (<span style="color:#a6e22e">insert</span> <span style="color:#e6db74">&#34; = &#34;</span> (calc-eval b))))
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">message</span> <span style="color:#e6db74">&#34;No active region!&#34;</span>))
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(global-set-key [(f6)] <span style="color:#e6db74">&#39;avs/calc-region</span>)
+</span></span></code></pre></div><p>The enhanced function is bound to <code>f6</code>. So now if you press <code>F6</code>,
 <code>15@45'20&quot;</code> becomes <code>15.7555555556</code>, and <code>((350.0 / 7) + 48.314)</code>
 becomes <code>((350.0 / 7) + 48.314) = 98.314</code>.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>Emacs' <strong>calc</strong> is great.</p>
+<p>Emacs&rsquo; <strong>calc</strong> is great.</p>
 <h2 id="next">Next</h2>
 <p>As a next step, I want to implement DMS and Decimal degree
 conversions to the DD:MM:SS format used by the excellent <a href="https://www.generic-mapping-tools.org/">Generic
@@ -217,6 +226,7 @@ Mapping Tools</a> (GMT) toolbox.</p>
 </main>
 
 
+
 <nav class="pager flex">
 	<div class="pager__item pager__item--prev">
 		<a class="pager__link" href="/post/i-am-back/" rel="prev">
@@ -231,6 +241,29 @@ Mapping Tools</a> (GMT) toolbox.</p>
 		</a>
 	</div>
 </nav>
+
+<section class="comments">
+	<div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "olddeuteronomy" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
 
 
 			</div>
@@ -258,19 +291,19 @@ Mapping Tools</a> (GMT) toolbox.</p>
 <div class="widget-taglist widget">
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
-		<a class="widget-taglist__link widget__link btn" href="/tags/calc/" title="calc">calc</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/config/" title="config">config</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/elisp/" title="elisp">elisp</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/emacs/" title="emacs">emacs</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/eshell/" title="eshell">eshell</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/org-mode/" title="org-mode">org-mode</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/packages/" title="packages">packages</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pages/" title="pages">pages</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/python/" title="python">python</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/snippets/" title="snippets">snippets</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/social/" title="social">social</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tree-sitter/" title="tree-sitter">tree-sitter</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/writing/" title="writing">writing</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/calc/" title="Calc">Calc</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/config/" title="Config">Config</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/elisp/" title="Elisp">Elisp</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/emacs/" title="Emacs">Emacs</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/eshell/" title="Eshell">Eshell</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/org-mode/" title="Org-Mode">Org-Mode</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/packages/" title="Packages">Packages</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pages/" title="Pages">Pages</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/python/" title="Python">Python</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/snippets/" title="Snippets">Snippets</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/social/" title="Social">Social</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tree-sitter/" title="Tree-Sitter">Tree-Sitter</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/writing/" title="Writing">Writing</a>
 	</div>
 </div>
 <div class="widget-categories widget">
@@ -346,7 +379,7 @@ Mapping Tools</a> (GMT) toolbox.</p>
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2024 The Emacs Cat.
+			&copy; 2025 The Emacs Cat.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>

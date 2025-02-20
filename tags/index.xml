@@ -4,125 +4,100 @@
     <title>Tags on The Emacs Cat</title>
     <link>https://olddeuteronomy.github.io/tags/</link>
     <description>Recent content in Tags on The Emacs Cat</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 26 Dec 2024 10:01:05 +0100</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 26 Dec 2024 10:01:05 +0100</lastBuildDate>
+    <atom:link href="https://olddeuteronomy.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>emacs</title>
+      <title>Emacs</title>
       <link>https://olddeuteronomy.github.io/tags/emacs/</link>
       <pubDate>Thu, 26 Dec 2024 10:01:05 +0100</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/tags/emacs/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>python</title>
+      <title>Python</title>
       <link>https://olddeuteronomy.github.io/tags/python/</link>
       <pubDate>Thu, 26 Dec 2024 10:01:05 +0100</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/tags/python/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>config</title>
+      <title>Config</title>
       <link>https://olddeuteronomy.github.io/tags/config/</link>
       <pubDate>Fri, 06 Dec 2024 18:40:56 +0100</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/tags/config/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>elisp</title>
+      <title>Elisp</title>
       <link>https://olddeuteronomy.github.io/tags/elisp/</link>
       <pubDate>Fri, 06 Dec 2024 18:40:56 +0100</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/tags/elisp/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>social</title>
+      <title>Social</title>
       <link>https://olddeuteronomy.github.io/tags/social/</link>
       <pubDate>Fri, 22 Nov 2024 11:23:12 +0100</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/tags/social/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>org-mode</title>
+      <title>Org-Mode</title>
       <link>https://olddeuteronomy.github.io/tags/org-mode/</link>
       <pubDate>Tue, 01 Aug 2023 14:07:46 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/tags/org-mode/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>tree-sitter</title>
+      <title>Tree-Sitter</title>
       <link>https://olddeuteronomy.github.io/tags/tree-sitter/</link>
       <pubDate>Mon, 05 Dec 2022 14:14:13 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/tags/tree-sitter/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>eshell</title>
+      <title>Eshell</title>
       <link>https://olddeuteronomy.github.io/tags/eshell/</link>
       <pubDate>Wed, 05 Oct 2022 13:07:45 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/tags/eshell/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>packages</title>
+      <title>Packages</title>
       <link>https://olddeuteronomy.github.io/tags/packages/</link>
       <pubDate>Sat, 03 Sep 2022 01:46:36 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/tags/packages/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>writing</title>
+      <title>Writing</title>
       <link>https://olddeuteronomy.github.io/tags/writing/</link>
       <pubDate>Tue, 16 Aug 2022 15:08:36 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/tags/writing/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>calc</title>
+      <title>Calc</title>
       <link>https://olddeuteronomy.github.io/tags/calc/</link>
       <pubDate>Wed, 22 Jun 2022 14:11:33 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/tags/calc/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>snippets</title>
+      <title>Snippets</title>
       <link>https://olddeuteronomy.github.io/tags/snippets/</link>
       <pubDate>Wed, 22 Jun 2022 14:11:33 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/tags/snippets/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>pages</title>
+      <title>Pages</title>
       <link>https://olddeuteronomy.github.io/tags/pages/</link>
       <pubDate>Sat, 17 Jun 2017 14:51:33 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/tags/pages/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

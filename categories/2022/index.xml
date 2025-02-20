@@ -4,110 +4,65 @@
     <title>2022 on The Emacs Cat</title>
     <link>https://olddeuteronomy.github.io/categories/2022/</link>
     <description>Recent content in 2022 on The Emacs Cat</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 05 Dec 2022 14:14:13 +0300</lastBuildDate><atom:link href="https://olddeuteronomy.github.io/categories/2022/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Dec 2022 14:14:13 +0300</lastBuildDate>
+    <atom:link href="https://olddeuteronomy.github.io/categories/2022/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A Simple tree-sitter Config That Works</title>
       <link>https://olddeuteronomy.github.io/post/a-tree-sitter-config-that-works/</link>
       <pubDate>Mon, 05 Dec 2022 14:14:13 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/a-tree-sitter-config-that-works/</guid>
-      <description>&lt;p&gt;Recently, I&amp;rsquo;ve discovered a number of posts on Reddit — like
-&lt;a href=&#34;https://www.reddit.com/r/emacs/comments/zc70m8/treesitterhlmode_does_not_do_anything/&#34;&gt;tree-sitter-hl-mode does not do
-anything&lt;/a&gt;
-or &lt;a href=&#34;https://www.reddit.com/r/emacs/comments/zbpa42/how_to_use_emacs_29_treesitter/&#34;&gt;How to use Emacs 29
-Tree-sitter?&lt;/a&gt;
-— and decided to share my simple &lt;code&gt;tree-sitter&lt;/code&gt; setup that
-seems to be working on my Emacs 28.2 like a charm.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Recently, I&amp;rsquo;ve discovered a number of posts on Reddit — like&#xA;&lt;a href=&#34;https://www.reddit.com/r/emacs/comments/zc70m8/treesitterhlmode_does_not_do_anything/&#34;&gt;tree-sitter-hl-mode does not do&#xA;anything&lt;/a&gt;&#xA;or &lt;a href=&#34;https://www.reddit.com/r/emacs/comments/zbpa42/how_to_use_emacs_29_treesitter/&#34;&gt;How to use Emacs 29&#xA;Tree-sitter?&lt;/a&gt;&#xA;— and decided to share my simple &lt;code&gt;tree-sitter&lt;/code&gt; setup that&#xA;seems to be working on my Emacs 28.2 like a charm.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>How to Clear the Eshell</title>
       <link>https://olddeuteronomy.github.io/post/how-to-clear-the-eshell/</link>
       <pubDate>Wed, 05 Oct 2022 13:07:45 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/how-to-clear-the-eshell/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m a big fan of Eshell, but some things in Eshell look, hmm,
-a bit strange. One of such things is how the Eshell&amp;rsquo;s command &lt;code&gt;clear&lt;/code&gt; clears
-the screen.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I&amp;rsquo;m a big fan of Eshell, but some things in Eshell look, hmm,&#xA;a bit strange. One of such things is how the Eshell&amp;rsquo;s command &lt;code&gt;clear&lt;/code&gt; clears&#xA;the screen.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Emacs Keyboard Shortcuts</title>
       <link>https://olddeuteronomy.github.io/post/emacs-shortcuts/</link>
       <pubDate>Tue, 06 Sep 2022 15:26:36 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/emacs-shortcuts/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://irreal.org/blog/&#34;&gt;Irreal&lt;/a&gt; has recently published &lt;a href=&#34;https://irreal.org/blog/?p=10784&#34;&gt;a
-post&lt;/a&gt; with a reference to the Vernon
-Grant&amp;rsquo;s
-&lt;a href=&#34;https://github.com/VernonGrant/emacs-keyboard-shortcuts&#34;&gt;emacs-keyboard-shortcuts&lt;/a&gt;
-README that contains a list of Emacs keyboard shortcuts Vernon uses on
-a regular basis.&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://irreal.org/blog/&#34;&gt;Irreal&lt;/a&gt; has recently published &lt;a href=&#34;https://irreal.org/blog/?p=10784&#34;&gt;a&#xA;post&lt;/a&gt; with a reference to the Vernon&#xA;Grant&amp;rsquo;s&#xA;&lt;a href=&#34;https://github.com/VernonGrant/emacs-keyboard-shortcuts&#34;&gt;emacs-keyboard-shortcuts&lt;/a&gt;&#xA;README that contains a list of Emacs keyboard shortcuts Vernon uses on&#xA;a regular basis.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Reverso Context in Emacs</title>
       <link>https://olddeuteronomy.github.io/post/reverso-context-in-emacs/</link>
       <pubDate>Sat, 03 Sep 2022 01:46:36 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/reverso-context-in-emacs/</guid>
-      <description>&lt;p&gt;If you are an emacser, you are probably already following the &lt;a href=&#34;https://sachachua.com/blog/&#34;&gt;Sacha
-Chua&amp;rsquo;s blog&lt;/a&gt;. If you are not, you should.
-Sacha maintains an incredible blog on Emacs-related news, upcoming
-events, Org Mode, configuration, new packages, and many other things
-from the Emacs world.&lt;/p&gt;</description>
+      <description>&lt;p&gt;If you are an emacser, you are probably already following the &lt;a href=&#34;https://sachachua.com/blog/&#34;&gt;Sacha&#xA;Chua&amp;rsquo;s blog&lt;/a&gt;. If you are not, you should.&#xA;Sacha maintains an incredible blog on Emacs-related news, upcoming&#xA;events, Org Mode, configuration, new packages, and many other things&#xA;from the Emacs world.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Use abbrev to Enter Special Characters</title>
       <link>https://olddeuteronomy.github.io/post/use-abbrev-to-enter-special-characters/</link>
       <pubDate>Tue, 16 Aug 2022 15:08:36 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/use-abbrev-to-enter-special-characters/</guid>
-      <description>&lt;p&gt;As it&amp;rsquo;s described in the GNU Emacs Manual, &lt;em&gt;an abbreviation or abbrev
-is a string of characters that may be expanded to a longer string. The
-user can insert the abbrev string and find it replaced automatically
-with the expansion of the abbrev. This saves typing&lt;/em&gt;.&lt;/p&gt;</description>
+      <description>&lt;p&gt;As it&amp;rsquo;s described in the GNU Emacs Manual, &lt;em&gt;an abbreviation or abbrev&#xA;is a string of characters that may be expanded to a longer string. The&#xA;user can insert the abbrev string and find it replaced automatically&#xA;with the expansion of the abbrev. This saves typing&lt;/em&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Eshell Aliases, Prompt, And Colors</title>
       <link>https://olddeuteronomy.github.io/post/eshell-aliases-and-prompt/</link>
       <pubDate>Fri, 22 Jul 2022 13:57:32 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/eshell-aliases-and-prompt/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;Do you use #Emacs to run shells or terminal emulators?
-Well, you should. With vterm you have a fast alternative to the
-builtin ansi-term. And if you prefer shells, you&amp;rsquo;ve got EShell and
-Shell Mode.
-And don&amp;rsquo;t forget serial-term for embedded programming.
-— Mickey Petersen (@mickeynp) on Twitter, July 18, 2022.&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;Do you use #Emacs to run shells or terminal emulators?&#xA;Well, you should. With vterm you have a fast alternative to the&#xA;builtin ansi-term. And if you prefer shells, you&amp;rsquo;ve got EShell and&#xA;Shell Mode.&#xA;And don&amp;rsquo;t forget serial-term for embedded programming.&#xA;— Mickey Petersen (@mickeynp) on Twitter, July 18, 2022.&lt;/p&gt;&lt;/blockquote&gt;</description>
     </item>
-    
     <item>
       <title>DMS To Decimal Degree Conversions And More</title>
       <link>https://olddeuteronomy.github.io/post/dms-decimal-degree-conversions/</link>
       <pubDate>Wed, 22 Jun 2022 14:11:33 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/dms-decimal-degree-conversions/</guid>
-      <description>&lt;p&gt;Working with satellite data I often have to convert a coordinate value or an
-angle value from the DMS notation (&lt;em&gt;degree@minute&amp;rsquo;second&amp;quot;&lt;/em&gt;) to a decimal
-degree in the floating point number format and vice versa.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Working with satellite data I often have to convert a coordinate value or an&#xA;angle value from the DMS notation (&lt;em&gt;degree@minute&amp;rsquo;second&amp;quot;&lt;/em&gt;) to a decimal&#xA;degree in the floating point number format and vice versa.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>I Am Back</title>
       <link>https://olddeuteronomy.github.io/post/i-am-back/</link>
       <pubDate>Tue, 21 Jun 2022 02:45:58 +0300</pubDate>
-      
       <guid>https://olddeuteronomy.github.io/post/i-am-back/</guid>
-      <description>I started this blog in 2017. After a long break, I decided to continue blogging about various things related to Emacs. And not just to Emacs.
-Also, I&amp;rsquo;ve switched from Jekyll to Hugo for a variety of reasons, mainly because of the Mainroad theme.</description>
+      <description>&lt;p&gt;I started this blog in 2017. After a long break, I decided to continue&#xA;blogging about various things related to Emacs. And not just to Emacs.&lt;/p&gt;&#xA;&lt;p&gt;Also, I&amp;rsquo;ve switched from Jekyll to Hugo for a variety of reasons, mainly&#xA;because of the Mainroad theme.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>
