@@ -6,8 +6,22 @@
     <description>Recent content in Config on The Emacs Cat</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Dec 2024 18:40:56 +0100</lastBuildDate>
+    <lastBuildDate>Sat, 22 Feb 2025 10:36:27 +0100</lastBuildDate>
     <atom:link href="https://olddeuteronomy.github.io/tags/config/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43; Programming in Emacs</title>
+      <link>https://olddeuteronomy.github.io/post/cpp-programming-in-emacs/</link>
+      <pubDate>Sat, 22 Feb 2025 10:36:27 +0100</pubDate>
+      <guid>https://olddeuteronomy.github.io/post/cpp-programming-in-emacs/</guid>
+      <description>&lt;p&gt;C++ is my primary programming language since &amp;ndash; I can&amp;rsquo;t believe it&#xA;myself &amp;ndash; 1991 (yes, it was Turbo C++). As I&amp;rsquo;m going to do almost&#xA;everything within Emacs 29.4 now &amp;ndash; no doubt I want to have the C++ IDE in&#xA;Emacs, in the same way I&amp;rsquo;m using Emacs as the&#xA;&lt;a href=&#34;https://olddeuteronomy.github.io/post/python-programming-in-emacs/&#34;&gt;Python IDE&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Thankfully, &lt;a href=&#34;https://github.com/joaotavora/eglot&#34;&gt;eglot&lt;/a&gt;, the Emacs &lt;em&gt;client&lt;/em&gt; for&#xA;the Language Server Protocol (LSP), is now &amp;ndash; since version 29 &amp;ndash; the&#xA;part of Emacs. It remains to choose the appropriate LSP.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Python Programming in Emacs</title>
+      <link>https://olddeuteronomy.github.io/post/python-programming-in-emacs/</link>
+      <pubDate>Thu, 26 Dec 2024 10:01:05 +0100</pubDate>
+      <guid>https://olddeuteronomy.github.io/post/python-programming-in-emacs/</guid>
+      <description>&lt;p&gt;Python is one of my programming languages I&amp;rsquo;m using for both work and&#xA;home life &amp;ndash; no doubt, I&amp;rsquo;d want to use Emacs as an IDE for Python&#xA;programming. There is a certain set of features we&amp;rsquo;d expect to have&#xA;in any IDE: 1) code completion, 2) code navigation, 3) error checking.&lt;/p&gt;&#xA;&lt;p&gt;Thanks to the fact that both &lt;code&gt;eglot&lt;/code&gt;, the Emacs client for the&#xA;Language Server Protocol (LSP), and &lt;code&gt;tree-sitter&lt;/code&gt;, a powerful parsing&#xA;library, are now &amp;ndash; since version 29 &amp;ndash; the parts of Emacs, It should&#xA;not be too hard to construct a lightweight and fast Python IDE.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Emacs Startup Screen</title>
       <link>https://olddeuteronomy.github.io/post/emacs-startup-screen/</link>
