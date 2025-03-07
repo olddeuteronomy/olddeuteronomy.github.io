@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Writing on The Emacs Cat</title>
-    <link>http://localhost:1313/tags/writing/</link>
+    <link>https://olddeuteronomy.github.io/tags/writing/</link>
     <description>Recent content in Writing on The Emacs Cat</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 16 Aug 2022 15:08:36 +0300</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/writing/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://olddeuteronomy.github.io/tags/writing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Use abbrev to Enter Special Characters</title>
-      <link>http://localhost:1313/post/use-abbrev-to-enter-special-characters/</link>
+      <link>https://olddeuteronomy.github.io/post/use-abbrev-to-enter-special-characters/</link>
       <pubDate>Tue, 16 Aug 2022 15:08:36 +0300</pubDate>
-      <guid>http://localhost:1313/post/use-abbrev-to-enter-special-characters/</guid>
+      <guid>https://olddeuteronomy.github.io/post/use-abbrev-to-enter-special-characters/</guid>
       <description>&lt;p&gt;As it&amp;rsquo;s described in the GNU Emacs Manual, &lt;em&gt;an abbreviation or abbrev&#xA;is a string of characters that may be expanded to a longer string. The&#xA;user can insert the abbrev string and find it replaced automatically&#xA;with the expansion of the abbrev. This saves typing&lt;/em&gt;.&lt;/p&gt;</description>
     </item>
   </channel>

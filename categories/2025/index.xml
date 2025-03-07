@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>2025 on The Emacs Cat</title>
-    <link>http://localhost:1313/categories/2025/</link>
+    <link>https://olddeuteronomy.github.io/categories/2025/</link>
     <description>Recent content in 2025 on The Emacs Cat</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 07 Mar 2025 10:33:34 +0100</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/2025/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://olddeuteronomy.github.io/categories/2025/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Using Emacs Org Mode for Reproducibility Testing</title>
-      <link>http://localhost:1313/post/orgmode-for-reproducibility-testing/</link>
+      <link>https://olddeuteronomy.github.io/post/orgmode-for-reproducibility-testing/</link>
       <pubDate>Fri, 07 Mar 2025 10:33:34 +0100</pubDate>
-      <guid>http://localhost:1313/post/orgmode-for-reproducibility-testing/</guid>
-      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;Software reproducibility testing is a critical aspect of&#xA;software development and maintenance.&#xA;It ensures that software is reliable, consistent, and predictable and&#xA;that it can be easily replicated and verified by others.&lt;/p&gt;&#xA;&lt;p&gt;Ana Pustan, &lt;a href=&#34;https://testerwork.com/reproducibility-testing/&#34;&gt;&lt;em&gt;Reproducibility Testing: A Complete Guide&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;For many of us, it won&amp;rsquo;t be a surprise that&#xA;the Emacs &lt;a href=&#34;https://orgmode.org/&#34;&gt;Org mode&lt;/a&gt; is perfectly suited&#xA;for reproducibility testing.&lt;/p&gt;</description>
+      <guid>https://olddeuteronomy.github.io/post/orgmode-for-reproducibility-testing/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;Software reproducibility testing is a critical aspect of&#xA;software development and maintenance.&#xA;It ensures that software is reliable, consistent, and predictable and&#xA;that it can be easily replicated and verified by others.&lt;/p&gt;&#xA;&lt;p&gt;Ana Pustan, &lt;a href=&#34;https://testerwork.com/reproducibility-testing/&#34;&gt;&lt;em&gt;Reproducibility Testing: A Complete Guide&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;For many of us, it won&amp;rsquo;t be a surprise that&#xA;the Emacs &lt;a href=&#34;https://orgmode.org/&#34;&gt;Org mode&lt;/a&gt; is perfectly suited&#xA;for reproducibility testing.&lt;/p&gt;</description>
     </item>
     <item>
       <title>C&#43;&#43; Programming in Emacs</title>
-      <link>http://localhost:1313/post/cpp-programming-in-emacs/</link>
+      <link>https://olddeuteronomy.github.io/post/cpp-programming-in-emacs/</link>
       <pubDate>Sat, 22 Feb 2025 10:36:27 +0100</pubDate>
-      <guid>http://localhost:1313/post/cpp-programming-in-emacs/</guid>
+      <guid>https://olddeuteronomy.github.io/post/cpp-programming-in-emacs/</guid>
       <description>&lt;p&gt;C++ is my primary programming language since &amp;ndash; I can&amp;rsquo;t believe it&#xA;myself &amp;ndash; 1991 (yes, it was Turbo C++). As I&amp;rsquo;m going to do almost&#xA;everything within Emacs 29.4 now &amp;ndash; no doubt I want to have the C++ IDE in&#xA;Emacs, in the same way I&amp;rsquo;m using Emacs as the&#xA;&lt;a href=&#34;https://olddeuteronomy.github.io/post/python-programming-in-emacs/&#34;&gt;Python IDE&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Thankfully, &lt;a href=&#34;https://github.com/joaotavora/eglot&#34;&gt;eglot&lt;/a&gt;, the Emacs &lt;em&gt;client&lt;/em&gt; for&#xA;the Language Server Protocol (LSP), is now &amp;ndash; since version 29 &amp;ndash; the&#xA;part of Emacs. It remains to choose the appropriate LSP.&lt;/p&gt;</description>
     </item>
   </channel>

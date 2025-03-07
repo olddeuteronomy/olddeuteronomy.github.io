@@ -1,36 +1,45 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>A Simple tree-sitter Config That Works - The Emacs Cat</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		<meta property="og:url" content="http://localhost:1313/post/a-tree-sitter-config-that-works/">
-  <meta property="og:site_name" content="The Emacs Cat">
-  <meta property="og:title" content="A Simple tree-sitter Config That Works">
-  <meta property="og:description" content="Recently, I’ve discovered a number of posts on Reddit — like tree-sitter-hl-mode does not do anything or How to use Emacs 29 Tree-sitter? — and decided to share my simple tree-sitter setup that seems to be working on my Emacs 28.2 like a charm.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2022-12-05T14:14:13+03:00">
-    <meta property="article:modified_time" content="2022-12-05T14:14:13+03:00">
-    <meta property="article:tag" content="Emacs">
-    <meta property="article:tag" content="Config">
-    <meta property="article:tag" content="Tree-Sitter">
+		<meta property="og:title" content="A Simple tree-sitter Config That Works" />
+<meta property="og:description" content="Recently, I&rsquo;ve discovered a number of posts on Reddit — like
+tree-sitter-hl-mode does not do
+anything
+or How to use Emacs 29
+Tree-sitter?
+— and decided to share my simple tree-sitter setup that
+seems to be working on my Emacs 28.2 like a charm." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://olddeuteronomy.github.io/post/a-tree-sitter-config-that-works/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-12-05T14:14:13+03:00" />
+<meta property="article:modified_time" content="2022-12-05T14:14:13+03:00" />
 
-		
-  <meta itemprop="name" content="A Simple tree-sitter Config That Works">
-  <meta itemprop="description" content="Recently, I’ve discovered a number of posts on Reddit — like tree-sitter-hl-mode does not do anything or How to use Emacs 29 Tree-sitter? — and decided to share my simple tree-sitter setup that seems to be working on my Emacs 28.2 like a charm.">
-  <meta itemprop="datePublished" content="2022-12-05T14:14:13+03:00">
-  <meta itemprop="dateModified" content="2022-12-05T14:14:13+03:00">
-  <meta itemprop="wordCount" content="250">
-  <meta itemprop="keywords" content="Emacs,Config,Tree-Sitter">
-		
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="A Simple tree-sitter Config That Works">
-  <meta name="twitter:description" content="Recently, I’ve discovered a number of posts on Reddit — like tree-sitter-hl-mode does not do anything or How to use Emacs 29 Tree-sitter? — and decided to share my simple tree-sitter setup that seems to be working on my Emacs 28.2 like a charm.">
+
+		<meta itemprop="name" content="A Simple tree-sitter Config That Works">
+<meta itemprop="description" content="Recently, I&rsquo;ve discovered a number of posts on Reddit — like
+tree-sitter-hl-mode does not do
+anything
+or How to use Emacs 29
+Tree-sitter?
+— and decided to share my simple tree-sitter setup that
+seems to be working on my Emacs 28.2 like a charm."><meta itemprop="datePublished" content="2022-12-05T14:14:13+03:00" />
+<meta itemprop="dateModified" content="2022-12-05T14:14:13+03:00" />
+<meta itemprop="wordCount" content="250">
+<meta itemprop="keywords" content="emacs,config,tree-sitter," />
+		<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="A Simple tree-sitter Config That Works"/>
+<meta name="twitter:description" content="Recently, I&rsquo;ve discovered a number of posts on Reddit — like
+tree-sitter-hl-mode does not do
+anything
+or How to use Emacs 29
+Tree-sitter?
+— and decided to share my simple tree-sitter setup that
+seems to be working on my Emacs 28.2 like a charm."/>
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -41,6 +50,7 @@
 	<link rel="stylesheet" href="/css/custom.css">
 
 	<link rel="shortcut icon" href="/favicon.ico">
+        
 </head>
 <body class="body">
 	<div class="container container--outer">
@@ -106,18 +116,18 @@ in my case that is <em>tree-sitter-linux-x64.gz</em> because I&rsquo;m on Pop!_O
 20.10. Then I&rsquo;ve unpack the archive, put the standalone binary in my
 <code>$HOME/bin</code> that is in my <code>$PATH</code> and therefore is accessible from
 anywhere, and changed its mode to <em>executable</em> by <code>chmod +x tree-sitter</code>.</p>
-<figure><img src="/img/tree-sitter-bin.png"><figcaption>
-      <h4>The latest tree-sitter app is installed.</h4>
-    </figcaption>
+<figure><img src="/img/tree-sitter-bin.png"/><figcaption>
+            <h4>The latest tree-sitter app is installed.</h4>
+        </figcaption>
 </figure>
 
 <h2 id="step-2-emacs">Step 2. Emacs</h2>
 <h3 id="step-21-emacs-installing-tree-sitter-packages">Step 2.1. Emacs: Installing <code>tree-sitter</code> packages</h3>
 <p>Then I&rsquo;ve installed <code>tree-sitter</code> (the parsing system) and <code>tree-sitter-langs</code>
 (the grammar bundle) Emacs packages using <code>package-list-packages</code>.</p>
-<figure><img src="/img/tree-sitter-packages.png"><figcaption>
-      <h4>The tree-sitter packages are installed.</h4>
-    </figcaption>
+<figure><img src="/img/tree-sitter-packages.png"/><figcaption>
+            <h4>The tree-sitter packages are installed.</h4>
+        </figcaption>
 </figure>
 
 <h3 id="step-22-emacs-configuring-tree-sitter">Step 2.2. Emacs: Configuring <code>tree-sitter</code></h3>
@@ -136,7 +146,7 @@ highlighting mode</em> provided by <code>tree-sitter-hl-mode</code> is not activ
 you load a file into the buffer even if the <em>global tree sitter mode</em> is on.
 Adding the hook for the particular source code mode solves this problem.</p>
 <h2 id="result">Result</h2>
-<figure><img src="/img/tree-sitter-python.png">
+<figure><img src="/img/tree-sitter-python.png"/>
 </figure>
 
 <p>Now I have a pretty looking Python code.</p>
@@ -180,6 +190,28 @@ Adding the hook for the particular source code mode solves this problem.</p>
 	</div>
 </nav>
 
+<section class="comments">
+	<div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "olddeuteronomy" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
 
 
 			</div>
@@ -189,7 +221,7 @@ Adding the hook for the particular source code mode solves this problem.</p>
 			<input class="widget-search__field" type="search" placeholder="SEARCH…" value="" name="q" aria-label="SEARCH…">
 		</label>
 		<input class="widget-search__submit" type="submit" value="Search">
-		<input type="hidden" name="sites" value="http://localhost:1313/"/>
+		<input type="hidden" name="sites" value="https://olddeuteronomy.github.io/"/>
 	</form>
 </div>
 <div class="widget-recent widget">
