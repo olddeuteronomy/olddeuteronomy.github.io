@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Eshell on The Emacs Cat</title>
-    <link>https://olddeuteronomy.github.io/tags/eshell/</link>
+    <link>http://localhost:1313/tags/eshell/</link>
     <description>Recent content in Eshell on The Emacs Cat</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 05 Oct 2022 13:07:45 +0300</lastBuildDate>
-    <atom:link href="https://olddeuteronomy.github.io/tags/eshell/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/eshell/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to Clear the Eshell</title>
-      <link>https://olddeuteronomy.github.io/post/how-to-clear-the-eshell/</link>
+      <link>http://localhost:1313/post/how-to-clear-the-eshell/</link>
       <pubDate>Wed, 05 Oct 2022 13:07:45 +0300</pubDate>
-      <guid>https://olddeuteronomy.github.io/post/how-to-clear-the-eshell/</guid>
+      <guid>http://localhost:1313/post/how-to-clear-the-eshell/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m a big fan of Eshell, but some things in Eshell look, hmm,&#xA;a bit strange. One of such things is how the Eshell&amp;rsquo;s command &lt;code&gt;clear&lt;/code&gt; clears&#xA;the screen.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Eshell Aliases, Prompt, And Colors</title>
-      <link>https://olddeuteronomy.github.io/post/eshell-aliases-and-prompt/</link>
+      <link>http://localhost:1313/post/eshell-aliases-and-prompt/</link>
       <pubDate>Fri, 22 Jul 2022 13:57:32 +0300</pubDate>
-      <guid>https://olddeuteronomy.github.io/post/eshell-aliases-and-prompt/</guid>
+      <guid>http://localhost:1313/post/eshell-aliases-and-prompt/</guid>
       <description>&lt;blockquote&gt;&#xA;&lt;p&gt;Do you use #Emacs to run shells or terminal emulators?&#xA;Well, you should. With vterm you have a fast alternative to the&#xA;builtin ansi-term. And if you prefer shells, you&amp;rsquo;ve got EShell and&#xA;Shell Mode.&#xA;And don&amp;rsquo;t forget serial-term for embedded programming.&#xA;— Mickey Petersen (@mickeynp) on Twitter, July 18, 2022.&lt;/p&gt;&lt;/blockquote&gt;</description>
     </item>
   </channel>

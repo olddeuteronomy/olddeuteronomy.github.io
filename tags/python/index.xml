@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on The Emacs Cat</title>
-    <link>https://olddeuteronomy.github.io/tags/python/</link>
+    <link>http://localhost:1313/tags/python/</link>
     <description>Recent content in Python on The Emacs Cat</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 26 Dec 2024 10:01:05 +0100</lastBuildDate>
-    <atom:link href="https://olddeuteronomy.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python Programming in Emacs</title>
-      <link>https://olddeuteronomy.github.io/post/python-programming-in-emacs/</link>
+      <link>http://localhost:1313/post/python-programming-in-emacs/</link>
       <pubDate>Thu, 26 Dec 2024 10:01:05 +0100</pubDate>
-      <guid>https://olddeuteronomy.github.io/post/python-programming-in-emacs/</guid>
+      <guid>http://localhost:1313/post/python-programming-in-emacs/</guid>
       <description>&lt;p&gt;Python is one of my programming languages I&amp;rsquo;m using for both work and&#xA;home life &amp;ndash; no doubt, I&amp;rsquo;d want to use Emacs as an IDE for Python&#xA;programming. There is a certain set of features we&amp;rsquo;d expect to have&#xA;in any IDE: 1) code completion, 2) code navigation, 3) error checking.&lt;/p&gt;&#xA;&lt;p&gt;Thanks to the fact that both &lt;code&gt;eglot&lt;/code&gt;, the Emacs client for the&#xA;Language Server Protocol (LSP), and &lt;code&gt;tree-sitter&lt;/code&gt;, a powerful parsing&#xA;library, are now &amp;ndash; since version 29 &amp;ndash; the parts of Emacs, It should&#xA;not be too hard to construct a lightweight and fast Python IDE.&lt;/p&gt;</description>
     </item>
   </channel>

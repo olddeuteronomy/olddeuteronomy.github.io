@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Elisp on The Emacs Cat</title>
-    <link>https://olddeuteronomy.github.io/tags/elisp/</link>
+    <link>http://localhost:1313/tags/elisp/</link>
     <description>Recent content in Elisp on The Emacs Cat</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 06 Dec 2024 18:40:56 +0100</lastBuildDate>
-    <atom:link href="https://olddeuteronomy.github.io/tags/elisp/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/elisp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Emacs Startup Screen</title>
-      <link>https://olddeuteronomy.github.io/post/emacs-startup-screen/</link>
+      <link>http://localhost:1313/post/emacs-startup-screen/</link>
       <pubDate>Fri, 06 Dec 2024 18:40:56 +0100</pubDate>
-      <guid>https://olddeuteronomy.github.io/post/emacs-startup-screen/</guid>
+      <guid>http://localhost:1313/post/emacs-startup-screen/</guid>
       <description>&lt;p&gt;Some time ago, I decided to customize my Emacs startup screen in order&#xA;to display something helpful for me. Ultimately, after much&#xA;consideration, I settled on the following items I just want to see on&#xA;my startup screen: 1) 3-month calendar, 2) agenda, 3) diary, 4)&#xA;something just for fun.&lt;/p&gt;&#xA;&lt;p&gt;No doubt, there are a number of packages that can assist you in making&#xA;a pretty good-looking startup screen &amp;ndash; like&#xA;&lt;a href=&#34;https://github.com/ichernyshovvv/enlight&#34;&gt;enlight&lt;/a&gt;, for instance.&#xA;However, I decided to construct my own startup screen, a very simple&#xA;one.&lt;/p&gt;&#xA;&lt;p&gt;It requires having two command line utilities installed on your&#xA;system: &lt;code&gt;fortune&lt;/code&gt; to print out a random epigram, and &lt;code&gt;calendar&lt;/code&gt; to&#xA;print out some of the events that have occurred on the current date in&#xA;the past. If you, like me, are using Linux or macOS &amp;ndash; it will not be&#xA;difficult to install them.&lt;/p&gt;&#xA;&lt;p&gt;And this is what I got&amp;hellip;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Some Excerpts From My Emacs Config - 2: Functions</title>
-      <link>https://olddeuteronomy.github.io/post/some-excerpts-from-config-2-functions/</link>
+      <link>http://localhost:1313/post/some-excerpts-from-config-2-functions/</link>
       <pubDate>Fri, 29 Nov 2024 11:45:17 +0100</pubDate>
-      <guid>https://olddeuteronomy.github.io/post/some-excerpts-from-config-2-functions/</guid>
+      <guid>http://localhost:1313/post/some-excerpts-from-config-2-functions/</guid>
       <description>&lt;p&gt;In his comment on &lt;a href=&#34;https://irreal.org/blog/&#34;&gt;Irreal&lt;/a&gt;&amp;rsquo;s post&#xA;&lt;a href=&#34;https://irreal.org/blog/?p=12595&#34;&gt;Some Configuration To Solve Common Problems&lt;/a&gt;,&#xA;&lt;a href=&#34;https://disqus.com/by/gregbognar/&#34;&gt;gregbognar&lt;/a&gt; noted that some of my&#xA;configuration &lt;em&gt;is seriously outdated&lt;/em&gt;. In some sense, he is absolutely&#xA;correct &amp;ndash; I&amp;rsquo;ve been collecting Emacs settings/tweaks since 2012, and&#xA;keeping them unmodified for 12+ years.&lt;/p&gt;&#xA;&lt;p&gt;But on the other hand, it demonstrates how stable and powerful Emacs&#xA;is &amp;ndash; everything is still working! &lt;em&gt;If something works, don&amp;rsquo;t fix it&lt;/em&gt;&#xA;&amp;ndash; I&amp;rsquo;ve since tried to apply this rule wherever possible.&lt;/p&gt;&#xA;&lt;p&gt;Here are a few functions/enhancements I found helpful.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Some Excerpts From My Emacs Config</title>
-      <link>https://olddeuteronomy.github.io/post/some-excerpts-from-my-emacs-config/</link>
+      <link>http://localhost:1313/post/some-excerpts-from-my-emacs-config/</link>
       <pubDate>Wed, 20 Nov 2024 11:52:19 +0100</pubDate>
-      <guid>https://olddeuteronomy.github.io/post/some-excerpts-from-my-emacs-config/</guid>
+      <guid>http://localhost:1313/post/some-excerpts-from-my-emacs-config/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m happy to be back after one year away and it feels great.&lt;/p&gt;&#xA;&lt;p&gt;Below are some chaotic mini/micro &amp;ndash; or even nano &amp;ndash; excerpts from my&#xA;&lt;code&gt;~/.emacs&lt;/code&gt; file I have been tuning in for 12 years. These days, I&amp;rsquo;m&#xA;running Emacs 29.4 on Ubuntu (Pop!_OS) 22.04 and, rarely, on macOS.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Org Mode: Exporting Clock Tables</title>
-      <link>https://olddeuteronomy.github.io/post/org-export-clocktables/</link>
+      <link>http://localhost:1313/post/org-export-clocktables/</link>
       <pubDate>Tue, 01 Aug 2023 14:07:46 +0300</pubDate>
-      <guid>https://olddeuteronomy.github.io/post/org-export-clocktables/</guid>
+      <guid>http://localhost:1313/post/org-export-clocktables/</guid>
       <description>&lt;p&gt;After reading a quite interesting post by Irreal on &lt;a href=&#34;https://irreal.org/blog/?p=11416&#34;&gt;Org mode clock tables&lt;/a&gt;,&#xA;I decided to share my — a bit specific —  experience with the subject.&lt;/p&gt;</description>
     </item>
     <item>
       <title>DMS To Decimal Degree Conversions And More</title>
-      <link>https://olddeuteronomy.github.io/post/dms-decimal-degree-conversions/</link>
+      <link>http://localhost:1313/post/dms-decimal-degree-conversions/</link>
       <pubDate>Wed, 22 Jun 2022 14:11:33 +0300</pubDate>
-      <guid>https://olddeuteronomy.github.io/post/dms-decimal-degree-conversions/</guid>
+      <guid>http://localhost:1313/post/dms-decimal-degree-conversions/</guid>
       <description>&lt;p&gt;Working with satellite data I often have to convert a coordinate value or an&#xA;angle value from the DMS notation (&lt;em&gt;degree@minute&amp;rsquo;second&amp;quot;&lt;/em&gt;) to a decimal&#xA;degree in the floating point number format and vice versa.&lt;/p&gt;</description>
     </item>
   </channel>

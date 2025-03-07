@@ -2,17 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Org-Mode on The Emacs Cat</title>
-    <link>https://olddeuteronomy.github.io/tags/org-mode/</link>
+    <link>http://localhost:1313/tags/org-mode/</link>
     <description>Recent content in Org-Mode on The Emacs Cat</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 01 Aug 2023 14:07:46 +0300</lastBuildDate>
-    <atom:link href="https://olddeuteronomy.github.io/tags/org-mode/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 07 Mar 2025 10:33:34 +0100</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/org-mode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Using Emacs Org Mode for Reproducibility Testing</title>
+      <link>http://localhost:1313/post/orgmode-for-reproducibility-testing/</link>
+      <pubDate>Fri, 07 Mar 2025 10:33:34 +0100</pubDate>
+      <guid>http://localhost:1313/post/orgmode-for-reproducibility-testing/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;Software reproducibility testing is a critical aspect of&#xA;software development and maintenance.&#xA;It ensures that software is reliable, consistent, and predictable and&#xA;that it can be easily replicated and verified by others.&lt;/p&gt;&#xA;&lt;p&gt;Ana Pustan, &lt;a href=&#34;https://testerwork.com/reproducibility-testing/&#34;&gt;&lt;em&gt;Reproducibility Testing: A Complete Guide&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;For many of us, it won&amp;rsquo;t be a surprise that&#xA;the Emacs &lt;a href=&#34;https://orgmode.org/&#34;&gt;Org mode&lt;/a&gt; is perfectly suited&#xA;for reproducibility testing.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Org Mode: Exporting Clock Tables</title>
-      <link>https://olddeuteronomy.github.io/post/org-export-clocktables/</link>
+      <link>http://localhost:1313/post/org-export-clocktables/</link>
       <pubDate>Tue, 01 Aug 2023 14:07:46 +0300</pubDate>
-      <guid>https://olddeuteronomy.github.io/post/org-export-clocktables/</guid>
+      <guid>http://localhost:1313/post/org-export-clocktables/</guid>
       <description>&lt;p&gt;After reading a quite interesting post by Irreal on &lt;a href=&#34;https://irreal.org/blog/?p=11416&#34;&gt;Org mode clock tables&lt;/a&gt;,&#xA;I decided to share my — a bit specific —  experience with the subject.&lt;/p&gt;</description>
     </item>
   </channel>
