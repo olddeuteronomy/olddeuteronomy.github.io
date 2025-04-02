@@ -872,7 +872,7 @@ button:not(:-moz-focusring):focus > .menu__btn-title {
 
 .list__title {
 	font-size: 20px;
-	font-size: 1.25rem;
+	font-size: 2rem;
 }
 
 .list__meta {
@@ -1307,7 +1307,7 @@ textarea {
 
 	.list__title {
 		font-size: 16px;
-		font-size: 1rem;
+		font-size: 1.75rem;
 	}
 
 	.list__lead {

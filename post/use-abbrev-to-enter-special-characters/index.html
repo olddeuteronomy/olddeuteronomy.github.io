@@ -4,33 +4,240 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Use abbrev to Enter Special Characters - The Emacs Cat</title>
+	<title>Using abbrev to Enter Special Characters - The Emacs Cat</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		<meta property="og:title" content="Use abbrev to Enter Special Characters" />
+		<meta property="og:title" content="Using abbrev to Enter Special Characters" />
 <meta property="og:description" content="As it&rsquo;s described in the GNU Emacs Manual, an abbreviation or abbrev
 is a string of characters that may be expanded to a longer string. The
 user can insert the abbrev string and find it replaced automatically
-with the expansion of the abbrev. This saves typing." />
+with the expansion of the abbrev. This saves typing.
+Mostly I use builtin abbrev package to enter the special
+characters like greek letters, arrow symbols etc.
+Below is my setup of abbrev from my ~/.emacs.
+(setq abbrev-file-name                ;; Tell Emacs where to read abbrev
+      &#34;~/.emacs.d/abbrev_defs.el&#34;)    ;; Definitions from...
+(setq save-abbrevs t)                 ;; (ask) save abbrevs when files are saved
+(setq-default abbrev-mode t)          ;; Turn it on globally
+(if (file-exists-p abbrev-file-name) (quietly-read-abbrev-file))
+Here is my abbrev definition file ~/.emacs.d/abbrev_defs.el.
+;; Time-stamp: &lt;Last changed 2022-08-16 16:38:50 by magnolia&gt;
+
+(define-abbrev-table &#39;global-abbrev-table
+  &#39;(
+    (&#34;8alpha&#34;   &#34;α&#34;)
+    (&#34;8beta&#34;    &#34;β&#34;)
+    (&#34;8gamma&#34;   &#34;γ&#34;)
+    (&#34;8Delta&#34;   &#34;Δ&#34;)
+    (&#34;8delta&#34;   &#34;δ&#34;)
+    (&#34;8theta&#34;   &#34;θ&#34;)
+    (&#34;8ksi&#34;     &#34;ξ&#34;)
+    (&#34;8lambda&#34;  &#34;λ&#34;)
+    (&#34;8mu&#34;      &#34;µ&#34;)
+    (&#34;8nu&#34;      &#34;ν&#34;)
+    (&#34;8pi&#34;      &#34;π&#34;)
+    (&#34;8Sigma&#34;   &#34;Σ&#34;)
+    (&#34;8sigma&#34;   &#34;σ&#34;)
+    (&#34;8tau&#34;     &#34;τ&#34;)
+    (&#34;8phi&#34;     &#34;φ&#34;)
+    (&#34;8psi&#34;     &#34;ψ&#34;)
+    (&#34;8Omega&#34;   &#34;Ω&#34;)
+    (&#34;8omega&#34;   &#34;ω&#34;)
+    (&#34;8in&#34;      &#34;∈&#34;)
+    (&#34;8nin&#34;     &#34;∉&#34;)
+    (&#34;8almost&#34;  &#34;≈&#34;)
+    (&#34;8inf&#34;     &#34;∞&#34;)
+    (&#34;8deg&#34;     &#34;°&#34;)
+    (&#34;8cels&#34;    &#34;℃&#34;)
+    (&#34;8right&#34;   &#34;→&#34;)
+    (&#34;8left&#34;    &#34;←&#34;)
+    (&#34;8up&#34;      &#34;↑&#34;)
+    (&#34;8down&#34;    &#34;↓&#34;)
+    (&#34;8para&#34;    &#34;§&#34;)
+    (&#34;8copy&#34;    &#34;©&#34;)
+    (&#34;8reg&#34;     &#34;®&#34;)
+    (&#34;8tm&#34;      &#34;™&#34;)
+    (&#34;8eur&#34;     &#34;€&#34;)
+    (&#34;8pound&#34;   &#34;£&#34;)
+    (&#34;8plusmin&#34; &#34;±&#34;)
+    (&#34;8sup1&#34;    &#34;¹&#34;)
+    (&#34;8sup2&#34;    &#34;²&#34;)
+    (&#34;8sup3&#34;    &#34;³&#34;)
+    (&#34;8ldquo&#34;   &#34;«&#34;)
+    (&#34;8rdquo&#34;   &#34;»&#34;)
+    (&#34;8range&#34;   &#34;÷&#34;)
+    (&#34;8not&#34;     &#34;¬&#34;)
+    (&#34;8mdot&#34;    &#34;·&#34;)
+    (&#34;8bull&#34;    &#34;∙&#34;)
+    (&#34;8accent&#34;  &#34;´&#34;)
+    (&#34;8mdash&#34;   &#34;—&#34;)
+    (&#34;8ndash&#34;   &#34;–&#34;)))
+Just after you type an abbreviation following by either SPC or any
+punctuation symbol it is replaced by the corresponding character.
+Of course, I&rsquo;ve compiled this setup from various sources, mostly from
+the Impaktor&rsquo;s article
+with some additions.
+It&rsquo;s also worth to read the Xah Lee&rsquo;s article
+for more examples of how to use abbrev mode in your daily Emacs
+life.
+Happy abbreving." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://olddeuteronomy.github.io/post/use-abbrev-to-enter-special-characters/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-08-16T15:08:36+03:00" />
 <meta property="article:modified_time" content="2022-08-16T15:08:36+03:00" />
 
 
-		<meta itemprop="name" content="Use abbrev to Enter Special Characters">
+		<meta itemprop="name" content="Using abbrev to Enter Special Characters">
 <meta itemprop="description" content="As it&rsquo;s described in the GNU Emacs Manual, an abbreviation or abbrev
 is a string of characters that may be expanded to a longer string. The
 user can insert the abbrev string and find it replaced automatically
-with the expansion of the abbrev. This saves typing."><meta itemprop="datePublished" content="2022-08-16T15:08:36+03:00" />
+with the expansion of the abbrev. This saves typing.
+Mostly I use builtin abbrev package to enter the special
+characters like greek letters, arrow symbols etc.
+Below is my setup of abbrev from my ~/.emacs.
+(setq abbrev-file-name                ;; Tell Emacs where to read abbrev
+      &#34;~/.emacs.d/abbrev_defs.el&#34;)    ;; Definitions from...
+(setq save-abbrevs t)                 ;; (ask) save abbrevs when files are saved
+(setq-default abbrev-mode t)          ;; Turn it on globally
+(if (file-exists-p abbrev-file-name) (quietly-read-abbrev-file))
+Here is my abbrev definition file ~/.emacs.d/abbrev_defs.el.
+;; Time-stamp: &lt;Last changed 2022-08-16 16:38:50 by magnolia&gt;
+
+(define-abbrev-table &#39;global-abbrev-table
+  &#39;(
+    (&#34;8alpha&#34;   &#34;α&#34;)
+    (&#34;8beta&#34;    &#34;β&#34;)
+    (&#34;8gamma&#34;   &#34;γ&#34;)
+    (&#34;8Delta&#34;   &#34;Δ&#34;)
+    (&#34;8delta&#34;   &#34;δ&#34;)
+    (&#34;8theta&#34;   &#34;θ&#34;)
+    (&#34;8ksi&#34;     &#34;ξ&#34;)
+    (&#34;8lambda&#34;  &#34;λ&#34;)
+    (&#34;8mu&#34;      &#34;µ&#34;)
+    (&#34;8nu&#34;      &#34;ν&#34;)
+    (&#34;8pi&#34;      &#34;π&#34;)
+    (&#34;8Sigma&#34;   &#34;Σ&#34;)
+    (&#34;8sigma&#34;   &#34;σ&#34;)
+    (&#34;8tau&#34;     &#34;τ&#34;)
+    (&#34;8phi&#34;     &#34;φ&#34;)
+    (&#34;8psi&#34;     &#34;ψ&#34;)
+    (&#34;8Omega&#34;   &#34;Ω&#34;)
+    (&#34;8omega&#34;   &#34;ω&#34;)
+    (&#34;8in&#34;      &#34;∈&#34;)
+    (&#34;8nin&#34;     &#34;∉&#34;)
+    (&#34;8almost&#34;  &#34;≈&#34;)
+    (&#34;8inf&#34;     &#34;∞&#34;)
+    (&#34;8deg&#34;     &#34;°&#34;)
+    (&#34;8cels&#34;    &#34;℃&#34;)
+    (&#34;8right&#34;   &#34;→&#34;)
+    (&#34;8left&#34;    &#34;←&#34;)
+    (&#34;8up&#34;      &#34;↑&#34;)
+    (&#34;8down&#34;    &#34;↓&#34;)
+    (&#34;8para&#34;    &#34;§&#34;)
+    (&#34;8copy&#34;    &#34;©&#34;)
+    (&#34;8reg&#34;     &#34;®&#34;)
+    (&#34;8tm&#34;      &#34;™&#34;)
+    (&#34;8eur&#34;     &#34;€&#34;)
+    (&#34;8pound&#34;   &#34;£&#34;)
+    (&#34;8plusmin&#34; &#34;±&#34;)
+    (&#34;8sup1&#34;    &#34;¹&#34;)
+    (&#34;8sup2&#34;    &#34;²&#34;)
+    (&#34;8sup3&#34;    &#34;³&#34;)
+    (&#34;8ldquo&#34;   &#34;«&#34;)
+    (&#34;8rdquo&#34;   &#34;»&#34;)
+    (&#34;8range&#34;   &#34;÷&#34;)
+    (&#34;8not&#34;     &#34;¬&#34;)
+    (&#34;8mdot&#34;    &#34;·&#34;)
+    (&#34;8bull&#34;    &#34;∙&#34;)
+    (&#34;8accent&#34;  &#34;´&#34;)
+    (&#34;8mdash&#34;   &#34;—&#34;)
+    (&#34;8ndash&#34;   &#34;–&#34;)))
+Just after you type an abbreviation following by either SPC or any
+punctuation symbol it is replaced by the corresponding character.
+Of course, I&rsquo;ve compiled this setup from various sources, mostly from
+the Impaktor&rsquo;s article
+with some additions.
+It&rsquo;s also worth to read the Xah Lee&rsquo;s article
+for more examples of how to use abbrev mode in your daily Emacs
+life.
+Happy abbreving."><meta itemprop="datePublished" content="2022-08-16T15:08:36+03:00" />
 <meta itemprop="dateModified" content="2022-08-16T15:08:36+03:00" />
 <meta itemprop="wordCount" content="283">
 <meta itemprop="keywords" content="emacs,writing," />
-		<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Use abbrev to Enter Special Characters"/>
+		<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Using abbrev to Enter Special Characters"/>
 <meta name="twitter:description" content="As it&rsquo;s described in the GNU Emacs Manual, an abbreviation or abbrev
 is a string of characters that may be expanded to a longer string. The
 user can insert the abbrev string and find it replaced automatically
-with the expansion of the abbrev. This saves typing."/>
+with the expansion of the abbrev. This saves typing.
+Mostly I use builtin abbrev package to enter the special
+characters like greek letters, arrow symbols etc.
+Below is my setup of abbrev from my ~/.emacs.
+(setq abbrev-file-name                ;; Tell Emacs where to read abbrev
+      &#34;~/.emacs.d/abbrev_defs.el&#34;)    ;; Definitions from...
+(setq save-abbrevs t)                 ;; (ask) save abbrevs when files are saved
+(setq-default abbrev-mode t)          ;; Turn it on globally
+(if (file-exists-p abbrev-file-name) (quietly-read-abbrev-file))
+Here is my abbrev definition file ~/.emacs.d/abbrev_defs.el.
+;; Time-stamp: &lt;Last changed 2022-08-16 16:38:50 by magnolia&gt;
+
+(define-abbrev-table &#39;global-abbrev-table
+  &#39;(
+    (&#34;8alpha&#34;   &#34;α&#34;)
+    (&#34;8beta&#34;    &#34;β&#34;)
+    (&#34;8gamma&#34;   &#34;γ&#34;)
+    (&#34;8Delta&#34;   &#34;Δ&#34;)
+    (&#34;8delta&#34;   &#34;δ&#34;)
+    (&#34;8theta&#34;   &#34;θ&#34;)
+    (&#34;8ksi&#34;     &#34;ξ&#34;)
+    (&#34;8lambda&#34;  &#34;λ&#34;)
+    (&#34;8mu&#34;      &#34;µ&#34;)
+    (&#34;8nu&#34;      &#34;ν&#34;)
+    (&#34;8pi&#34;      &#34;π&#34;)
+    (&#34;8Sigma&#34;   &#34;Σ&#34;)
+    (&#34;8sigma&#34;   &#34;σ&#34;)
+    (&#34;8tau&#34;     &#34;τ&#34;)
+    (&#34;8phi&#34;     &#34;φ&#34;)
+    (&#34;8psi&#34;     &#34;ψ&#34;)
+    (&#34;8Omega&#34;   &#34;Ω&#34;)
+    (&#34;8omega&#34;   &#34;ω&#34;)
+    (&#34;8in&#34;      &#34;∈&#34;)
+    (&#34;8nin&#34;     &#34;∉&#34;)
+    (&#34;8almost&#34;  &#34;≈&#34;)
+    (&#34;8inf&#34;     &#34;∞&#34;)
+    (&#34;8deg&#34;     &#34;°&#34;)
+    (&#34;8cels&#34;    &#34;℃&#34;)
+    (&#34;8right&#34;   &#34;→&#34;)
+    (&#34;8left&#34;    &#34;←&#34;)
+    (&#34;8up&#34;      &#34;↑&#34;)
+    (&#34;8down&#34;    &#34;↓&#34;)
+    (&#34;8para&#34;    &#34;§&#34;)
+    (&#34;8copy&#34;    &#34;©&#34;)
+    (&#34;8reg&#34;     &#34;®&#34;)
+    (&#34;8tm&#34;      &#34;™&#34;)
+    (&#34;8eur&#34;     &#34;€&#34;)
+    (&#34;8pound&#34;   &#34;£&#34;)
+    (&#34;8plusmin&#34; &#34;±&#34;)
+    (&#34;8sup1&#34;    &#34;¹&#34;)
+    (&#34;8sup2&#34;    &#34;²&#34;)
+    (&#34;8sup3&#34;    &#34;³&#34;)
+    (&#34;8ldquo&#34;   &#34;«&#34;)
+    (&#34;8rdquo&#34;   &#34;»&#34;)
+    (&#34;8range&#34;   &#34;÷&#34;)
+    (&#34;8not&#34;     &#34;¬&#34;)
+    (&#34;8mdot&#34;    &#34;·&#34;)
+    (&#34;8bull&#34;    &#34;∙&#34;)
+    (&#34;8accent&#34;  &#34;´&#34;)
+    (&#34;8mdash&#34;   &#34;—&#34;)
+    (&#34;8ndash&#34;   &#34;–&#34;)))
+Just after you type an abbreviation following by either SPC or any
+punctuation symbol it is replaced by the corresponding character.
+Of course, I&rsquo;ve compiled this setup from various sources, mostly from
+the Impaktor&rsquo;s article
+with some additions.
+It&rsquo;s also worth to read the Xah Lee&rsquo;s article
+for more examples of how to use abbrev mode in your daily Emacs
+life.
+Happy abbreving."/>
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -82,7 +289,7 @@ with the expansion of the abbrev. This saves typing."/>
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">Use abbrev to Enter Special Characters</h1>
+			<h1 class="post__title">Using abbrev to Enter Special Characters</h1>
 			<div class="post__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">The Emacs Cat</span>
 </div>
@@ -238,20 +445,22 @@ life.</p>
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/elfeed-optimized-blogging/">Elfeed-optimized Blogging</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/orgmode-for-reproducibility-testing/">Using Emacs Org Mode for Reproducibility Testing</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/cpp-programming-in-emacs/">C&#43;&#43; Programming in Emacs</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/python-programming-in-emacs/">Python Programming in Emacs</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/emacs-startup-screen/">Emacs Startup Screen</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/some-excerpts-from-config-2-functions/">Some Excerpts From My Emacs Config - 2: Functions</a></li>
 		</ul>
 	</div>
 </div>
 <div class="widget-taglist widget">
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog/" title="Blog">Blog</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/c&#43;&#43;/" title="C&#43;&#43;">C&#43;&#43;</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/calc/" title="Calc">Calc</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/config/" title="Config">Config</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/elfeed/" title="Elfeed">Elfeed</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/elisp/" title="Elisp">Elisp</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/emacs/" title="Emacs">Emacs</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/eshell/" title="Eshell">Eshell</a>
@@ -287,7 +496,7 @@ life.</p>
 				</li>
 			<li class="widget__item">
 				<a class="widget__link" href="/categories/2025/">2025</a>&nbsp;
-				<span class="widget__counter widget__counter--bubble">2</span>
+				<span class="widget__counter widget__counter--bubble">3</span>
 				</li>
 		</ul>
 	</div>

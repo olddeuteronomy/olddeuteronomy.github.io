@@ -11,7 +11,179 @@
 <meta property="og:description" content="I&rsquo;m happy to be back after one year away and it feels great.
 Below are some chaotic mini/micro &ndash; or even nano &ndash; excerpts from my
 ~/.emacs file I have been tuning in for 12 years. These days, I&rsquo;m
-running Emacs 29.4 on Ubuntu (Pop!_OS) 22.04 and, rarely, on macOS." />
+running Emacs 29.4 on Ubuntu (Pop!_OS) 22.04 and, rarely, on macOS.
+These tweaks have been collected from various sources; I provide a
+reference to the source if available.
+Checking the operating system Emacs is running on
+(defvar my/os-linux (string-equal system-type &#34;gnu/linux&#34;) &#34;I&#39;m on Linux&#34;)
+(defvar my/os-macos (string-equal system-type &#34;darwin&#34;) &#34;Oh, I&#39;m on macOS&#34;)
+(defvar my/os-windows (string-equal system-type &#34;windows-nt&#34;) &#34;OMG, that&#39;s Windows!&#34;)
+macOS keyboard
+;; Disable Command key and enable Options as Meta.
+(if my/os-macos
+    (setq mac-command-key-is-meta nil
+          mac-command-modifier &#39;super
+          mac-option-key-is-meta t
+          mac-option-modifier &#39;meta))
+Everything is UTF-8
+(set-language-environment &#39;utf-8)
+(setq locale-coding-system &#39;utf-8)
+(setq buffer-file-coding-system &#39;utf-8-unix)
+(set-terminal-coding-system &#39;utf-8)
+(set-keyboard-coding-system &#39;utf-8)
+(set-selection-coding-system &#39;utf-8)
+(prefer-coding-system &#39;utf-8)
+Smooth scrolling
+Borrowed from http://home.thep.lu.se/~karlf/emacs.html
+(setq scroll-step 1)
+
+;; Marker distance from center (don&#39;t jump to center).
+(setq scroll-conservatively 100000)
+
+;; Try to keep screen position when PgDn/PgUp.
+(setq scroll-preserve-screen-position 1)
+
+;; Start scrolling when marker at top/bottom.
+(setq scroll-margin 0)
+
+;; Mouse scroll moves 1 line at a time, instead of 5 lines.
+(setq mouse-wheel-scroll-amount &#39;(1))
+
+;; On a long mouse scroll keep scrolling by 1 line.
+(setq mouse-wheel-progressive-speed nil)
+Some helpful tips for emacsing in comfort
+Clipboard
+;; Non-nil means cutting and pasting uses the clipboard.
+(setq x-select-enable-clipboard t)
+Turning off some annoying features
+;; No ToolBar, please.
+(tool-bar-mode -1)
+
+;; No alarms, please.
+(setq ring-bell-function &#39;ignore)
+
+;; No lock files, please.
+;; https://emacs.stackexchange.com/questions/78800/how-to-disable-automatic-appearance-of-warnings-buffer-in-emacs
+(setq create-lockfiles nil)
+
+;; Sentences do not need double spaces to end. Period.
+(set-default &#39;sentence-end-double-space nil)
+
+;; Replace &#34;yes&#34; by &#34;y&#34;.
+(fset &#39;yes-or-no-p &#39;y-or-n-p)
+
+;; Don’t use dialog boxes.
+(setq use-dialog-box nil)
+
+;; For gpg (works on Ubuntu and macOS) to disable custom prompt.
+(setenv &#34;GPG_AGENT_INFO&#34; nil)
+
+;; Speedup cursor movement.
+;; https://emacs.stackexchange.com/questions/28736/emacs-pointcursor-movement-lag/28746
+(setq auto-window-vscroll nil)
+
+;; Spaces instead of tabs when indenting.
+;; Some people may not agree with this though.
+(setq-default indent-tabs-mode nil)
+Turning on some helpful features
+;; Nonzero means echo unfinished commands after this many seconds of
+;; pause. The value may be integer or floating point. If the value is
+;; zero, don’t echo at all.
+(setq echo-keystrokes 0.01)
+
+;; Winner mode is a global minor mode that records the changes in the
+;; window configuration.
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Window-Convenience.html
+(winner-mode t)
+
+;; Turn on highlighting current line.
+;; http://ergoemacs.org/emacs/emacs_make_modern.html
+(global-hl-line-mode 1)
+
+;; Replace highlighted text with what I type rather than just
+;; inserting at point.
+(delete-selection-mode t)
+
+;; Restore opened files.
+(desktop-save-mode 1)
+
+;; Save minibuffer history.
+(savehist-mode 1)
+
+;; When on a tab, make the cursor the tab length.
+(setq-default x-stretch-cursor t)
+
+;; Auto refresh dired when file changes.
+;; http://pragmaticemacs.com/emacs/automatically-revert-buffers/
+(add-hook &#39;dired-mode-hook &#39;auto-revert-mode)
+
+;; Auto refresh dired, but be quiet about it.
+(setq global-auto-revert-non-file-buffers t)
+(setq auto-revert-verbose nil)
+
+;; Automatically reload files was modified by external program.
+;; https://www.emacswiki.org/emacs/AutoRevertMode
+(global-auto-revert-mode 1)
+
+;; Make URLs in comments/strings clickable, (Emacs &gt; v22).
+(add-hook &#39;find-file-hooks &#39;goto-address-prog-mode)
+
+;; Display fringe indicators in `visual-line-mode`.
+(setq visual-line-fringe-indicators &#39;(left-curly-arrow right-curly-arrow))
+
+;; Switching the focus to the help window when it&#39;s opened.
+(setq help-window-select t)
+Frame title
+Template for displaying the title bar of visible frames.
+(Assuming the window manager supports this feature.)
+This variable has the same structure as mode-line-format, except that
+the %c, %C, and %l constructs are ignored.
+;; Frame title.
+(setq frame-title-format &#34;%F--%b-[%f]--%Z&#34;)
+Electric Pair mode
+Electric Pair mode is a global minor mode. When enabled, typing an
+open parenthesis automatically inserts the corresponding closing
+parenthesis, and vice versa. (Likewise for brackets, etc.). If the
+region is active, the parentheses (brackets, etc.) are inserted around
+the region instead.
+;; Global.
+(electric-pair-mode 1)
+Calendar tweaks
+If you want to be informed about the times of sunrise and sunset for
+any date at your location, Emacs is always ready to lend a hand &ndash; you
+just need to provide your coordinates to Emacs. Use one decimal place
+in the values of calendar-latitude and calendar-longitude.
+(defvar calendar-latitude NN.N)
+(defvar calendar-longitude NN.N)
+
+;; Number of minutes difference between local standard time and UTC.
+;; For example, -300 for New York City, -480 for Los Angeles.
+(defvar calendar-time-zone NNN)
+
+;; Optional, the default value is just the variable `calendar-latitude`
+;; paired with the variable `calendar-longitude`.
+(defvar calendar-location-name &#34;Your City, Your Country&#34;)
+Within the calendar, the following commands are available:
+
+S
+Display times of sunrise and sunset for the selected date (calendar-sunrise-sunset).
+M-x sunrise-sunset
+Display times of sunrise and sunset for today&rsquo;s date.
+C-u M-x sunrise-sunset
+Display times of sunrise and sunset for a specified date.
+M-x calendar-sunrise-sunset-month
+Display times of sunrise and sunset for the selected month.
+
+The command M-x sunrise-sunset is also available outside the
+calendar to display the sunrise and sunset information for today&rsquo;s
+date in the echo area.
+Some other Calendar tweaks
+;; First day of the week: 0:Sunday, 1:Monday.
+(defvar calendar-week-start-day 1)
+
+;; Use European date format (DD/MM/YYYY or 9 October 2024).
+(defvar calendar-date-style &#39;european)
+To be continued. Happy emacsing!" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://olddeuteronomy.github.io/post/some-excerpts-from-my-emacs-config/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2024-11-20T11:52:19+01:00" />
@@ -22,7 +194,179 @@ running Emacs 29.4 on Ubuntu (Pop!_OS) 22.04 and, rarely, on macOS." />
 <meta itemprop="description" content="I&rsquo;m happy to be back after one year away and it feels great.
 Below are some chaotic mini/micro &ndash; or even nano &ndash; excerpts from my
 ~/.emacs file I have been tuning in for 12 years. These days, I&rsquo;m
-running Emacs 29.4 on Ubuntu (Pop!_OS) 22.04 and, rarely, on macOS."><meta itemprop="datePublished" content="2024-11-20T11:52:19+01:00" />
+running Emacs 29.4 on Ubuntu (Pop!_OS) 22.04 and, rarely, on macOS.
+These tweaks have been collected from various sources; I provide a
+reference to the source if available.
+Checking the operating system Emacs is running on
+(defvar my/os-linux (string-equal system-type &#34;gnu/linux&#34;) &#34;I&#39;m on Linux&#34;)
+(defvar my/os-macos (string-equal system-type &#34;darwin&#34;) &#34;Oh, I&#39;m on macOS&#34;)
+(defvar my/os-windows (string-equal system-type &#34;windows-nt&#34;) &#34;OMG, that&#39;s Windows!&#34;)
+macOS keyboard
+;; Disable Command key and enable Options as Meta.
+(if my/os-macos
+    (setq mac-command-key-is-meta nil
+          mac-command-modifier &#39;super
+          mac-option-key-is-meta t
+          mac-option-modifier &#39;meta))
+Everything is UTF-8
+(set-language-environment &#39;utf-8)
+(setq locale-coding-system &#39;utf-8)
+(setq buffer-file-coding-system &#39;utf-8-unix)
+(set-terminal-coding-system &#39;utf-8)
+(set-keyboard-coding-system &#39;utf-8)
+(set-selection-coding-system &#39;utf-8)
+(prefer-coding-system &#39;utf-8)
+Smooth scrolling
+Borrowed from http://home.thep.lu.se/~karlf/emacs.html
+(setq scroll-step 1)
+
+;; Marker distance from center (don&#39;t jump to center).
+(setq scroll-conservatively 100000)
+
+;; Try to keep screen position when PgDn/PgUp.
+(setq scroll-preserve-screen-position 1)
+
+;; Start scrolling when marker at top/bottom.
+(setq scroll-margin 0)
+
+;; Mouse scroll moves 1 line at a time, instead of 5 lines.
+(setq mouse-wheel-scroll-amount &#39;(1))
+
+;; On a long mouse scroll keep scrolling by 1 line.
+(setq mouse-wheel-progressive-speed nil)
+Some helpful tips for emacsing in comfort
+Clipboard
+;; Non-nil means cutting and pasting uses the clipboard.
+(setq x-select-enable-clipboard t)
+Turning off some annoying features
+;; No ToolBar, please.
+(tool-bar-mode -1)
+
+;; No alarms, please.
+(setq ring-bell-function &#39;ignore)
+
+;; No lock files, please.
+;; https://emacs.stackexchange.com/questions/78800/how-to-disable-automatic-appearance-of-warnings-buffer-in-emacs
+(setq create-lockfiles nil)
+
+;; Sentences do not need double spaces to end. Period.
+(set-default &#39;sentence-end-double-space nil)
+
+;; Replace &#34;yes&#34; by &#34;y&#34;.
+(fset &#39;yes-or-no-p &#39;y-or-n-p)
+
+;; Don’t use dialog boxes.
+(setq use-dialog-box nil)
+
+;; For gpg (works on Ubuntu and macOS) to disable custom prompt.
+(setenv &#34;GPG_AGENT_INFO&#34; nil)
+
+;; Speedup cursor movement.
+;; https://emacs.stackexchange.com/questions/28736/emacs-pointcursor-movement-lag/28746
+(setq auto-window-vscroll nil)
+
+;; Spaces instead of tabs when indenting.
+;; Some people may not agree with this though.
+(setq-default indent-tabs-mode nil)
+Turning on some helpful features
+;; Nonzero means echo unfinished commands after this many seconds of
+;; pause. The value may be integer or floating point. If the value is
+;; zero, don’t echo at all.
+(setq echo-keystrokes 0.01)
+
+;; Winner mode is a global minor mode that records the changes in the
+;; window configuration.
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Window-Convenience.html
+(winner-mode t)
+
+;; Turn on highlighting current line.
+;; http://ergoemacs.org/emacs/emacs_make_modern.html
+(global-hl-line-mode 1)
+
+;; Replace highlighted text with what I type rather than just
+;; inserting at point.
+(delete-selection-mode t)
+
+;; Restore opened files.
+(desktop-save-mode 1)
+
+;; Save minibuffer history.
+(savehist-mode 1)
+
+;; When on a tab, make the cursor the tab length.
+(setq-default x-stretch-cursor t)
+
+;; Auto refresh dired when file changes.
+;; http://pragmaticemacs.com/emacs/automatically-revert-buffers/
+(add-hook &#39;dired-mode-hook &#39;auto-revert-mode)
+
+;; Auto refresh dired, but be quiet about it.
+(setq global-auto-revert-non-file-buffers t)
+(setq auto-revert-verbose nil)
+
+;; Automatically reload files was modified by external program.
+;; https://www.emacswiki.org/emacs/AutoRevertMode
+(global-auto-revert-mode 1)
+
+;; Make URLs in comments/strings clickable, (Emacs &gt; v22).
+(add-hook &#39;find-file-hooks &#39;goto-address-prog-mode)
+
+;; Display fringe indicators in `visual-line-mode`.
+(setq visual-line-fringe-indicators &#39;(left-curly-arrow right-curly-arrow))
+
+;; Switching the focus to the help window when it&#39;s opened.
+(setq help-window-select t)
+Frame title
+Template for displaying the title bar of visible frames.
+(Assuming the window manager supports this feature.)
+This variable has the same structure as mode-line-format, except that
+the %c, %C, and %l constructs are ignored.
+;; Frame title.
+(setq frame-title-format &#34;%F--%b-[%f]--%Z&#34;)
+Electric Pair mode
+Electric Pair mode is a global minor mode. When enabled, typing an
+open parenthesis automatically inserts the corresponding closing
+parenthesis, and vice versa. (Likewise for brackets, etc.). If the
+region is active, the parentheses (brackets, etc.) are inserted around
+the region instead.
+;; Global.
+(electric-pair-mode 1)
+Calendar tweaks
+If you want to be informed about the times of sunrise and sunset for
+any date at your location, Emacs is always ready to lend a hand &ndash; you
+just need to provide your coordinates to Emacs. Use one decimal place
+in the values of calendar-latitude and calendar-longitude.
+(defvar calendar-latitude NN.N)
+(defvar calendar-longitude NN.N)
+
+;; Number of minutes difference between local standard time and UTC.
+;; For example, -300 for New York City, -480 for Los Angeles.
+(defvar calendar-time-zone NNN)
+
+;; Optional, the default value is just the variable `calendar-latitude`
+;; paired with the variable `calendar-longitude`.
+(defvar calendar-location-name &#34;Your City, Your Country&#34;)
+Within the calendar, the following commands are available:
+
+S
+Display times of sunrise and sunset for the selected date (calendar-sunrise-sunset).
+M-x sunrise-sunset
+Display times of sunrise and sunset for today&rsquo;s date.
+C-u M-x sunrise-sunset
+Display times of sunrise and sunset for a specified date.
+M-x calendar-sunrise-sunset-month
+Display times of sunrise and sunset for the selected month.
+
+The command M-x sunrise-sunset is also available outside the
+calendar to display the sunrise and sunset information for today&rsquo;s
+date in the echo area.
+Some other Calendar tweaks
+;; First day of the week: 0:Sunday, 1:Monday.
+(defvar calendar-week-start-day 1)
+
+;; Use European date format (DD/MM/YYYY or 9 October 2024).
+(defvar calendar-date-style &#39;european)
+To be continued. Happy emacsing!"><meta itemprop="datePublished" content="2024-11-20T11:52:19+01:00" />
 <meta itemprop="dateModified" content="2024-11-20T11:52:19+01:00" />
 <meta itemprop="wordCount" content="829">
 <meta itemprop="keywords" content="emacs,config,elisp," />
@@ -30,7 +374,179 @@ running Emacs 29.4 on Ubuntu (Pop!_OS) 22.04 and, rarely, on macOS."><meta itemp
 <meta name="twitter:description" content="I&rsquo;m happy to be back after one year away and it feels great.
 Below are some chaotic mini/micro &ndash; or even nano &ndash; excerpts from my
 ~/.emacs file I have been tuning in for 12 years. These days, I&rsquo;m
-running Emacs 29.4 on Ubuntu (Pop!_OS) 22.04 and, rarely, on macOS."/>
+running Emacs 29.4 on Ubuntu (Pop!_OS) 22.04 and, rarely, on macOS.
+These tweaks have been collected from various sources; I provide a
+reference to the source if available.
+Checking the operating system Emacs is running on
+(defvar my/os-linux (string-equal system-type &#34;gnu/linux&#34;) &#34;I&#39;m on Linux&#34;)
+(defvar my/os-macos (string-equal system-type &#34;darwin&#34;) &#34;Oh, I&#39;m on macOS&#34;)
+(defvar my/os-windows (string-equal system-type &#34;windows-nt&#34;) &#34;OMG, that&#39;s Windows!&#34;)
+macOS keyboard
+;; Disable Command key and enable Options as Meta.
+(if my/os-macos
+    (setq mac-command-key-is-meta nil
+          mac-command-modifier &#39;super
+          mac-option-key-is-meta t
+          mac-option-modifier &#39;meta))
+Everything is UTF-8
+(set-language-environment &#39;utf-8)
+(setq locale-coding-system &#39;utf-8)
+(setq buffer-file-coding-system &#39;utf-8-unix)
+(set-terminal-coding-system &#39;utf-8)
+(set-keyboard-coding-system &#39;utf-8)
+(set-selection-coding-system &#39;utf-8)
+(prefer-coding-system &#39;utf-8)
+Smooth scrolling
+Borrowed from http://home.thep.lu.se/~karlf/emacs.html
+(setq scroll-step 1)
+
+;; Marker distance from center (don&#39;t jump to center).
+(setq scroll-conservatively 100000)
+
+;; Try to keep screen position when PgDn/PgUp.
+(setq scroll-preserve-screen-position 1)
+
+;; Start scrolling when marker at top/bottom.
+(setq scroll-margin 0)
+
+;; Mouse scroll moves 1 line at a time, instead of 5 lines.
+(setq mouse-wheel-scroll-amount &#39;(1))
+
+;; On a long mouse scroll keep scrolling by 1 line.
+(setq mouse-wheel-progressive-speed nil)
+Some helpful tips for emacsing in comfort
+Clipboard
+;; Non-nil means cutting and pasting uses the clipboard.
+(setq x-select-enable-clipboard t)
+Turning off some annoying features
+;; No ToolBar, please.
+(tool-bar-mode -1)
+
+;; No alarms, please.
+(setq ring-bell-function &#39;ignore)
+
+;; No lock files, please.
+;; https://emacs.stackexchange.com/questions/78800/how-to-disable-automatic-appearance-of-warnings-buffer-in-emacs
+(setq create-lockfiles nil)
+
+;; Sentences do not need double spaces to end. Period.
+(set-default &#39;sentence-end-double-space nil)
+
+;; Replace &#34;yes&#34; by &#34;y&#34;.
+(fset &#39;yes-or-no-p &#39;y-or-n-p)
+
+;; Don’t use dialog boxes.
+(setq use-dialog-box nil)
+
+;; For gpg (works on Ubuntu and macOS) to disable custom prompt.
+(setenv &#34;GPG_AGENT_INFO&#34; nil)
+
+;; Speedup cursor movement.
+;; https://emacs.stackexchange.com/questions/28736/emacs-pointcursor-movement-lag/28746
+(setq auto-window-vscroll nil)
+
+;; Spaces instead of tabs when indenting.
+;; Some people may not agree with this though.
+(setq-default indent-tabs-mode nil)
+Turning on some helpful features
+;; Nonzero means echo unfinished commands after this many seconds of
+;; pause. The value may be integer or floating point. If the value is
+;; zero, don’t echo at all.
+(setq echo-keystrokes 0.01)
+
+;; Winner mode is a global minor mode that records the changes in the
+;; window configuration.
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Window-Convenience.html
+(winner-mode t)
+
+;; Turn on highlighting current line.
+;; http://ergoemacs.org/emacs/emacs_make_modern.html
+(global-hl-line-mode 1)
+
+;; Replace highlighted text with what I type rather than just
+;; inserting at point.
+(delete-selection-mode t)
+
+;; Restore opened files.
+(desktop-save-mode 1)
+
+;; Save minibuffer history.
+(savehist-mode 1)
+
+;; When on a tab, make the cursor the tab length.
+(setq-default x-stretch-cursor t)
+
+;; Auto refresh dired when file changes.
+;; http://pragmaticemacs.com/emacs/automatically-revert-buffers/
+(add-hook &#39;dired-mode-hook &#39;auto-revert-mode)
+
+;; Auto refresh dired, but be quiet about it.
+(setq global-auto-revert-non-file-buffers t)
+(setq auto-revert-verbose nil)
+
+;; Automatically reload files was modified by external program.
+;; https://www.emacswiki.org/emacs/AutoRevertMode
+(global-auto-revert-mode 1)
+
+;; Make URLs in comments/strings clickable, (Emacs &gt; v22).
+(add-hook &#39;find-file-hooks &#39;goto-address-prog-mode)
+
+;; Display fringe indicators in `visual-line-mode`.
+(setq visual-line-fringe-indicators &#39;(left-curly-arrow right-curly-arrow))
+
+;; Switching the focus to the help window when it&#39;s opened.
+(setq help-window-select t)
+Frame title
+Template for displaying the title bar of visible frames.
+(Assuming the window manager supports this feature.)
+This variable has the same structure as mode-line-format, except that
+the %c, %C, and %l constructs are ignored.
+;; Frame title.
+(setq frame-title-format &#34;%F--%b-[%f]--%Z&#34;)
+Electric Pair mode
+Electric Pair mode is a global minor mode. When enabled, typing an
+open parenthesis automatically inserts the corresponding closing
+parenthesis, and vice versa. (Likewise for brackets, etc.). If the
+region is active, the parentheses (brackets, etc.) are inserted around
+the region instead.
+;; Global.
+(electric-pair-mode 1)
+Calendar tweaks
+If you want to be informed about the times of sunrise and sunset for
+any date at your location, Emacs is always ready to lend a hand &ndash; you
+just need to provide your coordinates to Emacs. Use one decimal place
+in the values of calendar-latitude and calendar-longitude.
+(defvar calendar-latitude NN.N)
+(defvar calendar-longitude NN.N)
+
+;; Number of minutes difference between local standard time and UTC.
+;; For example, -300 for New York City, -480 for Los Angeles.
+(defvar calendar-time-zone NNN)
+
+;; Optional, the default value is just the variable `calendar-latitude`
+;; paired with the variable `calendar-longitude`.
+(defvar calendar-location-name &#34;Your City, Your Country&#34;)
+Within the calendar, the following commands are available:
+
+S
+Display times of sunrise and sunset for the selected date (calendar-sunrise-sunset).
+M-x sunrise-sunset
+Display times of sunrise and sunset for today&rsquo;s date.
+C-u M-x sunrise-sunset
+Display times of sunrise and sunset for a specified date.
+M-x calendar-sunrise-sunset-month
+Display times of sunrise and sunset for the selected month.
+
+The command M-x sunrise-sunset is also available outside the
+calendar to display the sunrise and sunset information for today&rsquo;s
+date in the echo area.
+Some other Calendar tweaks
+;; First day of the week: 0:Sunday, 1:Monday.
+(defvar calendar-week-start-day 1)
+
+;; Use European date format (DD/MM/YYYY or 9 October 2024).
+(defvar calendar-date-style &#39;european)
+To be continued. Happy emacsing!"/>
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -372,20 +888,22 @@ date in the echo area.</p>
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/elfeed-optimized-blogging/">Elfeed-optimized Blogging</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/orgmode-for-reproducibility-testing/">Using Emacs Org Mode for Reproducibility Testing</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/cpp-programming-in-emacs/">C&#43;&#43; Programming in Emacs</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/python-programming-in-emacs/">Python Programming in Emacs</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/emacs-startup-screen/">Emacs Startup Screen</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/some-excerpts-from-config-2-functions/">Some Excerpts From My Emacs Config - 2: Functions</a></li>
 		</ul>
 	</div>
 </div>
 <div class="widget-taglist widget">
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog/" title="Blog">Blog</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/c&#43;&#43;/" title="C&#43;&#43;">C&#43;&#43;</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/calc/" title="Calc">Calc</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/config/" title="Config">Config</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/elfeed/" title="Elfeed">Elfeed</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/elisp/" title="Elisp">Elisp</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/emacs/" title="Emacs">Emacs</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/eshell/" title="Eshell">Eshell</a>
@@ -421,7 +939,7 @@ date in the echo area.</p>
 				</li>
 			<li class="widget__item">
 				<a class="widget__link" href="/categories/2025/">2025</a>&nbsp;
-				<span class="widget__counter widget__counter--bubble">2</span>
+				<span class="widget__counter widget__counter--bubble">3</span>
 				</li>
 		</ul>
 	</div>

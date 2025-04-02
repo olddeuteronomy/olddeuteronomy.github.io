@@ -17,7 +17,125 @@ keeping them unmodified for 12&#43; years.
 But on the other hand, it demonstrates how stable and powerful Emacs
 is &ndash; everything is still working! If something works, don&rsquo;t fix it
 &ndash; I&rsquo;ve since tried to apply this rule wherever possible.
-Here are a few functions/enhancements I found helpful." />
+Here are a few functions/enhancements I found helpful.
+dired-mode enhancements
+Function: Calculate the total size of all marked files
+The custom dired-get-size function calculates the total size of all
+marked files in the dired buffer and displays it in the echo area.
+Files in the dired buffer can be marked with m key and unmarked with
+u key.
+The current version only works on systems with the /usr/bin/du
+system utility, which actually comprise 100% of the (non-Windows)
+systems &ndash; borrowed from oremacs.com.
+(defun dired-get-size ()
+  &#34;Display file size in dired.&#34;
+  (interactive)
+  (let ((files (dired-get-marked-files)))
+    (with-temp-buffer
+      (apply &#39;call-process &#34;/usr/bin/du&#34; nil t nil &#34;-sch&#34; files)
+      (message
+       &#34;Size of all marked files: %s&#34;
+       (progn
+         (re-search-backward &#34;\\(^[ 0-9.,]&#43;[A-Za-z]&#43;\\).*total$&#34;)
+         (match-string 1))))))
+In my config, dired-get-size is bound to z key in the dired-mode.
+;; https://oremacs.com/2015/01/12/dired-file-size/
+(define-key dired-mode-map &#34;z&#34; #&#39;dired-get-size)
+
+            The result of pressing the `z` key in dired.
+        
+
+
+Some other dired-mode enhancements
+Move to the parent directory
+It reuses the current dired buffer for opening the parent
+directory (oremacs.com)
+instead of creating a new buffer.
+Bounded to the a key in dired-mode.
+;; Move to the parent directory.
+(define-key dired-mode-map &#34;a&#34;
+  (lambda ()
+    (interactive)
+    (find-alternate-file &#34;..&#34;)))
+Run eshell in the current dired directory
+Bounded to the ` back-tick key in dired-mode.
+;; Run eshell.
+(define-key dired-mode-map &#34;`&#34;
+  (lambda ()
+    (interactive)
+    (eshell)))
+Date and time stamps
+Inserting the date and/or time stamps at the current cursor position.
+You can bind these functions to any key chords you prefer or call the
+corresponding function with M-x.
+(defun my/time-stamp ()
+  &#34;Insert full date/time stamp as 2024-11-29 10:41 &#43;0100 CET&#34;
+  (interactive)
+  (insert (format-time-string &#34;%Y-%m-%d %R %z %Z&#34;)))
+
+(defun my/time-stamp-short ()
+  &#34;Insert short date/time stamp as 2024-11-29 10:41&#34;
+  (interactive)
+  (insert (format-time-string &#34;%Y-%m-%d %R&#34;)))
+
+(defun my/date-stamp ()
+  &#34;Insert date stamp as 2024-11-29&#34;
+  (interactive)
+  (insert (format-time-string &#34;%Y-%m-%d&#34;)))
+Some editing tweaks
+Inserting a new line
+Insert a new line, indent it, and move the cursor there. This behavior
+is different then the typical function bound to Enter which may be
+open-line or newline-and-indent. When you call them with the cursor
+between ^ (beginning of line) and $ (end of line), the contents of the
+line to the right of it will be moved to the newly inserted line. This
+function will not do that. Instead, the current line is left alone, a new line
+is inserted, indented, and the cursor is moved there. Borrowed from
+emacsredux.
+(defun smart-open-line ()
+  &#34;Insert a new line, indent it, and move the cursor there.&#34;
+  (interactive)
+  (move-end-of-line nil)
+  (newline-and-indent))
+
+(global-set-key (kbd &#34;&lt;C-return&gt;&#34;) #&#39;smart-open-line)
+I have bound it globally to Ctrl-Enter &ndash; C-return in the Emacs
+notation &ndash; so it should work in any mode.
+Smart beginning of line
+Move point to first non-whitespace character or beginning-of-line.
+(defun smart-beginning-of-line ()
+  &#34;Move point to first non-whitespace character or `beginning-of-line`.&#34;
+  (interactive)
+  (let ((oldpos (point)))
+    (back-to-indentation)
+    (and (= oldpos (point))
+         (beginning-of-line))))
+
+(global-set-key (kbd &#34;C-a&#34;) #&#39;smart-beginning-of-line)
+I&rsquo;ve rebound the default Ctrl-A &ndash; C-a in the Emacs notation &ndash; to
+move to first non-whitespace character of a line instead of first
+column.
+Killing a word at point
+Deleting the whole word at the cursor position.
+(defun kill-whole-word ()
+  &#34;Kill the current word at point.&#34;
+  (interactive)
+  (backward-word)
+  (kill-word 1))
+
+(define-key global-map (kbd &#34;&lt;M-DEL&gt;&#34;) #&#39;kill-whole-word)
+I&rsquo;ve rebound it to Alt-delete &ndash; M-DEL in the Emacs notation.
+Nuke all buffers
+Kill all buffers, leaving *scratch* only.
+(defun nuke-all-buffers ()
+  &#34;Kill all buffers, leaving *scratch* only.&#34;
+  (interactive)
+  (mapc
+   (lambda (buffer)
+     (kill-buffer buffer))
+   (buffer-list))
+  (delete-other-windows))
+To be continued. Happy emacsing!" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://olddeuteronomy.github.io/post/some-excerpts-from-config-2-functions/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2024-11-29T11:45:17+01:00" />
@@ -34,7 +152,125 @@ keeping them unmodified for 12&#43; years.
 But on the other hand, it demonstrates how stable and powerful Emacs
 is &ndash; everything is still working! If something works, don&rsquo;t fix it
 &ndash; I&rsquo;ve since tried to apply this rule wherever possible.
-Here are a few functions/enhancements I found helpful."><meta itemprop="datePublished" content="2024-11-29T11:45:17+01:00" />
+Here are a few functions/enhancements I found helpful.
+dired-mode enhancements
+Function: Calculate the total size of all marked files
+The custom dired-get-size function calculates the total size of all
+marked files in the dired buffer and displays it in the echo area.
+Files in the dired buffer can be marked with m key and unmarked with
+u key.
+The current version only works on systems with the /usr/bin/du
+system utility, which actually comprise 100% of the (non-Windows)
+systems &ndash; borrowed from oremacs.com.
+(defun dired-get-size ()
+  &#34;Display file size in dired.&#34;
+  (interactive)
+  (let ((files (dired-get-marked-files)))
+    (with-temp-buffer
+      (apply &#39;call-process &#34;/usr/bin/du&#34; nil t nil &#34;-sch&#34; files)
+      (message
+       &#34;Size of all marked files: %s&#34;
+       (progn
+         (re-search-backward &#34;\\(^[ 0-9.,]&#43;[A-Za-z]&#43;\\).*total$&#34;)
+         (match-string 1))))))
+In my config, dired-get-size is bound to z key in the dired-mode.
+;; https://oremacs.com/2015/01/12/dired-file-size/
+(define-key dired-mode-map &#34;z&#34; #&#39;dired-get-size)
+
+            The result of pressing the `z` key in dired.
+        
+
+
+Some other dired-mode enhancements
+Move to the parent directory
+It reuses the current dired buffer for opening the parent
+directory (oremacs.com)
+instead of creating a new buffer.
+Bounded to the a key in dired-mode.
+;; Move to the parent directory.
+(define-key dired-mode-map &#34;a&#34;
+  (lambda ()
+    (interactive)
+    (find-alternate-file &#34;..&#34;)))
+Run eshell in the current dired directory
+Bounded to the ` back-tick key in dired-mode.
+;; Run eshell.
+(define-key dired-mode-map &#34;`&#34;
+  (lambda ()
+    (interactive)
+    (eshell)))
+Date and time stamps
+Inserting the date and/or time stamps at the current cursor position.
+You can bind these functions to any key chords you prefer or call the
+corresponding function with M-x.
+(defun my/time-stamp ()
+  &#34;Insert full date/time stamp as 2024-11-29 10:41 &#43;0100 CET&#34;
+  (interactive)
+  (insert (format-time-string &#34;%Y-%m-%d %R %z %Z&#34;)))
+
+(defun my/time-stamp-short ()
+  &#34;Insert short date/time stamp as 2024-11-29 10:41&#34;
+  (interactive)
+  (insert (format-time-string &#34;%Y-%m-%d %R&#34;)))
+
+(defun my/date-stamp ()
+  &#34;Insert date stamp as 2024-11-29&#34;
+  (interactive)
+  (insert (format-time-string &#34;%Y-%m-%d&#34;)))
+Some editing tweaks
+Inserting a new line
+Insert a new line, indent it, and move the cursor there. This behavior
+is different then the typical function bound to Enter which may be
+open-line or newline-and-indent. When you call them with the cursor
+between ^ (beginning of line) and $ (end of line), the contents of the
+line to the right of it will be moved to the newly inserted line. This
+function will not do that. Instead, the current line is left alone, a new line
+is inserted, indented, and the cursor is moved there. Borrowed from
+emacsredux.
+(defun smart-open-line ()
+  &#34;Insert a new line, indent it, and move the cursor there.&#34;
+  (interactive)
+  (move-end-of-line nil)
+  (newline-and-indent))
+
+(global-set-key (kbd &#34;&lt;C-return&gt;&#34;) #&#39;smart-open-line)
+I have bound it globally to Ctrl-Enter &ndash; C-return in the Emacs
+notation &ndash; so it should work in any mode.
+Smart beginning of line
+Move point to first non-whitespace character or beginning-of-line.
+(defun smart-beginning-of-line ()
+  &#34;Move point to first non-whitespace character or `beginning-of-line`.&#34;
+  (interactive)
+  (let ((oldpos (point)))
+    (back-to-indentation)
+    (and (= oldpos (point))
+         (beginning-of-line))))
+
+(global-set-key (kbd &#34;C-a&#34;) #&#39;smart-beginning-of-line)
+I&rsquo;ve rebound the default Ctrl-A &ndash; C-a in the Emacs notation &ndash; to
+move to first non-whitespace character of a line instead of first
+column.
+Killing a word at point
+Deleting the whole word at the cursor position.
+(defun kill-whole-word ()
+  &#34;Kill the current word at point.&#34;
+  (interactive)
+  (backward-word)
+  (kill-word 1))
+
+(define-key global-map (kbd &#34;&lt;M-DEL&gt;&#34;) #&#39;kill-whole-word)
+I&rsquo;ve rebound it to Alt-delete &ndash; M-DEL in the Emacs notation.
+Nuke all buffers
+Kill all buffers, leaving *scratch* only.
+(defun nuke-all-buffers ()
+  &#34;Kill all buffers, leaving *scratch* only.&#34;
+  (interactive)
+  (mapc
+   (lambda (buffer)
+     (kill-buffer buffer))
+   (buffer-list))
+  (delete-other-windows))
+To be continued. Happy emacsing!"><meta itemprop="datePublished" content="2024-11-29T11:45:17+01:00" />
 <meta itemprop="dateModified" content="2024-11-29T11:45:17+01:00" />
 <meta itemprop="wordCount" content="649">
 <meta itemprop="keywords" content="emacs,config,elisp," />
@@ -48,7 +284,125 @@ keeping them unmodified for 12&#43; years.
 But on the other hand, it demonstrates how stable and powerful Emacs
 is &ndash; everything is still working! If something works, don&rsquo;t fix it
 &ndash; I&rsquo;ve since tried to apply this rule wherever possible.
-Here are a few functions/enhancements I found helpful."/>
+Here are a few functions/enhancements I found helpful.
+dired-mode enhancements
+Function: Calculate the total size of all marked files
+The custom dired-get-size function calculates the total size of all
+marked files in the dired buffer and displays it in the echo area.
+Files in the dired buffer can be marked with m key and unmarked with
+u key.
+The current version only works on systems with the /usr/bin/du
+system utility, which actually comprise 100% of the (non-Windows)
+systems &ndash; borrowed from oremacs.com.
+(defun dired-get-size ()
+  &#34;Display file size in dired.&#34;
+  (interactive)
+  (let ((files (dired-get-marked-files)))
+    (with-temp-buffer
+      (apply &#39;call-process &#34;/usr/bin/du&#34; nil t nil &#34;-sch&#34; files)
+      (message
+       &#34;Size of all marked files: %s&#34;
+       (progn
+         (re-search-backward &#34;\\(^[ 0-9.,]&#43;[A-Za-z]&#43;\\).*total$&#34;)
+         (match-string 1))))))
+In my config, dired-get-size is bound to z key in the dired-mode.
+;; https://oremacs.com/2015/01/12/dired-file-size/
+(define-key dired-mode-map &#34;z&#34; #&#39;dired-get-size)
+
+            The result of pressing the `z` key in dired.
+        
+
+
+Some other dired-mode enhancements
+Move to the parent directory
+It reuses the current dired buffer for opening the parent
+directory (oremacs.com)
+instead of creating a new buffer.
+Bounded to the a key in dired-mode.
+;; Move to the parent directory.
+(define-key dired-mode-map &#34;a&#34;
+  (lambda ()
+    (interactive)
+    (find-alternate-file &#34;..&#34;)))
+Run eshell in the current dired directory
+Bounded to the ` back-tick key in dired-mode.
+;; Run eshell.
+(define-key dired-mode-map &#34;`&#34;
+  (lambda ()
+    (interactive)
+    (eshell)))
+Date and time stamps
+Inserting the date and/or time stamps at the current cursor position.
+You can bind these functions to any key chords you prefer or call the
+corresponding function with M-x.
+(defun my/time-stamp ()
+  &#34;Insert full date/time stamp as 2024-11-29 10:41 &#43;0100 CET&#34;
+  (interactive)
+  (insert (format-time-string &#34;%Y-%m-%d %R %z %Z&#34;)))
+
+(defun my/time-stamp-short ()
+  &#34;Insert short date/time stamp as 2024-11-29 10:41&#34;
+  (interactive)
+  (insert (format-time-string &#34;%Y-%m-%d %R&#34;)))
+
+(defun my/date-stamp ()
+  &#34;Insert date stamp as 2024-11-29&#34;
+  (interactive)
+  (insert (format-time-string &#34;%Y-%m-%d&#34;)))
+Some editing tweaks
+Inserting a new line
+Insert a new line, indent it, and move the cursor there. This behavior
+is different then the typical function bound to Enter which may be
+open-line or newline-and-indent. When you call them with the cursor
+between ^ (beginning of line) and $ (end of line), the contents of the
+line to the right of it will be moved to the newly inserted line. This
+function will not do that. Instead, the current line is left alone, a new line
+is inserted, indented, and the cursor is moved there. Borrowed from
+emacsredux.
+(defun smart-open-line ()
+  &#34;Insert a new line, indent it, and move the cursor there.&#34;
+  (interactive)
+  (move-end-of-line nil)
+  (newline-and-indent))
+
+(global-set-key (kbd &#34;&lt;C-return&gt;&#34;) #&#39;smart-open-line)
+I have bound it globally to Ctrl-Enter &ndash; C-return in the Emacs
+notation &ndash; so it should work in any mode.
+Smart beginning of line
+Move point to first non-whitespace character or beginning-of-line.
+(defun smart-beginning-of-line ()
+  &#34;Move point to first non-whitespace character or `beginning-of-line`.&#34;
+  (interactive)
+  (let ((oldpos (point)))
+    (back-to-indentation)
+    (and (= oldpos (point))
+         (beginning-of-line))))
+
+(global-set-key (kbd &#34;C-a&#34;) #&#39;smart-beginning-of-line)
+I&rsquo;ve rebound the default Ctrl-A &ndash; C-a in the Emacs notation &ndash; to
+move to first non-whitespace character of a line instead of first
+column.
+Killing a word at point
+Deleting the whole word at the cursor position.
+(defun kill-whole-word ()
+  &#34;Kill the current word at point.&#34;
+  (interactive)
+  (backward-word)
+  (kill-word 1))
+
+(define-key global-map (kbd &#34;&lt;M-DEL&gt;&#34;) #&#39;kill-whole-word)
+I&rsquo;ve rebound it to Alt-delete &ndash; M-DEL in the Emacs notation.
+Nuke all buffers
+Kill all buffers, leaving *scratch* only.
+(defun nuke-all-buffers ()
+  &#34;Kill all buffers, leaving *scratch* only.&#34;
+  (interactive)
+  (mapc
+   (lambda (buffer)
+     (kill-buffer buffer))
+   (buffer-list))
+  (delete-other-windows))
+To be continued. Happy emacsing!"/>
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -339,20 +693,22 @@ column.</p>
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/elfeed-optimized-blogging/">Elfeed-optimized Blogging</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/orgmode-for-reproducibility-testing/">Using Emacs Org Mode for Reproducibility Testing</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/cpp-programming-in-emacs/">C&#43;&#43; Programming in Emacs</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/python-programming-in-emacs/">Python Programming in Emacs</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/emacs-startup-screen/">Emacs Startup Screen</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/some-excerpts-from-config-2-functions/">Some Excerpts From My Emacs Config - 2: Functions</a></li>
 		</ul>
 	</div>
 </div>
 <div class="widget-taglist widget">
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog/" title="Blog">Blog</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/c&#43;&#43;/" title="C&#43;&#43;">C&#43;&#43;</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/calc/" title="Calc">Calc</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/config/" title="Config">Config</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/elfeed/" title="Elfeed">Elfeed</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/elisp/" title="Elisp">Elisp</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/emacs/" title="Emacs">Emacs</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/eshell/" title="Eshell">Eshell</a>
@@ -388,7 +744,7 @@ column.</p>
 				</li>
 			<li class="widget__item">
 				<a class="widget__link" href="/categories/2025/">2025</a>&nbsp;
-				<span class="widget__counter widget__counter--bubble">2</span>
+				<span class="widget__counter widget__counter--bubble">3</span>
 				</li>
 		</ul>
 	</div>

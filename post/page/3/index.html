@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Posts - The Emacs Cat</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Posts" />
+<meta property="og:description" content="Various notes on Emacs and beyond" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://olddeuteronomy.github.io/post/" />
+
+
+		<meta itemprop="name" content="Posts">
+<meta itemprop="description" content="Various notes on Emacs and beyond">
+		<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Posts"/>
+<meta name="twitter:description" content="Various notes on Emacs and beyond"/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+	<link rel="alternate" type="application/rss+xml" href="/post/index.xml" title="The Emacs Cat">
+
+	<link rel="shortcut icon" href="/favicon.ico">
+        
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="The Emacs Cat" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/img/od.png">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">The Emacs Cat</div>
+					<div class="logo__tagline">An Emacser&#39;s Miscellany</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">
+				
+				<span class="menu__text">About</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main list" role="main">
+	<header class="main__header">
+		<h1 class="main__title">Posts</h1>
+	</header><article class="list__item post">
+	
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/post/how-to-clear-the-eshell/" rel="bookmark">
+			How to Clear the Eshell
+			</a>
+		</h2>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">The Emacs Cat</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-10-05T13:07:45&#43;03:00">Wednesday, Oct 5, 2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/2022/" rel="category">2022</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<p>I&rsquo;m a big fan of Eshell, but some things in Eshell look, hmm,
+a bit strange. One of such things is how the Eshell&rsquo;s command <code>clear</code> clears
+the screen.</p>
+<p>As it is decribed at the Unix Wiki page, <em><code>clear</code> is a computer operating
+system command which is used to bring the command line on top of the
+computer terminal.</em> The key words are &ldquo;bring the command line <strong>on top</strong>&rdquo;.</p>
+<p>The Eshell&rsquo;s <code>clear</code> works in a different way, it brings the command
+prompt <strong>on bottom</strong>, instead.</p>
+<figure><img src="/img/eshell-clear-1.png"/><figcaption>
+            <h4>Using the `clear` command to clear the Eshell screen.</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/img/eshell-clear-2.png"/><figcaption>
+            <h4>After the `clear`, the command prompt has been moved on bottom.</h4>
+        </figcaption>
+</figure>
+
+<p>Just recently, I&rsquo;ve accidently discovered an unexpected, at least for me, workaround
+(from this Stackexchange
+<a href="https://emacs.stackexchange.com/questions/12503/how-to-clear-the-eshell">thread</a>).
+To clear the Eshell screen you just need to type <code>clear 1</code> instead of
+just <code>clear</code>.</p>
+<figure><img src="/img/eshell-clear1-1.png"/><figcaption>
+            <h4>Using the `clear 1` command to clear the Eshell screen.</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/img/eshell-clear1-2.png"/><figcaption>
+            <h4>After the `clear 1`, it&#39;s OK now.</h4>
+        </figcaption>
+</figure>
+
+<p>Of course, then I&rsquo;ve immediately added an alias for <code>clear 1</code> to my
+Eshell aliases configuration file <code>~/.emacs.d/eshell/alias</code>.</p>
+<pre tabindex="0"><code>alias cls clear 1
+</code></pre><p>More on Eshell aliases you can find
+in my post <a href="https://olddeuteronomy.github.io/post/eshell-aliases-and-prompt/">Eshell Aliases, Prompt, And Colors</a>.</p>
+<p>Perhaps you can use this trick for your eshelling.</p>
+	</div>
+</article><article class="list__item post">
+	
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/post/emacs-shortcuts/" rel="bookmark">
+			Emacs Keyboard Shortcuts
+			</a>
+		</h2>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">The Emacs Cat</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-09-06T15:26:36&#43;03:00">Tuesday, Sep 6, 2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/2022/" rel="category">2022</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<p><a href="https://irreal.org/blog/">Irreal</a> has recently published <a href="https://irreal.org/blog/?p=10784">a
+post</a> with a reference to the Vernon
+Grant&rsquo;s
+<a href="https://github.com/VernonGrant/emacs-keyboard-shortcuts">emacs-keyboard-shortcuts</a>
+README that contains a list of Emacs keyboard shortcuts Vernon uses on
+a regular basis.</p>
+<p>It&rsquo;s worth to bookmark it or to download the markdown README locally even
+if you think you know Emacs very well (there is no such people,
+though).</p>
+<p>Many thanks to both Irreal and Vernon.</p>
+	</div>
+</article><article class="list__item post">
+	
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/post/reverso-context-in-emacs/" rel="bookmark">
+			Reverso Context in Emacs
+			</a>
+		</h2>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">The Emacs Cat</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-09-03T01:46:36&#43;03:00">Saturday, Sep 3, 2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/2022/" rel="category">2022</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<p>If you are an emacser, you are probably already following the <a href="https://sachachua.com/blog/">Sacha
+Chua&rsquo;s blog</a>. If you are not, you should.
+Sacha maintains an incredible blog on Emacs-related news, upcoming
+events, Org Mode, configuration, new packages, and many other things
+from the Emacs world.</p>
+<p>English is not my native language so I need <em>the right tools</em> to
+improve my language skills. My favorite tool is the
+<a href="https://www.reverso.net/text-translation">Reverso</a> web service, an
+AI-powered service for translation, grammar check, context, and
+synonyms search.</p>
+<p>Of course, I&rsquo;d prefer to use it in Emacs directly, and in
+<a href="https://sachachua.com/blog/2022/08/2022-08-29-emacs-news/">one</a> of
+the latest Sacha&rsquo;s posts I found what I had been searching for -
+<a href="https://github.com/SqrtMinusOne/reverso.el">reverso.el</a>.</p>
+<p>At the time of writing, the package isn’t yet available anywhere but
+in the author&rsquo;s GitHub repository, so as a first step you need either
+to download or to clone this package to your box.</p>
+<p>I&rsquo;ve cloned it to my <code>~/emacs.d/extras/</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone https://github.com/SqrtMinusOne/reverso.el.git
+</span></span></code></pre></div><p>Secondly, you need to add this directory to your <code>load-path</code> and
+<code>require</code> the package.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(add-to-list <span style="color:#e6db74">&#39;load-path</span> <span style="color:#e6db74">&#34;~/.emacs.d/extras/reverso.el/&#34;</span>)
+</span></span></code></pre></div><p>Almost done.</p>
+<p>Because I&rsquo;m using Reverso quite often, I decided to implement a
+<em>smart</em> start-up function and to bind it to a <em>common</em> key like
+<code>&lt;F9&gt;</code>. I want to distinguish between the <em>Translation</em> (applied to a
+single word) and the <em>Context</em> (applied to a phrase or a sentence)
+features of Reverso. So now if you press <code>&lt;F9&gt;</code> <em>and</em> there is some
+region selected (active, in terminology of Emacs), <code>reverso-context</code>
+is called, else, if no region selected, <code>reverso-translate</code> is
+called for a word under the cursor.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Reverso context</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; https://github.com/SqrtMinusOne/reverso.el</span>
+</span></span><span style="display:flex;"><span>(require <span style="color:#e6db74">&#39;reverso</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(defun avs/reverso ()
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Calls </span><span style="color:#e6db74">`reverso&#39;</span><span style="color:#e6db74"> functions depending on selection.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">If a region (selection) is active, calls </span><span style="color:#e6db74">`reverso-context&#39;</span><span style="color:#e6db74">,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">otherwise calls </span><span style="color:#e6db74">`reverso-translate&#39;</span><span style="color:#e6db74"> for a word under the cursor.&#34;</span>
+</span></span><span style="display:flex;"><span>  (interactive)
+</span></span><span style="display:flex;"><span>  (if (region-active-p)
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Region is active, use context.</span>
+</span></span><span style="display:flex;"><span>      (reverso-context)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">;; Region is not active, get word coordinates...</span>
+</span></span><span style="display:flex;"><span>    (let ((bounds (bounds-of-thing-at-point <span style="color:#e6db74">&#39;word</span>))
+</span></span><span style="display:flex;"><span>          (p (<span style="color:#a6e22e">point</span>))
+</span></span><span style="display:flex;"><span>          )
+</span></span><span style="display:flex;"><span>      (if bounds
+</span></span><span style="display:flex;"><span>          (progn
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">;; ...select the word under cursor...</span>
+</span></span><span style="display:flex;"><span>            (<span style="color:#a6e22e">goto-char</span> (<span style="color:#a6e22e">car</span> bounds))
+</span></span><span style="display:flex;"><span>            (set-mark-command <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>            (<span style="color:#a6e22e">goto-char</span> (<span style="color:#a6e22e">cdr</span> bounds))
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">;; ...and translate it.</span>
+</span></span><span style="display:flex;"><span>            (reverso-translate)
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">;; Then back to the initial position.</span>
+</span></span><span style="display:flex;"><span>            (deactivate-mark)
+</span></span><span style="display:flex;"><span>            (<span style="color:#a6e22e">goto-char</span> p)
+</span></span><span style="display:flex;"><span>            )
+</span></span><span style="display:flex;"><span>        (<span style="color:#a6e22e">error</span> <span style="color:#e6db74">&#34;No word under cursor!&#34;</span>)
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>      )
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(global-set-key [(f9)] <span style="color:#a6e22e">#&#39;</span>avs/reverso)
+</span></span></code></pre></div><figure><img src="/img/reverso-translate.png"/><figcaption>
+            <h4>The word &#39;deposed&#39; is under the cursor, no region is active, &lt;F9&gt; calls `reverso-translate&#39;.</h4>
+        </figcaption>
+</figure>
+
+<figure><img src="/img/reverso-context.png"/><figcaption>
+            <h4>The region &#39;different kind of weather&#39; is active, &lt;F9&gt; calls `reverso-context&#39;</h4>
+        </figcaption>
+</figure>
+
+<p>Many thanks to <a href="https://github.com/SqrtMinusOne">Pavel Korytov</a> for
+the excellent packages, and, indeed, to <a href="https://sachachua.com/blog/contact/">Sacha
+Chua</a> for pointing it out to all of us.</p>
+	</div>
+</article><article class="list__item post">
+	
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/post/use-abbrev-to-enter-special-characters/" rel="bookmark">
+			Using abbrev to Enter Special Characters
+			</a>
+		</h2>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">The Emacs Cat</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-08-16T15:08:36&#43;03:00">Tuesday, Aug 16, 2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/2022/" rel="category">2022</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<p>As it&rsquo;s described in the GNU Emacs Manual, <em>an abbreviation or abbrev
+is a string of characters that may be expanded to a longer string. The
+user can insert the abbrev string and find it replaced automatically
+with the expansion of the abbrev. This saves typing</em>.</p>
+<p>Mostly I use builtin <strong>abbrev</strong> package to enter the special
+characters like greek letters, arrow symbols etc.</p>
+<p>Below is my setup of <strong>abbrev</strong> from my <code>~/.emacs</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(setq abbrev-file-name                <span style="color:#75715e">;; Tell Emacs where to read abbrev</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;~/.emacs.d/abbrev_defs.el&#34;</span>)    <span style="color:#75715e">;; Definitions from...</span>
+</span></span><span style="display:flex;"><span>(setq save-abbrevs <span style="color:#66d9ef">t</span>)                 <span style="color:#75715e">;; (ask) save abbrevs when files are saved</span>
+</span></span><span style="display:flex;"><span>(setq-default abbrev-mode <span style="color:#66d9ef">t</span>)          <span style="color:#75715e">;; Turn it on globally</span>
+</span></span><span style="display:flex;"><span>(if (<span style="color:#a6e22e">file-exists-p</span> abbrev-file-name) (quietly-read-abbrev-file))
+</span></span></code></pre></div><p>Here is my abbrev definition file <code>~/.emacs.d/abbrev_defs.el</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Time-stamp: &lt;Last changed 2022-08-16 16:38:50 by magnolia&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(define-abbrev-table <span style="color:#e6db74">&#39;global-abbrev-table</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#39;</span>(
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8alpha&#34;</span>   <span style="color:#e6db74">&#34;α&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8beta&#34;</span>    <span style="color:#e6db74">&#34;β&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8gamma&#34;</span>   <span style="color:#e6db74">&#34;γ&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8Delta&#34;</span>   <span style="color:#e6db74">&#34;Δ&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8delta&#34;</span>   <span style="color:#e6db74">&#34;δ&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8theta&#34;</span>   <span style="color:#e6db74">&#34;θ&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8ksi&#34;</span>     <span style="color:#e6db74">&#34;ξ&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8lambda&#34;</span>  <span style="color:#e6db74">&#34;λ&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8mu&#34;</span>      <span style="color:#e6db74">&#34;µ&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8nu&#34;</span>      <span style="color:#e6db74">&#34;ν&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8pi&#34;</span>      <span style="color:#e6db74">&#34;π&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8Sigma&#34;</span>   <span style="color:#e6db74">&#34;Σ&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8sigma&#34;</span>   <span style="color:#e6db74">&#34;σ&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8tau&#34;</span>     <span style="color:#e6db74">&#34;τ&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8phi&#34;</span>     <span style="color:#e6db74">&#34;φ&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8psi&#34;</span>     <span style="color:#e6db74">&#34;ψ&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8Omega&#34;</span>   <span style="color:#e6db74">&#34;Ω&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8omega&#34;</span>   <span style="color:#e6db74">&#34;ω&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8in&#34;</span>      <span style="color:#e6db74">&#34;∈&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8nin&#34;</span>     <span style="color:#e6db74">&#34;∉&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8almost&#34;</span>  <span style="color:#e6db74">&#34;≈&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8inf&#34;</span>     <span style="color:#e6db74">&#34;∞&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8deg&#34;</span>     <span style="color:#e6db74">&#34;°&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8cels&#34;</span>    <span style="color:#e6db74">&#34;℃&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8right&#34;</span>   <span style="color:#e6db74">&#34;→&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8left&#34;</span>    <span style="color:#e6db74">&#34;←&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8up&#34;</span>      <span style="color:#e6db74">&#34;↑&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8down&#34;</span>    <span style="color:#e6db74">&#34;↓&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8para&#34;</span>    <span style="color:#e6db74">&#34;§&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8copy&#34;</span>    <span style="color:#e6db74">&#34;©&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8reg&#34;</span>     <span style="color:#e6db74">&#34;®&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8tm&#34;</span>      <span style="color:#e6db74">&#34;™&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8eur&#34;</span>     <span style="color:#e6db74">&#34;€&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8pound&#34;</span>   <span style="color:#e6db74">&#34;£&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8plusmin&#34;</span> <span style="color:#e6db74">&#34;±&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8sup1&#34;</span>    <span style="color:#e6db74">&#34;¹&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8sup2&#34;</span>    <span style="color:#e6db74">&#34;²&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8sup3&#34;</span>    <span style="color:#e6db74">&#34;³&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8ldquo&#34;</span>   <span style="color:#e6db74">&#34;«&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8rdquo&#34;</span>   <span style="color:#e6db74">&#34;»&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8range&#34;</span>   <span style="color:#e6db74">&#34;÷&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8not&#34;</span>     <span style="color:#e6db74">&#34;¬&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8mdot&#34;</span>    <span style="color:#e6db74">&#34;·&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8bull&#34;</span>    <span style="color:#e6db74">&#34;∙&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8accent&#34;</span>  <span style="color:#e6db74">&#34;´&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8mdash&#34;</span>   <span style="color:#e6db74">&#34;—&#34;</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8ndash&#34;</span>   <span style="color:#e6db74">&#34;–&#34;</span>)))
+</span></span></code></pre></div><p>Just after you type an abbreviation following by either SPC or any
+punctuation symbol it is replaced by the corresponding character.</p>
+<p>Of course, I&rsquo;ve compiled this setup from various sources, mostly from
+the <a href="https://impaktor.gitlab.io/dot_emacs.html#org87d6718">Impaktor&rsquo;s article</a>
+with some additions.</p>
+<p>It&rsquo;s also worth to read the <a href="http://xahlee.info/emacs/emacs/emacs_abbrev_mode_tutorial.html">Xah Lee&rsquo;s article</a>
+for more examples of how to use <strong>abbrev</strong> mode in your daily Emacs
+life.</p>
+<p>Happy abbreving.</p>
+	</div>
+</article><article class="list__item post">
+	
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/post/eshell-aliases-and-prompt/" rel="bookmark">
+			Eshell Aliases, Prompt, And Colors
+			</a>
+		</h2>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">The Emacs Cat</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-07-22T13:57:32&#43;03:00">Friday, Jul 22, 2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/2022/" rel="category">2022</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<blockquote>
+<p>Do you use #Emacs to run shells or terminal emulators?
+Well, you should. With vterm you have a fast alternative to the
+builtin ansi-term. And if you prefer shells, you&rsquo;ve got EShell and
+Shell Mode.
+And don&rsquo;t forget serial-term for embedded programming.
+— Mickey Petersen (@mickeynp) on Twitter, July 18, 2022.</p>
+</blockquote>
+<h2 id="eshell-aliases">Eshell Aliases</h2>
+<p>An excellent
+<a href="https://www.masteringemacs.org/article/running-shells-in-emacs-overview">post</a>
+from Mickey Petersen, a famous Emacs guru and the author of
+<a href="https://www.masteringemacs.org/"><em>Mastering Emacs</em></a> reminded me to
+share my eshell configuration.</p>
+<p>There are 2 ways to configure eshell aliases. <a href="http://www.gonsie.com/blorg/eshell.html">Elsa
+Gonsiorowski</a> uses a
+special configuration file <code>~/.emacs.d/eshell/alias</code> while <a href="https://github.com/howardabrams/dot-files/blob/master/emacs-eshell.org#aliases">Howard
+Abrams</a>
+prefers to put his eshell alias settings to <code>.emacs</code> or <code>init.el</code>.
+Personally, I prefer the former approach.</p>
+<p>Here is my <code>~/.emacs.d/eshell/alias</code>.</p>
+<pre tabindex="0"><code>alias ll ls -AFGhl --color=always $1
+alias ff find-file $1
+alias e find-file-other-window $1
+alias d dired $1
+alias gd magit-diff-unstaged
+alias gds magit-diff-staged
+alias gg git log --color --graph --oneline --abbrev-commit --decorate --all --date=short --pretty=format:&#34;%C(cyan)%h %C(yellow)%ad %C(bold green)%d %C(reset)%s&#34;
+</code></pre><p>Most of these aliases are obvious, e.g. <code>ll</code> prints extended directory
+listing, <code>ff somefile</code> opens <em>somefile</em> for editing in the same
+window, <code>e somefile</code> uses other window to edit <em>somefile</em>, <code>d</code> opens
+the dired buffer in the same window, etc. The last one prints
+the colorized one-line git log as shown below.</p>
+<figure><img src="/img/gg2.png"/>
+</figure>
+
+<h2 id="eshell-prompt">Eshell Prompt</h2>
+<p>The prompt you can see on the screenshot above is borrowed from the
+Reddit
+<a href="https://www.reddit.com/r/emacs/comments/6f0rkz/my_fancy_eshell_prompt/">post</a>
+with some colors optimized for the Solarized Dark theme.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(setq eshell-prompt-function
+</span></span><span style="display:flex;"><span>      (lambda ()
+</span></span><span style="display:flex;"><span>        (<span style="color:#a6e22e">concat</span>
+</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;┌─[&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
+</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> (<span style="color:#a6e22e">user-login-name</span>) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#dc322f&#34;</span>))
+</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;@&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
+</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> (<span style="color:#a6e22e">system-name</span>) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#268bd2&#34;</span>))
+</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;]──[&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
+</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> (<span style="color:#a6e22e">format-time-string</span> <span style="color:#e6db74">&#34;%H:%M&#34;</span> (<span style="color:#a6e22e">current-time</span>)) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#b58900&#34;</span>))
+</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;]──[&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
+</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> (<span style="color:#a6e22e">concat</span> (eshell/pwd)) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#93a1a1&#34;</span>))
+</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;]\n&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
+</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;└─&gt;&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
+</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> (if venv-current-name (<span style="color:#a6e22e">concat</span> <span style="color:#e6db74">&#34; (&#34;</span> venv-current-name <span style="color:#e6db74">&#34;)&#34;</span>)  <span style="color:#e6db74">&#34;&#34;</span>) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#00dc00&#34;</span>))
+</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> (if (<span style="color:#a6e22e">=</span> (<span style="color:#a6e22e">user-uid</span>) <span style="color:#ae81ff">0</span>) <span style="color:#e6db74">&#34; # &#34;</span> <span style="color:#e6db74">&#34; $ &#34;</span>) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
+</span></span><span style="display:flex;"><span>         )))
+</span></span></code></pre></div><p>In addition to the username, the current time, and the current
+directory it also shows the current Python virtual environment name
+(in green).</p>
+<h2 id="eshell-colors">Eshell Colors</h2>
+<p>The often cited issue with eshell is the lack of color output even if
+it is explicitly specified in a command (e.g. <code>ls --color=always</code>).</p>
+<p>Adding this to your <code>~/.emacs</code> (or <code>init.el</code>)  DOES NOT solve the problem:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(setenv <span style="color:#e6db74">&#34;TERM&#34;</span> <span style="color:#e6db74">&#34;xterm-256color&#34;</span>)
+</span></span></code></pre></div><p>THIS DOES solve the problem with color output in eshell:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;eshell-mode-hook</span> (lambda () (setenv <span style="color:#e6db74">&#34;TERM&#34;</span> <span style="color:#e6db74">&#34;xterm-256color&#34;</span>)))
+</span></span></code></pre></div><p>Though to get the current directory listing in eshell I prefer to use the eshell
+alias <code>d</code> (equivalent to <code>d .</code>), see the list of aliases above.</p>
+<p>More on Emacs&rsquo; eshell can be found
+<a href="https://www.masteringemacs.org/article/complete-guide-mastering-eshell">here</a>,
+thanks again, Mickey.</p>
+	</div>
+</article>
+</main>
+
+<div class="pagination">
+	<a class="pagination__item pagination__item--prev btn" href="/post/page/2/">«</a>
+	<span class="pagination__item pagination__item--current">3/4</span>
+	<a class="pagination__item pagination__item--next btn" href="/post/page/4/">»</a>
+</div>
+
+			</div>
+			
+<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://duckduckgo.com/">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH…" value="" name="q" aria-label="SEARCH…">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sites" value="https://olddeuteronomy.github.io/"/>
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/elfeed-optimized-blogging/">Elfeed-optimized Blogging</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/orgmode-for-reproducibility-testing/">Using Emacs Org Mode for Reproducibility Testing</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/cpp-programming-in-emacs/">C&#43;&#43; Programming in Emacs</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/python-programming-in-emacs/">Python Programming in Emacs</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/emacs-startup-screen/">Emacs Startup Screen</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog/" title="Blog">Blog</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/c&#43;&#43;/" title="C&#43;&#43;">C&#43;&#43;</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/calc/" title="Calc">Calc</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/config/" title="Config">Config</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/elfeed/" title="Elfeed">Elfeed</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/elisp/" title="Elisp">Elisp</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/emacs/" title="Emacs">Emacs</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/eshell/" title="Eshell">Eshell</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/org-mode/" title="Org-Mode">Org-Mode</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/packages/" title="Packages">Packages</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pages/" title="Pages">Pages</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/python/" title="Python">Python</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/snippets/" title="Snippets">Snippets</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/social/" title="Social">Social</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tree-sitter/" title="Tree-Sitter">Tree-Sitter</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/writing/" title="Writing">Writing</a>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/2017/">2017</a>&nbsp;
+				<span class="widget__counter widget__counter--bubble">1</span>
+				</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/2022/">2022</a>&nbsp;
+				<span class="widget__counter widget__counter--bubble">8</span>
+				</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/2023/">2023</a>&nbsp;
+				<span class="widget__counter widget__counter--bubble">1</span>
+				</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/2024/">2024</a>&nbsp;
+				<span class="widget__counter widget__counter--bubble">5</span>
+				</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/2025/">2025</a>&nbsp;
+				<span class="widget__counter widget__counter--bubble">3</span>
+				</li>
+		</ul>
+	</div>
+</div>
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/olddeuteronomy" target="_blank">
+				<svg class="widget-social__link-icon icon icon-github" width="24" height="24" viewBox="0 0 384 374"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+
+		
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="X" rel="noopener noreferrer" href="https://x.com/ODeuteronomy" target="_blank">
+					<svg class="widget-social__link-icon icon icon-rss" width="24" height="24" viewBox="0 0 24 24"><path d="M14.095479,10.316482L22.286354,1h-1.940718l-7.115352,8.087682L7.551414,1H1l8.589488,12.231093L1,23h1.940717  l7.509372-8.542861L16.448587,23H23L14.095479,10.316482z M11.436522,13.338465l-0.871624-1.218704l-6.924311-9.68815h2.981339  l5.58978,7.82155l0.867949,1.218704l7.26506,10.166271h-2.981339L11.436522,13.338465z"/></svg>
+
+				<span>X</span>
+			</a>
+		</div>
+		
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Bluesky" rel="noopener noreferrer" href="https://bsky.app/profile/olddeuteronomy.bsky.social" target="_blank">
+					<svg class="widget-social__link-icon icon icon-rss" width="24" height="24" viewBox="0 -3.268 64 68.414"><path d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805zm36.254 0C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745z"/></svg>
+				<span>Bluesky</span>
+			</a>
+		</div>
+		
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Mastodon" rel="noopener noreferrer" href="https://mastodon.social/@olddeuteronomy" target="_blank">
+					<svg class="widget-social__link-icon icon icon-rss" width="24" height="24" viewBox="0 0 24 24"><path d="M21.327 8.566c0-4.339-2.843-5.61-2.843-5.61-1.433-.658-3.894-.935-6.451-.956h-.063c-2.557.021-5.016.298-6.45.956 0 0-2.843 1.272-2.843 5.61 0 .993-.019 2.181.012 3.441.103 4.243.778 8.425 4.701 9.463 1.809.479 3.362.579 4.612.51 2.268-.126 3.541-.809 3.541-.809l-.075-1.646s-1.621.511-3.441.449c-1.804-.062-3.707-.194-3.999-2.409a4.523 4.523 0 0 1-.04-.621s1.77.433 4.014.536c1.372.063 2.658-.08 3.965-.236 2.506-.299 4.688-1.843 4.962-3.254.434-2.223.398-5.424.398-5.424zm-3.353 5.59h-2.081V9.057c0-1.075-.452-1.62-1.357-1.62-1 0-1.501.647-1.501 1.927v2.791h-2.069V9.364c0-1.28-.501-1.927-1.502-1.927-.905 0-1.357.546-1.357 1.62v5.099H6.026V8.903c0-1.074.273-1.927.823-2.558.566-.631 1.307-.955 2.228-.955 1.065 0 1.872.409 2.405 1.228l.518.869.519-.869c.533-.819 1.34-1.228 2.405-1.228.92 0 1.662.324 2.228.955.549.631.822 1.484.822 2.558v5.253z"/></svg>
+
+				<span>Mastodon</span>
+			</a>
+		</div>
+		
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="RSS" rel="noopener noreferrer" href="https://olddeuteronomy.github.io/index.xml" target="_blank">
+					<svg class="widget-social__link-icon icon icon-rss" width="24" height="24" viewBox="0 0 448 512"><path d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"/></svg>
+
+				<span>RSS</span>
+			</a>
+		</div>
+		
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2025 The Emacs Cat.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+</body>
+</html>

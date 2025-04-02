@@ -73,6 +73,46 @@
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
+			<a href="/post/elfeed-optimized-blogging/" rel="bookmark">
+			Elfeed-optimized Blogging
+			</a>
+		</h2>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">The Emacs Cat</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2025-04-02T13:16:58&#43;01:00">Wednesday, Apr 2, 2025</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/2025/" rel="category">2025</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<blockquote>
+<p><em>To read my newspapers I load my RSS feed via the <a href="https://github.com/skeeto/elfeed">elfeed package</a></em>.<br>
+&hellip;<br>
+<em>Also, I identify any RSS feed entry that does not provide the full
+text. And those live in provisional status. My reflexes are to ask
+“there’s lots of full-text feeds, why bother with this truncation?”</em></p>
+<p>Jeremy Friesen, <a href="https://takeonrules.com/2025/03/23/a-walk-through-my-digital-neighborhood/"><em>A Walk Through My Digital Neighborhood</em></a></p>
+</blockquote>
+<p>Jeremy is totally right! &ndash; it came to my mind immediately.</p>
+<p>I&rsquo;m using the <a href="https://gohugo.io/">Hugo</a> static site generator to
+build this blog. Hugo uses <em>content summaries</em> to display a list of
+blog entries on the main page. As a result, the Elfeed entry shows a
+summary of the post instead of the full text.</p>
+<p>Many of us &ndash; including me &ndash; are using <a href="https://github.com/skeeto/elfeed">Elfeed</a>
+as an RSS reader, and I have realized that the truncated Elfeed entry may cause inconvenience
+to the Elfeed users.</p>
+<p>Applying some tricks I was able to disable the automatic displaying of
+summaries on the main page. I hope it has become more comfortable for
+those who use Elfeed for reading RSS feeds.</p>
+<p>Happy elfeeding!</p>
+<p>&ndash; The Emacs Cat.</p>
+<p>P.S. Thanks to <a href="https://takeonrules.com/">Jeremy Friesen</a> for the heads up.</p>
+	</div>
+</article><article class="list__item post">
+	
+	<header class="list__header">
+		<h2 class="list__title post__title">
 			<a href="/post/orgmode-for-reproducibility-testing/" rel="bookmark">
 			Using Emacs Org Mode for Reproducibility Testing
 			</a>
@@ -87,18 +127,84 @@
 	</header>
 	<div class="content list__excerpt post__content clearfix">
 		<blockquote>
-<p>Software reproducibility testing is a critical aspect of
+<p><em>Software reproducibility testing is a critical aspect of
 software development and maintenance.
 It ensures that software is reliable, consistent, and predictable and
-that it can be easily replicated and verified by others.</p>
+that it can be easily replicated and verified by others.</em></p>
 <p>Ana Pustan, <a href="https://testerwork.com/reproducibility-testing/"><em>Reproducibility Testing: A Complete Guide</em></a></p>
 </blockquote>
 <p>For many of us, it won&rsquo;t be a surprise that
 the Emacs <a href="https://orgmode.org/">Org mode</a> is perfectly suited
 for reproducibility testing.</p>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/orgmode-for-reproducibility-testing/">Read more…</a>
+<p>In some of my projects I&rsquo;m using <a href="https://grpc.io">gRPC</a>, a modern
+open source high performance Remote Procedure Call (RPC) framework
+that can run in any environment. The gRPC framework is evolving very
+rapidly so I have to update it to the most recent stable version time to time.
+No doubt, I want to make sure that everything is working properly
+after the update.</p>
+<p>I&rsquo;ve built a tiny <em>hello-world</em> gRPC server for testing the
+update. I use <a href="https://github.com/fullstorydev/grpcurl">grpcurl</a>,
+a command-line tool that interacts with gRPC servers, as a client.</p>
+<p>Now Emacs has to go be onstage.</p>
+<h2 id="the-server">The Server</h2>
+<p>I don&rsquo;t like having to leave Emacs for too long so I run my server in Eshell.</p>
+<figure><a href="/img/grpc-server-start.png"><img src="/img/grpc-server-start.png"/></a><figcaption>
+            <h4>Click or tap to view the full-size picture.</h4>
+        </figcaption>
+</figure>
+
+<h2 id="the-client">The Client</h2>
+<p>The Org mode code blocks &ndash; that&rsquo;s all we need now.</p>
+<h3 id="listing-of-available-services-at-localhost-port-50051">Listing of available services at localhost port 50051</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-org" data-lang="org"><span style="display:flex;"><span><span style="color:#75715e">#+begin_src </span><span style="color:#75715e">bash</span><span style="color:#75715e"> :results verbatim
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  grpcurl -plaintext localhost:50051 list
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#+end_src</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#+RESULTS</span><span style="color:#75715e">:</span>
+</span></span><span style="display:flex;"><span>: grpc.reflection.v1.ServerReflection
+</span></span><span style="display:flex;"><span>: grpc.reflection.v1alpha.ServerReflection
+</span></span><span style="display:flex;"><span>: helloworld.Greeter
+</span></span></code></pre></div><p>Pressing <code>C-c C-c</code> when the point (cursor) is inside the code block
+shows 3 services available at <em>localhost:50051</em> &ndash; 2 builtin services and
+our <code>helloworld.Greeter</code> service, the last one.</p>
+<h3 id="inspecting-helloworldgreeter-service">Inspecting helloworld.Greeter service</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-org" data-lang="org"><span style="display:flex;"><span><span style="color:#75715e">#+begin_src </span><span style="color:#75715e">shell</span><span style="color:#75715e"> :results verbatim
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  grpcurl -plaintext localhost:50051 describe helloworld.Greeter
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#+end_src</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#+RESULTS</span><span style="color:#75715e">:</span>
+</span></span><span style="display:flex;"><span>: helloworld.Greeter is a service:
+</span></span><span style="display:flex;"><span>: service Greeter {
+</span></span><span style="display:flex;"><span>:   rpc SayHello ( .helloworld.HelloRequest ) returns ( .helloworld.HelloReply );
+</span></span><span style="display:flex;"><span>: }
+</span></span></code></pre></div><p>OK, everything seems to be in order.</p>
+<h3 id="inspecting-helloworldgreetersayhello-method">Inspecting helloworld.Greeter.SayHello method</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-org" data-lang="org"><span style="display:flex;"><span><span style="color:#75715e">#+begin_src </span><span style="color:#75715e">bash</span><span style="color:#75715e"> :results verbatim
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  grpcurl -plaintext localhost:50051 describe helloworld.Greeter.SayHello
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#+end_src</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#+RESULTS</span><span style="color:#75715e">:</span>
+</span></span><span style="display:flex;"><span>: helloworld.Greeter.SayHello is a method:
+</span></span><span style="display:flex;"><span>: rpc SayHello ( .helloworld.HelloRequest ) returns ( .helloworld.HelloReply );
+</span></span></code></pre></div><h3 id="querying-the-server">Querying the server</h3>
+<p>Finally, let&rsquo;s query the server.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-org" data-lang="org"><span style="display:flex;"><span><span style="color:#75715e">#+begin_src </span><span style="color:#75715e">bash</span><span style="color:#75715e"> :results verbatim
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  grpcurl -plaintext -d <span style="color:#e6db74">&#39;{&#34;name&#34;: &#34;world&#34;}&#39;</span> localhost:50051 helloworld.Greeter.SayHello
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#+end_src</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#+RESULTS</span><span style="color:#75715e">:</span>
+</span></span><span style="display:flex;"><span>: {
+</span></span><span style="display:flex;"><span>:   &#34;message&#34;: &#34;Hello world!&#34;
+</span></span><span style="display:flex;"><span>: }
+</span></span></code></pre></div><p>That is the expected outcome &ndash; the server replied accordingly.</p>
+<figure><a href="/img/grpc-server.png"><img src="/img/grpc-server.png"/></a><figcaption>
+            <h4>Click or tap to view the full-size picture.</h4>
+        </figcaption>
+</figure>
+
+<p>Now I can perform gRPC reproducibility testing every time after the update.</p>
+<p>Happy emacsing!</p>
+<p>&ndash; The Emacs Cat.</p>
 	</div>
 </article><article class="list__item post">
 	
@@ -126,9 +232,452 @@ Emacs, in the same way I&rsquo;m using Emacs as the
 <p>Thankfully, <a href="https://github.com/joaotavora/eglot">eglot</a>, the Emacs <em>client</em> for
 the Language Server Protocol (LSP), is now &ndash; since version 29 &ndash; the
 part of Emacs. It remains to choose the appropriate LSP.</p>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/cpp-programming-in-emacs/">Read more…</a>
+<h2 id="choosing-a-language-server">Choosing a Language Server</h2>
+<p>I&rsquo;ve settled on <a href="https://clangd.llvm.org/">clangd</a>, a powerful LSP for
+C++ based on the <a href="https://clang.llvm.org/">Clang</a> C++ compiler. It
+provides an impressive set of
+<a href="https://clangd.llvm.org/features">features</a> including error checking,
+code completion, cross-references, navigation, and others.</p>
+<p><code>clangd</code> is the part of the <a href="https://llvm.org/">LLVM</a> project and it can be
+downloaded from <a href="https://releases.llvm.org/download.html">LLVM Download Page</a>.
+Which version to download?
+It depends on OS/version you are using. I&rsquo;m using
+Pop!_OS 22.04 (Ubuntu 22.04 fork); after researching, I came upon
+<em>clang+llvm-17.0.6-x86_64-linux-gnu-ubuntu-22.04.tar.xz</em>
+from <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.6">this repository</a>
+that contains pre-build binaries for my OS. It supports C++17 standard
+&ndash; that&rsquo;s good enough for me.</p>
+<p>I&rsquo;ve unpacked the archive to <code>~/bin/LLVM-17.0.6/</code> then added
+<code>$HOME/bin/LLVM-17.0.6/bin</code> to the <code>$PATH</code> envvar.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ clangd --version
+</span></span><span style="display:flex;"><span>clangd version 17.0.6 <span style="color:#f92672">(</span>https://github.com/llvm/llvm-project 6009708b4367171ccdbf4b5905cb6a803753fe18<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Features: linux
+</span></span><span style="display:flex;"><span>Platform: x86_64-unknown-linux-gnu
+</span></span></code></pre></div><h3 id="configuring-clangd">Configuring clangd</h3>
+<p>Clangd stores its configuration in YAML files. I&rsquo;m using <em>per-project</em>
+configuration file <code>.clangd</code> &ndash; clangd searches for it in all parent
+directories of the active file.</p>
+<p>Below is my simple and straightforward <code>.clangd</code> for some of my projects.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># Enable all warnings, use C++17 standard, specify include directories.</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">CompileFlags</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Add</span>: [-<span style="color:#ae81ff">xc++, -Wall, -std=c++17, -I/home/magnolia/workspace/devel, -I/home/magnolia/lib/grpc/include, -I/home/magnolia/lib/spdlog/include]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Remove</span>: [-<span style="color:#ae81ff">W*]     </span> <span style="color:#75715e"># Strip all other warning-related flags</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Compiler</span>: <span style="color:#ae81ff">clang++ </span> <span style="color:#75715e"># Use `clang++` explicitly</span>
+</span></span></code></pre></div><p>It is placed in the <em>top level directory</em> of my project.
+You can find more about <code>clangd</code> configuration <a href="https://clangd.llvm.org/config">here</a>.</p>
+<p>Now we can return back to the Emacs configuration.</p>
+<h2 id="emacs-configuration-for-c">Emacs Configuration for C++</h2>
+<h3 id="using-eglot">Using Eglot</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(require <span style="color:#e6db74">&#39;eglot</span>)
+</span></span><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;c-mode-hook</span> <span style="color:#e6db74">&#39;eglot-ensure</span>)
+</span></span><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;c++-mode-hook</span> <span style="color:#e6db74">&#39;eglot-ensure</span>)
+</span></span><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;c-or-c++-mode-hook</span> <span style="color:#e6db74">&#39;eglot-ensure</span>)
+</span></span></code></pre></div><p>The Eglot session will start automatically every time you open the C/C++ file in a buffer.
+If the Eglot session for the current C/C++ buffer has started successfully
+it displays the following message in the Emacs minibuffer:</p>
+<pre tabindex="0"><code>[eglot] Connected! Server `clangd&#39; now managing `(c++-mode c-mode)&#39; buffers in project ...
+</code></pre><h3 id="visual-improvements">Visual Improvements</h3>
+<p>Highlighting symbols and numbers in the source code.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Highlights the word/symbol at point and any other occurrences in</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; view. Also allows to jump to the next or previous occurrence.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; https://github.com/nschum/highlight-symbol.el</span>
+</span></span><span style="display:flex;"><span>(use-package highlight-symbol
+</span></span><span style="display:flex;"><span>  :ensure <span style="color:#66d9ef">t</span>
+</span></span><span style="display:flex;"><span>  :config
+</span></span><span style="display:flex;"><span>  (setq highlight-symbol-on-navigation-p <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>  (add-hook <span style="color:#e6db74">&#39;prog-mode-hook</span> <span style="color:#e6db74">&#39;highlight-symbol-mode</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Emacs minor mode that highlights numeric literals in source code.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; https://github.com/Fanael/highlight-numbers</span>
+</span></span><span style="display:flex;"><span>(use-package highlight-numbers
+</span></span><span style="display:flex;"><span>  :ensure <span style="color:#66d9ef">t</span>
+</span></span><span style="display:flex;"><span>  :config
+</span></span><span style="display:flex;"><span>  (add-hook <span style="color:#e6db74">&#39;prog-mode-hook</span> <span style="color:#e6db74">&#39;highlight-numbers-mode</span>))
+</span></span></code></pre></div><h3 id="c-headers">C++ Headers</h3>
+<p>Please, treat C headers as C++ ones.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; .h files to open in c++-mode rather than c-mode.</span>
+</span></span><span style="display:flex;"><span>(add-to-list <span style="color:#e6db74">&#39;auto-mode-alist</span> <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">&#34;\\.h$&#34;</span> <span style="color:#f92672">.</span> c++-mode))
+</span></span></code></pre></div><h3 id="code-styles">Code Styles</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(setq c-default-style <span style="color:#e6db74">&#34;stroustrup&#34;</span>)
+</span></span><span style="display:flex;"><span>(setq c-basic-indent <span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>(setq c-basic-offset <span style="color:#ae81ff">4</span>)
+</span></span></code></pre></div><p>I&rsquo;m using the Stroustrup C++ <a href="https://www.emacswiki.org/emacs/IndentingC">code style</a>
+that is very similar to the K&amp;R (Kernighan &amp; Ritchie) code style.</p>
+<p>The <code>c-style-alist</code> Elisp variable contains a list of all predefined code
+styles. Pick a <a href="https://www.emacswiki.org/emacs/IndentingC">style</a> that suits you.</p>
+<h3 id="indentation-inside-of-namespaces">Indentation Inside of Namespaces</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; emacs-fu: don’t indent inside of C++ namespaces</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; http://brrian.tumblr.com/post/9018043954/emacs-fu-dont-indent-inside-of-c-namespaces</span>
+</span></span><span style="display:flex;"><span>(c-set-offset <span style="color:#e6db74">&#39;innamespace</span> <span style="color:#ae81ff">0</span>)
+</span></span></code></pre></div><p>I prefer to have the code <em>unindented</em> inside of a namespace as shown below,</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> tec {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Client</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Client() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">get_id</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}; <span style="color:#75715e">// ::Client
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>} <span style="color:#75715e">// ::tec
+</span></span></span></code></pre></div><p>rather than</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> tec {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Client</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        Client() {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">get_id</span>() {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>    }; <span style="color:#75715e">// ::Client
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>} <span style="color:#75715e">// ::tec
+</span></span></span></code></pre></div><h3 id="spaces-vs-tabs">Spaces vs Tabs</h3>
+<p>Yes, I&rsquo;m using spaces instead of tabs for indentation.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Spaces instead of tabs when indenting.</span>
+</span></span><span style="display:flex;"><span>(setq-default indent-tabs-mode <span style="color:#66d9ef">nil</span>)
+</span></span></code></pre></div><h3 id="trailing-tabs-and-spaces">Trailing Tabs and Spaces</h3>
+<p>A builtin <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Useless-Whitespace.html">package</a>
+that shows/deletes useless trailing tabs and spaces.
+You can also use <code>M-x delete-trailing-whitespace</code> to remove all
+trailing white-spaces in a buffer interactively.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; http://www.reddit.com/r/emacs/comments/2keh6u/show_tabs_and_trailing_whitespaces_only/</span>
+</span></span><span style="display:flex;"><span>(use-package whitespace
+</span></span><span style="display:flex;"><span>  :config
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; Commented since there are too many &#39;valid&#39; whitespaces in some modes.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; (setq-default show-trailing-whitespace t)</span>
+</span></span><span style="display:flex;"><span>  (setq whitespace-style <span style="color:#f92672">&#39;</span>(face tabs trailing))
+</span></span><span style="display:flex;"><span>  (set-face-attribute <span style="color:#e6db74">&#39;whitespace-tab</span> <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>      :background <span style="color:#e6db74">&#34;red&#34;</span>
+</span></span><span style="display:flex;"><span>      :foreground <span style="color:#e6db74">&#34;yellow&#34;</span>
+</span></span><span style="display:flex;"><span>      :weight <span style="color:#e6db74">&#39;bold</span>)
+</span></span><span style="display:flex;"><span>  (add-hook <span style="color:#e6db74">&#39;prog-mode-hook</span> <span style="color:#e6db74">&#39;whitespace-mode</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; Delete trailing tabs and spaces on save of a file.</span>
+</span></span><span style="display:flex;"><span>  (add-hook <span style="color:#e6db74">&#39;before-save-hook</span> <span style="color:#e6db74">&#39;whitespace-cleanup</span>)
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><h3 id="clangd-with-flymake">Clangd with Flymake</h3>
+<style type="text/css">
+     
+    .notice {
+        --title-color: #fff;
+        --title-background-color: #6be;
+        --content-color: #444;
+        --content-background-color: #e7f2fa;
+    }
+
+    .notice.info {
+        --title-background-color: #fb7;
+        --content-background-color: #fec;
+    }
+
+    .notice.tip {
+        --title-background-color: #5a5;
+        --content-background-color: #efe;
+    }
+
+    .notice.warning {
+        --title-background-color: #c33;
+        --content-background-color: #fee;
+    }
+
+     
+    @media (prefers-color-scheme:dark) {
+        .notice {
+            --title-color: #fff;
+            --title-background-color: #069;
+            --content-color: #ddd;
+            --content-background-color: #023;
+        }
+
+        .notice.info {
+            --title-background-color: #a50;
+            --content-background-color: #420;
+        }
+
+        .notice.tip {
+            --title-background-color: #363;
+            --content-background-color: #121;
+        }
+
+        .notice.warning {
+            --title-background-color: #800;
+            --content-background-color: #400;
+        }
+    }
+
+    body.dark .notice {
+        --title-color: #fff;
+        --title-background-color: #069;
+        --content-color: #ddd;
+        --content-background-color: #023;
+    }
+
+    body.dark .notice.info {
+        --title-background-color: #a50;
+        --content-background-color: #420;
+    }
+
+    body.dark .notice.tip {
+        --title-background-color: #363;
+        --content-background-color: #121;
+    }
+
+    body.dark .notice.warning {
+        --title-background-color: #800;
+        --content-background-color: #400;
+    }
+
+     
+    .notice {
+        padding: 18px;
+        line-height: 24px;
+        margin-bottom: 24px;
+        border-radius: 4px;
+        color: var(--content-color);
+        background: var(--content-background-color);
+    }
+
+    .notice p:last-child {
+        margin-bottom: 0
+    }
+
+     
+    .notice-title {
+        margin: -18px -18px 12px;
+        padding: 4px 18px;
+        border-radius: 4px 4px 0 0;
+        font-weight: 700;
+        color: var(--title-color);
+        background: var(--title-background-color);
+    }
+
+     
+    .icon-notice {
+        display: inline-flex;
+        align-self: center;
+        margin-right: 8px;
+    }
+
+    .icon-notice img,
+    .icon-notice svg {
+        height: 1em;
+        width: 1em;
+        fill: currentColor;
+    }
+
+    .icon-notice img,
+    .icon-notice.baseline svg {
+        top: .125em;
+        position: relative;
+    }
+</style><div class="notice info" >
+    <p class="notice-title">
+        <span class="icon-notice baseline">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="92 59.5 300 300">
+  <path d="M292 303.25V272c0-3.516-2.734-6.25-6.25-6.25H267v-100c0-3.516-2.734-6.25-6.25-6.25h-62.5c-3.516 0-6.25 2.734-6.25 6.25V197c0 3.516 2.734 6.25 6.25 6.25H217v62.5h-18.75c-3.516 0-6.25 2.734-6.25 6.25v31.25c0 3.516 2.734 6.25 6.25 6.25h87.5c3.516 0 6.25-2.734 6.25-6.25Zm-25-175V97c0-3.516-2.734-6.25-6.25-6.25h-37.5c-3.516 0-6.25 2.734-6.25 6.25v31.25c0 3.516 2.734 6.25 6.25 6.25h37.5c3.516 0 6.25-2.734 6.25-6.25Zm125 81.25c0 82.813-67.188 150-150 150-82.813 0-150-67.188-150-150 0-82.813 67.188-150 150-150 82.813 0 150 67.188 150 150Z"/>
+</svg>
+
+        </span></p><p>This chapter is identical to the corresponding chapter in my previous post
+<a href="https://olddeuteronomy.github.io/post/python-programming-in-emacs/">Python Programming in Emacs</a>.
+I put it here for clarity.</p></div>
+
+<p>Flymake is a minor Emacs mode performing on-the-fly syntax checks. I&rsquo;m
+using the <code>flymake</code> built-in Emacs package as an Eglot front-end for
+syntax checks.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(require <span style="color:#e6db74">&#39;flymake</span>)
+</span></span></code></pre></div><p>My custom <code>my/flymake-toggle-diagnostics-buffer</code> function toggles the
+<em>Flymake diagnostics</em> buffer window.</p>
+<p>If there is the Flymake diagnostics buffer associated with a file in
+the current buffer, it shows the diagnostics buffer in the new window
+and switches to it. If the current buffer <em>is</em> the Flymake diagnostics
+buffer, it closes it. Otherwise it just shows the error message.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun my/flymake-toggle-diagnostics-buffer ()
+</span></span><span style="display:flex;"><span>  (interactive)
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; Check if we are in the diagnostics buffer.</span>
+</span></span><span style="display:flex;"><span>  (if (string-search <span style="color:#e6db74">&#34;*Flymake diagnostics&#34;</span> (<span style="color:#a6e22e">buffer-name</span>))
+</span></span><span style="display:flex;"><span>      (delete-window)
+</span></span><span style="display:flex;"><span>    (progn
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Activate the Flymake diagnostics buffer.</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; and switch to it</span>
+</span></span><span style="display:flex;"><span>      (flymake-show-buffer-diagnostics)
+</span></span><span style="display:flex;"><span>      (let ((name (flymake--diagnostics-buffer-name)))
+</span></span><span style="display:flex;"><span>        (if (<span style="color:#a6e22e">get-buffer</span> name)
+</span></span><span style="display:flex;"><span>            (switch-to-buffer-other-window name)
+</span></span><span style="display:flex;"><span>          (<span style="color:#a6e22e">error</span> <span style="color:#e6db74">&#34;No Flymake diagnostics buffer found&#34;</span>)
+</span></span><span style="display:flex;"><span>          )))))
+</span></span></code></pre></div><p>I&rsquo;ve bound this function to the <code>F7</code> key globally since I&rsquo;m using <code>F7</code>
+in other programming modes as well.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(global-set-key [(f7)] <span style="color:#a6e22e">#&#39;</span>my/flymake-toggle-diagnostics-buffer)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Additional bindings.</span>
+</span></span><span style="display:flex;"><span>(global-set-key (kbd <span style="color:#e6db74">&#34;C-c f b&#34;</span>) <span style="color:#a6e22e">#&#39;</span>flymake-show-buffer-diagnostics)
+</span></span><span style="display:flex;"><span>(global-set-key (kbd <span style="color:#e6db74">&#34;C-c f p&#34;</span>) <span style="color:#a6e22e">#&#39;</span>flymake-show-project-diagnostics)
+</span></span></code></pre></div><p>The screenshot below shows what happens if you press <code>F7</code> while
+editing a C++ file managed by Eglot + Flymake.</p>
+<figure><a href="/img/cpp-eglot.png"><img src="/img/cpp-eglot.png"/></a><figcaption>
+            <h4>Click or tap to view the full-size picture.</h4>
+        </figcaption>
+</figure>
+
+<h2 id="treemacs">Treemacs</h2>
+<p>From looking at the screenshot above, you can see using of
+<a href="https://github.com/Alexander-Miller/treemacs">Treemacs</a>, a tree
+layout file explorer for Emacs.</p>
+<p>I can highly recommend to use it for any project you&rsquo;re working on in
+conjunction with the excellent
+<a href="https://github.com/bbatsov/projectile">Projectile</a>
+and <a href="https://github.com/abo-abo/swiper">Ivy</a> packages.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(use-package ivy
+</span></span><span style="display:flex;"><span>  :config
+</span></span><span style="display:flex;"><span>  (ivy-mode)
+</span></span><span style="display:flex;"><span>  (setq ivy-use-virtual-buffers <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>  (add-hook <span style="color:#e6db74">&#39;after-init-hook</span> (lambda () (setq ivy-height (<span style="color:#a6e22e">/</span> (window-height) <span style="color:#ae81ff">2</span>))))
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(use-package projectile
+</span></span><span style="display:flex;"><span>  :ensure <span style="color:#66d9ef">t</span>
+</span></span><span style="display:flex;"><span>  :config
+</span></span><span style="display:flex;"><span>  (projectile-global-mode)
+</span></span><span style="display:flex;"><span>  (setq projectile-enable-caching <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>  (setq projectile-completion-system <span style="color:#e6db74">&#39;ivy</span>)
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(use-package treemacs :ensure <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>(use-package treemacs-projectile :ensure <span style="color:#66d9ef">t</span>)
+</span></span></code></pre></div><p>I&rsquo;ve bound Treemacs to <code>F12</code> globally.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(global-set-key [(f12)] <span style="color:#a6e22e">#&#39;</span>treemacs-select-window)
+</span></span></code></pre></div><p>Press <code>?</code> when in the Treemacs window to see all commands available.
+Press <code>q</code> to close the Treemacs window.</p>
+<h2 id="code-completion">Code Completion</h2>
+<div class="notice info" >
+    <p class="notice-title">
+        <span class="icon-notice baseline">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="92 59.5 300 300">
+  <path d="M292 303.25V272c0-3.516-2.734-6.25-6.25-6.25H267v-100c0-3.516-2.734-6.25-6.25-6.25h-62.5c-3.516 0-6.25 2.734-6.25 6.25V197c0 3.516 2.734 6.25 6.25 6.25H217v62.5h-18.75c-3.516 0-6.25 2.734-6.25 6.25v31.25c0 3.516 2.734 6.25 6.25 6.25h87.5c3.516 0 6.25-2.734 6.25-6.25Zm-25-175V97c0-3.516-2.734-6.25-6.25-6.25h-37.5c-3.516 0-6.25 2.734-6.25 6.25v31.25c0 3.516 2.734 6.25 6.25 6.25h37.5c3.516 0 6.25-2.734 6.25-6.25Zm125 81.25c0 82.813-67.188 150-150 150-82.813 0-150-67.188-150-150 0-82.813 67.188-150 150-150 82.813 0 150 67.188 150 150Z"/>
+</svg>
+
+        </span></p><p>This chapter is identical to the corresponding chapter in my previous post
+<a href="https://olddeuteronomy.github.io/post/python-programming-in-emacs/">Python Programming in Emacs</a>.
+I put it here for clarity.</p></div>
+
+<p>I&rsquo;m using the <a href="https://company-mode.github.io/"><code>company</code></a> package, a
+modular in-buffer completion framework for Emacs, as an Eglot
+front-end for code completion; it integrates with Eglot seamlessly.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;;;; `COMPANY&#39;</span>
+</span></span><span style="display:flex;"><span>(use-package company
+</span></span><span style="display:flex;"><span>  :ensure <span style="color:#66d9ef">t</span>
+</span></span><span style="display:flex;"><span>  :config
+</span></span><span style="display:flex;"><span>  (setq company-idle-delay <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>  (setq company-minimum-prefix-length <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>  (setq company-show-numbers <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; To prevent default down-casing.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; https://emacs.stackexchange.com/questions/10837/how-to-make-company-mode-be-case-sensitive-on-plain-text</span>
+</span></span><span style="display:flex;"><span>  (setq company-dabbrev-downcase <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; 2023-01-13 From a Reddit post on mixed case issue.</span>
+</span></span><span style="display:flex;"><span>  (setq company-dabbrev-ignore-case <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>  (setq company-dabbrev-code-ignore-case <span style="color:#66d9ef">nil</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Use `company&#39; everywhere.</span>
+</span></span><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;after-init-hook</span> <span style="color:#e6db74">&#39;global-company-mode</span>)
+</span></span></code></pre></div><figure><a href="/img/cpp-company2.png"><img src="/img/cpp-company2.png"/></a><figcaption>
+            <h4>Click or tap to view the full-size picture.</h4>
+        </figcaption>
+</figure>
+
+<h2 id="code-navigation">Code Navigation</h2>
+<p>My favorite tool for code navigation <em>in the current buffer</em> is the
+excellent <code>imenu-list</code> <a href="https://github.com/bmag/imenu-list">package</a>.
+Powered by Eglot, it shows almost everything you want to see.</p>
+<figure><a href="/img/cpp-imenu.png"><img src="/img/cpp-imenu.png"/></a><figcaption>
+            <h4>Click or tap to view the full-size picture.</h4>
+        </figcaption>
+</figure>
+
+<p>Now your Emacs looks like a full-featured C++ IDE &ndash; and it is, actually.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Show the current buffer&#39;s imenu entries in a separate buffer</span>
+</span></span><span style="display:flex;"><span>(use-package imenu-list
+</span></span><span style="display:flex;"><span>  :ensure <span style="color:#66d9ef">t</span>
+</span></span><span style="display:flex;"><span>  :config
+</span></span><span style="display:flex;"><span>  (setq imenu-list-focus-after-activation <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>  (global-set-key (kbd <span style="color:#e6db74">&#34;C-.&#34;</span>) <span style="color:#a6e22e">#&#39;</span>imenu-list-minor-mode)
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>I&rsquo;ve bound <code>imenu-list-minor-mode</code> to <code>C-.</code>; this key chord will
+toggle the Imenu buffer on/off.</p>
+<p>Alternatively, you can use Treemacs to navigate through the code and files on a
+<em>per-project</em> basis.</p>
+<figure><a href="/img/cpp-treemacs.png"><img src="/img/cpp-treemacs.png"/></a><figcaption>
+            <h4>Click or tap to view the full-size picture.</h4>
+        </figcaption>
+</figure>
+
+<p>&ldquo;Classic&rdquo; default navigation keys will also work with all files in
+your project.</p>
+<dl>
+<dt><code>xref-find-definitions</code></dt>
+<dd><code>M-.</code> to find the definition of the identifier at point.</dd>
+<dt><code>xref-go-back</code></dt>
+<dd><code>M-,</code> to return back to where you invoked the <code>xref-find-definitions</code> command.</dd>
+<dt><code>xref-find-references</code></dt>
+<dd><code>M-?</code> to find references to the identifier at point.</dd>
+</dl>
+<p>These functions are now powered by Eglot.</p>
+<h2 id="appendix-a">Appendix A</h2>
+<h3 id="all-the-icons">All the Icons</h3>
+<p>As you can see from the screenshots above, I like to see icons
+wherever possible &ndash; in <code>treemacs</code>, <code>dired</code>, <code>ibuffer</code>, <code>company</code> and
+other modes. To achieve that, all you need is to install the
+corresponding packages.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; https://github.com/domtronn/all-the-icons.el</span>
+</span></span><span style="display:flex;"><span>(use-package all-the-icons :ensure <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(use-package all-the-icons-dired :ensure <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;dired-mode-hook</span> <span style="color:#e6db74">&#39;all-the-icons-dired-mode</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(use-package all-the-icons-ibuffer :ensure <span style="color:#66d9ef">t</span>
+</span></span><span style="display:flex;"><span>  :init (all-the-icons-ibuffer-mode <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>  :hook (ibuffer-mode <span style="color:#f92672">.</span> all-the-icons-ibuffer-mode))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(use-package treemacs-all-the-icons :ensure <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(use-package all-the-icons-ivy :ensure <span style="color:#66d9ef">t</span>
+</span></span><span style="display:flex;"><span>  :after all-the-icons
+</span></span><span style="display:flex;"><span>  :config (all-the-icons-ivy-setup))
+</span></span></code></pre></div><div class="notice tip" >
+    <p class="notice-title">
+        <span class="icon-notice baseline">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="300.5 134 300 300">
+  <path d="M551.281 252.36c0-3.32-1.172-6.641-3.515-8.985l-17.774-17.578c-2.344-2.344-5.469-3.711-8.789-3.711-3.32 0-6.445 1.367-8.789 3.71l-79.687 79.493-44.141-44.14c-2.344-2.344-5.469-3.712-8.79-3.712-3.32 0-6.444 1.368-8.788 3.711l-17.774 17.579c-2.343 2.343-3.515 5.664-3.515 8.984 0 3.32 1.172 6.445 3.515 8.789l70.704 70.703c2.343 2.344 5.664 3.711 8.789 3.711 3.32 0 6.64-1.367 8.984-3.71l106.055-106.056c2.343-2.343 3.515-5.468 3.515-8.789ZM600.5 284c0 82.813-67.188 150-150 150-82.813 0-150-67.188-150-150 0-82.813 67.188-150 150-150 82.813 0 150 67.188 150 150Z"/>
+</svg>
+
+        </span></p><p>To install icons font, please follow
+these <a href="https://github.com/domtronn/all-the-icons.el#installing-fonts">instructions</a>.</p></div>
+
+<h2 id="appendix-b">Appendix B</h2>
+<h3 id="a-note-for-tree-sitter-users">A Note for Tree-Sitter Users</h3>
+<div class="notice note" >
+    <p class="notice-title">
+        <span class="icon-notice baseline">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 128 300 300">
+  <path d="M150 128c82.813 0 150 67.188 150 150 0 82.813-67.188 150-150 150C67.187 428 0 360.812 0 278c0-82.813 67.188-150 150-150Zm25 243.555v-37.11c0-3.515-2.734-6.445-6.055-6.445h-37.5c-3.515 0-6.445 2.93-6.445 6.445v37.11c0 3.515 2.93 6.445 6.445 6.445h37.5c3.32 0 6.055-2.93 6.055-6.445Zm-.39-67.188 3.515-121.289c0-1.367-.586-2.734-1.953-3.516-1.172-.976-2.93-1.562-4.688-1.562h-42.968c-1.758 0-3.516.586-4.688 1.563-1.367.78-1.953 2.148-1.953 3.515l3.32 121.29c0 2.734 2.93 4.882 6.64 4.882h36.134c3.515 0 6.445-2.148 6.64-4.883Z"/>
+</svg>
+
+        </span></p><p><strong>I do not use Tree-Sitter for coding in C++</strong>. It seems it has
+its own rules for indentation that break down the code style I prefer.</p></div>
+
+<p>Happy emacsing!</p>
+<p>&ndash; The Emacs Cat.</p>
+<p><em>P.S.</em> Emacs 30.1 has been released on February 23. Thanks for everyone
+involved with this great project!</p>
+<p><em>P.P.S.</em> Mickey Petersen has published his excellent
+<a href="https://www.masteringemacs.org/article/whats-new-in-emacs-301">review</a>
+on what&rsquo;s new in this release.</p>
 	</div>
 </article><article class="list__item post">
 	
@@ -156,9 +705,137 @@ in any IDE: 1) code completion, 2) code navigation, 3) error checking.</p>
 Language Server Protocol (LSP), and <code>tree-sitter</code>, a powerful parsing
 library, are now &ndash; since version 29 &ndash; the parts of Emacs, It should
 not be too hard to construct a lightweight and fast Python IDE.</p>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/python-programming-in-emacs/">Read more…</a>
+<h2 id="choosing-a-language-server">Choosing a Language Server</h2>
+<p>There are a number of the language servers for Python available these days &ndash;
+<a href="https://github.com/python-lsp/python-lsp-server">pylsp</a>,
+<a href="https://github.com/palantir/python-language-server">pyls</a>,
+<a href="https://github.com/microsoft/pyright">pyright</a>,
+<a href="https://github.com/pappasam/jedi-language-server">jedi-language-server</a>.
+After a series of tests, I&rsquo;ve settled on <a href="https://github.com/microsoft/pyright">pyright</a>,
+an open syntax and type checker from Microsoft <em>(sic!)</em> used in Visual Studio Code,
+the fast and reliable one, as for me.</p>
+<p>The Pyright <a href="https://microsoft.github.io/pyright/#/">documentation</a> &ndash;
+a bit weird &ndash; claims that Pyright is just static type checker for Python.
+However, as we&rsquo;ll see later, Pyright can do much more than just type checks.</p>
+<h2 id="a-note-on-the-tree-sitter-package">A note on the Tree-Sitter package</h2>
+<p>The <code>tree-sitter</code> package is optional &ndash; I&rsquo;m using it for
+pretty-looking source code fontification mainly. However, if you want
+to use it you have to pay attention to the following quote from the
+Mickey Petersen&rsquo;s <a href="https://www.masteringemacs.org/article/how-to-get-started-tree-sitter">&lsquo;Mastering Emacs&rsquo;</a>
+book:</p>
+<blockquote>
+<p>And in Emacs 29, support for tree-sitter is built in. Sort of. It&rsquo;s an
+optional extra, so you must compile Emacs from source, or hope that
+someone else will do it for you.</p>
+<p>Neither tree-sitter nor Emacs come installed with language grammars.
+Just like kids&rsquo; toys and batteries, they&rsquo;re sold separately. So you&rsquo;re
+required to download and compile the sources for each language grammar
+you want to use.</p>
+<p><em>&ndash; Mastering Emacs by Mickey Petersen.</em></p>
+</blockquote>
+<p>If you are &ndash; like me &ndash; on Linux, the best way to setup language
+grammars is to compile them from the source code; you can find all grammars
+available on the <a href="https://github.com/orgs/tree-sitter/repositories?type=all">tree-sitter repository</a>.
+More details at <a href="https://www.masteringemacs.org/article/how-to-get-started-tree-sitter">How to Get Started with Tree-Sitter</a>.</p>
+<h2 id="python-prerequisites">Python prerequisites</h2>
+<p>First of all, we need to install the following Python packages &ndash;
+<code>pyright</code> (the language server) and <code>jsonrpc</code> (the transport layer for
+the LSP).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#f92672">[</span>p3<span style="color:#f92672">]</span> $ pip install pyright
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>p3<span style="color:#f92672">]</span> $ pip install jsonrpc
+</span></span></code></pre></div><p>I&rsquo;m running Python in the virtual environment, &ldquo;p3&rdquo; in my case.</p>
+<h2 id="error-checking-with-pyright">Error checking with Pyright</h2>
+<p>Eglot automatically finds a suitable LSP &ndash; Pyright in our case &ndash;
+when you are opening a Python file. I&rsquo;m using the default Pyright
+settings, no extra tuning required.</p>
+<h3 id="pyright-lsp-with-flymake">Pyright LSP with Flymake</h3>
+<p>Flymake is a minor Emacs mode performing on-the-fly syntax checks. I&rsquo;m
+using the <code>flymake</code> built-in Emacs package as an Eglot front-end for
+syntax checks.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(require <span style="color:#e6db74">&#39;flymake</span>)
+</span></span></code></pre></div><p>My custom <code>my/flymake-toggle-diagnostics-buffer</code> function toggles the
+<em>Flymake diagnostics</em> buffer window.</p>
+<p>If there is the Flymake diagnostics buffer associated with a file in
+the current buffer, it shows the diagnostics buffer in the new window
+and switches to it. If the current buffer <em>is</em> the Flymake diagnostics
+buffer, it closes it. Otherwise it just shows the error message.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun my/flymake-toggle-diagnostics-buffer ()
+</span></span><span style="display:flex;"><span>  (interactive)
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; Check if we are in the diagnostics buffer.</span>
+</span></span><span style="display:flex;"><span>  (if (string-search <span style="color:#e6db74">&#34;*Flymake diagnostics&#34;</span> (<span style="color:#a6e22e">buffer-name</span>))
+</span></span><span style="display:flex;"><span>      (delete-window)
+</span></span><span style="display:flex;"><span>    (progn
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Activate the Flymake diagnostics buffer.</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; and switch to it</span>
+</span></span><span style="display:flex;"><span>      (flymake-show-buffer-diagnostics)
+</span></span><span style="display:flex;"><span>      (let ((name (flymake--diagnostics-buffer-name)))
+</span></span><span style="display:flex;"><span>        (if (<span style="color:#a6e22e">get-buffer</span> name)
+</span></span><span style="display:flex;"><span>            (switch-to-buffer-other-window name)
+</span></span><span style="display:flex;"><span>          (<span style="color:#a6e22e">error</span> <span style="color:#e6db74">&#34;No Flymake diagnostics buffer found&#34;</span>)
+</span></span><span style="display:flex;"><span>          )))))
+</span></span></code></pre></div><p>I&rsquo;ve bound this function to the <code>F7</code> key globally since I&rsquo;m using <code>F7</code>
+in other programming modes as well.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(global-set-key [(f7)] <span style="color:#a6e22e">#&#39;</span>my/flymake-toggle-diagnostics-buffer)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Additional bindings.</span>
+</span></span><span style="display:flex;"><span>(global-set-key (kbd <span style="color:#e6db74">&#34;C-c f b&#34;</span>) <span style="color:#a6e22e">#&#39;</span>flymake-show-buffer-diagnostics)
+</span></span><span style="display:flex;"><span>(global-set-key (kbd <span style="color:#e6db74">&#34;C-c f p&#34;</span>) <span style="color:#a6e22e">#&#39;</span>flymake-show-project-diagnostics)
+</span></span></code></pre></div><p>The screenshot below shows what happens if you press <code>F7</code> while
+editing a Python file managed by Eglot + Flymake.</p>
+<figure><a href="/img/python-pyright.png"><img src="/img/python-pyright.png"/></a><figcaption>
+            <h4>Click or tap to view the full-size picture.</h4>
+        </figcaption>
+</figure>
+
+<p>As you can see, Pyright can do much more than just type checks.</p>
+<h2 id="code-completion">Code completion</h2>
+<p>I&rsquo;m using the <a href="https://company-mode.github.io/"><code>company</code></a> package, a
+modular in-buffer completion framework for Emacs, as an Eglot
+front-end for code completion; it integrates with Eglot seamlessly.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;;;; `COMPANY&#39;</span>
+</span></span><span style="display:flex;"><span>(use-package company
+</span></span><span style="display:flex;"><span>  :ensure <span style="color:#66d9ef">t</span>
+</span></span><span style="display:flex;"><span>  :config
+</span></span><span style="display:flex;"><span>  (setq company-idle-delay <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>  (setq company-minimum-prefix-length <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>  (setq company-show-numbers <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; To prevent default down-casing.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; https://emacs.stackexchange.com/questions/10837/how-to-make-company-mode-be-case-sensitive-on-plain-text</span>
+</span></span><span style="display:flex;"><span>  (setq company-dabbrev-downcase <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; 2023-01-13 From a Reddit post on mixed case issue.</span>
+</span></span><span style="display:flex;"><span>  (setq company-dabbrev-ignore-case <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>  (setq company-dabbrev-code-ignore-case <span style="color:#66d9ef">nil</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Use `company&#39; everywhere.</span>
+</span></span><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;after-init-hook</span> <span style="color:#e6db74">&#39;global-company-mode</span>)
+</span></span></code></pre></div><figure><a href="/img/python-eglot.png"><img src="/img/python-eglot.png"/></a><figcaption>
+            <h4>Click or tap to view the full-size picture.</h4>
+        </figcaption>
+</figure>
+
+<h2 id="code-navigation">Code navigation</h2>
+<p>I&rsquo;m using the default key bindings for</p>
+<dl>
+<dt><code>xref-find-definitions</code></dt>
+<dd><code>M-.</code> to find the definition of the identifier at point.</dd>
+<dt><code>xref-go-back</code></dt>
+<dd><code>M-,</code> to return back to where you invoked the <code>xref-find-definitions</code> command.</dd>
+<dt><code>xref-find-references</code></dt>
+<dd><code>M-?</code> to find references to the identifier at point.</dd>
+</dl>
+<p>These functions are now powered by Eglot.</p>
+<h2 id="final-notes">Final notes</h2>
+<p>I can recommend to force using Eglot for Python explicitly &ndash;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(require <span style="color:#e6db74">&#39;eglot</span>)
+</span></span><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;python-mode-hook</span> <span style="color:#e6db74">&#39;eglot-ensure</span>)
+</span></span></code></pre></div><h3 id="a-note-for-tree-sitter-users">A note for Tree-Sitter users</h3>
+<p>If you are using Tree-Sitter for Python, it&rsquo;s recommended to <em>remap</em>
+the <code>python-mode</code> to the Tree-Sitter specific <code>python-ts-mode</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(add-to-list <span style="color:#e6db74">&#39;major-mode-remap-alist</span> <span style="color:#f92672">&#39;</span>(python-mode <span style="color:#f92672">.</span> python-ts-mode))
+</span></span></code></pre></div><p>If this is the case, do not forget to force using Eglot for this mode
+as well.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;python-ts-mode-hook</span> <span style="color:#e6db74">&#39;eglot-ensure</span>)
+</span></span></code></pre></div><p>Happy emacsing!</p>
 	</div>
 </article><article class="list__item post">
 	
@@ -194,183 +871,65 @@ print out some of the events that have occurred on the current date in
 the past. If you, like me, are using Linux or macOS &ndash; it will not be
 difficult to install them.</p>
 <p>And this is what I got&hellip;</p>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/emacs-startup-screen/">Read more…</a>
-	</div>
-</article><article class="list__item post">
-	
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/post/some-excerpts-from-config-2-functions/" rel="bookmark">
-			Some Excerpts From My Emacs Config - 2: Functions
-			</a>
-		</h2>
-		<p class="list__lead post__lead">Some functions and mode enhancements from my .emacs</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">The Emacs Cat</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2024-11-29T11:45:17&#43;01:00">Friday, Nov 29, 2024</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/2024/" rel="category">2024</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>In his comment on <a href="https://irreal.org/blog/">Irreal</a>&rsquo;s post
-<a href="https://irreal.org/blog/?p=12595">Some Configuration To Solve Common Problems</a>,
-<a href="https://disqus.com/by/gregbognar/">gregbognar</a> noted that some of my
-configuration <em>is seriously outdated</em>. In some sense, he is absolutely
-correct &ndash; I&rsquo;ve been collecting Emacs settings/tweaks since 2012, and
-keeping them unmodified for 12+ years.</p>
-<p>But on the other hand, it demonstrates how stable and powerful Emacs
-is &ndash; everything is still working! <em>If something works, don&rsquo;t fix it</em>
-&ndash; I&rsquo;ve since tried to apply this rule wherever possible.</p>
-<p>Here are a few functions/enhancements I found helpful.</p>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/some-excerpts-from-config-2-functions/">Read more…</a>
-	</div>
-</article><article class="list__item post">
-	
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/post/migration-to-bluesky/" rel="bookmark">
-			Migration to Bluesky
-			</a>
-		</h2>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">The Emacs Cat</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2024-11-22T11:23:12&#43;01:00">Friday, Nov 22, 2024</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/2024/" rel="category">2024</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>After reading the quite interesting post <a href="https://cestlaz.github.io/post/blue-sky/">Blue Sky</a>
-by <a href="https://bsky.app/profile/zamansky.bsky.social">Mike Zamansky</a> I decided to begin
-my gentle migration to <a href="https://bsky.app/">Bluesky</a>, a new and promising social media platform.</p>
-<p>I completely agree with Mike&rsquo;s opinion on Twitter as well as other
-social platforms. Like many of us, I migrated from
-<a href="https://x.com/ODeuteronomy">Twitter</a> &ndash; keeping my existing account
-there &ndash; to <a href="https://emacs.ch/@olddeuteronomy">Mastodon</a>.
-Unfortunately, Mastodon, largely due to its distributed architecture,
-seems to be more fragile than other platforms &ndash; recently, I have been
-warned that <a href="https://emacs.ch">emacs.ch</a>, a fediverse server I have been using for two
-years now, is about to shutdown in this December.</p>
-<p>Sure, there is a (bit complex) way to transfer your Mastodon account
-to another server &ndash; and here is <a href="https://fedi.tips/transferring-your-mastodon-account-to-another-server/">detailed explanation</a>
-on how to do that. Perhaps, I will do that in the nearest future, but
-who can guarantee that the new server is immune from the same fate?</p>
-<p>Anyway, Bluesky looks promising and I decided to give it a try.
-You can find me at <a href="https://bsky.app/profile/olddeuteronomy.bsky.social">@olddeuteronomy.bsky.social</a>.</p>
-	</div>
-</article><article class="list__item post">
-	
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/post/some-excerpts-from-my-emacs-config/" rel="bookmark">
-			Some Excerpts From My Emacs Config
-			</a>
-		</h2>
-		<p class="list__lead post__lead">Some mini/micro excerpts from my .emacs</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">The Emacs Cat</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2024-11-20T11:52:19&#43;01:00">Wednesday, Nov 20, 2024</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/2024/" rel="category">2024</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>I&rsquo;m happy to be back after one year away and it feels great.</p>
-<p>Below are some chaotic mini/micro &ndash; or even nano &ndash; excerpts from my
-<code>~/.emacs</code> file I have been tuning in for 12 years. These days, I&rsquo;m
-running Emacs 29.4 on Ubuntu (Pop!_OS) 22.04 and, rarely, on macOS.</p>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/some-excerpts-from-my-emacs-config/">Read more…</a>
-	</div>
-</article><article class="list__item post">
-	
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/post/org-export-clocktables/" rel="bookmark">
-			Org Mode: Exporting Clock Tables
-			</a>
-		</h2>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">The Emacs Cat</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2023-08-01T14:07:46&#43;03:00">Tuesday, Aug 1, 2023</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/2023/" rel="category">2023</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>After reading a quite interesting post by Irreal on <a href="https://irreal.org/blog/?p=11416">Org mode clock tables</a>,
-I decided to share my — a bit specific —  experience with the subject.</p>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/org-export-clocktables/">Read more…</a>
-	</div>
-</article><article class="list__item post">
-	
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/post/a-tree-sitter-config-that-works/" rel="bookmark">
-			A Simple tree-sitter Config That Works
-			</a>
-		</h2>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">The Emacs Cat</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-12-05T14:14:13&#43;03:00">Monday, Dec 5, 2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/2022/" rel="category">2022</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>Recently, I&rsquo;ve discovered a number of posts on Reddit — like
-<a href="https://www.reddit.com/r/emacs/comments/zc70m8/treesitterhlmode_does_not_do_anything/">tree-sitter-hl-mode does not do
-anything</a>
-or <a href="https://www.reddit.com/r/emacs/comments/zbpa42/how_to_use_emacs_29_treesitter/">How to use Emacs 29
-Tree-sitter?</a>
-— and decided to share my simple <code>tree-sitter</code> setup that
-seems to be working on my Emacs 28.2 like a charm.</p>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/a-tree-sitter-config-that-works/">Read more…</a>
-	</div>
-</article><article class="list__item post">
-	
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/post/how-to-clear-the-eshell/" rel="bookmark">
-			How to Clear the Eshell
-			</a>
-		</h2>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">The Emacs Cat</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-10-05T13:07:45&#43;03:00">Wednesday, Oct 5, 2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/2022/" rel="category">2022</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>I&rsquo;m a big fan of Eshell, but some things in Eshell look, hmm,
-a bit strange. One of such things is how the Eshell&rsquo;s command <code>clear</code> clears
-the screen.</p>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/post/how-to-clear-the-eshell/">Read more…</a>
+<h2 id="in-the-emacs-init-file">In the <code>.emacs</code> init file</h2>
+<p>First of all, disable the builtin startup screen.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(setq inhibit-startup-screen <span style="color:#66d9ef">t</span>)
+</span></span></code></pre></div><p>Then add a startup hook.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;emacs-startup-hook</span>
+</span></span><span style="display:flex;"><span>  (lambda ()
+</span></span><span style="display:flex;"><span>    (let* ((buffer-today (<span style="color:#a6e22e">get-buffer-create</span> <span style="color:#e6db74">&#34;*today*&#34;</span>))
+</span></span><span style="display:flex;"><span>           (buffer-calendar <span style="color:#e6db74">&#34;*Calendar*&#34;</span>)
+</span></span><span style="display:flex;"><span>           (buffer-agenda <span style="color:#e6db74">&#34;*Org Agenda*&#34;</span>)
+</span></span><span style="display:flex;"><span>           (buffer-diary <span style="color:#e6db74">&#34;*Fancy Diary Entries*&#34;</span>))
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Call calendar first to obtain the current date</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; required to display the diary.</span>
+</span></span><span style="display:flex;"><span>      (calendar)
+</span></span><span style="display:flex;"><span>      (diary)
+</span></span><span style="display:flex;"><span>      (org-agenda-list)
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Fill and show the Today Events buffer.</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; NOTE: requires `fortune&#39; and `calendar&#39; command line utilities.</span>
+</span></span><span style="display:flex;"><span>      (switch-to-buffer buffer-today)
+</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">call-process</span> <span style="color:#e6db74">&#34;fortune&#34;</span> <span style="color:#66d9ef">nil</span> buffer-today)
+</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">insert</span> <span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">call-process</span> <span style="color:#e6db74">&#34;calendar&#34;</span> <span style="color:#66d9ef">nil</span> buffer-today)
+</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">goto-char</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>      (toggle-truncate-lines)
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Maximize the Today Events window</span>
+</span></span><span style="display:flex;"><span>      (delete-other-windows)
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Show Agenda in the lower left quadrant.</span>
+</span></span><span style="display:flex;"><span>      (split-window-vertically)
+</span></span><span style="display:flex;"><span>      (other-window <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>      (switch-to-buffer (<span style="color:#a6e22e">get-buffer</span> buffer-agenda))
+</span></span><span style="display:flex;"><span>      (split-window-horizontally)
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Try to show Diary in the lower right quadrant.</span>
+</span></span><span style="display:flex;"><span>      (other-window <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>      (if (<span style="color:#a6e22e">get-buffer</span> buffer-diary)
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">;; If Diary exists then show it ...</span>
+</span></span><span style="display:flex;"><span>          (switch-to-buffer (<span style="color:#a6e22e">get-buffer</span> buffer-diary))
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">;; ... else show the scratch buffer.</span>
+</span></span><span style="display:flex;"><span>        (let* ((buffer-scratch (switch-to-buffer (<span style="color:#a6e22e">get-buffer</span> <span style="color:#e6db74">&#34;*scratch*&#34;</span>))))
+</span></span><span style="display:flex;"><span>          (<span style="color:#a6e22e">goto-char</span> (<span style="color:#a6e22e">point-max</span>))
+</span></span><span style="display:flex;"><span>          (<span style="color:#a6e22e">insert</span> (<span style="color:#a6e22e">format-time-string</span> <span style="color:#e6db74">&#34;\n;; No diary entries for %A %d %b&#34;</span>)))
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Go back to the Today Events buffer.</span>
+</span></span><span style="display:flex;"><span>      (other-window <span style="color:#ae81ff">-2</span>)
+</span></span><span style="display:flex;"><span>      (split-window-horizontally)
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Show Calendar in the upper left quadrant.</span>
+</span></span><span style="display:flex;"><span>      (switch-to-buffer (<span style="color:#a6e22e">get-buffer</span> buffer-calendar))
+</span></span><span style="display:flex;"><span>      )))
+</span></span></code></pre></div><h2 id="the-startup-screen">The startup screen</h2>
+<figure><a href="/img/emacs-init-screen.png"><img src="/img/emacs-init-screen.png"/></a><figcaption>
+            <h4>Click or tap to view the full-size picture.</h4>
+        </figcaption>
+</figure>
+
+<p>Happy emacsing!</p>
 	</div>
 </article>
 </main>
 
 <div class="pagination">
-	<span class="pagination__item pagination__item--current">1/2</span>
+	<span class="pagination__item pagination__item--current">1/4</span>
 	<a class="pagination__item pagination__item--next btn" href="/post/page/2/">»</a>
 </div>
 
@@ -389,20 +948,22 @@ the screen.</p>
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/elfeed-optimized-blogging/">Elfeed-optimized Blogging</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/orgmode-for-reproducibility-testing/">Using Emacs Org Mode for Reproducibility Testing</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/cpp-programming-in-emacs/">C&#43;&#43; Programming in Emacs</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/python-programming-in-emacs/">Python Programming in Emacs</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/emacs-startup-screen/">Emacs Startup Screen</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/some-excerpts-from-config-2-functions/">Some Excerpts From My Emacs Config - 2: Functions</a></li>
 		</ul>
 	</div>
 </div>
 <div class="widget-taglist widget">
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog/" title="Blog">Blog</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/c&#43;&#43;/" title="C&#43;&#43;">C&#43;&#43;</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/calc/" title="Calc">Calc</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/config/" title="Config">Config</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/elfeed/" title="Elfeed">Elfeed</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/elisp/" title="Elisp">Elisp</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/emacs/" title="Emacs">Emacs</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/eshell/" title="Eshell">Eshell</a>
@@ -438,7 +999,7 @@ the screen.</p>
 				</li>
 			<li class="widget__item">
 				<a class="widget__link" href="/categories/2025/">2025</a>&nbsp;
-				<span class="widget__counter widget__counter--bubble">2</span>
+				<span class="widget__counter widget__counter--bubble">3</span>
 				</li>
 		</ul>
 	</div>
