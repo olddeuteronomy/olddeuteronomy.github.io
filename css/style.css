@@ -255,7 +255,8 @@ code,
 kbd,
 samp {
 	font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
-	font-size: inherit;
+	/* font-size: inherit; */
+    font-size: 0.9rem
 }
 
 pre,
@@ -859,10 +860,10 @@ button:not(:-moz-focusring):focus > .menu__btn-title {
 /* List content */
 .list__item {
 	padding-bottom: 20px;
-	padding-bottom: 1.25rem;
+	padding-bottom: 2rem;
 	margin-bottom: 20px;
-	margin-bottom: 1.25rem;
-	border-bottom: 1px solid #ebebeb;
+	margin-bottom: 2rem;
+	border-bottom: 1px solid #333;
 }
 
 .list__header {
@@ -1307,7 +1308,7 @@ textarea {
 
 	.list__title {
 		font-size: 16px;
-		font-size: 1.75rem;
+		font-size: 2rem;
 	}
 
 	.list__lead {

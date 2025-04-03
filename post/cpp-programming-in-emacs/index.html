@@ -18,7 +18,7 @@
 		<meta itemprop="name" content="C&#43;&#43; Programming in Emacs">
 <meta itemprop="description" content="Making a lightweight and fast C&#43;&#43; IDE in Emacs"><meta itemprop="datePublished" content="2025-02-22T10:36:27+01:00" />
 <meta itemprop="dateModified" content="2025-02-22T10:36:27+01:00" />
-<meta itemprop="wordCount" content="1447">
+<meta itemprop="wordCount" content="1439">
 <meta itemprop="keywords" content="emacs,config,c&#43;&#43;," />
 		<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="C&#43;&#43; Programming in Emacs"/>
 <meta name="twitter:description" content="Making a lightweight and fast C&#43;&#43; IDE in Emacs"/>
@@ -159,9 +159,13 @@ directories of the active file.</p>
 <p>Below is my simple and straightforward <code>.clangd</code> for some of my projects.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># Enable all warnings, use C++17 standard, specify include directories.</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">CompileFlags</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Add</span>: [-<span style="color:#ae81ff">xc++, -Wall, -std=c++17, -I/home/magnolia/workspace/devel, -I/home/magnolia/lib/grpc/include, -I/home/magnolia/lib/spdlog/include]</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Remove</span>: [-<span style="color:#ae81ff">W*]     </span> <span style="color:#75715e"># Strip all other warning-related flags</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Compiler</span>: <span style="color:#ae81ff">clang++ </span> <span style="color:#75715e"># Use `clang++` explicitly</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Add</span>: [-<span style="color:#ae81ff">xc++,</span>
+</span></span><span style="display:flex;"><span>       -<span style="color:#ae81ff">Wall,</span>
+</span></span><span style="display:flex;"><span>       -<span style="color:#ae81ff">std=c++17,</span>
+</span></span><span style="display:flex;"><span>       -<span style="color:#ae81ff">I/home/magnolia/workspace/devel,</span>
+</span></span><span style="display:flex;"><span>       -<span style="color:#ae81ff">I/home/magnolia/lib/grpc/include,</span>
+</span></span><span style="display:flex;"><span>       -<span style="color:#ae81ff">I/home/magnolia/lib/spdlog/include]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Compiler</span>: <span style="color:#ae81ff">clang++ </span> <span style="color:#75715e"># Always use `clang++&#39;</span>
 </span></span></code></pre></div><p>It is placed in the <em>top level directory</em> of my project.
 You can find more about <code>clangd</code> configuration <a href="https://clangd.llvm.org/config">here</a>.</p>
 <p>Now we can return back to the Emacs configuration.</p>
