@@ -69,7 +69,7 @@
 <main class="main list" role="main">
 	<header class="main__header">
 		<h1 class="main__title">Posts</h1>
-	</header><article class="list__item post">
+	</header><div class="list__item post">
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
@@ -91,132 +91,13 @@
 <a href="https://irreal.org/blog/?p=12595">Some Configuration To Solve Common Problems</a>,
 <a href="https://disqus.com/by/gregbognar/">gregbognar</a> noted that some of my
 configuration <em>is seriously outdated</em>. In some sense, he is absolutely
-correct &ndash; I&rsquo;ve been collecting Emacs settings/tweaks since 2012, and
-keeping them unmodified for 12+ years.</p>
-<p>But on the other hand, it demonstrates how stable and powerful Emacs
-is &ndash; everything is still working! <em>If something works, don&rsquo;t fix it</em>
-&ndash; I&rsquo;ve since tried to apply this rule wherever possible.</p>
-<p>Here are a few functions/enhancements I found helpful.</p>
-<h2 id="dired-mode-enhancements"><code>dired-mode</code> enhancements</h2>
-<h3 id="function-calculate-the-total-size-of-all-marked-files">Function: Calculate the total size of all marked files</h3>
-<p>The custom <code>dired-get-size</code> function calculates the total size of all
-marked files in the dired buffer and displays it in the echo area.
-Files in the dired buffer can be marked with <code>m</code> key and unmarked with
-<code>u</code> key.</p>
-<p>The current version only works on systems with the <code>/usr/bin/du</code>
-system utility, which actually comprise 100% of the (non-Windows)
-systems &ndash; borrowed from <a href="https://oremacs.com/2015/01/12/dired-file-size/">oremacs.com</a>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun dired-get-size ()
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Display file size in dired.&#34;</span>
-</span></span><span style="display:flex;"><span>  (interactive)
-</span></span><span style="display:flex;"><span>  (let ((files (dired-get-marked-files)))
-</span></span><span style="display:flex;"><span>    (with-temp-buffer
-</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">apply</span> <span style="color:#e6db74">&#39;call-process</span> <span style="color:#e6db74">&#34;/usr/bin/du&#34;</span> <span style="color:#66d9ef">nil</span> <span style="color:#66d9ef">t</span> <span style="color:#66d9ef">nil</span> <span style="color:#e6db74">&#34;-sch&#34;</span> files)
-</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">message</span>
-</span></span><span style="display:flex;"><span>       <span style="color:#e6db74">&#34;Size of all marked files: %s&#34;</span>
-</span></span><span style="display:flex;"><span>       (progn
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">re-search-backward</span> <span style="color:#e6db74">&#34;\\(^[ 0-9.,]+[A-Za-z]+\\).*total$&#34;</span>)
-</span></span><span style="display:flex;"><span>         (match-string <span style="color:#ae81ff">1</span>))))))
-</span></span></code></pre></div><p>In my config, <code>dired-get-size</code> is bound to <code>z</code> key in the <code>dired-mode</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; https://oremacs.com/2015/01/12/dired-file-size/</span>
-</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">define-key</span> dired-mode-map <span style="color:#e6db74">&#34;z&#34;</span> <span style="color:#a6e22e">#&#39;</span>dired-get-size)
-</span></span></code></pre></div><figure><img src="/img/dired-z.png"/><figcaption>
-            <h4>The result of pressing the `z` key in dired.</h4>
-        </figcaption>
-</figure>
-
-<h3 id="some-other-dired-mode-enhancements">Some other <code>dired-mode</code> enhancements</h3>
-<h4 id="move-to-the-parent-directory">Move to the parent directory</h4>
-<p>It reuses the current <code>dired</code> buffer for opening the parent
-directory (<a href="https://oremacs.com/2015/01/21/dired-shortcuts/">oremacs.com</a>)
-instead of creating a new buffer.
-Bounded to the <code>a</code> key in <code>dired-mode</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Move to the parent directory.</span>
-</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">define-key</span> dired-mode-map <span style="color:#e6db74">&#34;a&#34;</span>
-</span></span><span style="display:flex;"><span>  (lambda ()
-</span></span><span style="display:flex;"><span>    (interactive)
-</span></span><span style="display:flex;"><span>    (find-alternate-file <span style="color:#e6db74">&#34;..&#34;</span>)))
-</span></span></code></pre></div><h4 id="run-eshell-in-the-current-dired-directory">Run <code>eshell</code> in the current <code>dired</code> directory</h4>
-<p>Bounded to the ` back-tick key in <code>dired-mode</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Run eshell.</span>
-</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">define-key</span> dired-mode-map <span style="color:#e6db74">&#34;`&#34;</span>
-</span></span><span style="display:flex;"><span>  (lambda ()
-</span></span><span style="display:flex;"><span>    (interactive)
-</span></span><span style="display:flex;"><span>    (eshell)))
-</span></span></code></pre></div><h2 id="date-and-time-stamps">Date and time stamps</h2>
-<p>Inserting the date and/or time stamps at the current cursor position.
-You can bind these functions to any key chords you prefer or call the
-corresponding function with <code>M-x</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun my/time-stamp ()
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Insert full date/time stamp as 2024-11-29 10:41 +0100 CET&#34;</span>
-</span></span><span style="display:flex;"><span>  (interactive)
-</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">insert</span> (<span style="color:#a6e22e">format-time-string</span> <span style="color:#e6db74">&#34;%Y-%m-%d %R %z %Z&#34;</span>)))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>(defun my/time-stamp-short ()
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Insert short date/time stamp as 2024-11-29 10:41&#34;</span>
-</span></span><span style="display:flex;"><span>  (interactive)
-</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">insert</span> (<span style="color:#a6e22e">format-time-string</span> <span style="color:#e6db74">&#34;%Y-%m-%d %R&#34;</span>)))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>(defun my/date-stamp ()
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Insert date stamp as 2024-11-29&#34;</span>
-</span></span><span style="display:flex;"><span>  (interactive)
-</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">insert</span> (<span style="color:#a6e22e">format-time-string</span> <span style="color:#e6db74">&#34;%Y-%m-%d&#34;</span>)))
-</span></span></code></pre></div><h2 id="some-editing-tweaks">Some editing tweaks</h2>
-<h3 id="inserting-a-new-line">Inserting a new line</h3>
-<p>Insert a new line, indent it, and move the cursor there. This behavior
-is different then the typical function bound to <code>Enter</code> which may be
-<code>open-line</code> or <code>newline-and-indent</code>. When you call them with the cursor
-between ^ (beginning of line) and $ (end of line), the contents of the
-line to the right of it will be moved to the newly inserted line. <em>This
-function will not do that</em>. Instead, the current line is <em>left alone</em>, a new line
-is inserted, indented, and the cursor is moved there. Borrowed from
-<a href="http://emacsredux.com/blog/2013/03/26/smarter-open-line/">emacsredux</a>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun smart-open-line ()
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Insert a new line, indent it, and move the cursor there.&#34;</span>
-</span></span><span style="display:flex;"><span>  (interactive)
-</span></span><span style="display:flex;"><span>  (move-end-of-line <span style="color:#66d9ef">nil</span>)
-</span></span><span style="display:flex;"><span>  (newline-and-indent))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>(global-set-key (kbd <span style="color:#e6db74">&#34;&lt;C-return&gt;&#34;</span>) <span style="color:#a6e22e">#&#39;</span>smart-open-line)
-</span></span></code></pre></div><p>I have bound it globally to <code>Ctrl-Enter</code> &ndash; <code>C-return</code> in the Emacs
-notation &ndash; so it should work in any mode.</p>
-<h3 id="smart-beginning-of-line">Smart beginning of line</h3>
-<p>Move point to first non-whitespace character or <code>beginning-of-line</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun smart-beginning-of-line ()
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Move point to first non-whitespace character or `beginning-of-line`.&#34;</span>
-</span></span><span style="display:flex;"><span>  (interactive)
-</span></span><span style="display:flex;"><span>  (let ((oldpos (<span style="color:#a6e22e">point</span>)))
-</span></span><span style="display:flex;"><span>    (back-to-indentation)
-</span></span><span style="display:flex;"><span>    (and (<span style="color:#a6e22e">=</span> oldpos (<span style="color:#a6e22e">point</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">beginning-of-line</span>))))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>(global-set-key (kbd <span style="color:#e6db74">&#34;C-a&#34;</span>) <span style="color:#a6e22e">#&#39;</span>smart-beginning-of-line)
-</span></span></code></pre></div><p>I&rsquo;ve rebound the <em>default</em> <code>Ctrl-A</code> &ndash; <code>C-a</code> in the Emacs notation &ndash; to
-move to first non-whitespace character of a line instead of first
-column.</p>
-<h3 id="killing-a-word-at-point">Killing a word at point</h3>
-<p>Deleting the whole word at the cursor position.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun kill-whole-word ()
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Kill the current word at point.&#34;</span>
-</span></span><span style="display:flex;"><span>  (interactive)
-</span></span><span style="display:flex;"><span>  (backward-word)
-</span></span><span style="display:flex;"><span>  (kill-word <span style="color:#ae81ff">1</span>))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">define-key</span> global-map (kbd <span style="color:#e6db74">&#34;&lt;M-DEL&gt;&#34;</span>) <span style="color:#a6e22e">#&#39;</span>kill-whole-word)
-</span></span></code></pre></div><p>I&rsquo;ve rebound it to <code>Alt-delete</code> &ndash; <code>M-DEL</code> in the Emacs notation.</p>
-<h2 id="nuke-all-buffers">Nuke all buffers</h2>
-<p>Kill all buffers, leaving <em>*scratch*</em> only.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun nuke-all-buffers ()
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Kill all buffers, leaving *scratch* only.&#34;</span>
-</span></span><span style="display:flex;"><span>  (interactive)
-</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">mapc</span>
-</span></span><span style="display:flex;"><span>   (lambda (buffer)
-</span></span><span style="display:flex;"><span>     (<span style="color:#a6e22e">kill-buffer</span> buffer))
-</span></span><span style="display:flex;"><span>   (<span style="color:#a6e22e">buffer-list</span>))
-</span></span><span style="display:flex;"><span>  (delete-other-windows))
-</span></span></code></pre></div><p>To be continued. Happy emacsing!</p>
+correct &ndash; …</p>
 	</div>
-</article><article class="list__item post">
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/some-excerpts-from-config-2-functions/">Read more…</a>
+	</div>
+</div>
+<div class="list__item post">
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
@@ -236,22 +117,13 @@ column.</p>
 		<p>After reading the quite interesting post <a href="https://cestlaz.github.io/post/blue-sky/">Blue Sky</a>
 by <a href="https://bsky.app/profile/zamansky.bsky.social">Mike Zamansky</a> I decided to begin
 my gentle migration to <a href="https://bsky.app/">Bluesky</a>, a new and promising social media platform.</p>
-<p>I completely agree with Mike&rsquo;s opinion on Twitter as well as other
-social platforms. Like many of us, I migrated from
-<a href="https://x.com/ODeuteronomy">Twitter</a> &ndash; keeping my existing account
-there &ndash; to <a href="https://emacs.ch/@olddeuteronomy">Mastodon</a>.
-Unfortunately, Mastodon, largely due to its distributed architecture,
-seems to be more fragile than other platforms &ndash; recently, I have been
-warned that <a href="https://emacs.ch">emacs.ch</a>, a fediverse server I have been using for two
-years now, is about to shutdown in this December.</p>
-<p>Sure, there is a (bit complex) way to transfer your Mastodon account
-to another server &ndash; and here is <a href="https://fedi.tips/transferring-your-mastodon-account-to-another-server/">detailed explanation</a>
-on how to do that. Perhaps, I will do that in the nearest future, but
-who can guarantee that the new server is immune from the same fate?</p>
-<p>Anyway, Bluesky looks promising and I decided to give it a try.
-You can find me at <a href="https://bsky.app/profile/olddeuteronomy.bsky.social">@olddeuteronomy.bsky.social</a>.</p>
+<p>I completely agree with Mike&rsquo;s …</p>
 	</div>
-</article><article class="list__item post">
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/migration-to-bluesky/">Read more…</a>
+	</div>
+</div>
+<div class="list__item post">
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
@@ -271,182 +143,13 @@ You can find me at <a href="https://bsky.app/profile/olddeuteronomy.bsky.social"
 	<div class="content list__excerpt post__content clearfix">
 		<p>I&rsquo;m happy to be back after one year away and it feels great.</p>
 <p>Below are some chaotic mini/micro &ndash; or even nano &ndash; excerpts from my
-<code>~/.emacs</code> file I have been tuning in for 12 years. These days, I&rsquo;m
-running Emacs 29.4 on Ubuntu (Pop!_OS) 22.04 and, rarely, on macOS.</p>
-<p>These tweaks have been collected from various sources; I provide a
-reference to the source if available.</p>
-<h2 id="checking-the-operating-system-emacs-is-running-on">Checking the operating system Emacs is running on</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defvar my/os-linux (<span style="color:#a6e22e">string-equal</span> system-type <span style="color:#e6db74">&#34;gnu/linux&#34;</span>) <span style="color:#e6db74">&#34;I&#39;m on Linux&#34;</span>)
-</span></span><span style="display:flex;"><span>(defvar my/os-macos (<span style="color:#a6e22e">string-equal</span> system-type <span style="color:#e6db74">&#34;darwin&#34;</span>) <span style="color:#e6db74">&#34;Oh, I&#39;m on macOS&#34;</span>)
-</span></span><span style="display:flex;"><span>(defvar my/os-windows (<span style="color:#a6e22e">string-equal</span> system-type <span style="color:#e6db74">&#34;windows-nt&#34;</span>) <span style="color:#e6db74">&#34;OMG, that&#39;s Windows!&#34;</span>)
-</span></span></code></pre></div><h2 id="macos-keyboard">macOS keyboard</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Disable Command key and enable Options as Meta.</span>
-</span></span><span style="display:flex;"><span>(if my/os-macos
-</span></span><span style="display:flex;"><span>    (setq mac-command-key-is-meta <span style="color:#66d9ef">nil</span>
-</span></span><span style="display:flex;"><span>          mac-command-modifier <span style="color:#e6db74">&#39;super</span>
-</span></span><span style="display:flex;"><span>          mac-option-key-is-meta <span style="color:#66d9ef">t</span>
-</span></span><span style="display:flex;"><span>          mac-option-modifier <span style="color:#e6db74">&#39;meta</span>))
-</span></span></code></pre></div><h2 id="everything-is-utf-8">Everything is UTF-8</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(set-language-environment <span style="color:#e6db74">&#39;utf-8</span>)
-</span></span><span style="display:flex;"><span>(setq locale-coding-system <span style="color:#e6db74">&#39;utf-8</span>)
-</span></span><span style="display:flex;"><span>(setq buffer-file-coding-system <span style="color:#e6db74">&#39;utf-8-unix</span>)
-</span></span><span style="display:flex;"><span>(set-terminal-coding-system <span style="color:#e6db74">&#39;utf-8</span>)
-</span></span><span style="display:flex;"><span>(set-keyboard-coding-system <span style="color:#e6db74">&#39;utf-8</span>)
-</span></span><span style="display:flex;"><span>(set-selection-coding-system <span style="color:#e6db74">&#39;utf-8</span>)
-</span></span><span style="display:flex;"><span>(prefer-coding-system <span style="color:#e6db74">&#39;utf-8</span>)
-</span></span></code></pre></div><h2 id="smooth-scrolling">Smooth scrolling</h2>
-<p>Borrowed from <a href="http://home.thep.lu.se/~karlf/emacs.html">http://home.thep.lu.se/~karlf/emacs.html</a></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(setq scroll-step <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Marker distance from center (don&#39;t jump to center).</span>
-</span></span><span style="display:flex;"><span>(setq scroll-conservatively <span style="color:#ae81ff">100000</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Try to keep screen position when PgDn/PgUp.</span>
-</span></span><span style="display:flex;"><span>(setq scroll-preserve-screen-position <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Start scrolling when marker at top/bottom.</span>
-</span></span><span style="display:flex;"><span>(setq scroll-margin <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Mouse scroll moves 1 line at a time, instead of 5 lines.</span>
-</span></span><span style="display:flex;"><span>(setq mouse-wheel-scroll-amount <span style="color:#f92672">&#39;</span>(<span style="color:#ae81ff">1</span>))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; On a long mouse scroll keep scrolling by 1 line.</span>
-</span></span><span style="display:flex;"><span>(setq mouse-wheel-progressive-speed <span style="color:#66d9ef">nil</span>)
-</span></span></code></pre></div><h2 id="some-helpful-tips-for-emacsing-in-comfort">Some helpful tips for emacsing in comfort</h2>
-<h3 id="clipboard">Clipboard</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Non-nil means cutting and pasting uses the clipboard.</span>
-</span></span><span style="display:flex;"><span>(setq x-select-enable-clipboard <span style="color:#66d9ef">t</span>)
-</span></span></code></pre></div><h3 id="turning-off-some-annoying-features">Turning off some annoying features</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; No ToolBar, please.</span>
-</span></span><span style="display:flex;"><span>(tool-bar-mode <span style="color:#ae81ff">-1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; No alarms, please.</span>
-</span></span><span style="display:flex;"><span>(setq ring-bell-function <span style="color:#e6db74">&#39;ignore</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; No lock files, please.</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; https://emacs.stackexchange.com/questions/78800/how-to-disable-automatic-appearance-of-warnings-buffer-in-emacs</span>
-</span></span><span style="display:flex;"><span>(setq create-lockfiles <span style="color:#66d9ef">nil</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Sentences do not need double spaces to end. Period.</span>
-</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">set-default</span> <span style="color:#e6db74">&#39;sentence-end-double-space</span> <span style="color:#66d9ef">nil</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Replace &#34;yes&#34; by &#34;y&#34;.</span>
-</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">fset</span> <span style="color:#e6db74">&#39;yes-or-no-p</span> <span style="color:#e6db74">&#39;y-or-n-p</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Don’t use dialog boxes.</span>
-</span></span><span style="display:flex;"><span>(setq use-dialog-box <span style="color:#66d9ef">nil</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; For gpg (works on Ubuntu and macOS) to disable custom prompt.</span>
-</span></span><span style="display:flex;"><span>(setenv <span style="color:#e6db74">&#34;GPG_AGENT_INFO&#34;</span> <span style="color:#66d9ef">nil</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Speedup cursor movement.</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; https://emacs.stackexchange.com/questions/28736/emacs-pointcursor-movement-lag/28746</span>
-</span></span><span style="display:flex;"><span>(setq auto-window-vscroll <span style="color:#66d9ef">nil</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Spaces instead of tabs when indenting.</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Some people may not agree with this though.</span>
-</span></span><span style="display:flex;"><span>(setq-default indent-tabs-mode <span style="color:#66d9ef">nil</span>)
-</span></span></code></pre></div><h3 id="turning-on-some-helpful-features">Turning on some helpful features</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Nonzero means echo unfinished commands after this many seconds of</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; pause. The value may be integer or floating point. If the value is</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; zero, don’t echo at all.</span>
-</span></span><span style="display:flex;"><span>(setq echo-keystrokes <span style="color:#ae81ff">0.01</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Winner mode is a global minor mode that records the changes in the</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; window configuration.</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Window-Convenience.html</span>
-</span></span><span style="display:flex;"><span>(winner-mode <span style="color:#66d9ef">t</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Turn on highlighting current line.</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; http://ergoemacs.org/emacs/emacs_make_modern.html</span>
-</span></span><span style="display:flex;"><span>(global-hl-line-mode <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Replace highlighted text with what I type rather than just</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; inserting at point.</span>
-</span></span><span style="display:flex;"><span>(delete-selection-mode <span style="color:#66d9ef">t</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Restore opened files.</span>
-</span></span><span style="display:flex;"><span>(desktop-save-mode <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Save minibuffer history.</span>
-</span></span><span style="display:flex;"><span>(savehist-mode <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; When on a tab, make the cursor the tab length.</span>
-</span></span><span style="display:flex;"><span>(setq-default x-stretch-cursor <span style="color:#66d9ef">t</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Auto refresh dired when file changes.</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; http://pragmaticemacs.com/emacs/automatically-revert-buffers/</span>
-</span></span><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;dired-mode-hook</span> <span style="color:#e6db74">&#39;auto-revert-mode</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Auto refresh dired, but be quiet about it.</span>
-</span></span><span style="display:flex;"><span>(setq global-auto-revert-non-file-buffers <span style="color:#66d9ef">t</span>)
-</span></span><span style="display:flex;"><span>(setq auto-revert-verbose <span style="color:#66d9ef">nil</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Automatically reload files was modified by external program.</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; https://www.emacswiki.org/emacs/AutoRevertMode</span>
-</span></span><span style="display:flex;"><span>(global-auto-revert-mode <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Make URLs in comments/strings clickable, (Emacs &gt; v22).</span>
-</span></span><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;find-file-hooks</span> <span style="color:#e6db74">&#39;goto-address-prog-mode</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Display fringe indicators in `visual-line-mode`.</span>
-</span></span><span style="display:flex;"><span>(setq visual-line-fringe-indicators <span style="color:#f92672">&#39;</span>(left-curly-arrow right-curly-arrow))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Switching the focus to the help window when it&#39;s opened.</span>
-</span></span><span style="display:flex;"><span>(setq help-window-select <span style="color:#66d9ef">t</span>)
-</span></span></code></pre></div><h3 id="frame-title">Frame title</h3>
-<p>Template for displaying the title bar of visible frames.
-(Assuming the window manager supports this feature.)</p>
-<p>This variable has the same structure as <code>mode-line-format</code>, except that
-the %c, %C, and %l constructs are ignored.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Frame title.</span>
-</span></span><span style="display:flex;"><span>(setq frame-title-format <span style="color:#e6db74">&#34;%F--%b-[%f]--%Z&#34;</span>)
-</span></span></code></pre></div><h3 id="electric-pair-mode">Electric Pair mode</h3>
-<p>Electric Pair mode is a global minor mode. When enabled, typing an
-open parenthesis automatically inserts the corresponding closing
-parenthesis, and vice versa. (Likewise for brackets, etc.). If the
-region is active, the parentheses (brackets, etc.) are inserted around
-the region instead.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Global.</span>
-</span></span><span style="display:flex;"><span>(electric-pair-mode <span style="color:#ae81ff">1</span>)
-</span></span></code></pre></div><h2 id="calendar-tweaks">Calendar tweaks</h2>
-<p>If you want to be informed about the times of sunrise and sunset for
-any date at your location, Emacs is always ready to lend a hand &ndash; you
-just need to provide your coordinates to Emacs. Use one decimal place
-in the values of <code>calendar-latitude</code> and <code>calendar-longitude</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defvar calendar-latitude NN.N)
-</span></span><span style="display:flex;"><span>(defvar calendar-longitude NN.N)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Number of minutes difference between local standard time and UTC.</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; For example, -300 for New York City, -480 for Los Angeles.</span>
-</span></span><span style="display:flex;"><span>(defvar calendar-time-zone NNN)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Optional, the default value is just the variable `calendar-latitude`</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; paired with the variable `calendar-longitude`.</span>
-</span></span><span style="display:flex;"><span>(defvar calendar-location-name <span style="color:#e6db74">&#34;Your City, Your Country&#34;</span>)
-</span></span></code></pre></div><p>Within the calendar, the following commands are available:</p>
-<dl>
-<dt><code>S</code></dt>
-<dd>Display times of sunrise and sunset for the selected date (<code>calendar-sunrise-sunset</code>).</dd>
-<dt><code>M-x sunrise-sunset</code></dt>
-<dd>Display times of sunrise and sunset for today&rsquo;s date.</dd>
-<dt><code>C-u M-x sunrise-sunset</code></dt>
-<dd>Display times of sunrise and sunset for a specified date.</dd>
-<dt><code>M-x calendar-sunrise-sunset-month</code></dt>
-<dd>Display times of sunrise and sunset for the selected month.</dd>
-</dl>
-<p>The command <code>M-x sunrise-sunset</code> is also available outside the
-calendar to display the sunrise and sunset information for today&rsquo;s
-date in the echo area.</p>
-<h3 id="some-other-calendar-tweaks">Some other Calendar tweaks</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; First day of the week: 0:Sunday, 1:Monday.</span>
-</span></span><span style="display:flex;"><span>(defvar calendar-week-start-day <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Use European date format (DD/MM/YYYY or 9 October 2024).</span>
-</span></span><span style="display:flex;"><span>(defvar calendar-date-style <span style="color:#e6db74">&#39;european</span>)
-</span></span></code></pre></div><p>To be continued. Happy emacsing!</p>
+<code>~/.emacs</code> file I have been tuning in for 12 years. …</p>
 	</div>
-</article><article class="list__item post">
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/some-excerpts-from-my-emacs-config/">Read more…</a>
+	</div>
+</div>
+<div class="list__item post">
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
@@ -466,255 +169,13 @@ date in the echo area.</p>
 		<p>After reading a quite interesting post by Irreal on <a href="https://irreal.org/blog/?p=11416">Org mode clock tables</a>,
 I decided to share my — a bit specific —  experience with the subject.</p>
 <h2 id="the-task">The Task</h2>
-<p>Like many of us these days, I&rsquo;m working remotely. My employer requires
-a periodic report and I should track my time I spend on various task —
-exactly as Irreal describes in his post. Of course, I&rsquo;m using Org mode
-clock tables for that purpose.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-org" data-lang="org"><span style="display:flex;"><span><span style="color:#75715e">#+TITLE</span><span style="color:#75715e">: Worktime Tracker for July 2023</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#+OPTIONS</span><span style="color:#75715e">: num:nil toc:nil</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#+BEGIN</span><span style="color:#75715e">: clocktable :maxlevel 3 :scope file</span>
-</span></span><span style="display:flex;"><span>#+END
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>*<span style="font-weight:bold"> 2023-07   </span><span style="font-style:italic"> :2023:</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">**</span> 2023-07-03
-</span></span><span style="display:flex;"><span><span style="color:#75715e">***</span> Impl. a test gRPC server                           <span style="font-style:italic"> :TEST:</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">:LOGBOOK:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">CLOCK: [2023-07-03 Mon 15:05]--[2023-07-03 Mon 15:50] =&gt;  0:45
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">CLOCK: [2023-07-03 Mon 09:45]--[2023-07-03 Mon 14:10] =&gt;  4:25
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">:END:</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">**</span> 2023-07-04
-</span></span><span style="display:flex;"><span><span style="color:#75715e">***</span> Fix client timeout                                  <span style="font-style:italic"> :FIX:</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">:LOGBOOK:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">CLOCK: [2023-07-04 Tue 12:45]--[2023-07-04 Tue 13:10] =&gt;  0:25
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">:END:</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">***</span> Add AddOrder handler                               <span style="font-style:italic"> :FEAT:</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">:LOGBOOK:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">CLOCK: [2023-07-04 Tue 14:05]--[2023-07-04 Tue 15:10] =&gt;  1:05
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">:END:</span>
-</span></span></code></pre></div><p>Then if I put the cursor at the line with the word <code>#+BEGIN</code> (line #4
-in my org file) and press <code>C-c C-c</code> (in the Org mode, this chord runs
-the multipurpose command <code>org-ctrl-c-ctrl-c</code>), the dynamic clock table
-block is getting updated immediately and I get a standard clock table
-report as shown below.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-org" data-lang="org"><span style="display:flex;"><span><span style="color:#75715e">#+BEGIN</span><span style="color:#75715e">: clocktable :maxlevel 3 :scope file</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#+CAPTION</span><span style="color:#75715e">: Clock summary at [2023-07-30 Sun 15:32]</span>
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">| Headline                       | Time |      |      |</span>
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">|--------------------------------+------+------+------|</span>
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">| *Total time*                   |*6:40*|      |      |</span>
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">|--------------------------------+------+------+------|</span>
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">| 2023-07                        | 6:40 |      |      |</span>
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">| \_  2023-07-03                 |      | 5:10 |      |</span>
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">| \_    Impl. a test gRPC server |      |      | 5:10 |</span>
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">| \_  2023-07-04                 |      | 1:30 |      |</span>
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">| \_    Fix client timeout       |      |      | 0:25 |</span>
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">| \_    Add AddOrder handler     |      |      | 1:05 |</span>
-</span></span><span style="display:flex;"><span>#+END
-</span></span></code></pre></div><p>So far, everything looks fine.</p>
-<h2 id="the-problem">The Problem</h2>
-<p>The problem is that my employer wants the report to be in a specific
-format.</p>
-<figure><img src="/img/clock-report.png"/><figcaption>
-            <h4>The required MS Word (sic!) file with the work time report.</h4>
-        </figcaption>
-</figure>
-
-<p>Please note the column #1 should contain <em>a tag</em> of the task, all dates
-should be in the <em>DD.MM.YYYY</em> format, a time spent for the task should
-be in the <em>hh:mm</em> format, left-padded with 0s if required, and the
-total time should be in the <em>hhh:mm</em> format, left-padded with 0s as
-well.</p>
-<p>Here the adventure begins.</p>
-<h2 id="the-adventure">The Adventure</h2>
-<p>I decided to implement my <em>exporter</em> as the Elisp code block inside my
-time tracking org file. Therefore, if I press <code>C-c C-c</code> when the
-cursor is over the <em>exporter</em> code block, Emacs evaluates this block
-and prints the result just below the block. This would allow us to
-make some experiments.</p>
-<p>First of all, I need an access to my clock table entries. After some
-research I found what I need — <code>org-clock-get-table-data</code>, a built-in
-function defined in the <code>org-clock.el[.gz]</code> file (as of Emacs 28.2).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun org-clock-get-table-data (file params)
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Get the clocktable data for file FILE, with parameters PARAMS.
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">FILE is only for identification - this function assumes that
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">the correct buffer is current, and that the wanted restriction is
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">in place.
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">The return value will be a list with the file name and the total
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">file time (in minutes) as 1st and 2nd elements.  The third element
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">of this list will be a list of headline entries.  Each entry has the
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">following structure:
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  (LEVEL HEADLINE TAGS TIMESTAMP TIME PROPERTIES)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">LEVEL:      The level of the headline, as an integer.  This will be
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            the reduced level, so 1,2,3,... even if only odd levels
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            are being used.
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">HEADLINE:   The text of the headline.  Depending on PARAMS, this may
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            already be formatted like a link.
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">TAGS:       The list of tags of the headline.
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">TIMESTAMP:  If PARAMS require it, this will be a time stamp found in the
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            entry, any of SCHEDULED, DEADLINE, NORMAL, or first inactive,
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            in this sequence.
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">TIME:       The sum of all time spend in this tree, in minutes.  This time
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            will of cause be restricted to the time block and tags match
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            specified in PARAMS.
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">PROPERTIES: The list properties specified in the `:properties&#39; parameter
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            along with their value, as an alist following the pattern
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            (NAME . VALUE).&#34;</span>
-</span></span></code></pre></div><p>Let&rsquo;s make an experiment.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>+begin_src elisp
-</span></span><span style="display:flex;"><span>(org-clock-get-table-data <span style="color:#a6e22e">buffer-file-name</span> <span style="color:#f92672">&#39;</span>(:tags <span style="color:#66d9ef">t</span>))
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>+end_src
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>+RESULTS:
-</span></span><span style="display:flex;"><span>| /home/magnolia/Desktop/demo.org | <span style="color:#ae81ff">400</span> | ((<span style="color:#ae81ff">1</span> 2023-07 (<span style="color:#ae81ff">2023</span>) <span style="color:#66d9ef">nil</span> <span style="color:#ae81ff">400</span> <span style="color:#66d9ef">nil</span>) (<span style="color:#ae81ff">2</span> 2023-07-03 (<span style="color:#ae81ff">2023</span>) <span style="color:#66d9ef">nil</span> <span style="color:#ae81ff">310</span> <span style="color:#66d9ef">nil</span>) (<span style="color:#ae81ff">3</span> Impl. a test gRPC server (<span style="color:#ae81ff">2023</span> TEST) <span style="color:#66d9ef">nil</span> <span style="color:#ae81ff">310</span> <span style="color:#66d9ef">nil</span>) (<span style="color:#ae81ff">2</span> 2023-07-04 (<span style="color:#ae81ff">2023</span>) <span style="color:#66d9ef">nil</span> <span style="color:#ae81ff">90</span> <span style="color:#66d9ef">nil</span>) (<span style="color:#ae81ff">3</span> Fix client timeout (<span style="color:#ae81ff">2023</span> FIX) <span style="color:#66d9ef">nil</span> <span style="color:#ae81ff">25</span> <span style="color:#66d9ef">nil</span>) (<span style="color:#ae81ff">3</span> Add AddOrder handler (<span style="color:#ae81ff">2023</span> FEAT) <span style="color:#66d9ef">nil</span> <span style="color:#ae81ff">65</span> <span style="color:#66d9ef">nil</span>)) |
-</span></span></code></pre></div><p>Please note the output is an Org table because the result is a list.
-Please also note the <code>'(:tags t)</code> parameter — it is required because
-we want all tags to be included in the output.</p>
-<p>Obviously, we actually want the 3rd element of the output list.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>+begin_src elisp
-</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">nth</span> <span style="color:#ae81ff">2</span> (org-clock-get-table-data <span style="color:#a6e22e">buffer-file-name</span> <span style="color:#f92672">&#39;</span>(:tags <span style="color:#66d9ef">t</span>)))
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>+end_src
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>+RESULTS:
-</span></span><span style="display:flex;"><span>| <span style="color:#ae81ff">1</span> |                  2023-07 | (<span style="color:#ae81ff">2023</span>)      | <span style="color:#66d9ef">nil</span> | <span style="color:#ae81ff">400</span> | <span style="color:#66d9ef">nil</span> |
-</span></span><span style="display:flex;"><span>| <span style="color:#ae81ff">2</span> |               2023-07-03 | (<span style="color:#ae81ff">2023</span>)      | <span style="color:#66d9ef">nil</span> | <span style="color:#ae81ff">310</span> | <span style="color:#66d9ef">nil</span> |
-</span></span><span style="display:flex;"><span>| <span style="color:#ae81ff">3</span> | Impl. a test gRPC server | (<span style="color:#ae81ff">2023</span> TEST) | <span style="color:#66d9ef">nil</span> | <span style="color:#ae81ff">310</span> | <span style="color:#66d9ef">nil</span> |
-</span></span><span style="display:flex;"><span>| <span style="color:#ae81ff">2</span> |               2023-07-04 | (<span style="color:#ae81ff">2023</span>)      | <span style="color:#66d9ef">nil</span> |  <span style="color:#ae81ff">90</span> | <span style="color:#66d9ef">nil</span> |
-</span></span><span style="display:flex;"><span>| <span style="color:#ae81ff">3</span> |       Fix client timeout | (<span style="color:#ae81ff">2023</span> FIX)  | <span style="color:#66d9ef">nil</span> |  <span style="color:#ae81ff">25</span> | <span style="color:#66d9ef">nil</span> |
-</span></span><span style="display:flex;"><span>| <span style="color:#ae81ff">3</span> |     Add AddOrder handler | (<span style="color:#ae81ff">2023</span> FEAT) | <span style="color:#66d9ef">nil</span> |  <span style="color:#ae81ff">65</span> | <span style="color:#66d9ef">nil</span> |
-</span></span></code></pre></div><p>It seems we are on the right way. The column #1 contains the level of
-the headline, as an integer; #2 — the text of the headline; #3 — the
-list of tags of the headline; #5 — the sum of all time spend in this
-tree, in minutes, as an integer.</p>
-<h3 id="the-magic">The Magic</h3>
-<p>Before implementing the clock table parser, we need some <em>utilities</em>.</p>
-<p>First of all we should convert a date from the ISO 8601 format
-(YYYY-MM-DD) to the European DD.MM.YYYY format.
-According to the <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Time-Parsing.html">GNU Emacs Lisp Reference Manual</a>,
-we can use two built-in functions for this purpose:</p>
-<blockquote>
-<p>Function: <code>format-time-string</code> <em>format-string &amp;optional time zone</em></p>
-<p>This function converts <em>time</em> (which should be a Lisp <strong>timestamp</strong>,
-and defaults to the current time if time is omitted or nil) to a
-string according to format-string.</p>
-</blockquote>
-<p>and</p>
-<blockquote>
-<p>Function: <code>date-to-time</code> <em>string</em></p>
-<p>This function parses the time-string <em>string</em> and returns the
-corresponding Lisp <strong>timestamp</strong>.
-This function assumes Universal Time if <em>string</em> lacks explicit time zone information,
-and <em>assumes earliest values if string lacks month, day, or time</em>.</p>
-</blockquote>
-<p>As we&rsquo;ll see below, the last sentence (in italic) is wrong — at least as of Emacs
-28.2. Maybe it has something to do with
-<a href="https://debbugs.gnu.org/cgi/bugreport.cgi?bug=52209">this bug in Emacs 28</a>,
-I don&rsquo;t know.</p>
-<p>Okay, let&rsquo;s test it out.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>+begin_src elisp
-</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">format-time-string</span> <span style="color:#e6db74">&#34;%d.%m.%Y&#34;</span> (date-to-time <span style="color:#e6db74">&#34;2023-07&#34;</span>))
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>+end_src
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Error: date-to-time: Invalid date: 2023-07
-</span></span></code></pre></div><p>This doesn&rsquo;t work.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>+begin_src elisp
-</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">format-time-string</span> <span style="color:#e6db74">&#34;%d.%m.%Y&#34;</span> (date-to-time <span style="color:#e6db74">&#34;2023-07-04&#34;</span>))
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>+end_src
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Error: date-to-time: Invalid date: 2023-07-04
-</span></span></code></pre></div><p>This doesn&rsquo;t work as well.</p>
-<p>This is where the magic begins. Let&rsquo;s add <em>a fake time component</em>
-<code>T01</code> to the ISO date string.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>+begin_src elisp
-</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">format-time-string</span> <span style="color:#e6db74">&#34;%d.%m.%Y&#34;</span> (date-to-time <span style="color:#e6db74">&#34;2023-07-04T01&#34;</span>))
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>+end_src
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>+RESULTS:
-</span></span><span style="display:flex;"><span><span style="color:#f92672">:</span> 04.07.2023
-</span></span></code></pre></div><p>It worked, I&rsquo;m so happy.</p>
-<p>Now let&rsquo;s implement a utility function that converts a time, in
-minutes, as an integer, to the properly padded  string.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>+begin_src elisp
-</span></span><span style="display:flex;"><span>  (defun my/clock--format-time (time-in-minutes <span style="color:#66d9ef">&amp;optional</span> padding)
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Convert TIME-IN-MINUTES, as an integer, to a string,
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   with hours left-padded with zeroes. Default PADDING is 2.&#34;</span>
-</span></span><span style="display:flex;"><span>    (let* ((hours (<span style="color:#a6e22e">/</span> time-in-minutes <span style="color:#ae81ff">60</span>))
-</span></span><span style="display:flex;"><span>           (minutes (<span style="color:#a6e22e">-</span> time-in-minutes (<span style="color:#a6e22e">*</span> hours <span style="color:#ae81ff">60</span>))))
-</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">format</span> (<span style="color:#a6e22e">concat</span> <span style="color:#e6db74">&#34;%0&#34;</span> (<span style="color:#a6e22e">format</span> <span style="color:#e6db74">&#34;%d&#34;</span> (or padding <span style="color:#ae81ff">2</span>)) <span style="color:#e6db74">&#34;d:%02d&#34;</span>)
-</span></span><span style="display:flex;"><span>               hours minutes)))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; TEST</span>
-</span></span><span style="display:flex;"><span>(my/clock--format-time <span style="color:#ae81ff">310</span>)
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>+end_src
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>+RESULTS:
-</span></span><span style="display:flex;"><span><span style="color:#f92672">:</span> 05:10
-</span></span></code></pre></div><p>Okay, it works.</p>
-<h2 id="the-result">The Result</h2>
-<p>Now let&rsquo;s combine everything together and then evaluate the code
-block.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>+begin_src elisp
-</span></span><span style="display:flex;"><span>  (require <span style="color:#e6db74">&#39;org-clock</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  (defvar my/cur-date <span style="color:#66d9ef">nil</span> <span style="color:#e6db74">&#34;Holds the current entry date.&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  (defun my/clock--format-time (time-in-minutes <span style="color:#66d9ef">&amp;optional</span> padding)
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Convert TIME-IN-MINUTES, as an integer, to a string,
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   with hours left-padded with zeroes. Default PADDING is 2.&#34;</span>
-</span></span><span style="display:flex;"><span>    (let* ((hours (<span style="color:#a6e22e">/</span> time-in-minutes <span style="color:#ae81ff">60</span>))
-</span></span><span style="display:flex;"><span>           (minutes (<span style="color:#a6e22e">-</span> time-in-minutes (<span style="color:#a6e22e">*</span> hours <span style="color:#ae81ff">60</span>))))
-</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">format</span> (<span style="color:#a6e22e">concat</span> <span style="color:#e6db74">&#34;%0&#34;</span> (<span style="color:#a6e22e">format</span> <span style="color:#e6db74">&#34;%d&#34;</span> (or padding <span style="color:#ae81ff">2</span>)) <span style="color:#e6db74">&#34;d:%02d&#34;</span>)
-</span></span><span style="display:flex;"><span>               hours minutes)))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  (defun my/clock--parse-entry (entry)
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Parse the clock table ENTRY, returning a list of row items,
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   depending on the level of the headline.&#34;</span>
-</span></span><span style="display:flex;"><span>    (let* ((level (<span style="color:#a6e22e">car</span> entry))
-</span></span><span style="display:flex;"><span>           (headline (<span style="color:#a6e22e">nth</span> <span style="color:#ae81ff">1</span> entry))
-</span></span><span style="display:flex;"><span>           (tag (<span style="color:#a6e22e">nth</span> <span style="color:#ae81ff">1</span> (<span style="color:#a6e22e">nth</span> <span style="color:#ae81ff">2</span> entry)))
-</span></span><span style="display:flex;"><span>           (minutes (<span style="color:#a6e22e">nth</span> <span style="color:#ae81ff">4</span> entry))
-</span></span><span style="display:flex;"><span>           (date (if (<span style="color:#a6e22e">=</span> level <span style="color:#ae81ff">2</span>)
-</span></span><span style="display:flex;"><span>                     (<span style="color:#a6e22e">format-time-string</span> <span style="color:#e6db74">&#34;%d.%m.%Y&#34;</span>
-</span></span><span style="display:flex;"><span>                         (date-to-time (<span style="color:#a6e22e">concat</span> headline <span style="color:#e6db74">&#34;T01&#34;</span>))))))
-</span></span><span style="display:flex;"><span>      (cond
-</span></span><span style="display:flex;"><span>        ((<span style="color:#a6e22e">=</span> level <span style="color:#ae81ff">1</span>) (<span style="color:#a6e22e">list</span> headline <span style="color:#e6db74">&#34;TOTAL&#34;</span> <span style="color:#e6db74">&#34;&#34;</span> (my/clock--format-time minutes <span style="color:#ae81ff">3</span>)))
-</span></span><span style="display:flex;"><span>        ((<span style="color:#a6e22e">=</span> level <span style="color:#ae81ff">2</span>) (progn (setq my/cur-date date) <span style="color:#66d9ef">nil</span>))
-</span></span><span style="display:flex;"><span>        ((<span style="color:#a6e22e">=</span> level <span style="color:#ae81ff">3</span>) (<span style="color:#a6e22e">list</span> tag headline my/cur-date (my/clock--format-time minutes)))
-</span></span><span style="display:flex;"><span>      )))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; Apply the parser to every entry in the clock table.</span>
-</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">mapcar</span> <span style="color:#a6e22e">#&#39;</span>my/clock--parse-entry
-</span></span><span style="display:flex;"><span>     (<span style="color:#a6e22e">nth</span> <span style="color:#ae81ff">2</span> (org-clock-get-table-data <span style="color:#a6e22e">buffer-file-name</span> <span style="color:#f92672">&#39;</span>(:tags <span style="color:#66d9ef">t</span>))))
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>+end_src
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>+RESULTS:
-</span></span><span style="display:flex;"><span>| 2023-07 | TOTAL                    |            | 006:40 |
-</span></span><span style="display:flex;"><span>| TEST    | Impl. a test gRPC server | 03.07.2023 |  05:10 |
-</span></span><span style="display:flex;"><span>| FIX     | Fix client timeout       | 04.07.2023 |  00:25 |
-</span></span><span style="display:flex;"><span>| FEAT    | Add AddOrder handler     | 04.07.2023 |  01:05 |
-</span></span></code></pre></div><p>Bingo! We&rsquo;ve got what we exactly want — the Org mode table filled with
-properly formatted data. Now I can just copy this table from my work
-time org file to another org file and export it to the ODT file (and
-then save it as the MS Word file).</p>
-<figure><img src="/img/clock-report.png"/><figcaption>
-            <h4>The MS Word file with the work time report.</h4>
-        </figcaption>
-</figure>
-
-<p>Tested on Ubuntu Linux (Pop!_OS 20.10) and MS Windows 10 using Emacs 28.2.</p>
-<h2 id="conclusions">Conclusions</h2>
-<ol>
-<li>We can have access to all the data collected in a clock table.</li>
-<li>Org mode code blocks provide an ideal way to make experiments,
-testing your code, and getting the result <em>inplace</em>.</li>
-<li>In Emacs, you can do everything.</li>
-</ol>
-<p>Happy emacsing!</p>
+<p>Like many of us these days, I&rsquo;m working …</p>
 	</div>
-</article><article class="list__item post">
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/org-export-clocktables/">Read more…</a>
+	</div>
+</div>
+<div class="list__item post">
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
@@ -736,54 +197,13 @@ testing your code, and getting the result <em>inplace</em>.</li>
 anything</a>
 or <a href="https://www.reddit.com/r/emacs/comments/zbpa42/how_to_use_emacs_29_treesitter/">How to use Emacs 29
 Tree-sitter?</a>
-— and decided to share my simple <code>tree-sitter</code> setup that
-seems to be working on my Emacs 28.2 like a charm.</p>
-<h2 id="step-1-os-installing-the--tree-sitter-app">Step 1. OS: Installing the  <code>tree-sitter</code> app</h2>
-<p>First of all, I&rsquo;ve downloaded the latest pre-build binary archive for my
-system from this <a href="https://github.com/tree-sitter/tree-sitter/releases/tag/v0.20.7">GitHub
-repo</a>,
-in my case that is <em>tree-sitter-linux-x64.gz</em> because I&rsquo;m on Pop!_OS
-20.10. Then I&rsquo;ve unpack the archive, put the standalone binary in my
-<code>$HOME/bin</code> that is in my <code>$PATH</code> and therefore is accessible from
-anywhere, and changed its mode to <em>executable</em> by <code>chmod +x tree-sitter</code>.</p>
-<figure><img src="/img/tree-sitter-bin.png"/><figcaption>
-            <h4>The latest tree-sitter app is installed.</h4>
-        </figcaption>
-</figure>
-
-<h2 id="step-2-emacs">Step 2. Emacs</h2>
-<h3 id="step-21-emacs-installing-tree-sitter-packages">Step 2.1. Emacs: Installing <code>tree-sitter</code> packages</h3>
-<p>Then I&rsquo;ve installed <code>tree-sitter</code> (the parsing system) and <code>tree-sitter-langs</code>
-(the grammar bundle) Emacs packages using <code>package-list-packages</code>.</p>
-<figure><img src="/img/tree-sitter-packages.png"/><figcaption>
-            <h4>The tree-sitter packages are installed.</h4>
-        </figcaption>
-</figure>
-
-<h3 id="step-22-emacs-configuring-tree-sitter">Step 2.2. Emacs: Configuring <code>tree-sitter</code></h3>
-<p>I&rsquo;ve added the following lines to my <code>~/.emacs</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;;;; `TREE-SITTER&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; 2022-12-04</span>
-</span></span><span style="display:flex;"><span>(require <span style="color:#e6db74">&#39;tree-sitter</span>)
-</span></span><span style="display:flex;"><span>(require <span style="color:#e6db74">&#39;tree-sitter-langs</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>(global-tree-sitter-mode)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;python-mode-hook</span> <span style="color:#a6e22e">#&#39;</span>tree-sitter-hl-mode)
-</span></span></code></pre></div><p>That&rsquo;s it. Quite simple, isn&rsquo;t it?</p>
-<p>Please pay attention to the last line. It seems that the <em>tree-sitter
-highlighting mode</em> provided by <code>tree-sitter-hl-mode</code> is not activated when
-you load a file into the buffer even if the <em>global tree sitter mode</em> is on.
-Adding the hook for the particular source code mode solves this problem.</p>
-<h2 id="result">Result</h2>
-<figure><img src="/img/tree-sitter-python.png"/>
-</figure>
-
-<p>Now I have a pretty looking Python code.</p>
-<p>More on <code>tree-sitter</code> and its internals can be found at <a href="https://tree-sitter.github.io/tree-sitter/">https://tree-sitter.github.io/tree-sitter/</a>.</p>
-<p>Happy tree-sittering!</p>
+— and decided to share my simple <code>tree-sitter</code> setup that …</p>
 	</div>
-</article>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/a-tree-sitter-config-that-works/">Read more…</a>
+	</div>
+</div>
+
 </main>
 
 <div class="pagination">

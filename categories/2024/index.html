@@ -69,7 +69,7 @@
 <main class="main list" role="main">
 	<header class="main__header">
 		<h1 class="main__title">2024</h1>
-	</header><article class="list__item post">
+	</header><div class="list__item post">
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
@@ -89,145 +89,13 @@
 	<div class="content list__excerpt post__content clearfix">
 		<p>Python is one of my programming languages I&rsquo;m using for both work and
 home life &ndash; no doubt, I&rsquo;d want to use Emacs as an IDE for Python
-programming. There is a certain set of features we&rsquo;d expect to have
-in any IDE: 1) code completion, 2) code navigation, 3) error checking.</p>
-<p>Thanks to the fact that both <code>eglot</code>, the Emacs client for the
-Language Server Protocol (LSP), and <code>tree-sitter</code>, a powerful parsing
-library, are now &ndash; since version 29 &ndash; the parts of Emacs, It should
-not be too hard to construct a lightweight and fast Python IDE.</p>
-<h2 id="choosing-a-language-server">Choosing a Language Server</h2>
-<p>There are a number of the language servers for Python available these days &ndash;
-<a href="https://github.com/python-lsp/python-lsp-server">pylsp</a>,
-<a href="https://github.com/palantir/python-language-server">pyls</a>,
-<a href="https://github.com/microsoft/pyright">pyright</a>,
-<a href="https://github.com/pappasam/jedi-language-server">jedi-language-server</a>.
-After a series of tests, I&rsquo;ve settled on <a href="https://github.com/microsoft/pyright">pyright</a>,
-an open syntax and type checker from Microsoft <em>(sic!)</em> used in Visual Studio Code,
-the fast and reliable one, as for me.</p>
-<p>The Pyright <a href="https://microsoft.github.io/pyright/#/">documentation</a> &ndash;
-a bit weird &ndash; claims that Pyright is just static type checker for Python.
-However, as we&rsquo;ll see later, Pyright can do much more than just type checks.</p>
-<h2 id="a-note-on-the-tree-sitter-package">A note on the Tree-Sitter package</h2>
-<p>The <code>tree-sitter</code> package is optional &ndash; I&rsquo;m using it for
-pretty-looking source code fontification mainly. However, if you want
-to use it you have to pay attention to the following quote from the
-Mickey Petersen&rsquo;s <a href="https://www.masteringemacs.org/article/how-to-get-started-tree-sitter">&lsquo;Mastering Emacs&rsquo;</a>
-book:</p>
-<blockquote>
-<p>And in Emacs 29, support for tree-sitter is built in. Sort of. It&rsquo;s an
-optional extra, so you must compile Emacs from source, or hope that
-someone else will do it for you.</p>
-<p>Neither tree-sitter nor Emacs come installed with language grammars.
-Just like kids&rsquo; toys and batteries, they&rsquo;re sold separately. So you&rsquo;re
-required to download and compile the sources for each language grammar
-you want to use.</p>
-<p><em>&ndash; Mastering Emacs by Mickey Petersen.</em></p>
-</blockquote>
-<p>If you are &ndash; like me &ndash; on Linux, the best way to setup language
-grammars is to compile them from the source code; you can find all grammars
-available on the <a href="https://github.com/orgs/tree-sitter/repositories?type=all">tree-sitter repository</a>.
-More details at <a href="https://www.masteringemacs.org/article/how-to-get-started-tree-sitter">How to Get Started with Tree-Sitter</a>.</p>
-<h2 id="python-prerequisites">Python prerequisites</h2>
-<p>First of all, we need to install the following Python packages &ndash;
-<code>pyright</code> (the language server) and <code>jsonrpc</code> (the transport layer for
-the LSP).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#f92672">[</span>p3<span style="color:#f92672">]</span> $ pip install pyright
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>p3<span style="color:#f92672">]</span> $ pip install jsonrpc
-</span></span></code></pre></div><p>I&rsquo;m running Python in the virtual environment, &ldquo;p3&rdquo; in my case.</p>
-<h2 id="error-checking-with-pyright">Error checking with Pyright</h2>
-<p>Eglot automatically finds a suitable LSP &ndash; Pyright in our case &ndash;
-when you are opening a Python file. I&rsquo;m using the default Pyright
-settings, no extra tuning required.</p>
-<h3 id="pyright-lsp-with-flymake">Pyright LSP with Flymake</h3>
-<p>Flymake is a minor Emacs mode performing on-the-fly syntax checks. I&rsquo;m
-using the <code>flymake</code> built-in Emacs package as an Eglot front-end for
-syntax checks.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(require <span style="color:#e6db74">&#39;flymake</span>)
-</span></span></code></pre></div><p>My custom <code>my/flymake-toggle-diagnostics-buffer</code> function toggles the
-<em>Flymake diagnostics</em> buffer window.</p>
-<p>If there is the Flymake diagnostics buffer associated with a file in
-the current buffer, it shows the diagnostics buffer in the new window
-and switches to it. If the current buffer <em>is</em> the Flymake diagnostics
-buffer, it closes it. Otherwise it just shows the error message.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun my/flymake-toggle-diagnostics-buffer ()
-</span></span><span style="display:flex;"><span>  (interactive)
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; Check if we are in the diagnostics buffer.</span>
-</span></span><span style="display:flex;"><span>  (if (string-search <span style="color:#e6db74">&#34;*Flymake diagnostics&#34;</span> (<span style="color:#a6e22e">buffer-name</span>))
-</span></span><span style="display:flex;"><span>      (delete-window)
-</span></span><span style="display:flex;"><span>    (progn
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Activate the Flymake diagnostics buffer.</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; and switch to it</span>
-</span></span><span style="display:flex;"><span>      (flymake-show-buffer-diagnostics)
-</span></span><span style="display:flex;"><span>      (let ((name (flymake--diagnostics-buffer-name)))
-</span></span><span style="display:flex;"><span>        (if (<span style="color:#a6e22e">get-buffer</span> name)
-</span></span><span style="display:flex;"><span>            (switch-to-buffer-other-window name)
-</span></span><span style="display:flex;"><span>          (<span style="color:#a6e22e">error</span> <span style="color:#e6db74">&#34;No Flymake diagnostics buffer found&#34;</span>)
-</span></span><span style="display:flex;"><span>          )))))
-</span></span></code></pre></div><p>I&rsquo;ve bound this function to the <code>F7</code> key globally since I&rsquo;m using <code>F7</code>
-in other programming modes as well.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(global-set-key [(f7)] <span style="color:#a6e22e">#&#39;</span>my/flymake-toggle-diagnostics-buffer)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Additional bindings.</span>
-</span></span><span style="display:flex;"><span>(global-set-key (kbd <span style="color:#e6db74">&#34;C-c f b&#34;</span>) <span style="color:#a6e22e">#&#39;</span>flymake-show-buffer-diagnostics)
-</span></span><span style="display:flex;"><span>(global-set-key (kbd <span style="color:#e6db74">&#34;C-c f p&#34;</span>) <span style="color:#a6e22e">#&#39;</span>flymake-show-project-diagnostics)
-</span></span></code></pre></div><p>The screenshot below shows what happens if you press <code>F7</code> while
-editing a Python file managed by Eglot + Flymake.</p>
-<figure><a href="/img/python-pyright.png"><img src="/img/python-pyright.png"/></a><figcaption>
-            <h4>Click or tap to view the full-size picture.</h4>
-        </figcaption>
-</figure>
-
-<p>As you can see, Pyright can do much more than just type checks.</p>
-<h2 id="code-completion">Code completion</h2>
-<p>I&rsquo;m using the <a href="https://company-mode.github.io/"><code>company</code></a> package, a
-modular in-buffer completion framework for Emacs, as an Eglot
-front-end for code completion; it integrates with Eglot seamlessly.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;;;; `COMPANY&#39;</span>
-</span></span><span style="display:flex;"><span>(use-package company
-</span></span><span style="display:flex;"><span>  :ensure <span style="color:#66d9ef">t</span>
-</span></span><span style="display:flex;"><span>  :config
-</span></span><span style="display:flex;"><span>  (setq company-idle-delay <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>  (setq company-minimum-prefix-length <span style="color:#ae81ff">2</span>)
-</span></span><span style="display:flex;"><span>  (setq company-show-numbers <span style="color:#66d9ef">t</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; To prevent default down-casing.</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; https://emacs.stackexchange.com/questions/10837/how-to-make-company-mode-be-case-sensitive-on-plain-text</span>
-</span></span><span style="display:flex;"><span>  (setq company-dabbrev-downcase <span style="color:#66d9ef">nil</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">;; 2023-01-13 From a Reddit post on mixed case issue.</span>
-</span></span><span style="display:flex;"><span>  (setq company-dabbrev-ignore-case <span style="color:#66d9ef">nil</span>)
-</span></span><span style="display:flex;"><span>  (setq company-dabbrev-code-ignore-case <span style="color:#66d9ef">nil</span>))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Use `company&#39; everywhere.</span>
-</span></span><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;after-init-hook</span> <span style="color:#e6db74">&#39;global-company-mode</span>)
-</span></span></code></pre></div><figure><a href="/img/python-eglot.png"><img src="/img/python-eglot.png"/></a><figcaption>
-            <h4>Click or tap to view the full-size picture.</h4>
-        </figcaption>
-</figure>
-
-<h2 id="code-navigation">Code navigation</h2>
-<p>I&rsquo;m using the default key bindings for</p>
-<dl>
-<dt><code>xref-find-definitions</code></dt>
-<dd><code>M-.</code> to find the definition of the identifier at point.</dd>
-<dt><code>xref-go-back</code></dt>
-<dd><code>M-,</code> to return back to where you invoked the <code>xref-find-definitions</code> command.</dd>
-<dt><code>xref-find-references</code></dt>
-<dd><code>M-?</code> to find references to the identifier at point.</dd>
-</dl>
-<p>These functions are now powered by Eglot.</p>
-<h2 id="final-notes">Final notes</h2>
-<p>I can recommend to force using Eglot for Python explicitly &ndash;</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(require <span style="color:#e6db74">&#39;eglot</span>)
-</span></span><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;python-mode-hook</span> <span style="color:#e6db74">&#39;eglot-ensure</span>)
-</span></span></code></pre></div><h3 id="a-note-for-tree-sitter-users">A note for Tree-Sitter users</h3>
-<p>If you are using Tree-Sitter for Python, it&rsquo;s recommended to <em>remap</em>
-the <code>python-mode</code> to the Tree-Sitter specific <code>python-ts-mode</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(add-to-list <span style="color:#e6db74">&#39;major-mode-remap-alist</span> <span style="color:#f92672">&#39;</span>(python-mode <span style="color:#f92672">.</span> python-ts-mode))
-</span></span></code></pre></div><p>If this is the case, do not forget to force using Eglot for this mode
-as well.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;python-ts-mode-hook</span> <span style="color:#e6db74">&#39;eglot-ensure</span>)
-</span></span></code></pre></div><p>Happy emacsing!</p>
+programming. There is a certain set of features …</p>
 	</div>
-</article><article class="list__item post">
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/python-programming-in-emacs/">Read more…</a>
+	</div>
+</div>
+<div class="list__item post">
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
@@ -247,75 +115,13 @@ as well.</p>
 	<div class="content list__excerpt post__content clearfix">
 		<p>Some time ago, I decided to customize my Emacs startup screen in order
 to display something helpful for me. Ultimately, after much
-consideration, I settled on the following items I just want to see on
-my startup screen: 1) 3-month calendar, 2) agenda, 3) diary, 4)
-something just for fun.</p>
-<p>No doubt, there are a number of packages that can assist you in making
-a pretty good-looking startup screen &ndash; like
-<a href="https://github.com/ichernyshovvv/enlight">enlight</a>, for instance.
-However, I decided to construct my own startup screen, a very simple
-one.</p>
-<p>It requires having two command line utilities installed on your
-system: <code>fortune</code> to print out a random epigram, and <code>calendar</code> to
-print out some of the events that have occurred on the current date in
-the past. If you, like me, are using Linux or macOS &ndash; it will not be
-difficult to install them.</p>
-<p>And this is what I got&hellip;</p>
-<h2 id="in-the-emacs-init-file">In the <code>.emacs</code> init file</h2>
-<p>First of all, disable the builtin startup screen.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(setq inhibit-startup-screen <span style="color:#66d9ef">t</span>)
-</span></span></code></pre></div><p>Then add a startup hook.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;emacs-startup-hook</span>
-</span></span><span style="display:flex;"><span>  (lambda ()
-</span></span><span style="display:flex;"><span>    (let* ((buffer-today (<span style="color:#a6e22e">get-buffer-create</span> <span style="color:#e6db74">&#34;*today*&#34;</span>))
-</span></span><span style="display:flex;"><span>           (buffer-calendar <span style="color:#e6db74">&#34;*Calendar*&#34;</span>)
-</span></span><span style="display:flex;"><span>           (buffer-agenda <span style="color:#e6db74">&#34;*Org Agenda*&#34;</span>)
-</span></span><span style="display:flex;"><span>           (buffer-diary <span style="color:#e6db74">&#34;*Fancy Diary Entries*&#34;</span>))
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Call calendar first to obtain the current date</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; required to display the diary.</span>
-</span></span><span style="display:flex;"><span>      (calendar)
-</span></span><span style="display:flex;"><span>      (diary)
-</span></span><span style="display:flex;"><span>      (org-agenda-list)
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Fill and show the Today Events buffer.</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; NOTE: requires `fortune&#39; and `calendar&#39; command line utilities.</span>
-</span></span><span style="display:flex;"><span>      (switch-to-buffer buffer-today)
-</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">call-process</span> <span style="color:#e6db74">&#34;fortune&#34;</span> <span style="color:#66d9ef">nil</span> buffer-today)
-</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">insert</span> <span style="color:#e6db74">&#34;\n&#34;</span>)
-</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">call-process</span> <span style="color:#e6db74">&#34;calendar&#34;</span> <span style="color:#66d9ef">nil</span> buffer-today)
-</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">goto-char</span> <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>      (toggle-truncate-lines)
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Maximize the Today Events window</span>
-</span></span><span style="display:flex;"><span>      (delete-other-windows)
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Show Agenda in the lower left quadrant.</span>
-</span></span><span style="display:flex;"><span>      (split-window-vertically)
-</span></span><span style="display:flex;"><span>      (other-window <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>      (switch-to-buffer (<span style="color:#a6e22e">get-buffer</span> buffer-agenda))
-</span></span><span style="display:flex;"><span>      (split-window-horizontally)
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Try to show Diary in the lower right quadrant.</span>
-</span></span><span style="display:flex;"><span>      (other-window <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>      (if (<span style="color:#a6e22e">get-buffer</span> buffer-diary)
-</span></span><span style="display:flex;"><span>          <span style="color:#75715e">;; If Diary exists then show it ...</span>
-</span></span><span style="display:flex;"><span>          (switch-to-buffer (<span style="color:#a6e22e">get-buffer</span> buffer-diary))
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">;; ... else show the scratch buffer.</span>
-</span></span><span style="display:flex;"><span>        (let* ((buffer-scratch (switch-to-buffer (<span style="color:#a6e22e">get-buffer</span> <span style="color:#e6db74">&#34;*scratch*&#34;</span>))))
-</span></span><span style="display:flex;"><span>          (<span style="color:#a6e22e">goto-char</span> (<span style="color:#a6e22e">point-max</span>))
-</span></span><span style="display:flex;"><span>          (<span style="color:#a6e22e">insert</span> (<span style="color:#a6e22e">format-time-string</span> <span style="color:#e6db74">&#34;\n;; No diary entries for %A %d %b&#34;</span>)))
-</span></span><span style="display:flex;"><span>        )
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Go back to the Today Events buffer.</span>
-</span></span><span style="display:flex;"><span>      (other-window <span style="color:#ae81ff">-2</span>)
-</span></span><span style="display:flex;"><span>      (split-window-horizontally)
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Show Calendar in the upper left quadrant.</span>
-</span></span><span style="display:flex;"><span>      (switch-to-buffer (<span style="color:#a6e22e">get-buffer</span> buffer-calendar))
-</span></span><span style="display:flex;"><span>      )))
-</span></span></code></pre></div><h2 id="the-startup-screen">The startup screen</h2>
-<figure><a href="/img/emacs-init-screen.png"><img src="/img/emacs-init-screen.png"/></a><figcaption>
-            <h4>Click or tap to view the full-size picture.</h4>
-        </figcaption>
-</figure>
-
-<p>Happy emacsing!</p>
+consideration, I&rsquo;ve settled on the following items I just want …</p>
 	</div>
-</article><article class="list__item post">
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/emacs-startup-screen/">Read more…</a>
+	</div>
+</div>
+<div class="list__item post">
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
@@ -337,132 +143,13 @@ difficult to install them.</p>
 <a href="https://irreal.org/blog/?p=12595">Some Configuration To Solve Common Problems</a>,
 <a href="https://disqus.com/by/gregbognar/">gregbognar</a> noted that some of my
 configuration <em>is seriously outdated</em>. In some sense, he is absolutely
-correct &ndash; I&rsquo;ve been collecting Emacs settings/tweaks since 2012, and
-keeping them unmodified for 12+ years.</p>
-<p>But on the other hand, it demonstrates how stable and powerful Emacs
-is &ndash; everything is still working! <em>If something works, don&rsquo;t fix it</em>
-&ndash; I&rsquo;ve since tried to apply this rule wherever possible.</p>
-<p>Here are a few functions/enhancements I found helpful.</p>
-<h2 id="dired-mode-enhancements"><code>dired-mode</code> enhancements</h2>
-<h3 id="function-calculate-the-total-size-of-all-marked-files">Function: Calculate the total size of all marked files</h3>
-<p>The custom <code>dired-get-size</code> function calculates the total size of all
-marked files in the dired buffer and displays it in the echo area.
-Files in the dired buffer can be marked with <code>m</code> key and unmarked with
-<code>u</code> key.</p>
-<p>The current version only works on systems with the <code>/usr/bin/du</code>
-system utility, which actually comprise 100% of the (non-Windows)
-systems &ndash; borrowed from <a href="https://oremacs.com/2015/01/12/dired-file-size/">oremacs.com</a>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun dired-get-size ()
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Display file size in dired.&#34;</span>
-</span></span><span style="display:flex;"><span>  (interactive)
-</span></span><span style="display:flex;"><span>  (let ((files (dired-get-marked-files)))
-</span></span><span style="display:flex;"><span>    (with-temp-buffer
-</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">apply</span> <span style="color:#e6db74">&#39;call-process</span> <span style="color:#e6db74">&#34;/usr/bin/du&#34;</span> <span style="color:#66d9ef">nil</span> <span style="color:#66d9ef">t</span> <span style="color:#66d9ef">nil</span> <span style="color:#e6db74">&#34;-sch&#34;</span> files)
-</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">message</span>
-</span></span><span style="display:flex;"><span>       <span style="color:#e6db74">&#34;Size of all marked files: %s&#34;</span>
-</span></span><span style="display:flex;"><span>       (progn
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">re-search-backward</span> <span style="color:#e6db74">&#34;\\(^[ 0-9.,]+[A-Za-z]+\\).*total$&#34;</span>)
-</span></span><span style="display:flex;"><span>         (match-string <span style="color:#ae81ff">1</span>))))))
-</span></span></code></pre></div><p>In my config, <code>dired-get-size</code> is bound to <code>z</code> key in the <code>dired-mode</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; https://oremacs.com/2015/01/12/dired-file-size/</span>
-</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">define-key</span> dired-mode-map <span style="color:#e6db74">&#34;z&#34;</span> <span style="color:#a6e22e">#&#39;</span>dired-get-size)
-</span></span></code></pre></div><figure><img src="/img/dired-z.png"/><figcaption>
-            <h4>The result of pressing the `z` key in dired.</h4>
-        </figcaption>
-</figure>
-
-<h3 id="some-other-dired-mode-enhancements">Some other <code>dired-mode</code> enhancements</h3>
-<h4 id="move-to-the-parent-directory">Move to the parent directory</h4>
-<p>It reuses the current <code>dired</code> buffer for opening the parent
-directory (<a href="https://oremacs.com/2015/01/21/dired-shortcuts/">oremacs.com</a>)
-instead of creating a new buffer.
-Bounded to the <code>a</code> key in <code>dired-mode</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Move to the parent directory.</span>
-</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">define-key</span> dired-mode-map <span style="color:#e6db74">&#34;a&#34;</span>
-</span></span><span style="display:flex;"><span>  (lambda ()
-</span></span><span style="display:flex;"><span>    (interactive)
-</span></span><span style="display:flex;"><span>    (find-alternate-file <span style="color:#e6db74">&#34;..&#34;</span>)))
-</span></span></code></pre></div><h4 id="run-eshell-in-the-current-dired-directory">Run <code>eshell</code> in the current <code>dired</code> directory</h4>
-<p>Bounded to the ` back-tick key in <code>dired-mode</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Run eshell.</span>
-</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">define-key</span> dired-mode-map <span style="color:#e6db74">&#34;`&#34;</span>
-</span></span><span style="display:flex;"><span>  (lambda ()
-</span></span><span style="display:flex;"><span>    (interactive)
-</span></span><span style="display:flex;"><span>    (eshell)))
-</span></span></code></pre></div><h2 id="date-and-time-stamps">Date and time stamps</h2>
-<p>Inserting the date and/or time stamps at the current cursor position.
-You can bind these functions to any key chords you prefer or call the
-corresponding function with <code>M-x</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun my/time-stamp ()
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Insert full date/time stamp as 2024-11-29 10:41 +0100 CET&#34;</span>
-</span></span><span style="display:flex;"><span>  (interactive)
-</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">insert</span> (<span style="color:#a6e22e">format-time-string</span> <span style="color:#e6db74">&#34;%Y-%m-%d %R %z %Z&#34;</span>)))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>(defun my/time-stamp-short ()
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Insert short date/time stamp as 2024-11-29 10:41&#34;</span>
-</span></span><span style="display:flex;"><span>  (interactive)
-</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">insert</span> (<span style="color:#a6e22e">format-time-string</span> <span style="color:#e6db74">&#34;%Y-%m-%d %R&#34;</span>)))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>(defun my/date-stamp ()
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Insert date stamp as 2024-11-29&#34;</span>
-</span></span><span style="display:flex;"><span>  (interactive)
-</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">insert</span> (<span style="color:#a6e22e">format-time-string</span> <span style="color:#e6db74">&#34;%Y-%m-%d&#34;</span>)))
-</span></span></code></pre></div><h2 id="some-editing-tweaks">Some editing tweaks</h2>
-<h3 id="inserting-a-new-line">Inserting a new line</h3>
-<p>Insert a new line, indent it, and move the cursor there. This behavior
-is different then the typical function bound to <code>Enter</code> which may be
-<code>open-line</code> or <code>newline-and-indent</code>. When you call them with the cursor
-between ^ (beginning of line) and $ (end of line), the contents of the
-line to the right of it will be moved to the newly inserted line. <em>This
-function will not do that</em>. Instead, the current line is <em>left alone</em>, a new line
-is inserted, indented, and the cursor is moved there. Borrowed from
-<a href="http://emacsredux.com/blog/2013/03/26/smarter-open-line/">emacsredux</a>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun smart-open-line ()
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Insert a new line, indent it, and move the cursor there.&#34;</span>
-</span></span><span style="display:flex;"><span>  (interactive)
-</span></span><span style="display:flex;"><span>  (move-end-of-line <span style="color:#66d9ef">nil</span>)
-</span></span><span style="display:flex;"><span>  (newline-and-indent))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>(global-set-key (kbd <span style="color:#e6db74">&#34;&lt;C-return&gt;&#34;</span>) <span style="color:#a6e22e">#&#39;</span>smart-open-line)
-</span></span></code></pre></div><p>I have bound it globally to <code>Ctrl-Enter</code> &ndash; <code>C-return</code> in the Emacs
-notation &ndash; so it should work in any mode.</p>
-<h3 id="smart-beginning-of-line">Smart beginning of line</h3>
-<p>Move point to first non-whitespace character or <code>beginning-of-line</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun smart-beginning-of-line ()
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Move point to first non-whitespace character or `beginning-of-line`.&#34;</span>
-</span></span><span style="display:flex;"><span>  (interactive)
-</span></span><span style="display:flex;"><span>  (let ((oldpos (<span style="color:#a6e22e">point</span>)))
-</span></span><span style="display:flex;"><span>    (back-to-indentation)
-</span></span><span style="display:flex;"><span>    (and (<span style="color:#a6e22e">=</span> oldpos (<span style="color:#a6e22e">point</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">beginning-of-line</span>))))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>(global-set-key (kbd <span style="color:#e6db74">&#34;C-a&#34;</span>) <span style="color:#a6e22e">#&#39;</span>smart-beginning-of-line)
-</span></span></code></pre></div><p>I&rsquo;ve rebound the <em>default</em> <code>Ctrl-A</code> &ndash; <code>C-a</code> in the Emacs notation &ndash; to
-move to first non-whitespace character of a line instead of first
-column.</p>
-<h3 id="killing-a-word-at-point">Killing a word at point</h3>
-<p>Deleting the whole word at the cursor position.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun kill-whole-word ()
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Kill the current word at point.&#34;</span>
-</span></span><span style="display:flex;"><span>  (interactive)
-</span></span><span style="display:flex;"><span>  (backward-word)
-</span></span><span style="display:flex;"><span>  (kill-word <span style="color:#ae81ff">1</span>))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">define-key</span> global-map (kbd <span style="color:#e6db74">&#34;&lt;M-DEL&gt;&#34;</span>) <span style="color:#a6e22e">#&#39;</span>kill-whole-word)
-</span></span></code></pre></div><p>I&rsquo;ve rebound it to <code>Alt-delete</code> &ndash; <code>M-DEL</code> in the Emacs notation.</p>
-<h2 id="nuke-all-buffers">Nuke all buffers</h2>
-<p>Kill all buffers, leaving <em>*scratch*</em> only.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defun nuke-all-buffers ()
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Kill all buffers, leaving *scratch* only.&#34;</span>
-</span></span><span style="display:flex;"><span>  (interactive)
-</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">mapc</span>
-</span></span><span style="display:flex;"><span>   (lambda (buffer)
-</span></span><span style="display:flex;"><span>     (<span style="color:#a6e22e">kill-buffer</span> buffer))
-</span></span><span style="display:flex;"><span>   (<span style="color:#a6e22e">buffer-list</span>))
-</span></span><span style="display:flex;"><span>  (delete-other-windows))
-</span></span></code></pre></div><p>To be continued. Happy emacsing!</p>
+correct &ndash; …</p>
 	</div>
-</article><article class="list__item post">
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/some-excerpts-from-config-2-functions/">Read more…</a>
+	</div>
+</div>
+<div class="list__item post">
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
@@ -482,22 +169,13 @@ column.</p>
 		<p>After reading the quite interesting post <a href="https://cestlaz.github.io/post/blue-sky/">Blue Sky</a>
 by <a href="https://bsky.app/profile/zamansky.bsky.social">Mike Zamansky</a> I decided to begin
 my gentle migration to <a href="https://bsky.app/">Bluesky</a>, a new and promising social media platform.</p>
-<p>I completely agree with Mike&rsquo;s opinion on Twitter as well as other
-social platforms. Like many of us, I migrated from
-<a href="https://x.com/ODeuteronomy">Twitter</a> &ndash; keeping my existing account
-there &ndash; to <a href="https://emacs.ch/@olddeuteronomy">Mastodon</a>.
-Unfortunately, Mastodon, largely due to its distributed architecture,
-seems to be more fragile than other platforms &ndash; recently, I have been
-warned that <a href="https://emacs.ch">emacs.ch</a>, a fediverse server I have been using for two
-years now, is about to shutdown in this December.</p>
-<p>Sure, there is a (bit complex) way to transfer your Mastodon account
-to another server &ndash; and here is <a href="https://fedi.tips/transferring-your-mastodon-account-to-another-server/">detailed explanation</a>
-on how to do that. Perhaps, I will do that in the nearest future, but
-who can guarantee that the new server is immune from the same fate?</p>
-<p>Anyway, Bluesky looks promising and I decided to give it a try.
-You can find me at <a href="https://bsky.app/profile/olddeuteronomy.bsky.social">@olddeuteronomy.bsky.social</a>.</p>
+<p>I completely agree with Mike&rsquo;s …</p>
 	</div>
-</article><article class="list__item post">
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/migration-to-bluesky/">Read more…</a>
+	</div>
+</div>
+<div class="list__item post">
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
@@ -517,182 +195,13 @@ You can find me at <a href="https://bsky.app/profile/olddeuteronomy.bsky.social"
 	<div class="content list__excerpt post__content clearfix">
 		<p>I&rsquo;m happy to be back after one year away and it feels great.</p>
 <p>Below are some chaotic mini/micro &ndash; or even nano &ndash; excerpts from my
-<code>~/.emacs</code> file I have been tuning in for 12 years. These days, I&rsquo;m
-running Emacs 29.4 on Ubuntu (Pop!_OS) 22.04 and, rarely, on macOS.</p>
-<p>These tweaks have been collected from various sources; I provide a
-reference to the source if available.</p>
-<h2 id="checking-the-operating-system-emacs-is-running-on">Checking the operating system Emacs is running on</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defvar my/os-linux (<span style="color:#a6e22e">string-equal</span> system-type <span style="color:#e6db74">&#34;gnu/linux&#34;</span>) <span style="color:#e6db74">&#34;I&#39;m on Linux&#34;</span>)
-</span></span><span style="display:flex;"><span>(defvar my/os-macos (<span style="color:#a6e22e">string-equal</span> system-type <span style="color:#e6db74">&#34;darwin&#34;</span>) <span style="color:#e6db74">&#34;Oh, I&#39;m on macOS&#34;</span>)
-</span></span><span style="display:flex;"><span>(defvar my/os-windows (<span style="color:#a6e22e">string-equal</span> system-type <span style="color:#e6db74">&#34;windows-nt&#34;</span>) <span style="color:#e6db74">&#34;OMG, that&#39;s Windows!&#34;</span>)
-</span></span></code></pre></div><h2 id="macos-keyboard">macOS keyboard</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Disable Command key and enable Options as Meta.</span>
-</span></span><span style="display:flex;"><span>(if my/os-macos
-</span></span><span style="display:flex;"><span>    (setq mac-command-key-is-meta <span style="color:#66d9ef">nil</span>
-</span></span><span style="display:flex;"><span>          mac-command-modifier <span style="color:#e6db74">&#39;super</span>
-</span></span><span style="display:flex;"><span>          mac-option-key-is-meta <span style="color:#66d9ef">t</span>
-</span></span><span style="display:flex;"><span>          mac-option-modifier <span style="color:#e6db74">&#39;meta</span>))
-</span></span></code></pre></div><h2 id="everything-is-utf-8">Everything is UTF-8</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(set-language-environment <span style="color:#e6db74">&#39;utf-8</span>)
-</span></span><span style="display:flex;"><span>(setq locale-coding-system <span style="color:#e6db74">&#39;utf-8</span>)
-</span></span><span style="display:flex;"><span>(setq buffer-file-coding-system <span style="color:#e6db74">&#39;utf-8-unix</span>)
-</span></span><span style="display:flex;"><span>(set-terminal-coding-system <span style="color:#e6db74">&#39;utf-8</span>)
-</span></span><span style="display:flex;"><span>(set-keyboard-coding-system <span style="color:#e6db74">&#39;utf-8</span>)
-</span></span><span style="display:flex;"><span>(set-selection-coding-system <span style="color:#e6db74">&#39;utf-8</span>)
-</span></span><span style="display:flex;"><span>(prefer-coding-system <span style="color:#e6db74">&#39;utf-8</span>)
-</span></span></code></pre></div><h2 id="smooth-scrolling">Smooth scrolling</h2>
-<p>Borrowed from <a href="http://home.thep.lu.se/~karlf/emacs.html">http://home.thep.lu.se/~karlf/emacs.html</a></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(setq scroll-step <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Marker distance from center (don&#39;t jump to center).</span>
-</span></span><span style="display:flex;"><span>(setq scroll-conservatively <span style="color:#ae81ff">100000</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Try to keep screen position when PgDn/PgUp.</span>
-</span></span><span style="display:flex;"><span>(setq scroll-preserve-screen-position <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Start scrolling when marker at top/bottom.</span>
-</span></span><span style="display:flex;"><span>(setq scroll-margin <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Mouse scroll moves 1 line at a time, instead of 5 lines.</span>
-</span></span><span style="display:flex;"><span>(setq mouse-wheel-scroll-amount <span style="color:#f92672">&#39;</span>(<span style="color:#ae81ff">1</span>))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; On a long mouse scroll keep scrolling by 1 line.</span>
-</span></span><span style="display:flex;"><span>(setq mouse-wheel-progressive-speed <span style="color:#66d9ef">nil</span>)
-</span></span></code></pre></div><h2 id="some-helpful-tips-for-emacsing-in-comfort">Some helpful tips for emacsing in comfort</h2>
-<h3 id="clipboard">Clipboard</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Non-nil means cutting and pasting uses the clipboard.</span>
-</span></span><span style="display:flex;"><span>(setq x-select-enable-clipboard <span style="color:#66d9ef">t</span>)
-</span></span></code></pre></div><h3 id="turning-off-some-annoying-features">Turning off some annoying features</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; No ToolBar, please.</span>
-</span></span><span style="display:flex;"><span>(tool-bar-mode <span style="color:#ae81ff">-1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; No alarms, please.</span>
-</span></span><span style="display:flex;"><span>(setq ring-bell-function <span style="color:#e6db74">&#39;ignore</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; No lock files, please.</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; https://emacs.stackexchange.com/questions/78800/how-to-disable-automatic-appearance-of-warnings-buffer-in-emacs</span>
-</span></span><span style="display:flex;"><span>(setq create-lockfiles <span style="color:#66d9ef">nil</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Sentences do not need double spaces to end. Period.</span>
-</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">set-default</span> <span style="color:#e6db74">&#39;sentence-end-double-space</span> <span style="color:#66d9ef">nil</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Replace &#34;yes&#34; by &#34;y&#34;.</span>
-</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">fset</span> <span style="color:#e6db74">&#39;yes-or-no-p</span> <span style="color:#e6db74">&#39;y-or-n-p</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Don’t use dialog boxes.</span>
-</span></span><span style="display:flex;"><span>(setq use-dialog-box <span style="color:#66d9ef">nil</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; For gpg (works on Ubuntu and macOS) to disable custom prompt.</span>
-</span></span><span style="display:flex;"><span>(setenv <span style="color:#e6db74">&#34;GPG_AGENT_INFO&#34;</span> <span style="color:#66d9ef">nil</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Speedup cursor movement.</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; https://emacs.stackexchange.com/questions/28736/emacs-pointcursor-movement-lag/28746</span>
-</span></span><span style="display:flex;"><span>(setq auto-window-vscroll <span style="color:#66d9ef">nil</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Spaces instead of tabs when indenting.</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Some people may not agree with this though.</span>
-</span></span><span style="display:flex;"><span>(setq-default indent-tabs-mode <span style="color:#66d9ef">nil</span>)
-</span></span></code></pre></div><h3 id="turning-on-some-helpful-features">Turning on some helpful features</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Nonzero means echo unfinished commands after this many seconds of</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; pause. The value may be integer or floating point. If the value is</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; zero, don’t echo at all.</span>
-</span></span><span style="display:flex;"><span>(setq echo-keystrokes <span style="color:#ae81ff">0.01</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Winner mode is a global minor mode that records the changes in the</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; window configuration.</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Window-Convenience.html</span>
-</span></span><span style="display:flex;"><span>(winner-mode <span style="color:#66d9ef">t</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Turn on highlighting current line.</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; http://ergoemacs.org/emacs/emacs_make_modern.html</span>
-</span></span><span style="display:flex;"><span>(global-hl-line-mode <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Replace highlighted text with what I type rather than just</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; inserting at point.</span>
-</span></span><span style="display:flex;"><span>(delete-selection-mode <span style="color:#66d9ef">t</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Restore opened files.</span>
-</span></span><span style="display:flex;"><span>(desktop-save-mode <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Save minibuffer history.</span>
-</span></span><span style="display:flex;"><span>(savehist-mode <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; When on a tab, make the cursor the tab length.</span>
-</span></span><span style="display:flex;"><span>(setq-default x-stretch-cursor <span style="color:#66d9ef">t</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Auto refresh dired when file changes.</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; http://pragmaticemacs.com/emacs/automatically-revert-buffers/</span>
-</span></span><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;dired-mode-hook</span> <span style="color:#e6db74">&#39;auto-revert-mode</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Auto refresh dired, but be quiet about it.</span>
-</span></span><span style="display:flex;"><span>(setq global-auto-revert-non-file-buffers <span style="color:#66d9ef">t</span>)
-</span></span><span style="display:flex;"><span>(setq auto-revert-verbose <span style="color:#66d9ef">nil</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Automatically reload files was modified by external program.</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; https://www.emacswiki.org/emacs/AutoRevertMode</span>
-</span></span><span style="display:flex;"><span>(global-auto-revert-mode <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Make URLs in comments/strings clickable, (Emacs &gt; v22).</span>
-</span></span><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;find-file-hooks</span> <span style="color:#e6db74">&#39;goto-address-prog-mode</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Display fringe indicators in `visual-line-mode`.</span>
-</span></span><span style="display:flex;"><span>(setq visual-line-fringe-indicators <span style="color:#f92672">&#39;</span>(left-curly-arrow right-curly-arrow))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Switching the focus to the help window when it&#39;s opened.</span>
-</span></span><span style="display:flex;"><span>(setq help-window-select <span style="color:#66d9ef">t</span>)
-</span></span></code></pre></div><h3 id="frame-title">Frame title</h3>
-<p>Template for displaying the title bar of visible frames.
-(Assuming the window manager supports this feature.)</p>
-<p>This variable has the same structure as <code>mode-line-format</code>, except that
-the %c, %C, and %l constructs are ignored.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Frame title.</span>
-</span></span><span style="display:flex;"><span>(setq frame-title-format <span style="color:#e6db74">&#34;%F--%b-[%f]--%Z&#34;</span>)
-</span></span></code></pre></div><h3 id="electric-pair-mode">Electric Pair mode</h3>
-<p>Electric Pair mode is a global minor mode. When enabled, typing an
-open parenthesis automatically inserts the corresponding closing
-parenthesis, and vice versa. (Likewise for brackets, etc.). If the
-region is active, the parentheses (brackets, etc.) are inserted around
-the region instead.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Global.</span>
-</span></span><span style="display:flex;"><span>(electric-pair-mode <span style="color:#ae81ff">1</span>)
-</span></span></code></pre></div><h2 id="calendar-tweaks">Calendar tweaks</h2>
-<p>If you want to be informed about the times of sunrise and sunset for
-any date at your location, Emacs is always ready to lend a hand &ndash; you
-just need to provide your coordinates to Emacs. Use one decimal place
-in the values of <code>calendar-latitude</code> and <code>calendar-longitude</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(defvar calendar-latitude NN.N)
-</span></span><span style="display:flex;"><span>(defvar calendar-longitude NN.N)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Number of minutes difference between local standard time and UTC.</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; For example, -300 for New York City, -480 for Los Angeles.</span>
-</span></span><span style="display:flex;"><span>(defvar calendar-time-zone NNN)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Optional, the default value is just the variable `calendar-latitude`</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; paired with the variable `calendar-longitude`.</span>
-</span></span><span style="display:flex;"><span>(defvar calendar-location-name <span style="color:#e6db74">&#34;Your City, Your Country&#34;</span>)
-</span></span></code></pre></div><p>Within the calendar, the following commands are available:</p>
-<dl>
-<dt><code>S</code></dt>
-<dd>Display times of sunrise and sunset for the selected date (<code>calendar-sunrise-sunset</code>).</dd>
-<dt><code>M-x sunrise-sunset</code></dt>
-<dd>Display times of sunrise and sunset for today&rsquo;s date.</dd>
-<dt><code>C-u M-x sunrise-sunset</code></dt>
-<dd>Display times of sunrise and sunset for a specified date.</dd>
-<dt><code>M-x calendar-sunrise-sunset-month</code></dt>
-<dd>Display times of sunrise and sunset for the selected month.</dd>
-</dl>
-<p>The command <code>M-x sunrise-sunset</code> is also available outside the
-calendar to display the sunrise and sunset information for today&rsquo;s
-date in the echo area.</p>
-<h3 id="some-other-calendar-tweaks">Some other Calendar tweaks</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; First day of the week: 0:Sunday, 1:Monday.</span>
-</span></span><span style="display:flex;"><span>(defvar calendar-week-start-day <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Use European date format (DD/MM/YYYY or 9 October 2024).</span>
-</span></span><span style="display:flex;"><span>(defvar calendar-date-style <span style="color:#e6db74">&#39;european</span>)
-</span></span></code></pre></div><p>To be continued. Happy emacsing!</p>
+<code>~/.emacs</code> file I have been tuning in for 12 years. …</p>
 	</div>
-</article>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/some-excerpts-from-my-emacs-config/">Read more…</a>
+	</div>
+</div>
+
 </main>
 
 

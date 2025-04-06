@@ -69,7 +69,7 @@
 <main class="main list" role="main">
 	<header class="main__header">
 		<h1 class="main__title">Posts</h1>
-	</header><article class="list__item post">
+	</header><div class="list__item post">
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
@@ -89,44 +89,13 @@
 		<p>I&rsquo;m a big fan of Eshell, but some things in Eshell look, hmm,
 a bit strange. One of such things is how the Eshell&rsquo;s command <code>clear</code> clears
 the screen.</p>
-<p>As it is decribed at the Unix Wiki page, <em><code>clear</code> is a computer operating
-system command which is used to bring the command line on top of the
-computer terminal.</em> The key words are &ldquo;bring the command line <strong>on top</strong>&rdquo;.</p>
-<p>The Eshell&rsquo;s <code>clear</code> works in a different way, it brings the command
-prompt <strong>on bottom</strong>, instead.</p>
-<figure><img src="/img/eshell-clear-1.png"/><figcaption>
-            <h4>Using the `clear` command to clear the Eshell screen.</h4>
-        </figcaption>
-</figure>
-
-<figure><img src="/img/eshell-clear-2.png"/><figcaption>
-            <h4>After the `clear`, the command prompt has been moved on bottom.</h4>
-        </figcaption>
-</figure>
-
-<p>Just recently, I&rsquo;ve accidently discovered an unexpected, at least for me, workaround
-(from this Stackexchange
-<a href="https://emacs.stackexchange.com/questions/12503/how-to-clear-the-eshell">thread</a>).
-To clear the Eshell screen you just need to type <code>clear 1</code> instead of
-just <code>clear</code>.</p>
-<figure><img src="/img/eshell-clear1-1.png"/><figcaption>
-            <h4>Using the `clear 1` command to clear the Eshell screen.</h4>
-        </figcaption>
-</figure>
-
-<figure><img src="/img/eshell-clear1-2.png"/><figcaption>
-            <h4>After the `clear 1`, it&#39;s OK now.</h4>
-        </figcaption>
-</figure>
-
-<p>Of course, then I&rsquo;ve immediately added an alias for <code>clear 1</code> to my
-Eshell aliases configuration file <code>~/.emacs.d/eshell/alias</code>.</p>
-<pre tabindex="0"><code>alias cls clear 1
-</code></pre><p>More on Eshell aliases you can find
-in my post <a href="https://olddeuteronomy.github.io/post/eshell-aliases-and-prompt/">Eshell Aliases, Prompt, And Colors</a>.</p>
-<p>Perhaps you can use this trick for your eshelling.</p>
+<p>As it is decribed at the Unix Wiki …</p>
 	</div>
-</article><article class="list__item post">
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/how-to-clear-the-eshell/">Read more…</a>
+	</div>
+</div>
+<div class="list__item post">
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
@@ -148,13 +117,13 @@ post</a> with a reference to the Vernon
 Grant&rsquo;s
 <a href="https://github.com/VernonGrant/emacs-keyboard-shortcuts">emacs-keyboard-shortcuts</a>
 README that contains a list of Emacs keyboard shortcuts Vernon uses on
-a regular basis.</p>
-<p>It&rsquo;s worth to bookmark it or to download the markdown README locally even
-if you think you know Emacs very well (there is no such people,
-though).</p>
-<p>Many thanks to both Irreal and Vernon.</p>
+a regular basis. …</p>
 	</div>
-</article><article class="list__item post">
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/emacs-shortcuts/">Read more…</a>
+	</div>
+</div>
+<div class="list__item post">
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
@@ -174,84 +143,13 @@ though).</p>
 		<p>If you are an emacser, you are probably already following the <a href="https://sachachua.com/blog/">Sacha
 Chua&rsquo;s blog</a>. If you are not, you should.
 Sacha maintains an incredible blog on Emacs-related news, upcoming
-events, Org Mode, configuration, new packages, and many other things
-from the Emacs world.</p>
-<p>English is not my native language so I need <em>the right tools</em> to
-improve my language skills. My favorite tool is the
-<a href="https://www.reverso.net/text-translation">Reverso</a> web service, an
-AI-powered service for translation, grammar check, context, and
-synonyms search.</p>
-<p>Of course, I&rsquo;d prefer to use it in Emacs directly, and in
-<a href="https://sachachua.com/blog/2022/08/2022-08-29-emacs-news/">one</a> of
-the latest Sacha&rsquo;s posts I found what I had been searching for -
-<a href="https://github.com/SqrtMinusOne/reverso.el">reverso.el</a>.</p>
-<p>At the time of writing, the package isn’t yet available anywhere but
-in the author&rsquo;s GitHub repository, so as a first step you need either
-to download or to clone this package to your box.</p>
-<p>I&rsquo;ve cloned it to my <code>~/emacs.d/extras/</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone https://github.com/SqrtMinusOne/reverso.el.git
-</span></span></code></pre></div><p>Secondly, you need to add this directory to your <code>load-path</code> and
-<code>require</code> the package.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(add-to-list <span style="color:#e6db74">&#39;load-path</span> <span style="color:#e6db74">&#34;~/.emacs.d/extras/reverso.el/&#34;</span>)
-</span></span></code></pre></div><p>Almost done.</p>
-<p>Because I&rsquo;m using Reverso quite often, I decided to implement a
-<em>smart</em> start-up function and to bind it to a <em>common</em> key like
-<code>&lt;F9&gt;</code>. I want to distinguish between the <em>Translation</em> (applied to a
-single word) and the <em>Context</em> (applied to a phrase or a sentence)
-features of Reverso. So now if you press <code>&lt;F9&gt;</code> <em>and</em> there is some
-region selected (active, in terminology of Emacs), <code>reverso-context</code>
-is called, else, if no region selected, <code>reverso-translate</code> is
-called for a word under the cursor.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Reverso context</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">;; https://github.com/SqrtMinusOne/reverso.el</span>
-</span></span><span style="display:flex;"><span>(require <span style="color:#e6db74">&#39;reverso</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>(defun avs/reverso ()
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Calls </span><span style="color:#e6db74">`reverso&#39;</span><span style="color:#e6db74"> functions depending on selection.
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">If a region (selection) is active, calls </span><span style="color:#e6db74">`reverso-context&#39;</span><span style="color:#e6db74">,
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">otherwise calls </span><span style="color:#e6db74">`reverso-translate&#39;</span><span style="color:#e6db74"> for a word under the cursor.&#34;</span>
-</span></span><span style="display:flex;"><span>  (interactive)
-</span></span><span style="display:flex;"><span>  (if (region-active-p)
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">;; Region is active, use context.</span>
-</span></span><span style="display:flex;"><span>      (reverso-context)
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">;; Region is not active, get word coordinates...</span>
-</span></span><span style="display:flex;"><span>    (let ((bounds (bounds-of-thing-at-point <span style="color:#e6db74">&#39;word</span>))
-</span></span><span style="display:flex;"><span>          (p (<span style="color:#a6e22e">point</span>))
-</span></span><span style="display:flex;"><span>          )
-</span></span><span style="display:flex;"><span>      (if bounds
-</span></span><span style="display:flex;"><span>          (progn
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">;; ...select the word under cursor...</span>
-</span></span><span style="display:flex;"><span>            (<span style="color:#a6e22e">goto-char</span> (<span style="color:#a6e22e">car</span> bounds))
-</span></span><span style="display:flex;"><span>            (set-mark-command <span style="color:#66d9ef">nil</span>)
-</span></span><span style="display:flex;"><span>            (<span style="color:#a6e22e">goto-char</span> (<span style="color:#a6e22e">cdr</span> bounds))
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">;; ...and translate it.</span>
-</span></span><span style="display:flex;"><span>            (reverso-translate)
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">;; Then back to the initial position.</span>
-</span></span><span style="display:flex;"><span>            (deactivate-mark)
-</span></span><span style="display:flex;"><span>            (<span style="color:#a6e22e">goto-char</span> p)
-</span></span><span style="display:flex;"><span>            )
-</span></span><span style="display:flex;"><span>        (<span style="color:#a6e22e">error</span> <span style="color:#e6db74">&#34;No word under cursor!&#34;</span>)
-</span></span><span style="display:flex;"><span>        )
-</span></span><span style="display:flex;"><span>      )
-</span></span><span style="display:flex;"><span>    )
-</span></span><span style="display:flex;"><span>  )
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>(global-set-key [(f9)] <span style="color:#a6e22e">#&#39;</span>avs/reverso)
-</span></span></code></pre></div><figure><img src="/img/reverso-translate.png"/><figcaption>
-            <h4>The word &#39;deposed&#39; is under the cursor, no region is active, &lt;F9&gt; calls `reverso-translate&#39;.</h4>
-        </figcaption>
-</figure>
-
-<figure><img src="/img/reverso-context.png"/><figcaption>
-            <h4>The region &#39;different kind of weather&#39; is active, &lt;F9&gt; calls `reverso-context&#39;</h4>
-        </figcaption>
-</figure>
-
-<p>Many thanks to <a href="https://github.com/SqrtMinusOne">Pavel Korytov</a> for
-the excellent packages, and, indeed, to <a href="https://sachachua.com/blog/contact/">Sacha
-Chua</a> for pointing it out to all of us.</p>
+events, Org Mode, …</p>
 	</div>
-</article><article class="list__item post">
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/reverso-context-in-emacs/">Read more…</a>
+	</div>
+</div>
+<div class="list__item post">
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
@@ -270,79 +168,13 @@ Chua</a> for pointing it out to all of us.</p>
 	<div class="content list__excerpt post__content clearfix">
 		<p>As it&rsquo;s described in the GNU Emacs Manual, <em>an abbreviation or abbrev
 is a string of characters that may be expanded to a longer string. The
-user can insert the abbrev string and find it replaced automatically
-with the expansion of the abbrev. This saves typing</em>.</p>
-<p>Mostly I use builtin <strong>abbrev</strong> package to enter the special
-characters like greek letters, arrow symbols etc.</p>
-<p>Below is my setup of <strong>abbrev</strong> from my <code>~/.emacs</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(setq abbrev-file-name                <span style="color:#75715e">;; Tell Emacs where to read abbrev</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;~/.emacs.d/abbrev_defs.el&#34;</span>)    <span style="color:#75715e">;; Definitions from...</span>
-</span></span><span style="display:flex;"><span>(setq save-abbrevs <span style="color:#66d9ef">t</span>)                 <span style="color:#75715e">;; (ask) save abbrevs when files are saved</span>
-</span></span><span style="display:flex;"><span>(setq-default abbrev-mode <span style="color:#66d9ef">t</span>)          <span style="color:#75715e">;; Turn it on globally</span>
-</span></span><span style="display:flex;"><span>(if (<span style="color:#a6e22e">file-exists-p</span> abbrev-file-name) (quietly-read-abbrev-file))
-</span></span></code></pre></div><p>Here is my abbrev definition file <code>~/.emacs.d/abbrev_defs.el</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Time-stamp: &lt;Last changed 2022-08-16 16:38:50 by magnolia&gt;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>(define-abbrev-table <span style="color:#e6db74">&#39;global-abbrev-table</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#39;</span>(
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8alpha&#34;</span>   <span style="color:#e6db74">&#34;α&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8beta&#34;</span>    <span style="color:#e6db74">&#34;β&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8gamma&#34;</span>   <span style="color:#e6db74">&#34;γ&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8Delta&#34;</span>   <span style="color:#e6db74">&#34;Δ&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8delta&#34;</span>   <span style="color:#e6db74">&#34;δ&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8theta&#34;</span>   <span style="color:#e6db74">&#34;θ&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8ksi&#34;</span>     <span style="color:#e6db74">&#34;ξ&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8lambda&#34;</span>  <span style="color:#e6db74">&#34;λ&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8mu&#34;</span>      <span style="color:#e6db74">&#34;µ&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8nu&#34;</span>      <span style="color:#e6db74">&#34;ν&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8pi&#34;</span>      <span style="color:#e6db74">&#34;π&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8Sigma&#34;</span>   <span style="color:#e6db74">&#34;Σ&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8sigma&#34;</span>   <span style="color:#e6db74">&#34;σ&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8tau&#34;</span>     <span style="color:#e6db74">&#34;τ&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8phi&#34;</span>     <span style="color:#e6db74">&#34;φ&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8psi&#34;</span>     <span style="color:#e6db74">&#34;ψ&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8Omega&#34;</span>   <span style="color:#e6db74">&#34;Ω&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8omega&#34;</span>   <span style="color:#e6db74">&#34;ω&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8in&#34;</span>      <span style="color:#e6db74">&#34;∈&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8nin&#34;</span>     <span style="color:#e6db74">&#34;∉&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8almost&#34;</span>  <span style="color:#e6db74">&#34;≈&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8inf&#34;</span>     <span style="color:#e6db74">&#34;∞&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8deg&#34;</span>     <span style="color:#e6db74">&#34;°&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8cels&#34;</span>    <span style="color:#e6db74">&#34;℃&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8right&#34;</span>   <span style="color:#e6db74">&#34;→&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8left&#34;</span>    <span style="color:#e6db74">&#34;←&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8up&#34;</span>      <span style="color:#e6db74">&#34;↑&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8down&#34;</span>    <span style="color:#e6db74">&#34;↓&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8para&#34;</span>    <span style="color:#e6db74">&#34;§&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8copy&#34;</span>    <span style="color:#e6db74">&#34;©&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8reg&#34;</span>     <span style="color:#e6db74">&#34;®&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8tm&#34;</span>      <span style="color:#e6db74">&#34;™&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8eur&#34;</span>     <span style="color:#e6db74">&#34;€&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8pound&#34;</span>   <span style="color:#e6db74">&#34;£&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8plusmin&#34;</span> <span style="color:#e6db74">&#34;±&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8sup1&#34;</span>    <span style="color:#e6db74">&#34;¹&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8sup2&#34;</span>    <span style="color:#e6db74">&#34;²&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8sup3&#34;</span>    <span style="color:#e6db74">&#34;³&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8ldquo&#34;</span>   <span style="color:#e6db74">&#34;«&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8rdquo&#34;</span>   <span style="color:#e6db74">&#34;»&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8range&#34;</span>   <span style="color:#e6db74">&#34;÷&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8not&#34;</span>     <span style="color:#e6db74">&#34;¬&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8mdot&#34;</span>    <span style="color:#e6db74">&#34;·&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8bull&#34;</span>    <span style="color:#e6db74">&#34;∙&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8accent&#34;</span>  <span style="color:#e6db74">&#34;´&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8mdash&#34;</span>   <span style="color:#e6db74">&#34;—&#34;</span>)
-</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;8ndash&#34;</span>   <span style="color:#e6db74">&#34;–&#34;</span>)))
-</span></span></code></pre></div><p>Just after you type an abbreviation following by either SPC or any
-punctuation symbol it is replaced by the corresponding character.</p>
-<p>Of course, I&rsquo;ve compiled this setup from various sources, mostly from
-the <a href="https://impaktor.gitlab.io/dot_emacs.html#org87d6718">Impaktor&rsquo;s article</a>
-with some additions.</p>
-<p>It&rsquo;s also worth to read the <a href="http://xahlee.info/emacs/emacs/emacs_abbrev_mode_tutorial.html">Xah Lee&rsquo;s article</a>
-for more examples of how to use <strong>abbrev</strong> mode in your daily Emacs
-life.</p>
-<p>Happy abbreving.</p>
+user can insert the abbrev string and find it replaced …</em></p>
 	</div>
-</article><article class="list__item post">
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/use-abbrev-to-enter-special-characters/">Read more…</a>
+	</div>
+</div>
+<div class="list__item post">
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
@@ -363,76 +195,13 @@ life.</p>
 <p>Do you use #Emacs to run shells or terminal emulators?
 Well, you should. With vterm you have a fast alternative to the
 builtin ansi-term. And if you prefer shells, you&rsquo;ve got EShell and
-Shell Mode.
-And don&rsquo;t forget serial-term for embedded programming.
-— Mickey Petersen (@mickeynp) on Twitter, July 18, 2022.</p>
-</blockquote>
-<h2 id="eshell-aliases">Eshell Aliases</h2>
-<p>An excellent
-<a href="https://www.masteringemacs.org/article/running-shells-in-emacs-overview">post</a>
-from Mickey Petersen, a famous Emacs guru and the author of
-<a href="https://www.masteringemacs.org/"><em>Mastering Emacs</em></a> reminded me to
-share my eshell configuration.</p>
-<p>There are 2 ways to configure eshell aliases. <a href="http://www.gonsie.com/blorg/eshell.html">Elsa
-Gonsiorowski</a> uses a
-special configuration file <code>~/.emacs.d/eshell/alias</code> while <a href="https://github.com/howardabrams/dot-files/blob/master/emacs-eshell.org#aliases">Howard
-Abrams</a>
-prefers to put his eshell alias settings to <code>.emacs</code> or <code>init.el</code>.
-Personally, I prefer the former approach.</p>
-<p>Here is my <code>~/.emacs.d/eshell/alias</code>.</p>
-<pre tabindex="0"><code>alias ll ls -AFGhl --color=always $1
-alias ff find-file $1
-alias e find-file-other-window $1
-alias d dired $1
-alias gd magit-diff-unstaged
-alias gds magit-diff-staged
-alias gg git log --color --graph --oneline --abbrev-commit --decorate --all --date=short --pretty=format:&#34;%C(cyan)%h %C(yellow)%ad %C(bold green)%d %C(reset)%s&#34;
-</code></pre><p>Most of these aliases are obvious, e.g. <code>ll</code> prints extended directory
-listing, <code>ff somefile</code> opens <em>somefile</em> for editing in the same
-window, <code>e somefile</code> uses other window to edit <em>somefile</em>, <code>d</code> opens
-the dired buffer in the same window, etc. The last one prints
-the colorized one-line git log as shown below.</p>
-<figure><img src="/img/gg2.png"/>
-</figure>
-
-<h2 id="eshell-prompt">Eshell Prompt</h2>
-<p>The prompt you can see on the screenshot above is borrowed from the
-Reddit
-<a href="https://www.reddit.com/r/emacs/comments/6f0rkz/my_fancy_eshell_prompt/">post</a>
-with some colors optimized for the Solarized Dark theme.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(setq eshell-prompt-function
-</span></span><span style="display:flex;"><span>      (lambda ()
-</span></span><span style="display:flex;"><span>        (<span style="color:#a6e22e">concat</span>
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;┌─[&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> (<span style="color:#a6e22e">user-login-name</span>) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#dc322f&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;@&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> (<span style="color:#a6e22e">system-name</span>) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#268bd2&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;]──[&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> (<span style="color:#a6e22e">format-time-string</span> <span style="color:#e6db74">&#34;%H:%M&#34;</span> (<span style="color:#a6e22e">current-time</span>)) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#b58900&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;]──[&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> (<span style="color:#a6e22e">concat</span> (eshell/pwd)) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#93a1a1&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;]\n&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;└─&gt;&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> (if venv-current-name (<span style="color:#a6e22e">concat</span> <span style="color:#e6db74">&#34; (&#34;</span> venv-current-name <span style="color:#e6db74">&#34;)&#34;</span>)  <span style="color:#e6db74">&#34;&#34;</span>) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#00dc00&#34;</span>))
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">propertize</span> (if (<span style="color:#a6e22e">=</span> (<span style="color:#a6e22e">user-uid</span>) <span style="color:#ae81ff">0</span>) <span style="color:#e6db74">&#34; # &#34;</span> <span style="color:#e6db74">&#34; $ &#34;</span>) <span style="color:#e6db74">&#39;face</span> <span style="color:#f92672">`</span>(:foreground <span style="color:#e6db74">&#34;#2aa198&#34;</span>))
-</span></span><span style="display:flex;"><span>         )))
-</span></span></code></pre></div><p>In addition to the username, the current time, and the current
-directory it also shows the current Python virtual environment name
-(in green).</p>
-<h2 id="eshell-colors">Eshell Colors</h2>
-<p>The often cited issue with eshell is the lack of color output even if
-it is explicitly specified in a command (e.g. <code>ls --color=always</code>).</p>
-<p>Adding this to your <code>~/.emacs</code> (or <code>init.el</code>)  DOES NOT solve the problem:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(setenv <span style="color:#e6db74">&#34;TERM&#34;</span> <span style="color:#e6db74">&#34;xterm-256color&#34;</span>)
-</span></span></code></pre></div><p>THIS DOES solve the problem with color output in eshell:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;eshell-mode-hook</span> (lambda () (setenv <span style="color:#e6db74">&#34;TERM&#34;</span> <span style="color:#e6db74">&#34;xterm-256color&#34;</span>)))
-</span></span></code></pre></div><p>Though to get the current directory listing in eshell I prefer to use the eshell
-alias <code>d</code> (equivalent to <code>d .</code>), see the list of aliases above.</p>
-<p>More on Emacs&rsquo; eshell can be found
-<a href="https://www.masteringemacs.org/article/complete-guide-mastering-eshell">here</a>,
-thanks again, Mickey.</p>
+Shell …</p></blockquote>
 	</div>
-</article>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/eshell-aliases-and-prompt/">Read more…</a>
+	</div>
+</div>
+
 </main>
 
 <div class="pagination">
