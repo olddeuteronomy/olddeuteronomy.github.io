@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>My Emacs Org Configuration - The Emacs Cat</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="My Emacs Org Configuration" />
+<meta property="og:description" content="These days, I’ve come across numerous posts and Reddit threads
+praising Org mode as one of the most compelling features of Emacs.
+There’s no doubt this is true, and I’m amazed by how many people use
+Emacs solely for Org-mode. As a software developer, I rely on Org
+every day for note-taking, maintaining my knowledge
+database (org-roam), agenda management (org-agenda, synchronized with
+beorg on my iPhone and iPad via Dropbox), and, of course, blogging.
+So, I’ve decided to share my Org configuration in the hope that it
+will be useful to someone.
+Org-mode
+Org-mode is now included with Emacs, so we don’t need to install it
+separately&mdash;except for org-roam, which is an external package.
+Common Settings
+;; When at a URL, pressing the &lt;Enter&gt; opens the link in a browser.
+(setq org-return-follows-link t)
+
+;; To prevent M-RET splitting the line.
+;; https://irreal.org/blog/?p=6297
+(setq org-M-RET-may-split-line &#39;((item . nil)))
+
+;; To hide drawers, e.g. PROPERTIES.
+(setq org-startup-folded &#39;fold)
+Hide Emphasis Characters
+From Org as a Word Processor.
+;; Non-nil means font-lock should hide
+;; the emphasis marker characters.
+(setq org-hide-emphasis-markers t)
+Keep in mind that the slash characters (and asterisks for bold, etc)
+are still there, but aren’t displayed.
+;; Make invisible parts of Org elements appear visible.
+(use-package org-appear :ensure t
+  :init
+  (setq org-appear-delay 0.2)
+  :hook
+  org-mode
+)
+The org-appear package is very helpful
+when using org-hide-emphasis-markers, as described above.
+Hidden element parts appear when the cursor enters an element
+and disappear when it leaves&mdash;with some delay.
+Better List Bullets
+From Org as a Word Processor.
+;; Better list bullets.
+(font-lock-add-keywords
+ &#39;org-mode
+ &#39;((&#34;^ &#43;\\([-*]\\) &#34;
+    (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) &#34;•&#34;))))))
+Replace the initial - with a Unicode bullet symbol •.
+Better Header Bullets
+I prefer using Unicode circled digit symbols as header bullets to
+indicate the header level.
+(use-package org-bullets :ensure t)
+(add-hook &#39;org-mode-hook (lambda () (org-bullets-mode 1)))
+(setq org-bullets-bullet-list
+  &#39;(&#34;①&#34; &#34;②&#34; &#34;③&#34; &#34;④&#34; &#34;⑤&#34; &#34;⑥&#34; &#34;⑦&#34; &#34;⑧&#34; &#34;⑨&#34; &#34;⑩&#34;))
+
+;; Indent levels.
+(add-hook &#39;org-mode-hook &#39;org-indent-mode)
+
+;; Use this character(s) for ellipsis.
+(setq org-ellipsis &#34;...&#34;)
+Source Code Blocks
+;; Pretty fontification of source code blocks.
+(setq org-src-fontify-natively t)
+
+;; Use `bash&#39; instead of `sh&#39; in the `shell&#39; code block.
+(setq org-babel-sh-command &#34;bash&#34;)
+
+;; Use C&#43;&#43;17.
+(setq org-babel-C&#43;&#43;-compiler &#34;g&#43;&#43; -std=c&#43;&#43;17&#34;)
+
+;; `org-babel&#39; languages.
+(require &#39;ob-tangle)
+(org-babel-do-load-languages
+ &#39;org-babel-load-languages
+ &#39;(
+   (shell . t)
+   (python . t)
+   (C . t)         ; C and C&#43;&#43;
+   (calc . t)
+   (latex . t)
+   (gnuplot . t)
+   (sqlite . t)))
+
+;; No confirmation on block execution.
+(setq org-confirm-babel-evaluate nil)
+Org Agenda
+;; Open the current agenda.
+(global-set-key (kbd &#34;C-c a&#34;) &#39;org-agenda)
+
+;; View the agenda in the current window.
+(setq org-agenda-window-setup &#39;current-window)
+
+;; A file to store the agenda. I use Dropbox to be able to view/edit
+;; the agenda on other devices (phones, tablets).
+;; In particular, I use the `beorg&#39; app on both iPhone and iPad.
+(setq org-agenda-files &#39;(&#34;~/Dropbox/org/refile-beorg.org&#34;))
+
+;; View diary for the current week.
+(setq org-agenda-include-diary t)
+
+;; Set priority range from A to C with default A.
+(setq org-highest-priority ?A)
+(setq org-lowest-priority ?C)
+(setq org-default-priority ?A)
+
+;; Optional. Set custom colors for priorities (for Solarized Dark theme).
+;; Your theme may require a different color set.
+(setq org-priority-faces
+      &#39;((?A . (:foreground &#34;#F0DFAF&#34; :weight bold))
+        (?B . (:foreground &#34;LightSteelBlue&#34;))
+        (?C . (:foreground &#34;OliveDrab&#34;))))
+
+;; Capture items using &lt;C-c c&gt;.
+(define-key global-map (kbd &#34;C-c c&#34;) &#39;org-capture)
+(setq org-capture-templates
+      &#39;(
+        (&#34;t&#34; &#34;TODO item in refile-beorg&#34;
+         entry (file &#34;~/Dropbox/org/refile-beorg.org&#34;)
+         &#34;* TODO %?\n%U&#34;
+         )
+        (&#34;n&#34; &#34;Notes in notes.org&#34;
+         entry (file &#34;~/Dropbox/org/notes.org&#34;)
+         &#34;\n* %T %?\n%i&#34;
+         )))
+
+;; https://github.com/harrybournis/org-fancy-priorities
+(use-package org-fancy-priorities
+  :ensure t
+  :hook
+  (org-mode . org-fancy-priorities-mode)
+  :config
+  (setq org-fancy-priorities-list &#39;(&#34;⚡&#34; &#34;⏰&#34; &#34;☕&#34;)))
+
+;; A timestamp or a note will be recorded when an entry has been refiled.
+(setq org-log-refile t)
+
+;; Add &#34;CLOSED: [timestamp]&#34; when a task is marked as DONE.
+(setq org-log-done t)
+
+(defun my/notes-open ()
+  (interactive)
+  (switch-to-buffer (find-file-noselect &#34;~/Dropbox/org/notes.org&#34;)))
+(global-set-key (kbd &#34;C-c n&#34;) #&#39;my/notes-open)
+Theme Specific Settings
+I use the Solarized Dark theme; it has some tweaks for Org-mode.
+;; Don&#39;t change size of Org-mode headlines (but keep other size-changes)
+(setq solarized-scale-org-headlines nil)
+
+;; Avoid all font-size changes
+(setq solarized-height-minus-1 1.0)
+(setq solarized-height-plus-1 1.0)
+(setq solarized-height-plus-2 1.0)
+(setq solarized-height-plus-3 1.0)
+(setq solarized-height-plus-4 1.0)
+Some Custom Face Settings for Org-mode
+I prefer to have a very dark background in code blocks.
+Your theme may require a different color set.
+(custom-set-faces
+ &#39;(org-block ((t (:background &#34;gray10&#34;))))
+ &#39;(org-document-title ((t (:foreground &#34;red&#34; :weight bold))))
+ &#39;(org-level-1 ((t (:inherit outline-1 :weight bold))))
+ &#39;(org-level-2 ((t (:inherit outline-2 :weight normal :slant italic))))
+ &#39;(org-level-3 ((t (:inherit outline-3 :slant italic))))
+ &#39;(org-level-4 ((t (:inherit outline-4 :slant italic)))))
+Screenshots
+
+            Org mode w/ code blocks. Click or tap to view the full-size picture.
+        
+
+
+
+            Org agenda w/ diary. Click or tap to view the full-size picture.
+        
+
+
+Happy emacsing!
+&mdash; The Emacs Cat." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://olddeuteronomy.github.io/post/emacs-org-config/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2025-07-24T10:41:06+01:00" />
+<meta property="article:modified_time" content="2025-07-24T10:41:06+01:00" />
+
+
+		<meta itemprop="name" content="My Emacs Org Configuration">
+<meta itemprop="description" content="These days, I’ve come across numerous posts and Reddit threads
+praising Org mode as one of the most compelling features of Emacs.
+There’s no doubt this is true, and I’m amazed by how many people use
+Emacs solely for Org-mode. As a software developer, I rely on Org
+every day for note-taking, maintaining my knowledge
+database (org-roam), agenda management (org-agenda, synchronized with
+beorg on my iPhone and iPad via Dropbox), and, of course, blogging.
+So, I’ve decided to share my Org configuration in the hope that it
+will be useful to someone.
+Org-mode
+Org-mode is now included with Emacs, so we don’t need to install it
+separately&mdash;except for org-roam, which is an external package.
+Common Settings
+;; When at a URL, pressing the &lt;Enter&gt; opens the link in a browser.
+(setq org-return-follows-link t)
+
+;; To prevent M-RET splitting the line.
+;; https://irreal.org/blog/?p=6297
+(setq org-M-RET-may-split-line &#39;((item . nil)))
+
+;; To hide drawers, e.g. PROPERTIES.
+(setq org-startup-folded &#39;fold)
+Hide Emphasis Characters
+From Org as a Word Processor.
+;; Non-nil means font-lock should hide
+;; the emphasis marker characters.
+(setq org-hide-emphasis-markers t)
+Keep in mind that the slash characters (and asterisks for bold, etc)
+are still there, but aren’t displayed.
+;; Make invisible parts of Org elements appear visible.
+(use-package org-appear :ensure t
+  :init
+  (setq org-appear-delay 0.2)
+  :hook
+  org-mode
+)
+The org-appear package is very helpful
+when using org-hide-emphasis-markers, as described above.
+Hidden element parts appear when the cursor enters an element
+and disappear when it leaves&mdash;with some delay.
+Better List Bullets
+From Org as a Word Processor.
+;; Better list bullets.
+(font-lock-add-keywords
+ &#39;org-mode
+ &#39;((&#34;^ &#43;\\([-*]\\) &#34;
+    (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) &#34;•&#34;))))))
+Replace the initial - with a Unicode bullet symbol •.
+Better Header Bullets
+I prefer using Unicode circled digit symbols as header bullets to
+indicate the header level.
+(use-package org-bullets :ensure t)
+(add-hook &#39;org-mode-hook (lambda () (org-bullets-mode 1)))
+(setq org-bullets-bullet-list
+  &#39;(&#34;①&#34; &#34;②&#34; &#34;③&#34; &#34;④&#34; &#34;⑤&#34; &#34;⑥&#34; &#34;⑦&#34; &#34;⑧&#34; &#34;⑨&#34; &#34;⑩&#34;))
+
+;; Indent levels.
+(add-hook &#39;org-mode-hook &#39;org-indent-mode)
+
+;; Use this character(s) for ellipsis.
+(setq org-ellipsis &#34;...&#34;)
+Source Code Blocks
+;; Pretty fontification of source code blocks.
+(setq org-src-fontify-natively t)
+
+;; Use `bash&#39; instead of `sh&#39; in the `shell&#39; code block.
+(setq org-babel-sh-command &#34;bash&#34;)
+
+;; Use C&#43;&#43;17.
+(setq org-babel-C&#43;&#43;-compiler &#34;g&#43;&#43; -std=c&#43;&#43;17&#34;)
+
+;; `org-babel&#39; languages.
+(require &#39;ob-tangle)
+(org-babel-do-load-languages
+ &#39;org-babel-load-languages
+ &#39;(
+   (shell . t)
+   (python . t)
+   (C . t)         ; C and C&#43;&#43;
+   (calc . t)
+   (latex . t)
+   (gnuplot . t)
+   (sqlite . t)))
+
+;; No confirmation on block execution.
+(setq org-confirm-babel-evaluate nil)
+Org Agenda
+;; Open the current agenda.
+(global-set-key (kbd &#34;C-c a&#34;) &#39;org-agenda)
+
+;; View the agenda in the current window.
+(setq org-agenda-window-setup &#39;current-window)
+
+;; A file to store the agenda. I use Dropbox to be able to view/edit
+;; the agenda on other devices (phones, tablets).
+;; In particular, I use the `beorg&#39; app on both iPhone and iPad.
+(setq org-agenda-files &#39;(&#34;~/Dropbox/org/refile-beorg.org&#34;))
+
+;; View diary for the current week.
+(setq org-agenda-include-diary t)
+
+;; Set priority range from A to C with default A.
+(setq org-highest-priority ?A)
+(setq org-lowest-priority ?C)
+(setq org-default-priority ?A)
+
+;; Optional. Set custom colors for priorities (for Solarized Dark theme).
+;; Your theme may require a different color set.
+(setq org-priority-faces
+      &#39;((?A . (:foreground &#34;#F0DFAF&#34; :weight bold))
+        (?B . (:foreground &#34;LightSteelBlue&#34;))
+        (?C . (:foreground &#34;OliveDrab&#34;))))
+
+;; Capture items using &lt;C-c c&gt;.
+(define-key global-map (kbd &#34;C-c c&#34;) &#39;org-capture)
+(setq org-capture-templates
+      &#39;(
+        (&#34;t&#34; &#34;TODO item in refile-beorg&#34;
+         entry (file &#34;~/Dropbox/org/refile-beorg.org&#34;)
+         &#34;* TODO %?\n%U&#34;
+         )
+        (&#34;n&#34; &#34;Notes in notes.org&#34;
+         entry (file &#34;~/Dropbox/org/notes.org&#34;)
+         &#34;\n* %T %?\n%i&#34;
+         )))
+
+;; https://github.com/harrybournis/org-fancy-priorities
+(use-package org-fancy-priorities
+  :ensure t
+  :hook
+  (org-mode . org-fancy-priorities-mode)
+  :config
+  (setq org-fancy-priorities-list &#39;(&#34;⚡&#34; &#34;⏰&#34; &#34;☕&#34;)))
+
+;; A timestamp or a note will be recorded when an entry has been refiled.
+(setq org-log-refile t)
+
+;; Add &#34;CLOSED: [timestamp]&#34; when a task is marked as DONE.
+(setq org-log-done t)
+
+(defun my/notes-open ()
+  (interactive)
+  (switch-to-buffer (find-file-noselect &#34;~/Dropbox/org/notes.org&#34;)))
+(global-set-key (kbd &#34;C-c n&#34;) #&#39;my/notes-open)
+Theme Specific Settings
+I use the Solarized Dark theme; it has some tweaks for Org-mode.
+;; Don&#39;t change size of Org-mode headlines (but keep other size-changes)
+(setq solarized-scale-org-headlines nil)
+
+;; Avoid all font-size changes
+(setq solarized-height-minus-1 1.0)
+(setq solarized-height-plus-1 1.0)
+(setq solarized-height-plus-2 1.0)
+(setq solarized-height-plus-3 1.0)
+(setq solarized-height-plus-4 1.0)
+Some Custom Face Settings for Org-mode
+I prefer to have a very dark background in code blocks.
+Your theme may require a different color set.
+(custom-set-faces
+ &#39;(org-block ((t (:background &#34;gray10&#34;))))
+ &#39;(org-document-title ((t (:foreground &#34;red&#34; :weight bold))))
+ &#39;(org-level-1 ((t (:inherit outline-1 :weight bold))))
+ &#39;(org-level-2 ((t (:inherit outline-2 :weight normal :slant italic))))
+ &#39;(org-level-3 ((t (:inherit outline-3 :slant italic))))
+ &#39;(org-level-4 ((t (:inherit outline-4 :slant italic)))))
+Screenshots
+
+            Org mode w/ code blocks. Click or tap to view the full-size picture.
+        
+
+
+
+            Org agenda w/ diary. Click or tap to view the full-size picture.
+        
+
+
+Happy emacsing!
+&mdash; The Emacs Cat."><meta itemprop="datePublished" content="2025-07-24T10:41:06+01:00" />
+<meta itemprop="dateModified" content="2025-07-24T10:41:06+01:00" />
+<meta itemprop="wordCount" content="783">
+<meta itemprop="keywords" content="emacs,config,org-mode," />
+		<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="My Emacs Org Configuration"/>
+<meta name="twitter:description" content="These days, I’ve come across numerous posts and Reddit threads
+praising Org mode as one of the most compelling features of Emacs.
+There’s no doubt this is true, and I’m amazed by how many people use
+Emacs solely for Org-mode. As a software developer, I rely on Org
+every day for note-taking, maintaining my knowledge
+database (org-roam), agenda management (org-agenda, synchronized with
+beorg on my iPhone and iPad via Dropbox), and, of course, blogging.
+So, I’ve decided to share my Org configuration in the hope that it
+will be useful to someone.
+Org-mode
+Org-mode is now included with Emacs, so we don’t need to install it
+separately&mdash;except for org-roam, which is an external package.
+Common Settings
+;; When at a URL, pressing the &lt;Enter&gt; opens the link in a browser.
+(setq org-return-follows-link t)
+
+;; To prevent M-RET splitting the line.
+;; https://irreal.org/blog/?p=6297
+(setq org-M-RET-may-split-line &#39;((item . nil)))
+
+;; To hide drawers, e.g. PROPERTIES.
+(setq org-startup-folded &#39;fold)
+Hide Emphasis Characters
+From Org as a Word Processor.
+;; Non-nil means font-lock should hide
+;; the emphasis marker characters.
+(setq org-hide-emphasis-markers t)
+Keep in mind that the slash characters (and asterisks for bold, etc)
+are still there, but aren’t displayed.
+;; Make invisible parts of Org elements appear visible.
+(use-package org-appear :ensure t
+  :init
+  (setq org-appear-delay 0.2)
+  :hook
+  org-mode
+)
+The org-appear package is very helpful
+when using org-hide-emphasis-markers, as described above.
+Hidden element parts appear when the cursor enters an element
+and disappear when it leaves&mdash;with some delay.
+Better List Bullets
+From Org as a Word Processor.
+;; Better list bullets.
+(font-lock-add-keywords
+ &#39;org-mode
+ &#39;((&#34;^ &#43;\\([-*]\\) &#34;
+    (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) &#34;•&#34;))))))
+Replace the initial - with a Unicode bullet symbol •.
+Better Header Bullets
+I prefer using Unicode circled digit symbols as header bullets to
+indicate the header level.
+(use-package org-bullets :ensure t)
+(add-hook &#39;org-mode-hook (lambda () (org-bullets-mode 1)))
+(setq org-bullets-bullet-list
+  &#39;(&#34;①&#34; &#34;②&#34; &#34;③&#34; &#34;④&#34; &#34;⑤&#34; &#34;⑥&#34; &#34;⑦&#34; &#34;⑧&#34; &#34;⑨&#34; &#34;⑩&#34;))
+
+;; Indent levels.
+(add-hook &#39;org-mode-hook &#39;org-indent-mode)
+
+;; Use this character(s) for ellipsis.
+(setq org-ellipsis &#34;...&#34;)
+Source Code Blocks
+;; Pretty fontification of source code blocks.
+(setq org-src-fontify-natively t)
+
+;; Use `bash&#39; instead of `sh&#39; in the `shell&#39; code block.
+(setq org-babel-sh-command &#34;bash&#34;)
+
+;; Use C&#43;&#43;17.
+(setq org-babel-C&#43;&#43;-compiler &#34;g&#43;&#43; -std=c&#43;&#43;17&#34;)
+
+;; `org-babel&#39; languages.
+(require &#39;ob-tangle)
+(org-babel-do-load-languages
+ &#39;org-babel-load-languages
+ &#39;(
+   (shell . t)
+   (python . t)
+   (C . t)         ; C and C&#43;&#43;
+   (calc . t)
+   (latex . t)
+   (gnuplot . t)
+   (sqlite . t)))
+
+;; No confirmation on block execution.
+(setq org-confirm-babel-evaluate nil)
+Org Agenda
+;; Open the current agenda.
+(global-set-key (kbd &#34;C-c a&#34;) &#39;org-agenda)
+
+;; View the agenda in the current window.
+(setq org-agenda-window-setup &#39;current-window)
+
+;; A file to store the agenda. I use Dropbox to be able to view/edit
+;; the agenda on other devices (phones, tablets).
+;; In particular, I use the `beorg&#39; app on both iPhone and iPad.
+(setq org-agenda-files &#39;(&#34;~/Dropbox/org/refile-beorg.org&#34;))
+
+;; View diary for the current week.
+(setq org-agenda-include-diary t)
+
+;; Set priority range from A to C with default A.
+(setq org-highest-priority ?A)
+(setq org-lowest-priority ?C)
+(setq org-default-priority ?A)
+
+;; Optional. Set custom colors for priorities (for Solarized Dark theme).
+;; Your theme may require a different color set.
+(setq org-priority-faces
+      &#39;((?A . (:foreground &#34;#F0DFAF&#34; :weight bold))
+        (?B . (:foreground &#34;LightSteelBlue&#34;))
+        (?C . (:foreground &#34;OliveDrab&#34;))))
+
+;; Capture items using &lt;C-c c&gt;.
+(define-key global-map (kbd &#34;C-c c&#34;) &#39;org-capture)
+(setq org-capture-templates
+      &#39;(
+        (&#34;t&#34; &#34;TODO item in refile-beorg&#34;
+         entry (file &#34;~/Dropbox/org/refile-beorg.org&#34;)
+         &#34;* TODO %?\n%U&#34;
+         )
+        (&#34;n&#34; &#34;Notes in notes.org&#34;
+         entry (file &#34;~/Dropbox/org/notes.org&#34;)
+         &#34;\n* %T %?\n%i&#34;
+         )))
+
+;; https://github.com/harrybournis/org-fancy-priorities
+(use-package org-fancy-priorities
+  :ensure t
+  :hook
+  (org-mode . org-fancy-priorities-mode)
+  :config
+  (setq org-fancy-priorities-list &#39;(&#34;⚡&#34; &#34;⏰&#34; &#34;☕&#34;)))
+
+;; A timestamp or a note will be recorded when an entry has been refiled.
+(setq org-log-refile t)
+
+;; Add &#34;CLOSED: [timestamp]&#34; when a task is marked as DONE.
+(setq org-log-done t)
+
+(defun my/notes-open ()
+  (interactive)
+  (switch-to-buffer (find-file-noselect &#34;~/Dropbox/org/notes.org&#34;)))
+(global-set-key (kbd &#34;C-c n&#34;) #&#39;my/notes-open)
+Theme Specific Settings
+I use the Solarized Dark theme; it has some tweaks for Org-mode.
+;; Don&#39;t change size of Org-mode headlines (but keep other size-changes)
+(setq solarized-scale-org-headlines nil)
+
+;; Avoid all font-size changes
+(setq solarized-height-minus-1 1.0)
+(setq solarized-height-plus-1 1.0)
+(setq solarized-height-plus-2 1.0)
+(setq solarized-height-plus-3 1.0)
+(setq solarized-height-plus-4 1.0)
+Some Custom Face Settings for Org-mode
+I prefer to have a very dark background in code blocks.
+Your theme may require a different color set.
+(custom-set-faces
+ &#39;(org-block ((t (:background &#34;gray10&#34;))))
+ &#39;(org-document-title ((t (:foreground &#34;red&#34; :weight bold))))
+ &#39;(org-level-1 ((t (:inherit outline-1 :weight bold))))
+ &#39;(org-level-2 ((t (:inherit outline-2 :weight normal :slant italic))))
+ &#39;(org-level-3 ((t (:inherit outline-3 :slant italic))))
+ &#39;(org-level-4 ((t (:inherit outline-4 :slant italic)))))
+Screenshots
+
+            Org mode w/ code blocks. Click or tap to view the full-size picture.
+        
+
+
+
+            Org agenda w/ diary. Click or tap to view the full-size picture.
+        
+
+
+Happy emacsing!
+&mdash; The Emacs Cat."/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="/favicon.ico">
+        
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="The Emacs Cat" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/img/od.png">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">The Emacs Cat</div>
+					<div class="logo__tagline">An Emacser&#39;s Miscellany</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">
+				
+				<span class="menu__text">About</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">My Emacs Org Configuration</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">The Emacs Cat</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2025-07-24T10:41:06&#43;01:00">Thursday, Jul 24, 2025</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/2025/" rel="category">2025</a>
+	</span>
+</div></div>
+		</header>
+		<div class="content post__content clearfix">
+			<p>These days, I’ve come across numerous posts and Reddit threads
+praising <a href="https://orgmode.org/">Org mode</a> as one of the most compelling features of Emacs.
+There’s no doubt this is true, and I’m amazed by how many people use
+Emacs <em>solely</em> for Org-mode. As a software developer, I rely on Org
+every day for note-taking, maintaining my knowledge
+database (<a href="https://www.orgroam.com/">org-roam</a>), agenda management (<a href="https://orgmode.org/manual/Agenda-Views.html">org-agenda</a>, synchronized with
+<em>beorg</em> on my iPhone and iPad via Dropbox), and, of course, blogging.</p>
+<p>So, I’ve decided to share my Org configuration in the hope that it
+will be useful to someone.</p>
+<h2 id="org-mode">Org-mode</h2>
+<p>Org-mode is now included with Emacs, so we don’t need to install it
+separately&mdash;except for <code>org-roam</code>, which is an external package.</p>
+<h3 id="common-settings">Common Settings</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; When at a URL, pressing the &lt;Enter&gt; opens the link in a browser.</span>
+</span></span><span style="display:flex;"><span>(setq org-return-follows-link <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; To prevent M-RET splitting the line.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; https://irreal.org/blog/?p=6297</span>
+</span></span><span style="display:flex;"><span>(setq org-M-RET-may-split-line <span style="color:#f92672">&#39;</span>((item <span style="color:#f92672">.</span> <span style="color:#66d9ef">nil</span>)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; To hide drawers, e.g. PROPERTIES.</span>
+</span></span><span style="display:flex;"><span>(setq org-startup-folded <span style="color:#e6db74">&#39;fold</span>)
+</span></span></code></pre></div><h3 id="hide-emphasis-characters">Hide Emphasis Characters</h3>
+<p>From <a href="https://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html">Org as a Word Processor</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Non-nil means font-lock should hide</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; the emphasis marker characters.</span>
+</span></span><span style="display:flex;"><span>(setq org-hide-emphasis-markers <span style="color:#66d9ef">t</span>)
+</span></span></code></pre></div><p>Keep in mind that the slash characters (and asterisks for bold, etc)
+are <em>still there</em>, but aren’t displayed.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Make invisible parts of Org elements appear visible.</span>
+</span></span><span style="display:flex;"><span>(use-package org-appear :ensure <span style="color:#66d9ef">t</span>
+</span></span><span style="display:flex;"><span>  :init
+</span></span><span style="display:flex;"><span>  (setq org-appear-delay <span style="color:#ae81ff">0.2</span>)
+</span></span><span style="display:flex;"><span>  :hook
+</span></span><span style="display:flex;"><span>  org-mode
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>The <a href="https://github.com/awth13/org-appear">org-appear</a> package is very helpful
+when using <code>org-hide-emphasis-markers</code>, as described above.
+Hidden element parts appear when the cursor enters an element
+and disappear when it leaves&mdash;with some delay.</p>
+<h3 id="better-list-bullets">Better List Bullets</h3>
+<p>From <a href="https://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html">Org as a Word Processor</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Better list bullets.</span>
+</span></span><span style="display:flex;"><span>(font-lock-add-keywords
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#39;org-mode</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">&#34;^ +\\([-*]\\) &#34;</span>
+</span></span><span style="display:flex;"><span>    (<span style="color:#ae81ff">0</span> (prog1 () (compose-region (<span style="color:#a6e22e">match-beginning</span> <span style="color:#ae81ff">1</span>) (<span style="color:#a6e22e">match-end</span> <span style="color:#ae81ff">1</span>) <span style="color:#e6db74">&#34;•&#34;</span>))))))
+</span></span></code></pre></div><p>Replace the initial <code>-</code> with a Unicode bullet symbol <code>•</code>.</p>
+<h3 id="better-header-bullets">Better Header Bullets</h3>
+<p>I prefer using Unicode circled digit symbols as header bullets to
+indicate the header level.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(use-package org-bullets :ensure <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;org-mode-hook</span> (lambda () (org-bullets-mode <span style="color:#ae81ff">1</span>)))
+</span></span><span style="display:flex;"><span>(setq org-bullets-bullet-list
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">&#34;①&#34;</span> <span style="color:#e6db74">&#34;②&#34;</span> <span style="color:#e6db74">&#34;③&#34;</span> <span style="color:#e6db74">&#34;④&#34;</span> <span style="color:#e6db74">&#34;⑤&#34;</span> <span style="color:#e6db74">&#34;⑥&#34;</span> <span style="color:#e6db74">&#34;⑦&#34;</span> <span style="color:#e6db74">&#34;⑧&#34;</span> <span style="color:#e6db74">&#34;⑨&#34;</span> <span style="color:#e6db74">&#34;⑩&#34;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Indent levels.</span>
+</span></span><span style="display:flex;"><span>(add-hook <span style="color:#e6db74">&#39;org-mode-hook</span> <span style="color:#e6db74">&#39;org-indent-mode</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Use this character(s) for ellipsis.</span>
+</span></span><span style="display:flex;"><span>(setq org-ellipsis <span style="color:#e6db74">&#34;...&#34;</span>)
+</span></span></code></pre></div><h3 id="source-code-blocks">Source Code Blocks</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Pretty fontification of source code blocks.</span>
+</span></span><span style="display:flex;"><span>(setq org-src-fontify-natively <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Use `bash&#39; instead of `sh&#39; in the `shell&#39; code block.</span>
+</span></span><span style="display:flex;"><span>(setq org-babel-sh-command <span style="color:#e6db74">&#34;bash&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Use C++17.</span>
+</span></span><span style="display:flex;"><span>(setq org-babel-C++-compiler <span style="color:#e6db74">&#34;g++ -std=c++17&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; `org-babel&#39; languages.</span>
+</span></span><span style="display:flex;"><span>(require <span style="color:#e6db74">&#39;ob-tangle</span>)
+</span></span><span style="display:flex;"><span>(org-babel-do-load-languages
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#39;org-babel-load-languages</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">&#39;</span>(
+</span></span><span style="display:flex;"><span>   (shell <span style="color:#f92672">.</span> <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>   (python <span style="color:#f92672">.</span> <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>   (C <span style="color:#f92672">.</span> <span style="color:#66d9ef">t</span>)         <span style="color:#75715e">; C and C++</span>
+</span></span><span style="display:flex;"><span>   (calc <span style="color:#f92672">.</span> <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>   (latex <span style="color:#f92672">.</span> <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>   (gnuplot <span style="color:#f92672">.</span> <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>   (sqlite <span style="color:#f92672">.</span> <span style="color:#66d9ef">t</span>)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; No confirmation on block execution.</span>
+</span></span><span style="display:flex;"><span>(setq org-confirm-babel-evaluate <span style="color:#66d9ef">nil</span>)
+</span></span></code></pre></div><h3 id="org-agenda">Org Agenda</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Open the current agenda.</span>
+</span></span><span style="display:flex;"><span>(global-set-key (kbd <span style="color:#e6db74">&#34;C-c a&#34;</span>) <span style="color:#e6db74">&#39;org-agenda</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; View the agenda in the current window.</span>
+</span></span><span style="display:flex;"><span>(setq org-agenda-window-setup <span style="color:#e6db74">&#39;current-window</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; A file to store the agenda. I use Dropbox to be able to view/edit</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; the agenda on other devices (phones, tablets).</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; In particular, I use the `beorg&#39; app on both iPhone and iPad.</span>
+</span></span><span style="display:flex;"><span>(setq org-agenda-files <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">&#34;~/Dropbox/org/refile-beorg.org&#34;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; View diary for the current week.</span>
+</span></span><span style="display:flex;"><span>(setq org-agenda-include-diary <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Set priority range from A to C with default A.</span>
+</span></span><span style="display:flex;"><span>(setq org-highest-priority <span style="color:#e6db74">?A</span>)
+</span></span><span style="display:flex;"><span>(setq org-lowest-priority <span style="color:#e6db74">?C</span>)
+</span></span><span style="display:flex;"><span>(setq org-default-priority <span style="color:#e6db74">?A</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Optional. Set custom colors for priorities (for Solarized Dark theme).</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Your theme may require a different color set.</span>
+</span></span><span style="display:flex;"><span>(setq org-priority-faces
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">?A</span> <span style="color:#f92672">.</span> (:foreground <span style="color:#e6db74">&#34;#F0DFAF&#34;</span> :weight bold))
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">?B</span> <span style="color:#f92672">.</span> (:foreground <span style="color:#e6db74">&#34;LightSteelBlue&#34;</span>))
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">?C</span> <span style="color:#f92672">.</span> (:foreground <span style="color:#e6db74">&#34;OliveDrab&#34;</span>))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Capture items using &lt;C-c c&gt;.</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">define-key</span> global-map (kbd <span style="color:#e6db74">&#34;C-c c&#34;</span>) <span style="color:#e6db74">&#39;org-capture</span>)
+</span></span><span style="display:flex;"><span>(setq org-capture-templates
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#39;</span>(
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;t&#34;</span> <span style="color:#e6db74">&#34;TODO item in refile-beorg&#34;</span>
+</span></span><span style="display:flex;"><span>         entry (file <span style="color:#e6db74">&#34;~/Dropbox/org/refile-beorg.org&#34;</span>)
+</span></span><span style="display:flex;"><span>         <span style="color:#e6db74">&#34;* TODO %?\n%U&#34;</span>
+</span></span><span style="display:flex;"><span>         )
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;n&#34;</span> <span style="color:#e6db74">&#34;Notes in notes.org&#34;</span>
+</span></span><span style="display:flex;"><span>         entry (file <span style="color:#e6db74">&#34;~/Dropbox/org/notes.org&#34;</span>)
+</span></span><span style="display:flex;"><span>         <span style="color:#e6db74">&#34;\n* %T %?\n%i&#34;</span>
+</span></span><span style="display:flex;"><span>         )))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; https://github.com/harrybournis/org-fancy-priorities</span>
+</span></span><span style="display:flex;"><span>(use-package org-fancy-priorities
+</span></span><span style="display:flex;"><span>  :ensure <span style="color:#66d9ef">t</span>
+</span></span><span style="display:flex;"><span>  :hook
+</span></span><span style="display:flex;"><span>  (org-mode <span style="color:#f92672">.</span> org-fancy-priorities-mode)
+</span></span><span style="display:flex;"><span>  :config
+</span></span><span style="display:flex;"><span>  (setq org-fancy-priorities-list <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">&#34;⚡&#34;</span> <span style="color:#e6db74">&#34;⏰&#34;</span> <span style="color:#e6db74">&#34;☕&#34;</span>)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; A timestamp or a note will be recorded when an entry has been refiled.</span>
+</span></span><span style="display:flex;"><span>(setq org-log-refile <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Add &#34;CLOSED: [timestamp]&#34; when a task is marked as DONE.</span>
+</span></span><span style="display:flex;"><span>(setq org-log-done <span style="color:#66d9ef">t</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(defun my/notes-open ()
+</span></span><span style="display:flex;"><span>  (interactive)
+</span></span><span style="display:flex;"><span>  (switch-to-buffer (find-file-noselect <span style="color:#e6db74">&#34;~/Dropbox/org/notes.org&#34;</span>)))
+</span></span><span style="display:flex;"><span>(global-set-key (kbd <span style="color:#e6db74">&#34;C-c n&#34;</span>) <span style="color:#a6e22e">#&#39;</span>my/notes-open)
+</span></span></code></pre></div><h3 id="theme-specific-settings">Theme Specific Settings</h3>
+<p>I use the Solarized Dark theme; it has some tweaks for Org-mode.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span><span style="color:#75715e">;; Don&#39;t change size of Org-mode headlines (but keep other size-changes)</span>
+</span></span><span style="display:flex;"><span>(setq solarized-scale-org-headlines <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; Avoid all font-size changes</span>
+</span></span><span style="display:flex;"><span>(setq solarized-height-minus-1 <span style="color:#ae81ff">1.0</span>)
+</span></span><span style="display:flex;"><span>(setq solarized-height-plus-1 <span style="color:#ae81ff">1.0</span>)
+</span></span><span style="display:flex;"><span>(setq solarized-height-plus-2 <span style="color:#ae81ff">1.0</span>)
+</span></span><span style="display:flex;"><span>(setq solarized-height-plus-3 <span style="color:#ae81ff">1.0</span>)
+</span></span><span style="display:flex;"><span>(setq solarized-height-plus-4 <span style="color:#ae81ff">1.0</span>)
+</span></span></code></pre></div><h4 id="some-custom-face-settings-for-org-mode">Some Custom Face Settings for Org-mode</h4>
+<p>I prefer to have a very dark background in code blocks.
+Your theme may require a different color set.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(custom-set-faces
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">&#39;</span>(org-block ((<span style="color:#66d9ef">t</span> (:background <span style="color:#e6db74">&#34;gray10&#34;</span>))))
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">&#39;</span>(org-document-title ((<span style="color:#66d9ef">t</span> (:foreground <span style="color:#e6db74">&#34;red&#34;</span> :weight bold))))
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">&#39;</span>(org-level-1 ((<span style="color:#66d9ef">t</span> (:inherit outline-1 :weight bold))))
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">&#39;</span>(org-level-2 ((<span style="color:#66d9ef">t</span> (:inherit outline-2 :weight normal :slant italic))))
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">&#39;</span>(org-level-3 ((<span style="color:#66d9ef">t</span> (:inherit outline-3 :slant italic))))
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">&#39;</span>(org-level-4 ((<span style="color:#66d9ef">t</span> (:inherit outline-4 :slant italic)))))
+</span></span></code></pre></div><h3 id="screenshots">Screenshots</h3>
+<figure><a href="/img/org-mode.png"><img src="/img/org-mode.png"/></a><figcaption>
+            <h4>Org mode w/ code blocks. Click or tap to view the full-size picture.</h4>
+        </figcaption>
+</figure>
+
+<figure><a href="/img/org-agenda.png"><img src="/img/org-agenda.png"/></a><figcaption>
+            <h4>Org agenda w/ diary. Click or tap to view the full-size picture.</h4>
+        </figcaption>
+</figure>
+
+<p>Happy emacsing!</p>
+<p>&mdash; The Emacs Cat.</p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/emacs/" rel="tag">emacs</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/config/" rel="tag">config</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/org-mode/" rel="tag">org-mode</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/post/multiplatform-emacs-config/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Making a Multiplatform Emacs Configuration</p>
+		</a>
+	</div>
+</nav>
+
+<section class="comments">
+	<div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "olddeuteronomy" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://duckduckgo.com/">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH…" value="" name="q" aria-label="SEARCH…">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sites" value="https://olddeuteronomy.github.io/"/>
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/emacs-org-config/">My Emacs Org Configuration</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/multiplatform-emacs-config/">Making a Multiplatform Emacs Configuration</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/emacs-window-navigation/">Windows Navigation in Emacs</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/emacs-time-stamp/">Emacs Time Stamp</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/elfeed-optimized-blogging/">Elfeed-optimized Blogging</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog/" title="Blog">Blog</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/c&#43;&#43;/" title="C&#43;&#43;">C&#43;&#43;</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/calc/" title="Calc">Calc</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/config/" title="Config">Config</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/elfeed/" title="Elfeed">Elfeed</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/elisp/" title="Elisp">Elisp</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/emacs/" title="Emacs">Emacs</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/eshell/" title="Eshell">Eshell</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/org-mode/" title="Org-Mode">Org-Mode</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/packages/" title="Packages">Packages</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pages/" title="Pages">Pages</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/python/" title="Python">Python</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/snippets/" title="Snippets">Snippets</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/social/" title="Social">Social</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/tree-sitter/" title="Tree-Sitter">Tree-Sitter</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/writing/" title="Writing">Writing</a>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/2017/">2017</a>&nbsp;
+				<span class="widget__counter widget__counter--bubble">1</span>
+				</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/2022/">2022</a>&nbsp;
+				<span class="widget__counter widget__counter--bubble">8</span>
+				</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/2023/">2023</a>&nbsp;
+				<span class="widget__counter widget__counter--bubble">1</span>
+				</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/2024/">2024</a>&nbsp;
+				<span class="widget__counter widget__counter--bubble">5</span>
+				</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/2025/">2025</a>&nbsp;
+				<span class="widget__counter widget__counter--bubble">7</span>
+				</li>
+		</ul>
+	</div>
+</div>
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/olddeuteronomy" target="_blank">
+				<svg class="widget-social__link-icon icon icon-github" width="24" height="24" viewBox="0 0 384 374"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+
+		
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="X" rel="noopener noreferrer" href="https://x.com/ODeuteronomy" target="_blank">
+					<svg class="widget-social__link-icon icon icon-rss" width="24" height="24" viewBox="0 0 24 24"><path d="M14.095479,10.316482L22.286354,1h-1.940718l-7.115352,8.087682L7.551414,1H1l8.589488,12.231093L1,23h1.940717  l7.509372-8.542861L16.448587,23H23L14.095479,10.316482z M11.436522,13.338465l-0.871624-1.218704l-6.924311-9.68815h2.981339  l5.58978,7.82155l0.867949,1.218704l7.26506,10.166271h-2.981339L11.436522,13.338465z"/></svg>
+
+				<span>X</span>
+			</a>
+		</div>
+		
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Bluesky" rel="noopener noreferrer" href="https://bsky.app/profile/olddeuteronomy.bsky.social" target="_blank">
+					<svg class="widget-social__link-icon icon icon-rss" width="24" height="24" viewBox="0 -3.268 64 68.414"><path d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805zm36.254 0C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745z"/></svg>
+				<span>Bluesky</span>
+			</a>
+		</div>
+		
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Mastodon" rel="noopener noreferrer" href="https://mastodon.social/@olddeuteronomy" target="_blank">
+					<svg class="widget-social__link-icon icon icon-rss" width="24" height="24" viewBox="0 0 24 24"><path d="M21.327 8.566c0-4.339-2.843-5.61-2.843-5.61-1.433-.658-3.894-.935-6.451-.956h-.063c-2.557.021-5.016.298-6.45.956 0 0-2.843 1.272-2.843 5.61 0 .993-.019 2.181.012 3.441.103 4.243.778 8.425 4.701 9.463 1.809.479 3.362.579 4.612.51 2.268-.126 3.541-.809 3.541-.809l-.075-1.646s-1.621.511-3.441.449c-1.804-.062-3.707-.194-3.999-2.409a4.523 4.523 0 0 1-.04-.621s1.77.433 4.014.536c1.372.063 2.658-.08 3.965-.236 2.506-.299 4.688-1.843 4.962-3.254.434-2.223.398-5.424.398-5.424zm-3.353 5.59h-2.081V9.057c0-1.075-.452-1.62-1.357-1.62-1 0-1.501.647-1.501 1.927v2.791h-2.069V9.364c0-1.28-.501-1.927-1.502-1.927-.905 0-1.357.546-1.357 1.62v5.099H6.026V8.903c0-1.074.273-1.927.823-2.558.566-.631 1.307-.955 2.228-.955 1.065 0 1.872.409 2.405 1.228l.518.869.519-.869c.533-.819 1.34-1.228 2.405-1.228.92 0 1.662.324 2.228.955.549.631.822 1.484.822 2.558v5.253z"/></svg>
+
+				<span>Mastodon</span>
+			</a>
+		</div>
+		
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="RSS" rel="noopener noreferrer" href="https://olddeuteronomy.github.io/index.xml" target="_blank">
+					<svg class="widget-social__link-icon icon icon-rss" width="24" height="24" viewBox="0 0 448 512"><path d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"/></svg>
+
+				<span>RSS</span>
+			</a>
+		</div>
+		
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2025 The Emacs Cat.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+</body>
+</html>
