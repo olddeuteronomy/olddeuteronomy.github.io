@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Social on The Emacs Cat</title>
-    <link>https://olddeuteronomy.github.io/tags/social/</link>
+    <link>http://localhost:1313/tags/social/</link>
     <description>Recent content in Social on The Emacs Cat</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 22 Nov 2024 11:23:12 +0100</lastBuildDate>
-    <atom:link href="https://olddeuteronomy.github.io/tags/social/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/social/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Migration to Bluesky</title>
-      <link>https://olddeuteronomy.github.io/post/migration-to-bluesky/</link>
+      <link>http://localhost:1313/post/migration-to-bluesky/</link>
       <pubDate>Fri, 22 Nov 2024 11:23:12 +0100</pubDate>
-      <guid>https://olddeuteronomy.github.io/post/migration-to-bluesky/</guid>
+      <guid>http://localhost:1313/post/migration-to-bluesky/</guid>
       <description>&lt;p&gt;After reading the quite interesting post &lt;a href=&#34;https://cestlaz.github.io/post/blue-sky/&#34;&gt;Blue Sky&lt;/a&gt;&#xA;by &lt;a href=&#34;https://bsky.app/profile/zamansky.bsky.social&#34;&gt;Mike Zamansky&lt;/a&gt; I decided to begin&#xA;my gentle migration to &lt;a href=&#34;https://bsky.app/&#34;&gt;Bluesky&lt;/a&gt;, a new and promising social media platform.&lt;/p&gt;&#xA;&lt;p&gt;I completely agree with Mike&amp;rsquo;s opinion on Twitter as well as other&#xA;social platforms. Like many of us, I migrated from&#xA;&lt;a href=&#34;https://x.com/ODeuteronomy&#34;&gt;Twitter&lt;/a&gt; &amp;ndash; keeping my existing account&#xA;there &amp;ndash; to &lt;a href=&#34;https://emacs.ch/@olddeuteronomy&#34;&gt;Mastodon&lt;/a&gt;.&#xA;Unfortunately, Mastodon, largely due to its distributed architecture,&#xA;seems to be more fragile than other platforms &amp;ndash; recently, I have been&#xA;warned that &lt;a href=&#34;https://emacs.ch&#34;&gt;emacs.ch&lt;/a&gt;, a fediverse server I have been using for two&#xA;years now, is about to shutdown in this December.&lt;/p&gt;&#xA;&lt;p&gt;Sure, there is a (bit complex) way to transfer your Mastodon account&#xA;to another server &amp;ndash; and here is &lt;a href=&#34;https://fedi.tips/transferring-your-mastodon-account-to-another-server/&#34;&gt;detailed explanation&lt;/a&gt;&#xA;on how to do that. Perhaps, I will do that in the nearest future, but&#xA;who can guarantee that the new server is immune from the same fate?&lt;/p&gt;&#xA;&lt;p&gt;Anyway, Bluesky looks promising and I decided to give it a try.&#xA;You can find me at &lt;a href=&#34;https://bsky.app/profile/olddeuteronomy.bsky.social&#34;&gt;@olddeuteronomy.bsky.social&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
   </channel>

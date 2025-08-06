@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blog on The Emacs Cat</title>
-    <link>https://olddeuteronomy.github.io/tags/blog/</link>
+    <link>http://localhost:1313/tags/blog/</link>
     <description>Recent content in Blog on The Emacs Cat</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 02 Apr 2025 13:16:58 +0100</lastBuildDate>
-    <atom:link href="https://olddeuteronomy.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Elfeed-optimized Blogging</title>
-      <link>https://olddeuteronomy.github.io/post/elfeed-optimized-blogging/</link>
+      <link>http://localhost:1313/post/elfeed-optimized-blogging/</link>
       <pubDate>Wed, 02 Apr 2025 13:16:58 +0100</pubDate>
-      <guid>https://olddeuteronomy.github.io/post/elfeed-optimized-blogging/</guid>
+      <guid>http://localhost:1313/post/elfeed-optimized-blogging/</guid>
       <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;em&gt;To read my newspapers I load my RSS feed via the &lt;a href=&#34;https://github.com/skeeto/elfeed&#34;&gt;elfeed package&lt;/a&gt;&lt;/em&gt;.&lt;br&gt;&#xA;&amp;hellip;&lt;br&gt;&#xA;&lt;em&gt;Also, I identify any RSS feed entry that does not provide the full&#xA;text. And those live in provisional status. My reflexes are to ask&#xA;“there’s lots of full-text feeds, why bother with this truncation?”&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;Jeremy Friesen, &lt;a href=&#34;https://takeonrules.com/2025/03/23/a-walk-through-my-digital-neighborhood/&#34;&gt;&lt;em&gt;A Walk Through My Digital Neighborhood&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;Jeremy is totally right! &amp;ndash; it came to my mind immediately.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;m using the &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; static site generator to&#xA;build this blog. Hugo uses &lt;em&gt;content summaries&lt;/em&gt; to display a list of&#xA;blog entries on the main page. As a result, the Elfeed entry shows a&#xA;summary of the post instead of the full text.&lt;/p&gt;&#xA;&lt;p&gt;Many of us &amp;ndash; including me &amp;ndash; are using &lt;a href=&#34;https://github.com/skeeto/elfeed&#34;&gt;Elfeed&lt;/a&gt;&#xA;as an RSS reader, and I have realized that the truncated Elfeed entry may cause inconvenience&#xA;to the Elfeed users.&lt;/p&gt;&#xA;&lt;p&gt;Applying some tricks I was able to disable the automatic displaying of&#xA;summaries on the main page. I hope it has become more comfortable for&#xA;those who use Elfeed for reading RSS feeds.&lt;/p&gt;&#xA;&lt;p&gt;Happy elfeeding!&lt;/p&gt;&#xA;&lt;p&gt;&amp;ndash; The Emacs Cat.&lt;/p&gt;&#xA;&lt;p&gt;P.S. Thanks to &lt;a href=&#34;https://takeonrules.com/&#34;&gt;Jeremy Friesen&lt;/a&gt; for the heads up.&lt;/p&gt;</description>
     </item>
   </channel>

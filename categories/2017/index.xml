@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>2017 on The Emacs Cat</title>
-    <link>https://olddeuteronomy.github.io/categories/2017/</link>
+    <link>http://localhost:1313/categories/2017/</link>
     <description>Recent content in 2017 on The Emacs Cat</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 17 Jun 2017 14:51:33 +0300</lastBuildDate>
-    <atom:link href="https://olddeuteronomy.github.io/categories/2017/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/categories/2017/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
-      <link>https://olddeuteronomy.github.io/about/</link>
+      <link>http://localhost:1313/about/</link>
       <pubDate>Sat, 17 Jun 2017 14:51:33 +0300</pubDate>
-      <guid>https://olddeuteronomy.github.io/about/</guid>
+      <guid>http://localhost:1313/about/</guid>
       <description>About The Emacs Cat My first attempt to dive into the ocean of Emacs occurred in 1997, more than 25 years ago.&#xA;It was an unsuccessful attempt; it now seems to me, I wasn&amp;rsquo;t able to feel the spirit of Emacs at that time.&#xA;A second - and successful - attempt happened in 2012. Since then, I&amp;rsquo;m trying to use Emacs for almost everything, from C++ and Python coding to my knowledge base maintenance (org-roam), and writing articles in LaTeX.</description>
     </item>
   </channel>
