@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on The Emacs Cat</title>
-    <link>http://localhost:1313/categories/</link>
+    <link>https://olddeuteronomy.github.io/categories/</link>
     <description>Recent content in Categories on The Emacs Cat</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 24 Jul 2025 10:41:06 +0100</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://olddeuteronomy.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2025</title>
-      <link>http://localhost:1313/categories/2025/</link>
+      <link>https://olddeuteronomy.github.io/categories/2025/</link>
       <pubDate>Thu, 24 Jul 2025 10:41:06 +0100</pubDate>
-      <guid>http://localhost:1313/categories/2025/</guid>
+      <guid>https://olddeuteronomy.github.io/categories/2025/</guid>
       <description></description>
     </item>
     <item>
       <title>2024</title>
-      <link>http://localhost:1313/categories/2024/</link>
+      <link>https://olddeuteronomy.github.io/categories/2024/</link>
       <pubDate>Thu, 26 Dec 2024 10:01:05 +0100</pubDate>
-      <guid>http://localhost:1313/categories/2024/</guid>
+      <guid>https://olddeuteronomy.github.io/categories/2024/</guid>
       <description></description>
     </item>
     <item>
       <title>2023</title>
-      <link>http://localhost:1313/categories/2023/</link>
+      <link>https://olddeuteronomy.github.io/categories/2023/</link>
       <pubDate>Tue, 01 Aug 2023 14:07:46 +0300</pubDate>
-      <guid>http://localhost:1313/categories/2023/</guid>
+      <guid>https://olddeuteronomy.github.io/categories/2023/</guid>
       <description></description>
     </item>
     <item>
       <title>2022</title>
-      <link>http://localhost:1313/categories/2022/</link>
+      <link>https://olddeuteronomy.github.io/categories/2022/</link>
       <pubDate>Mon, 05 Dec 2022 14:14:13 +0300</pubDate>
-      <guid>http://localhost:1313/categories/2022/</guid>
+      <guid>https://olddeuteronomy.github.io/categories/2022/</guid>
       <description></description>
     </item>
     <item>
       <title>2017</title>
-      <link>http://localhost:1313/categories/2017/</link>
+      <link>https://olddeuteronomy.github.io/categories/2017/</link>
       <pubDate>Sat, 17 Jun 2017 14:51:33 +0300</pubDate>
-      <guid>http://localhost:1313/categories/2017/</guid>
+      <guid>https://olddeuteronomy.github.io/categories/2017/</guid>
       <description></description>
     </item>
   </channel>

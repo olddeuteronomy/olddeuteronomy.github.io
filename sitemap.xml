@@ -2,145 +2,145 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/categories/2025/</loc>
+    <loc>https://olddeuteronomy.github.io/categories/2025/</loc>
     <lastmod>2025-07-24T10:41:06+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://olddeuteronomy.github.io/categories/</loc>
     <lastmod>2025-07-24T10:41:06+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/config/</loc>
+    <loc>https://olddeuteronomy.github.io/tags/config/</loc>
     <lastmod>2025-07-24T10:41:06+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/emacs/</loc>
+    <loc>https://olddeuteronomy.github.io/tags/emacs/</loc>
     <lastmod>2025-07-24T10:41:06+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/emacs-org-config/</loc>
+    <loc>https://olddeuteronomy.github.io/post/emacs-org-config/</loc>
     <lastmod>2025-07-24T10:41:06+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/org-mode/</loc>
+    <loc>https://olddeuteronomy.github.io/tags/org-mode/</loc>
     <lastmod>2025-07-24T10:41:06+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/</loc>
+    <loc>https://olddeuteronomy.github.io/post/</loc>
     <lastmod>2025-07-24T10:41:06+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://olddeuteronomy.github.io/tags/</loc>
     <lastmod>2025-07-24T10:41:06+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://olddeuteronomy.github.io/</loc>
     <lastmod>2025-07-24T10:41:06+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/multiplatform-emacs-config/</loc>
+    <loc>https://olddeuteronomy.github.io/post/multiplatform-emacs-config/</loc>
     <lastmod>2025-06-20T11:15:16+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/emacs-window-navigation/</loc>
+    <loc>https://olddeuteronomy.github.io/post/emacs-window-navigation/</loc>
     <lastmod>2025-05-16T10:11:27+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/emacs-time-stamp/</loc>
+    <loc>https://olddeuteronomy.github.io/post/emacs-time-stamp/</loc>
     <lastmod>2025-04-24T10:44:10+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/blog/</loc>
+    <loc>https://olddeuteronomy.github.io/tags/blog/</loc>
     <lastmod>2025-04-02T13:16:58+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/elfeed/</loc>
+    <loc>https://olddeuteronomy.github.io/tags/elfeed/</loc>
     <lastmod>2025-04-02T13:16:58+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/elfeed-optimized-blogging/</loc>
+    <loc>https://olddeuteronomy.github.io/post/elfeed-optimized-blogging/</loc>
     <lastmod>2025-04-02T13:16:58+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/orgmode-for-reproducibility-testing/</loc>
+    <loc>https://olddeuteronomy.github.io/post/orgmode-for-reproducibility-testing/</loc>
     <lastmod>2025-03-07T10:33:34+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/c&#43;&#43;/</loc>
+    <loc>https://olddeuteronomy.github.io/tags/c&#43;&#43;/</loc>
     <lastmod>2025-02-22T10:36:27+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/cpp-programming-in-emacs/</loc>
+    <loc>https://olddeuteronomy.github.io/post/cpp-programming-in-emacs/</loc>
     <lastmod>2025-02-22T10:36:27+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/2024/</loc>
+    <loc>https://olddeuteronomy.github.io/categories/2024/</loc>
     <lastmod>2024-12-26T10:01:05+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/python/</loc>
+    <loc>https://olddeuteronomy.github.io/tags/python/</loc>
     <lastmod>2024-12-26T10:01:05+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/python-programming-in-emacs/</loc>
+    <loc>https://olddeuteronomy.github.io/post/python-programming-in-emacs/</loc>
     <lastmod>2024-12-26T10:01:05+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/elisp/</loc>
+    <loc>https://olddeuteronomy.github.io/tags/elisp/</loc>
     <lastmod>2024-12-06T18:40:56+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/emacs-startup-screen/</loc>
+    <loc>https://olddeuteronomy.github.io/post/emacs-startup-screen/</loc>
     <lastmod>2024-12-06T18:40:56+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/some-excerpts-from-config-2-functions/</loc>
+    <loc>https://olddeuteronomy.github.io/post/some-excerpts-from-config-2-functions/</loc>
     <lastmod>2024-11-29T11:45:17+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/migration-to-bluesky/</loc>
+    <loc>https://olddeuteronomy.github.io/post/migration-to-bluesky/</loc>
     <lastmod>2024-11-22T11:23:12+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/social/</loc>
+    <loc>https://olddeuteronomy.github.io/tags/social/</loc>
     <lastmod>2024-11-22T11:23:12+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/some-excerpts-from-my-emacs-config/</loc>
+    <loc>https://olddeuteronomy.github.io/post/some-excerpts-from-my-emacs-config/</loc>
     <lastmod>2024-11-20T11:52:19+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/2023/</loc>
+    <loc>https://olddeuteronomy.github.io/categories/2023/</loc>
     <lastmod>2023-08-01T14:07:46+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/org-export-clocktables/</loc>
+    <loc>https://olddeuteronomy.github.io/post/org-export-clocktables/</loc>
     <lastmod>2023-08-01T14:07:46+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/2022/</loc>
+    <loc>https://olddeuteronomy.github.io/categories/2022/</loc>
     <lastmod>2022-12-05T14:14:13+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/a-tree-sitter-config-that-works/</loc>
+    <loc>https://olddeuteronomy.github.io/post/a-tree-sitter-config-that-works/</loc>
     <lastmod>2022-12-05T14:14:13+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/tree-sitter/</loc>
+    <loc>https://olddeuteronomy.github.io/tags/tree-sitter/</loc>
     <lastmod>2022-12-05T14:14:13+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/eshell/</loc>
+    <loc>https://olddeuteronomy.github.io/tags/eshell/</loc>
     <lastmod>2022-10-05T13:07:45+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/how-to-clear-the-eshell/</loc>
+    <loc>https://olddeuteronomy.github.io/post/how-to-clear-the-eshell/</loc>
     <lastmod>2022-10-05T13:07:45+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/emacs-shortcuts/</loc>
+    <loc>https://olddeuteronomy.github.io/post/emacs-shortcuts/</loc>
     <lastmod>2022-09-06T15:26:36+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/packages/</loc>
+    <loc>https://olddeuteronomy.github.io/tags/packages/</loc>
     <lastmod>2022-09-03T01:46:36+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/reverso-context-in-emacs/</loc>
+    <loc>https://olddeuteronomy.github.io/post/reverso-context-in-emacs/</loc>
     <lastmod>2022-09-03T01:46:36+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/use-abbrev-to-enter-special-characters/</loc>
+    <loc>https://olddeuteronomy.github.io/post/use-abbrev-to-enter-special-characters/</loc>
     <lastmod>2022-08-16T15:08:36+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/writing/</loc>
+    <loc>https://olddeuteronomy.github.io/tags/writing/</loc>
     <lastmod>2022-08-16T15:08:36+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/eshell-aliases-and-prompt/</loc>
+    <loc>https://olddeuteronomy.github.io/post/eshell-aliases-and-prompt/</loc>
     <lastmod>2022-07-22T13:57:32+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/calc/</loc>
+    <loc>https://olddeuteronomy.github.io/tags/calc/</loc>
     <lastmod>2022-06-22T14:11:33+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/dms-decimal-degree-conversions/</loc>
+    <loc>https://olddeuteronomy.github.io/post/dms-decimal-degree-conversions/</loc>
     <lastmod>2022-06-22T14:11:33+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/snippets/</loc>
+    <loc>https://olddeuteronomy.github.io/tags/snippets/</loc>
     <lastmod>2022-06-22T14:11:33+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/i-am-back/</loc>
+    <loc>https://olddeuteronomy.github.io/post/i-am-back/</loc>
     <lastmod>2022-06-21T02:45:58+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/2017/</loc>
+    <loc>https://olddeuteronomy.github.io/categories/2017/</loc>
     <lastmod>2017-06-17T14:51:33+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://olddeuteronomy.github.io/about/</loc>
     <lastmod>2017-06-17T14:51:33+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/pages/</loc>
+    <loc>https://olddeuteronomy.github.io/tags/pages/</loc>
     <lastmod>2017-06-17T14:51:33+03:00</lastmod>
   </url>
 </urlset>
