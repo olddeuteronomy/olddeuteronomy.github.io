@@ -3,18 +3,28 @@ body {
     font-size: 1rem;
 }
 
-/* .content p { */
-/*     color: #333; */
-/* } */
-
 input {
     font-size: inherit;
+}
+
+figure.center {
+    text-align: center;
+}
+figure.center img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+}
+figure.center figcaption {
+    text-align: center;
 }
 
 figcaption h4 {
     font-weight: 500;
     font-size: 1rem;
     font-style: italic;
+    text-align: center;
 }
 
 .required {
