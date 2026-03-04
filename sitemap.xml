@@ -2,28 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://olddeuteronomy.github.io/categories/2025/</loc>
-    <lastmod>2025-08-28T15:11:15+01:00</lastmod>
+    <loc>https://olddeuteronomy.github.io/categories/2026/</loc>
+    <lastmod>2026-03-04T09:16:11+01:00</lastmod>
+  </url><url>
+    <loc>https://olddeuteronomy.github.io/tags/ai/</loc>
+    <lastmod>2026-03-04T09:16:11+01:00</lastmod>
+  </url><url>
+    <loc>https://olddeuteronomy.github.io/tags/c&#43;&#43;/</loc>
+    <lastmod>2026-03-04T09:16:11+01:00</lastmod>
   </url><url>
     <loc>https://olddeuteronomy.github.io/categories/</loc>
+    <lastmod>2026-03-04T09:16:11+01:00</lastmod>
+  </url><url>
+    <loc>https://olddeuteronomy.github.io/tags/emacs/</loc>
+    <lastmod>2026-03-04T09:16:11+01:00</lastmod>
+  </url><url>
+    <loc>https://olddeuteronomy.github.io/post/emacs-software-development-and-llm/</loc>
+    <lastmod>2026-03-04T09:16:11+01:00</lastmod>
+  </url><url>
+    <loc>https://olddeuteronomy.github.io/post/</loc>
+    <lastmod>2026-03-04T09:16:11+01:00</lastmod>
+  </url><url>
+    <loc>https://olddeuteronomy.github.io/tags/</loc>
+    <lastmod>2026-03-04T09:16:11+01:00</lastmod>
+  </url><url>
+    <loc>https://olddeuteronomy.github.io/</loc>
+    <lastmod>2026-03-04T09:16:11+01:00</lastmod>
+  </url><url>
+    <loc>https://olddeuteronomy.github.io/categories/2025/</loc>
     <lastmod>2025-08-28T15:11:15+01:00</lastmod>
   </url><url>
     <loc>https://olddeuteronomy.github.io/tags/config/</loc>
     <lastmod>2025-08-28T15:11:15+01:00</lastmod>
   </url><url>
-    <loc>https://olddeuteronomy.github.io/tags/emacs/</loc>
-    <lastmod>2025-08-28T15:11:15+01:00</lastmod>
-  </url><url>
     <loc>https://olddeuteronomy.github.io/post/emacs-ibuffer-config/</loc>
-    <lastmod>2025-08-28T15:11:15+01:00</lastmod>
-  </url><url>
-    <loc>https://olddeuteronomy.github.io/post/</loc>
-    <lastmod>2025-08-28T15:11:15+01:00</lastmod>
-  </url><url>
-    <loc>https://olddeuteronomy.github.io/tags/</loc>
-    <lastmod>2025-08-28T15:11:15+01:00</lastmod>
-  </url><url>
-    <loc>https://olddeuteronomy.github.io/</loc>
     <lastmod>2025-08-28T15:11:15+01:00</lastmod>
   </url><url>
     <loc>https://olddeuteronomy.github.io/post/emacs-org-config/</loc>
@@ -52,9 +64,6 @@
   </url><url>
     <loc>https://olddeuteronomy.github.io/post/orgmode-for-reproducibility-testing/</loc>
     <lastmod>2025-03-07T10:33:34+01:00</lastmod>
-  </url><url>
-    <loc>https://olddeuteronomy.github.io/tags/c&#43;&#43;/</loc>
-    <lastmod>2025-02-22T10:36:27+01:00</lastmod>
   </url><url>
     <loc>https://olddeuteronomy.github.io/post/cpp-programming-in-emacs/</loc>
     <lastmod>2025-02-22T10:36:27+01:00</lastmod>
