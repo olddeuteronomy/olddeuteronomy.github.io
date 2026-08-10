@@ -30,3 +30,19 @@ figcaption h4 {
 .required {
     color: red;
 }
+
+/* kbd { */
+/*   display: inline-block; */
+/*   padding: 3px 6px; */
+/*   font-size: 0.85em; */
+/*   line-height: 1.2; */
+/*   color: #444; */
+/*   background: #f7f7f7; */
+/*   border: 1px solid #d73a49;   /\* GitHub-like red border *\/ */
+/*   border-radius: 4px; */
+/*   box-shadow: 0 1px 0 rgba(0,0,0,0.2); */
+/* } */
+
+/* kbd + kbd { */
+/*   margin-left: 4px; */
+/* } */

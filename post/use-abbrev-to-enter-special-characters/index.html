@@ -7,237 +7,50 @@
 	<title>Using abbrev to Enter Special Characters - The Emacs Cat</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		<meta property="og:title" content="Using abbrev to Enter Special Characters" />
-<meta property="og:description" content="As it&rsquo;s described in the GNU Emacs Manual, an abbreviation or abbrev
-is a string of characters that may be expanded to a longer string. The
-user can insert the abbrev string and find it replaced automatically
-with the expansion of the abbrev. This saves typing.
-Mostly I use builtin abbrev package to enter the special
-characters like greek letters, arrow symbols etc.
+		<meta property="og:url" content="https://olddeuteronomy.github.io/post/use-abbrev-to-enter-special-characters/">
+  <meta property="og:site_name" content="The Emacs Cat">
+  <meta property="og:title" content="Using abbrev to Enter Special Characters">
+  <meta property="og:description" content="As it’s described in the GNU Emacs Manual, an abbreviation or abbrev is a string of characters that may be expanded to a longer string. The user can insert the abbrev string and find it replaced automatically with the expansion of the abbrev. This saves typing.
+Mostly I use builtin abbrev package to enter the special characters like greek letters, arrow symbols etc.
 Below is my setup of abbrev from my ~/.emacs.
-(setq abbrev-file-name                ;; Tell Emacs where to read abbrev
-      &#34;~/.emacs.d/abbrev_defs.el&#34;)    ;; Definitions from...
-(setq save-abbrevs t)                 ;; (ask) save abbrevs when files are saved
-(setq-default abbrev-mode t)          ;; Turn it on globally
-(if (file-exists-p abbrev-file-name) (quietly-read-abbrev-file))
-Here is my abbrev definition file ~/.emacs.d/abbrev_defs.el.
-;; Time-stamp: &lt;Last changed 2022-08-16 16:38:50 by magnolia&gt;
+(setq abbrev-file-name ;; Tell Emacs where to read abbrev &#34;~/.emacs.d/abbrev_defs.el&#34;) ;; Definitions from... (setq save-abbrevs t) ;; (ask) save abbrevs when files are saved (setq-default abbrev-mode t) ;; Turn it on globally (if (file-exists-p abbrev-file-name) (quietly-read-abbrev-file)) Here is my abbrev definition file ~/.emacs.d/abbrev_defs.el.
+;; Time-stamp: &lt;Last changed 2022-08-16 16:38:50 by magnolia&gt; (define-abbrev-table &#39;global-abbrev-table &#39;( (&#34;8alpha&#34; &#34;α&#34;) (&#34;8beta&#34; &#34;β&#34;) (&#34;8gamma&#34; &#34;γ&#34;) (&#34;8Delta&#34; &#34;Δ&#34;) (&#34;8delta&#34; &#34;δ&#34;) (&#34;8theta&#34; &#34;θ&#34;) (&#34;8ksi&#34; &#34;ξ&#34;) (&#34;8lambda&#34; &#34;λ&#34;) (&#34;8mu&#34; &#34;µ&#34;) (&#34;8nu&#34; &#34;ν&#34;) (&#34;8pi&#34; &#34;π&#34;) (&#34;8Sigma&#34; &#34;Σ&#34;) (&#34;8sigma&#34; &#34;σ&#34;) (&#34;8tau&#34; &#34;τ&#34;) (&#34;8phi&#34; &#34;φ&#34;) (&#34;8psi&#34; &#34;ψ&#34;) (&#34;8Omega&#34; &#34;Ω&#34;) (&#34;8omega&#34; &#34;ω&#34;) (&#34;8in&#34; &#34;∈&#34;) (&#34;8nin&#34; &#34;∉&#34;) (&#34;8almost&#34; &#34;≈&#34;) (&#34;8inf&#34; &#34;∞&#34;) (&#34;8deg&#34; &#34;°&#34;) (&#34;8cels&#34; &#34;℃&#34;) (&#34;8right&#34; &#34;→&#34;) (&#34;8left&#34; &#34;←&#34;) (&#34;8up&#34; &#34;↑&#34;) (&#34;8down&#34; &#34;↓&#34;) (&#34;8para&#34; &#34;§&#34;) (&#34;8copy&#34; &#34;©&#34;) (&#34;8reg&#34; &#34;®&#34;) (&#34;8tm&#34; &#34;™&#34;) (&#34;8eur&#34; &#34;€&#34;) (&#34;8pound&#34; &#34;£&#34;) (&#34;8plusmin&#34; &#34;±&#34;) (&#34;8sup1&#34; &#34;¹&#34;) (&#34;8sup2&#34; &#34;²&#34;) (&#34;8sup3&#34; &#34;³&#34;) (&#34;8ldquo&#34; &#34;«&#34;) (&#34;8rdquo&#34; &#34;»&#34;) (&#34;8range&#34; &#34;÷&#34;) (&#34;8not&#34; &#34;¬&#34;) (&#34;8mdot&#34; &#34;·&#34;) (&#34;8bull&#34; &#34;∙&#34;) (&#34;8accent&#34; &#34;´&#34;) (&#34;8mdash&#34; &#34;—&#34;) (&#34;8ndash&#34; &#34;–&#34;))) Just after you type an abbreviation following by either SPC or any punctuation symbol it is replaced by the corresponding character.
+Of course, I’ve compiled this setup from various sources, mostly from the Impaktor’s article with some additions.
+It’s also worth to read the Xah Lee’s article for more examples of how to use abbrev mode in your daily Emacs life.
+Happy abbreving.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-08-16T15:08:36+03:00">
+    <meta property="article:modified_time" content="2022-08-16T15:08:36+03:00">
+    <meta property="article:tag" content="Emacs">
+    <meta property="article:tag" content="Writing">
 
-(define-abbrev-table &#39;global-abbrev-table
-  &#39;(
-    (&#34;8alpha&#34;   &#34;α&#34;)
-    (&#34;8beta&#34;    &#34;β&#34;)
-    (&#34;8gamma&#34;   &#34;γ&#34;)
-    (&#34;8Delta&#34;   &#34;Δ&#34;)
-    (&#34;8delta&#34;   &#34;δ&#34;)
-    (&#34;8theta&#34;   &#34;θ&#34;)
-    (&#34;8ksi&#34;     &#34;ξ&#34;)
-    (&#34;8lambda&#34;  &#34;λ&#34;)
-    (&#34;8mu&#34;      &#34;µ&#34;)
-    (&#34;8nu&#34;      &#34;ν&#34;)
-    (&#34;8pi&#34;      &#34;π&#34;)
-    (&#34;8Sigma&#34;   &#34;Σ&#34;)
-    (&#34;8sigma&#34;   &#34;σ&#34;)
-    (&#34;8tau&#34;     &#34;τ&#34;)
-    (&#34;8phi&#34;     &#34;φ&#34;)
-    (&#34;8psi&#34;     &#34;ψ&#34;)
-    (&#34;8Omega&#34;   &#34;Ω&#34;)
-    (&#34;8omega&#34;   &#34;ω&#34;)
-    (&#34;8in&#34;      &#34;∈&#34;)
-    (&#34;8nin&#34;     &#34;∉&#34;)
-    (&#34;8almost&#34;  &#34;≈&#34;)
-    (&#34;8inf&#34;     &#34;∞&#34;)
-    (&#34;8deg&#34;     &#34;°&#34;)
-    (&#34;8cels&#34;    &#34;℃&#34;)
-    (&#34;8right&#34;   &#34;→&#34;)
-    (&#34;8left&#34;    &#34;←&#34;)
-    (&#34;8up&#34;      &#34;↑&#34;)
-    (&#34;8down&#34;    &#34;↓&#34;)
-    (&#34;8para&#34;    &#34;§&#34;)
-    (&#34;8copy&#34;    &#34;©&#34;)
-    (&#34;8reg&#34;     &#34;®&#34;)
-    (&#34;8tm&#34;      &#34;™&#34;)
-    (&#34;8eur&#34;     &#34;€&#34;)
-    (&#34;8pound&#34;   &#34;£&#34;)
-    (&#34;8plusmin&#34; &#34;±&#34;)
-    (&#34;8sup1&#34;    &#34;¹&#34;)
-    (&#34;8sup2&#34;    &#34;²&#34;)
-    (&#34;8sup3&#34;    &#34;³&#34;)
-    (&#34;8ldquo&#34;   &#34;«&#34;)
-    (&#34;8rdquo&#34;   &#34;»&#34;)
-    (&#34;8range&#34;   &#34;÷&#34;)
-    (&#34;8not&#34;     &#34;¬&#34;)
-    (&#34;8mdot&#34;    &#34;·&#34;)
-    (&#34;8bull&#34;    &#34;∙&#34;)
-    (&#34;8accent&#34;  &#34;´&#34;)
-    (&#34;8mdash&#34;   &#34;—&#34;)
-    (&#34;8ndash&#34;   &#34;–&#34;)))
-Just after you type an abbreviation following by either SPC or any
-punctuation symbol it is replaced by the corresponding character.
-Of course, I&rsquo;ve compiled this setup from various sources, mostly from
-the Impaktor&rsquo;s article
-with some additions.
-It&rsquo;s also worth to read the Xah Lee&rsquo;s article
-for more examples of how to use abbrev mode in your daily Emacs
-life.
-Happy abbreving." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://olddeuteronomy.github.io/post/use-abbrev-to-enter-special-characters/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-08-16T15:08:36+03:00" />
-<meta property="article:modified_time" content="2022-08-16T15:08:36+03:00" />
-
-
-		<meta itemprop="name" content="Using abbrev to Enter Special Characters">
-<meta itemprop="description" content="As it&rsquo;s described in the GNU Emacs Manual, an abbreviation or abbrev
-is a string of characters that may be expanded to a longer string. The
-user can insert the abbrev string and find it replaced automatically
-with the expansion of the abbrev. This saves typing.
-Mostly I use builtin abbrev package to enter the special
-characters like greek letters, arrow symbols etc.
+		
+  <meta itemprop="name" content="Using abbrev to Enter Special Characters">
+  <meta itemprop="description" content="As it’s described in the GNU Emacs Manual, an abbreviation or abbrev is a string of characters that may be expanded to a longer string. The user can insert the abbrev string and find it replaced automatically with the expansion of the abbrev. This saves typing.
+Mostly I use builtin abbrev package to enter the special characters like greek letters, arrow symbols etc.
 Below is my setup of abbrev from my ~/.emacs.
-(setq abbrev-file-name                ;; Tell Emacs where to read abbrev
-      &#34;~/.emacs.d/abbrev_defs.el&#34;)    ;; Definitions from...
-(setq save-abbrevs t)                 ;; (ask) save abbrevs when files are saved
-(setq-default abbrev-mode t)          ;; Turn it on globally
-(if (file-exists-p abbrev-file-name) (quietly-read-abbrev-file))
-Here is my abbrev definition file ~/.emacs.d/abbrev_defs.el.
-;; Time-stamp: &lt;Last changed 2022-08-16 16:38:50 by magnolia&gt;
-
-(define-abbrev-table &#39;global-abbrev-table
-  &#39;(
-    (&#34;8alpha&#34;   &#34;α&#34;)
-    (&#34;8beta&#34;    &#34;β&#34;)
-    (&#34;8gamma&#34;   &#34;γ&#34;)
-    (&#34;8Delta&#34;   &#34;Δ&#34;)
-    (&#34;8delta&#34;   &#34;δ&#34;)
-    (&#34;8theta&#34;   &#34;θ&#34;)
-    (&#34;8ksi&#34;     &#34;ξ&#34;)
-    (&#34;8lambda&#34;  &#34;λ&#34;)
-    (&#34;8mu&#34;      &#34;µ&#34;)
-    (&#34;8nu&#34;      &#34;ν&#34;)
-    (&#34;8pi&#34;      &#34;π&#34;)
-    (&#34;8Sigma&#34;   &#34;Σ&#34;)
-    (&#34;8sigma&#34;   &#34;σ&#34;)
-    (&#34;8tau&#34;     &#34;τ&#34;)
-    (&#34;8phi&#34;     &#34;φ&#34;)
-    (&#34;8psi&#34;     &#34;ψ&#34;)
-    (&#34;8Omega&#34;   &#34;Ω&#34;)
-    (&#34;8omega&#34;   &#34;ω&#34;)
-    (&#34;8in&#34;      &#34;∈&#34;)
-    (&#34;8nin&#34;     &#34;∉&#34;)
-    (&#34;8almost&#34;  &#34;≈&#34;)
-    (&#34;8inf&#34;     &#34;∞&#34;)
-    (&#34;8deg&#34;     &#34;°&#34;)
-    (&#34;8cels&#34;    &#34;℃&#34;)
-    (&#34;8right&#34;   &#34;→&#34;)
-    (&#34;8left&#34;    &#34;←&#34;)
-    (&#34;8up&#34;      &#34;↑&#34;)
-    (&#34;8down&#34;    &#34;↓&#34;)
-    (&#34;8para&#34;    &#34;§&#34;)
-    (&#34;8copy&#34;    &#34;©&#34;)
-    (&#34;8reg&#34;     &#34;®&#34;)
-    (&#34;8tm&#34;      &#34;™&#34;)
-    (&#34;8eur&#34;     &#34;€&#34;)
-    (&#34;8pound&#34;   &#34;£&#34;)
-    (&#34;8plusmin&#34; &#34;±&#34;)
-    (&#34;8sup1&#34;    &#34;¹&#34;)
-    (&#34;8sup2&#34;    &#34;²&#34;)
-    (&#34;8sup3&#34;    &#34;³&#34;)
-    (&#34;8ldquo&#34;   &#34;«&#34;)
-    (&#34;8rdquo&#34;   &#34;»&#34;)
-    (&#34;8range&#34;   &#34;÷&#34;)
-    (&#34;8not&#34;     &#34;¬&#34;)
-    (&#34;8mdot&#34;    &#34;·&#34;)
-    (&#34;8bull&#34;    &#34;∙&#34;)
-    (&#34;8accent&#34;  &#34;´&#34;)
-    (&#34;8mdash&#34;   &#34;—&#34;)
-    (&#34;8ndash&#34;   &#34;–&#34;)))
-Just after you type an abbreviation following by either SPC or any
-punctuation symbol it is replaced by the corresponding character.
-Of course, I&rsquo;ve compiled this setup from various sources, mostly from
-the Impaktor&rsquo;s article
-with some additions.
-It&rsquo;s also worth to read the Xah Lee&rsquo;s article
-for more examples of how to use abbrev mode in your daily Emacs
-life.
-Happy abbreving."><meta itemprop="datePublished" content="2022-08-16T15:08:36+03:00" />
-<meta itemprop="dateModified" content="2022-08-16T15:08:36+03:00" />
-<meta itemprop="wordCount" content="283">
-<meta itemprop="keywords" content="emacs,writing," />
-		<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Using abbrev to Enter Special Characters"/>
-<meta name="twitter:description" content="As it&rsquo;s described in the GNU Emacs Manual, an abbreviation or abbrev
-is a string of characters that may be expanded to a longer string. The
-user can insert the abbrev string and find it replaced automatically
-with the expansion of the abbrev. This saves typing.
-Mostly I use builtin abbrev package to enter the special
-characters like greek letters, arrow symbols etc.
+(setq abbrev-file-name ;; Tell Emacs where to read abbrev &#34;~/.emacs.d/abbrev_defs.el&#34;) ;; Definitions from... (setq save-abbrevs t) ;; (ask) save abbrevs when files are saved (setq-default abbrev-mode t) ;; Turn it on globally (if (file-exists-p abbrev-file-name) (quietly-read-abbrev-file)) Here is my abbrev definition file ~/.emacs.d/abbrev_defs.el.
+;; Time-stamp: &lt;Last changed 2022-08-16 16:38:50 by magnolia&gt; (define-abbrev-table &#39;global-abbrev-table &#39;( (&#34;8alpha&#34; &#34;α&#34;) (&#34;8beta&#34; &#34;β&#34;) (&#34;8gamma&#34; &#34;γ&#34;) (&#34;8Delta&#34; &#34;Δ&#34;) (&#34;8delta&#34; &#34;δ&#34;) (&#34;8theta&#34; &#34;θ&#34;) (&#34;8ksi&#34; &#34;ξ&#34;) (&#34;8lambda&#34; &#34;λ&#34;) (&#34;8mu&#34; &#34;µ&#34;) (&#34;8nu&#34; &#34;ν&#34;) (&#34;8pi&#34; &#34;π&#34;) (&#34;8Sigma&#34; &#34;Σ&#34;) (&#34;8sigma&#34; &#34;σ&#34;) (&#34;8tau&#34; &#34;τ&#34;) (&#34;8phi&#34; &#34;φ&#34;) (&#34;8psi&#34; &#34;ψ&#34;) (&#34;8Omega&#34; &#34;Ω&#34;) (&#34;8omega&#34; &#34;ω&#34;) (&#34;8in&#34; &#34;∈&#34;) (&#34;8nin&#34; &#34;∉&#34;) (&#34;8almost&#34; &#34;≈&#34;) (&#34;8inf&#34; &#34;∞&#34;) (&#34;8deg&#34; &#34;°&#34;) (&#34;8cels&#34; &#34;℃&#34;) (&#34;8right&#34; &#34;→&#34;) (&#34;8left&#34; &#34;←&#34;) (&#34;8up&#34; &#34;↑&#34;) (&#34;8down&#34; &#34;↓&#34;) (&#34;8para&#34; &#34;§&#34;) (&#34;8copy&#34; &#34;©&#34;) (&#34;8reg&#34; &#34;®&#34;) (&#34;8tm&#34; &#34;™&#34;) (&#34;8eur&#34; &#34;€&#34;) (&#34;8pound&#34; &#34;£&#34;) (&#34;8plusmin&#34; &#34;±&#34;) (&#34;8sup1&#34; &#34;¹&#34;) (&#34;8sup2&#34; &#34;²&#34;) (&#34;8sup3&#34; &#34;³&#34;) (&#34;8ldquo&#34; &#34;«&#34;) (&#34;8rdquo&#34; &#34;»&#34;) (&#34;8range&#34; &#34;÷&#34;) (&#34;8not&#34; &#34;¬&#34;) (&#34;8mdot&#34; &#34;·&#34;) (&#34;8bull&#34; &#34;∙&#34;) (&#34;8accent&#34; &#34;´&#34;) (&#34;8mdash&#34; &#34;—&#34;) (&#34;8ndash&#34; &#34;–&#34;))) Just after you type an abbreviation following by either SPC or any punctuation symbol it is replaced by the corresponding character.
+Of course, I’ve compiled this setup from various sources, mostly from the Impaktor’s article with some additions.
+It’s also worth to read the Xah Lee’s article for more examples of how to use abbrev mode in your daily Emacs life.
+Happy abbreving.">
+  <meta itemprop="datePublished" content="2022-08-16T15:08:36+03:00">
+  <meta itemprop="dateModified" content="2022-08-16T15:08:36+03:00">
+  <meta itemprop="wordCount" content="283">
+  <meta itemprop="keywords" content="Emacs,Writing">
+		
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Using abbrev to Enter Special Characters">
+  <meta name="twitter:description" content="As it’s described in the GNU Emacs Manual, an abbreviation or abbrev is a string of characters that may be expanded to a longer string. The user can insert the abbrev string and find it replaced automatically with the expansion of the abbrev. This saves typing.
+Mostly I use builtin abbrev package to enter the special characters like greek letters, arrow symbols etc.
 Below is my setup of abbrev from my ~/.emacs.
-(setq abbrev-file-name                ;; Tell Emacs where to read abbrev
-      &#34;~/.emacs.d/abbrev_defs.el&#34;)    ;; Definitions from...
-(setq save-abbrevs t)                 ;; (ask) save abbrevs when files are saved
-(setq-default abbrev-mode t)          ;; Turn it on globally
-(if (file-exists-p abbrev-file-name) (quietly-read-abbrev-file))
-Here is my abbrev definition file ~/.emacs.d/abbrev_defs.el.
-;; Time-stamp: &lt;Last changed 2022-08-16 16:38:50 by magnolia&gt;
-
-(define-abbrev-table &#39;global-abbrev-table
-  &#39;(
-    (&#34;8alpha&#34;   &#34;α&#34;)
-    (&#34;8beta&#34;    &#34;β&#34;)
-    (&#34;8gamma&#34;   &#34;γ&#34;)
-    (&#34;8Delta&#34;   &#34;Δ&#34;)
-    (&#34;8delta&#34;   &#34;δ&#34;)
-    (&#34;8theta&#34;   &#34;θ&#34;)
-    (&#34;8ksi&#34;     &#34;ξ&#34;)
-    (&#34;8lambda&#34;  &#34;λ&#34;)
-    (&#34;8mu&#34;      &#34;µ&#34;)
-    (&#34;8nu&#34;      &#34;ν&#34;)
-    (&#34;8pi&#34;      &#34;π&#34;)
-    (&#34;8Sigma&#34;   &#34;Σ&#34;)
-    (&#34;8sigma&#34;   &#34;σ&#34;)
-    (&#34;8tau&#34;     &#34;τ&#34;)
-    (&#34;8phi&#34;     &#34;φ&#34;)
-    (&#34;8psi&#34;     &#34;ψ&#34;)
-    (&#34;8Omega&#34;   &#34;Ω&#34;)
-    (&#34;8omega&#34;   &#34;ω&#34;)
-    (&#34;8in&#34;      &#34;∈&#34;)
-    (&#34;8nin&#34;     &#34;∉&#34;)
-    (&#34;8almost&#34;  &#34;≈&#34;)
-    (&#34;8inf&#34;     &#34;∞&#34;)
-    (&#34;8deg&#34;     &#34;°&#34;)
-    (&#34;8cels&#34;    &#34;℃&#34;)
-    (&#34;8right&#34;   &#34;→&#34;)
-    (&#34;8left&#34;    &#34;←&#34;)
-    (&#34;8up&#34;      &#34;↑&#34;)
-    (&#34;8down&#34;    &#34;↓&#34;)
-    (&#34;8para&#34;    &#34;§&#34;)
-    (&#34;8copy&#34;    &#34;©&#34;)
-    (&#34;8reg&#34;     &#34;®&#34;)
-    (&#34;8tm&#34;      &#34;™&#34;)
-    (&#34;8eur&#34;     &#34;€&#34;)
-    (&#34;8pound&#34;   &#34;£&#34;)
-    (&#34;8plusmin&#34; &#34;±&#34;)
-    (&#34;8sup1&#34;    &#34;¹&#34;)
-    (&#34;8sup2&#34;    &#34;²&#34;)
-    (&#34;8sup3&#34;    &#34;³&#34;)
-    (&#34;8ldquo&#34;   &#34;«&#34;)
-    (&#34;8rdquo&#34;   &#34;»&#34;)
-    (&#34;8range&#34;   &#34;÷&#34;)
-    (&#34;8not&#34;     &#34;¬&#34;)
-    (&#34;8mdot&#34;    &#34;·&#34;)
-    (&#34;8bull&#34;    &#34;∙&#34;)
-    (&#34;8accent&#34;  &#34;´&#34;)
-    (&#34;8mdash&#34;   &#34;—&#34;)
-    (&#34;8ndash&#34;   &#34;–&#34;)))
-Just after you type an abbreviation following by either SPC or any
-punctuation symbol it is replaced by the corresponding character.
-Of course, I&rsquo;ve compiled this setup from various sources, mostly from
-the Impaktor&rsquo;s article
-with some additions.
-It&rsquo;s also worth to read the Xah Lee&rsquo;s article
-for more examples of how to use abbrev mode in your daily Emacs
-life.
-Happy abbreving."/>
+(setq abbrev-file-name ;; Tell Emacs where to read abbrev &#34;~/.emacs.d/abbrev_defs.el&#34;) ;; Definitions from... (setq save-abbrevs t) ;; (ask) save abbrevs when files are saved (setq-default abbrev-mode t) ;; Turn it on globally (if (file-exists-p abbrev-file-name) (quietly-read-abbrev-file)) Here is my abbrev definition file ~/.emacs.d/abbrev_defs.el.
+;; Time-stamp: &lt;Last changed 2022-08-16 16:38:50 by magnolia&gt; (define-abbrev-table &#39;global-abbrev-table &#39;( (&#34;8alpha&#34; &#34;α&#34;) (&#34;8beta&#34; &#34;β&#34;) (&#34;8gamma&#34; &#34;γ&#34;) (&#34;8Delta&#34; &#34;Δ&#34;) (&#34;8delta&#34; &#34;δ&#34;) (&#34;8theta&#34; &#34;θ&#34;) (&#34;8ksi&#34; &#34;ξ&#34;) (&#34;8lambda&#34; &#34;λ&#34;) (&#34;8mu&#34; &#34;µ&#34;) (&#34;8nu&#34; &#34;ν&#34;) (&#34;8pi&#34; &#34;π&#34;) (&#34;8Sigma&#34; &#34;Σ&#34;) (&#34;8sigma&#34; &#34;σ&#34;) (&#34;8tau&#34; &#34;τ&#34;) (&#34;8phi&#34; &#34;φ&#34;) (&#34;8psi&#34; &#34;ψ&#34;) (&#34;8Omega&#34; &#34;Ω&#34;) (&#34;8omega&#34; &#34;ω&#34;) (&#34;8in&#34; &#34;∈&#34;) (&#34;8nin&#34; &#34;∉&#34;) (&#34;8almost&#34; &#34;≈&#34;) (&#34;8inf&#34; &#34;∞&#34;) (&#34;8deg&#34; &#34;°&#34;) (&#34;8cels&#34; &#34;℃&#34;) (&#34;8right&#34; &#34;→&#34;) (&#34;8left&#34; &#34;←&#34;) (&#34;8up&#34; &#34;↑&#34;) (&#34;8down&#34; &#34;↓&#34;) (&#34;8para&#34; &#34;§&#34;) (&#34;8copy&#34; &#34;©&#34;) (&#34;8reg&#34; &#34;®&#34;) (&#34;8tm&#34; &#34;™&#34;) (&#34;8eur&#34; &#34;€&#34;) (&#34;8pound&#34; &#34;£&#34;) (&#34;8plusmin&#34; &#34;±&#34;) (&#34;8sup1&#34; &#34;¹&#34;) (&#34;8sup2&#34; &#34;²&#34;) (&#34;8sup3&#34; &#34;³&#34;) (&#34;8ldquo&#34; &#34;«&#34;) (&#34;8rdquo&#34; &#34;»&#34;) (&#34;8range&#34; &#34;÷&#34;) (&#34;8not&#34; &#34;¬&#34;) (&#34;8mdot&#34; &#34;·&#34;) (&#34;8bull&#34; &#34;∙&#34;) (&#34;8accent&#34; &#34;´&#34;) (&#34;8mdash&#34; &#34;—&#34;) (&#34;8ndash&#34; &#34;–&#34;))) Just after you type an abbreviation following by either SPC or any punctuation symbol it is replaced by the corresponding character.
+Of course, I’ve compiled this setup from various sources, mostly from the Impaktor’s article with some additions.
+It’s also worth to read the Xah Lee’s article for more examples of how to use abbrev mode in your daily Emacs life.
+Happy abbreving.">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">

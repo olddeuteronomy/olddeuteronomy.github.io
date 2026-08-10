@@ -7,552 +7,66 @@
 	<title>My Emacs Org Configuration - The Emacs Cat</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		<meta property="og:title" content="My Emacs Org Configuration" />
-<meta property="og:description" content="These days, I’ve come across numerous posts and Reddit threads
-praising Org mode as one of the most compelling features of Emacs.
-There’s no doubt this is true, and I’m amazed by how many people use
-Emacs solely for Org-mode. As a software developer, I rely on Org
-every day for note-taking, maintaining my knowledge
-database (org-roam), agenda management (org-agenda, synchronized with
-beorg on my iPhone and iPad via Dropbox), and, of course, blogging.
-So, I’ve decided to share my Org configuration in the hope that it
-will be useful to someone.
-Org-mode
-Org-mode is now included with Emacs, so we don’t need to install it
-separately&mdash;except for org-roam, which is an external package.
-Common Settings
-;; When at a URL, pressing the &lt;Enter&gt; opens the link in a browser.
-(setq org-return-follows-link t)
-
-;; To prevent M-RET splitting the line.
-;; https://irreal.org/blog/?p=6297
-(setq org-M-RET-may-split-line &#39;((item . nil)))
-
-;; To hide drawers, e.g. PROPERTIES.
-(setq org-startup-folded &#39;fold)
-Hide Emphasis Characters
-From Org as a Word Processor.
-;; Non-nil means font-lock should hide
-;; the emphasis marker characters.
-(setq org-hide-emphasis-markers t)
-Keep in mind that the slash characters (and asterisks for bold, etc)
-are still there, but aren’t displayed.
-;; Make invisible parts of Org elements appear visible.
-(use-package org-appear :ensure t
-  :init
-  (setq org-appear-delay 0.2)
-  :hook
-  org-mode
-)
-The org-appear package is very helpful
-when using org-hide-emphasis-markers, as described above.
-Hidden element parts appear when the cursor enters an element
-and disappear when it leaves&mdash;with some delay.
-Better List Bullets
-From Org as a Word Processor.
-;; Better list bullets.
-(font-lock-add-keywords
- &#39;org-mode
- &#39;((&#34;^ &#43;\\([-*]\\) &#34;
-    (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) &#34;•&#34;))))))
-Replace the initial - with a Unicode bullet symbol •.
-Better Header Bullets
-I prefer using Unicode circled digit symbols as header bullets to
-indicate the header level.
-(use-package org-bullets :ensure t)
-(add-hook &#39;org-mode-hook (lambda () (org-bullets-mode 1)))
-(setq org-bullets-bullet-list
-  &#39;(&#34;①&#34; &#34;②&#34; &#34;③&#34; &#34;④&#34; &#34;⑤&#34; &#34;⑥&#34; &#34;⑦&#34; &#34;⑧&#34; &#34;⑨&#34; &#34;⑩&#34;))
-
-;; Indent levels.
-(add-hook &#39;org-mode-hook &#39;org-indent-mode)
-
-;; Use this character(s) for ellipsis.
-(setq org-ellipsis &#34;...&#34;)
-Source Code Blocks
-;; Pretty fontification of source code blocks.
-(setq org-src-fontify-natively t)
-
-;; Use `bash&#39; instead of `sh&#39; in the `shell&#39; code block.
-(setq org-babel-sh-command &#34;bash&#34;)
-
-;; Use C&#43;&#43;17.
-(setq org-babel-C&#43;&#43;-compiler &#34;g&#43;&#43; -std=c&#43;&#43;17&#34;)
-
-;; `org-babel&#39; languages.
-(require &#39;ob-tangle)
-(org-babel-do-load-languages
- &#39;org-babel-load-languages
- &#39;(
-   (shell . t)
-   (python . t)
-   (C . t)         ; C and C&#43;&#43;
-   (calc . t)
-   (latex . t)
-   (gnuplot . t)
-   (sqlite . t)))
-
-;; No confirmation on block execution.
-(setq org-confirm-babel-evaluate nil)
-Org Agenda
-;; Open the current agenda.
-(global-set-key (kbd &#34;C-c a&#34;) &#39;org-agenda)
-
-;; View the agenda in the current window.
-(setq org-agenda-window-setup &#39;current-window)
-
-;; A file to store the agenda. I use Dropbox to be able to view/edit
-;; the agenda on other devices (phones, tablets).
-;; In particular, I use the `beorg&#39; app on both iPhone and iPad.
-(setq org-agenda-files &#39;(&#34;~/Dropbox/org/refile-beorg.org&#34;))
-
-;; View diary for the current week.
-(setq org-agenda-include-diary t)
-
-;; Set priority range from A to C with default A.
-(setq org-highest-priority ?A)
-(setq org-lowest-priority ?C)
-(setq org-default-priority ?A)
-
-;; Optional. Set custom colors for priorities (for Solarized Dark theme).
-;; Your theme may require a different color set.
-(setq org-priority-faces
-      &#39;((?A . (:foreground &#34;#F0DFAF&#34; :weight bold))
-        (?B . (:foreground &#34;LightSteelBlue&#34;))
-        (?C . (:foreground &#34;OliveDrab&#34;))))
-
-;; Capture items using &lt;C-c c&gt;.
-(define-key global-map (kbd &#34;C-c c&#34;) &#39;org-capture)
-(setq org-capture-templates
-      &#39;(
-        (&#34;t&#34; &#34;TODO item in refile-beorg&#34;
-         entry (file &#34;~/Dropbox/org/refile-beorg.org&#34;)
-         &#34;* TODO %?\n%U&#34;
-         )
-        (&#34;n&#34; &#34;Notes in notes.org&#34;
-         entry (file &#34;~/Dropbox/org/notes.org&#34;)
-         &#34;\n* %T %?\n%i&#34;
-         )))
-
-;; https://github.com/harrybournis/org-fancy-priorities
-(use-package org-fancy-priorities
-  :ensure t
-  :hook
-  (org-mode . org-fancy-priorities-mode)
-  :config
-  (setq org-fancy-priorities-list &#39;(&#34;⚡&#34; &#34;⏰&#34; &#34;☕&#34;)))
-
-;; A timestamp or a note will be recorded when an entry has been refiled.
-(setq org-log-refile t)
-
-;; Add &#34;CLOSED: [timestamp]&#34; when a task is marked as DONE.
-(setq org-log-done t)
-
-(defun my/notes-open ()
-  (interactive)
-  (switch-to-buffer (find-file-noselect &#34;~/Dropbox/org/notes.org&#34;)))
-(global-set-key (kbd &#34;C-c n&#34;) #&#39;my/notes-open)
-Theme Specific Settings
-I use the Solarized Dark theme; it has some tweaks for Org-mode.
-;; Don&#39;t change size of Org-mode headlines (but keep other size-changes)
-(setq solarized-scale-org-headlines nil)
-
-;; Avoid all font-size changes
-(setq solarized-height-minus-1 1.0)
-(setq solarized-height-plus-1 1.0)
-(setq solarized-height-plus-2 1.0)
-(setq solarized-height-plus-3 1.0)
-(setq solarized-height-plus-4 1.0)
-Some Custom Face Settings for Org-mode
-I prefer to have a very dark background in code blocks.
-Your theme may require a different color set.
-(custom-set-faces
- &#39;(org-block ((t (:background &#34;gray10&#34;))))
- &#39;(org-document-title ((t (:foreground &#34;red&#34; :weight bold))))
- &#39;(org-level-1 ((t (:inherit outline-1 :weight bold))))
- &#39;(org-level-2 ((t (:inherit outline-2 :weight normal :slant italic))))
- &#39;(org-level-3 ((t (:inherit outline-3 :slant italic))))
- &#39;(org-level-4 ((t (:inherit outline-4 :slant italic)))))
-Screenshots
-
-            Org mode w/ code blocks. Click or tap to view the full-size picture.
-        
-
-
-
-            Org agenda w/ diary. Click or tap to view the full-size picture.
-        
-
-
-Happy emacsing!
-&mdash; The Emacs Cat." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://olddeuteronomy.github.io/post/emacs-org-config/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2025-07-24T10:41:06+01:00" />
-<meta property="article:modified_time" content="2025-07-24T10:41:06+01:00" />
-
-
-		<meta itemprop="name" content="My Emacs Org Configuration">
-<meta itemprop="description" content="These days, I’ve come across numerous posts and Reddit threads
-praising Org mode as one of the most compelling features of Emacs.
-There’s no doubt this is true, and I’m amazed by how many people use
-Emacs solely for Org-mode. As a software developer, I rely on Org
-every day for note-taking, maintaining my knowledge
-database (org-roam), agenda management (org-agenda, synchronized with
-beorg on my iPhone and iPad via Dropbox), and, of course, blogging.
-So, I’ve decided to share my Org configuration in the hope that it
-will be useful to someone.
-Org-mode
-Org-mode is now included with Emacs, so we don’t need to install it
-separately&mdash;except for org-roam, which is an external package.
-Common Settings
-;; When at a URL, pressing the &lt;Enter&gt; opens the link in a browser.
-(setq org-return-follows-link t)
-
-;; To prevent M-RET splitting the line.
-;; https://irreal.org/blog/?p=6297
-(setq org-M-RET-may-split-line &#39;((item . nil)))
-
-;; To hide drawers, e.g. PROPERTIES.
-(setq org-startup-folded &#39;fold)
-Hide Emphasis Characters
-From Org as a Word Processor.
-;; Non-nil means font-lock should hide
-;; the emphasis marker characters.
-(setq org-hide-emphasis-markers t)
-Keep in mind that the slash characters (and asterisks for bold, etc)
-are still there, but aren’t displayed.
-;; Make invisible parts of Org elements appear visible.
-(use-package org-appear :ensure t
-  :init
-  (setq org-appear-delay 0.2)
-  :hook
-  org-mode
-)
-The org-appear package is very helpful
-when using org-hide-emphasis-markers, as described above.
-Hidden element parts appear when the cursor enters an element
-and disappear when it leaves&mdash;with some delay.
-Better List Bullets
-From Org as a Word Processor.
-;; Better list bullets.
-(font-lock-add-keywords
- &#39;org-mode
- &#39;((&#34;^ &#43;\\([-*]\\) &#34;
-    (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) &#34;•&#34;))))))
-Replace the initial - with a Unicode bullet symbol •.
-Better Header Bullets
-I prefer using Unicode circled digit symbols as header bullets to
-indicate the header level.
-(use-package org-bullets :ensure t)
-(add-hook &#39;org-mode-hook (lambda () (org-bullets-mode 1)))
-(setq org-bullets-bullet-list
-  &#39;(&#34;①&#34; &#34;②&#34; &#34;③&#34; &#34;④&#34; &#34;⑤&#34; &#34;⑥&#34; &#34;⑦&#34; &#34;⑧&#34; &#34;⑨&#34; &#34;⑩&#34;))
-
-;; Indent levels.
-(add-hook &#39;org-mode-hook &#39;org-indent-mode)
-
-;; Use this character(s) for ellipsis.
-(setq org-ellipsis &#34;...&#34;)
-Source Code Blocks
-;; Pretty fontification of source code blocks.
-(setq org-src-fontify-natively t)
-
-;; Use `bash&#39; instead of `sh&#39; in the `shell&#39; code block.
-(setq org-babel-sh-command &#34;bash&#34;)
-
-;; Use C&#43;&#43;17.
-(setq org-babel-C&#43;&#43;-compiler &#34;g&#43;&#43; -std=c&#43;&#43;17&#34;)
-
-;; `org-babel&#39; languages.
-(require &#39;ob-tangle)
-(org-babel-do-load-languages
- &#39;org-babel-load-languages
- &#39;(
-   (shell . t)
-   (python . t)
-   (C . t)         ; C and C&#43;&#43;
-   (calc . t)
-   (latex . t)
-   (gnuplot . t)
-   (sqlite . t)))
-
-;; No confirmation on block execution.
-(setq org-confirm-babel-evaluate nil)
-Org Agenda
-;; Open the current agenda.
-(global-set-key (kbd &#34;C-c a&#34;) &#39;org-agenda)
-
-;; View the agenda in the current window.
-(setq org-agenda-window-setup &#39;current-window)
-
-;; A file to store the agenda. I use Dropbox to be able to view/edit
-;; the agenda on other devices (phones, tablets).
-;; In particular, I use the `beorg&#39; app on both iPhone and iPad.
-(setq org-agenda-files &#39;(&#34;~/Dropbox/org/refile-beorg.org&#34;))
-
-;; View diary for the current week.
-(setq org-agenda-include-diary t)
-
-;; Set priority range from A to C with default A.
-(setq org-highest-priority ?A)
-(setq org-lowest-priority ?C)
-(setq org-default-priority ?A)
-
-;; Optional. Set custom colors for priorities (for Solarized Dark theme).
-;; Your theme may require a different color set.
-(setq org-priority-faces
-      &#39;((?A . (:foreground &#34;#F0DFAF&#34; :weight bold))
-        (?B . (:foreground &#34;LightSteelBlue&#34;))
-        (?C . (:foreground &#34;OliveDrab&#34;))))
-
-;; Capture items using &lt;C-c c&gt;.
-(define-key global-map (kbd &#34;C-c c&#34;) &#39;org-capture)
-(setq org-capture-templates
-      &#39;(
-        (&#34;t&#34; &#34;TODO item in refile-beorg&#34;
-         entry (file &#34;~/Dropbox/org/refile-beorg.org&#34;)
-         &#34;* TODO %?\n%U&#34;
-         )
-        (&#34;n&#34; &#34;Notes in notes.org&#34;
-         entry (file &#34;~/Dropbox/org/notes.org&#34;)
-         &#34;\n* %T %?\n%i&#34;
-         )))
-
-;; https://github.com/harrybournis/org-fancy-priorities
-(use-package org-fancy-priorities
-  :ensure t
-  :hook
-  (org-mode . org-fancy-priorities-mode)
-  :config
-  (setq org-fancy-priorities-list &#39;(&#34;⚡&#34; &#34;⏰&#34; &#34;☕&#34;)))
-
-;; A timestamp or a note will be recorded when an entry has been refiled.
-(setq org-log-refile t)
-
-;; Add &#34;CLOSED: [timestamp]&#34; when a task is marked as DONE.
-(setq org-log-done t)
-
-(defun my/notes-open ()
-  (interactive)
-  (switch-to-buffer (find-file-noselect &#34;~/Dropbox/org/notes.org&#34;)))
-(global-set-key (kbd &#34;C-c n&#34;) #&#39;my/notes-open)
-Theme Specific Settings
-I use the Solarized Dark theme; it has some tweaks for Org-mode.
-;; Don&#39;t change size of Org-mode headlines (but keep other size-changes)
-(setq solarized-scale-org-headlines nil)
-
-;; Avoid all font-size changes
-(setq solarized-height-minus-1 1.0)
-(setq solarized-height-plus-1 1.0)
-(setq solarized-height-plus-2 1.0)
-(setq solarized-height-plus-3 1.0)
-(setq solarized-height-plus-4 1.0)
-Some Custom Face Settings for Org-mode
-I prefer to have a very dark background in code blocks.
-Your theme may require a different color set.
-(custom-set-faces
- &#39;(org-block ((t (:background &#34;gray10&#34;))))
- &#39;(org-document-title ((t (:foreground &#34;red&#34; :weight bold))))
- &#39;(org-level-1 ((t (:inherit outline-1 :weight bold))))
- &#39;(org-level-2 ((t (:inherit outline-2 :weight normal :slant italic))))
- &#39;(org-level-3 ((t (:inherit outline-3 :slant italic))))
- &#39;(org-level-4 ((t (:inherit outline-4 :slant italic)))))
-Screenshots
-
-            Org mode w/ code blocks. Click or tap to view the full-size picture.
-        
-
-
-
-            Org agenda w/ diary. Click or tap to view the full-size picture.
-        
-
-
-Happy emacsing!
-&mdash; The Emacs Cat."><meta itemprop="datePublished" content="2025-07-24T10:41:06+01:00" />
-<meta itemprop="dateModified" content="2025-07-24T10:41:06+01:00" />
-<meta itemprop="wordCount" content="783">
-<meta itemprop="keywords" content="emacs,config,org-mode," />
-		<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="My Emacs Org Configuration"/>
-<meta name="twitter:description" content="These days, I’ve come across numerous posts and Reddit threads
-praising Org mode as one of the most compelling features of Emacs.
-There’s no doubt this is true, and I’m amazed by how many people use
-Emacs solely for Org-mode. As a software developer, I rely on Org
-every day for note-taking, maintaining my knowledge
-database (org-roam), agenda management (org-agenda, synchronized with
-beorg on my iPhone and iPad via Dropbox), and, of course, blogging.
-So, I’ve decided to share my Org configuration in the hope that it
-will be useful to someone.
-Org-mode
-Org-mode is now included with Emacs, so we don’t need to install it
-separately&mdash;except for org-roam, which is an external package.
-Common Settings
-;; When at a URL, pressing the &lt;Enter&gt; opens the link in a browser.
-(setq org-return-follows-link t)
-
-;; To prevent M-RET splitting the line.
-;; https://irreal.org/blog/?p=6297
-(setq org-M-RET-may-split-line &#39;((item . nil)))
-
-;; To hide drawers, e.g. PROPERTIES.
-(setq org-startup-folded &#39;fold)
-Hide Emphasis Characters
-From Org as a Word Processor.
-;; Non-nil means font-lock should hide
-;; the emphasis marker characters.
-(setq org-hide-emphasis-markers t)
-Keep in mind that the slash characters (and asterisks for bold, etc)
-are still there, but aren’t displayed.
-;; Make invisible parts of Org elements appear visible.
-(use-package org-appear :ensure t
-  :init
-  (setq org-appear-delay 0.2)
-  :hook
-  org-mode
-)
-The org-appear package is very helpful
-when using org-hide-emphasis-markers, as described above.
-Hidden element parts appear when the cursor enters an element
-and disappear when it leaves&mdash;with some delay.
-Better List Bullets
-From Org as a Word Processor.
-;; Better list bullets.
-(font-lock-add-keywords
- &#39;org-mode
- &#39;((&#34;^ &#43;\\([-*]\\) &#34;
-    (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) &#34;•&#34;))))))
-Replace the initial - with a Unicode bullet symbol •.
-Better Header Bullets
-I prefer using Unicode circled digit symbols as header bullets to
-indicate the header level.
-(use-package org-bullets :ensure t)
-(add-hook &#39;org-mode-hook (lambda () (org-bullets-mode 1)))
-(setq org-bullets-bullet-list
-  &#39;(&#34;①&#34; &#34;②&#34; &#34;③&#34; &#34;④&#34; &#34;⑤&#34; &#34;⑥&#34; &#34;⑦&#34; &#34;⑧&#34; &#34;⑨&#34; &#34;⑩&#34;))
-
-;; Indent levels.
-(add-hook &#39;org-mode-hook &#39;org-indent-mode)
-
-;; Use this character(s) for ellipsis.
-(setq org-ellipsis &#34;...&#34;)
-Source Code Blocks
-;; Pretty fontification of source code blocks.
-(setq org-src-fontify-natively t)
-
-;; Use `bash&#39; instead of `sh&#39; in the `shell&#39; code block.
-(setq org-babel-sh-command &#34;bash&#34;)
-
-;; Use C&#43;&#43;17.
-(setq org-babel-C&#43;&#43;-compiler &#34;g&#43;&#43; -std=c&#43;&#43;17&#34;)
-
-;; `org-babel&#39; languages.
-(require &#39;ob-tangle)
-(org-babel-do-load-languages
- &#39;org-babel-load-languages
- &#39;(
-   (shell . t)
-   (python . t)
-   (C . t)         ; C and C&#43;&#43;
-   (calc . t)
-   (latex . t)
-   (gnuplot . t)
-   (sqlite . t)))
-
-;; No confirmation on block execution.
-(setq org-confirm-babel-evaluate nil)
-Org Agenda
-;; Open the current agenda.
-(global-set-key (kbd &#34;C-c a&#34;) &#39;org-agenda)
-
-;; View the agenda in the current window.
-(setq org-agenda-window-setup &#39;current-window)
-
-;; A file to store the agenda. I use Dropbox to be able to view/edit
-;; the agenda on other devices (phones, tablets).
-;; In particular, I use the `beorg&#39; app on both iPhone and iPad.
-(setq org-agenda-files &#39;(&#34;~/Dropbox/org/refile-beorg.org&#34;))
-
-;; View diary for the current week.
-(setq org-agenda-include-diary t)
-
-;; Set priority range from A to C with default A.
-(setq org-highest-priority ?A)
-(setq org-lowest-priority ?C)
-(setq org-default-priority ?A)
-
-;; Optional. Set custom colors for priorities (for Solarized Dark theme).
-;; Your theme may require a different color set.
-(setq org-priority-faces
-      &#39;((?A . (:foreground &#34;#F0DFAF&#34; :weight bold))
-        (?B . (:foreground &#34;LightSteelBlue&#34;))
-        (?C . (:foreground &#34;OliveDrab&#34;))))
-
-;; Capture items using &lt;C-c c&gt;.
-(define-key global-map (kbd &#34;C-c c&#34;) &#39;org-capture)
-(setq org-capture-templates
-      &#39;(
-        (&#34;t&#34; &#34;TODO item in refile-beorg&#34;
-         entry (file &#34;~/Dropbox/org/refile-beorg.org&#34;)
-         &#34;* TODO %?\n%U&#34;
-         )
-        (&#34;n&#34; &#34;Notes in notes.org&#34;
-         entry (file &#34;~/Dropbox/org/notes.org&#34;)
-         &#34;\n* %T %?\n%i&#34;
-         )))
-
-;; https://github.com/harrybournis/org-fancy-priorities
-(use-package org-fancy-priorities
-  :ensure t
-  :hook
-  (org-mode . org-fancy-priorities-mode)
-  :config
-  (setq org-fancy-priorities-list &#39;(&#34;⚡&#34; &#34;⏰&#34; &#34;☕&#34;)))
-
-;; A timestamp or a note will be recorded when an entry has been refiled.
-(setq org-log-refile t)
-
-;; Add &#34;CLOSED: [timestamp]&#34; when a task is marked as DONE.
-(setq org-log-done t)
-
-(defun my/notes-open ()
-  (interactive)
-  (switch-to-buffer (find-file-noselect &#34;~/Dropbox/org/notes.org&#34;)))
-(global-set-key (kbd &#34;C-c n&#34;) #&#39;my/notes-open)
-Theme Specific Settings
-I use the Solarized Dark theme; it has some tweaks for Org-mode.
-;; Don&#39;t change size of Org-mode headlines (but keep other size-changes)
-(setq solarized-scale-org-headlines nil)
-
-;; Avoid all font-size changes
-(setq solarized-height-minus-1 1.0)
-(setq solarized-height-plus-1 1.0)
-(setq solarized-height-plus-2 1.0)
-(setq solarized-height-plus-3 1.0)
-(setq solarized-height-plus-4 1.0)
-Some Custom Face Settings for Org-mode
-I prefer to have a very dark background in code blocks.
-Your theme may require a different color set.
-(custom-set-faces
- &#39;(org-block ((t (:background &#34;gray10&#34;))))
- &#39;(org-document-title ((t (:foreground &#34;red&#34; :weight bold))))
- &#39;(org-level-1 ((t (:inherit outline-1 :weight bold))))
- &#39;(org-level-2 ((t (:inherit outline-2 :weight normal :slant italic))))
- &#39;(org-level-3 ((t (:inherit outline-3 :slant italic))))
- &#39;(org-level-4 ((t (:inherit outline-4 :slant italic)))))
-Screenshots
-
-            Org mode w/ code blocks. Click or tap to view the full-size picture.
-        
-
-
-
-            Org agenda w/ diary. Click or tap to view the full-size picture.
-        
-
-
-Happy emacsing!
-&mdash; The Emacs Cat."/>
+		<meta property="og:url" content="https://olddeuteronomy.github.io/post/emacs-org-config/">
+  <meta property="og:site_name" content="The Emacs Cat">
+  <meta property="og:title" content="My Emacs Org Configuration">
+  <meta property="og:description" content="These days, I’ve come across numerous posts and Reddit threads praising Org mode as one of the most compelling features of Emacs. There’s no doubt this is true, and I’m amazed by how many people use Emacs solely for Org-mode. As a software developer, I rely on Org every day for note-taking, maintaining my knowledge database (org-roam), agenda management (org-agenda, synchronized with beorg on my iPhone and iPad via Dropbox), and, of course, blogging.
+So, I’ve decided to share my Org configuration in the hope that it will be useful to someone.
+Org-mode Org-mode is now included with Emacs, so we don’t need to install it separately—except for org-roam, which is an external package.
+Common Settings ;; When at a URL, pressing the &lt;Enter&gt; opens the link in a browser. (setq org-return-follows-link t) ;; To prevent M-RET splitting the line. ;; https://irreal.org/blog/?p=6297 (setq org-M-RET-may-split-line &#39;((item . nil))) ;; To hide drawers, e.g. PROPERTIES. (setq org-startup-folded &#39;fold) Hide Emphasis Characters From Org as a Word Processor.
+;; Non-nil means font-lock should hide ;; the emphasis marker characters. (setq org-hide-emphasis-markers t) Keep in mind that the slash characters (and asterisks for bold, etc) are still there, but aren’t displayed.
+;; Make invisible parts of Org elements appear visible. (use-package org-appear :ensure t :init (setq org-appear-delay 0.2) :hook org-mode ) The org-appear package is very helpful when using org-hide-emphasis-markers, as described above. Hidden element parts appear when the cursor enters an element and disappear when it leaves—with some delay.
+Better List Bullets From Org as a Word Processor.
+;; Better list bullets. (font-lock-add-keywords &#39;org-mode &#39;((&#34;^ &#43;\\([-*]\\) &#34; (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) &#34;•&#34;)))))) Replace the initial - with a Unicode bullet symbol •.
+Better Header Bullets I prefer using Unicode circled digit symbols as header bullets to indicate the header level.
+(use-package org-bullets :ensure t) (add-hook &#39;org-mode-hook (lambda () (org-bullets-mode 1))) (setq org-bullets-bullet-list &#39;(&#34;①&#34; &#34;②&#34; &#34;③&#34; &#34;④&#34; &#34;⑤&#34; &#34;⑥&#34; &#34;⑦&#34; &#34;⑧&#34; &#34;⑨&#34; &#34;⑩&#34;)) ;; Indent levels. (add-hook &#39;org-mode-hook &#39;org-indent-mode) ;; Use this character(s) for ellipsis. (setq org-ellipsis &#34;...&#34;) Source Code Blocks ;; Pretty fontification of source code blocks. (setq org-src-fontify-natively t) ;; Use `bash&#39; instead of `sh&#39; in the `shell&#39; code block. (setq org-babel-sh-command &#34;bash&#34;) ;; Use C&#43;&#43;17. (setq org-babel-C&#43;&#43;-compiler &#34;g&#43;&#43; -std=c&#43;&#43;17&#34;) ;; `org-babel&#39; languages. (require &#39;ob-tangle) (org-babel-do-load-languages &#39;org-babel-load-languages &#39;( (shell . t) (python . t) (C . t) ; C and C&#43;&#43; (calc . t) (latex . t) (gnuplot . t) (sqlite . t))) ;; No confirmation on block execution. (setq org-confirm-babel-evaluate nil) Org Agenda ;; Open the current agenda. (global-set-key (kbd &#34;C-c a&#34;) &#39;org-agenda) ;; View the agenda in the current window. (setq org-agenda-window-setup &#39;current-window) ;; A file to store the agenda. I use Dropbox to be able to view/edit ;; the agenda on other devices (phones, tablets). ;; In particular, I use the `beorg&#39; app on both iPhone and iPad. (setq org-agenda-files &#39;(&#34;~/Dropbox/org/refile-beorg.org&#34;)) ;; View diary for the current week. (setq org-agenda-include-diary t) ;; Set priority range from A to C with default A. (setq org-highest-priority ?A) (setq org-lowest-priority ?C) (setq org-default-priority ?A) ;; Optional. Set custom colors for priorities (for Solarized Dark theme). ;; Your theme may require a different color set. (setq org-priority-faces &#39;((?A . (:foreground &#34;#F0DFAF&#34; :weight bold)) (?B . (:foreground &#34;LightSteelBlue&#34;)) (?C . (:foreground &#34;OliveDrab&#34;)))) ;; Capture items using &lt;C-c c&gt;. (define-key global-map (kbd &#34;C-c c&#34;) &#39;org-capture) (setq org-capture-templates &#39;( (&#34;t&#34; &#34;TODO item in refile-beorg&#34; entry (file &#34;~/Dropbox/org/refile-beorg.org&#34;) &#34;* TODO %?\n%U&#34; ) (&#34;n&#34; &#34;Notes in notes.org&#34; entry (file &#34;~/Dropbox/org/notes.org&#34;) &#34;\n* %T %?\n%i&#34; ))) ;; https://github.com/harrybournis/org-fancy-priorities (use-package org-fancy-priorities :ensure t :hook (org-mode . org-fancy-priorities-mode) :config (setq org-fancy-priorities-list &#39;(&#34;⚡&#34; &#34;⏰&#34; &#34;☕&#34;))) ;; A timestamp or a note will be recorded when an entry has been refiled. (setq org-log-refile t) ;; Add &#34;CLOSED: [timestamp]&#34; when a task is marked as DONE. (setq org-log-done t) (defun my/notes-open () (interactive) (switch-to-buffer (find-file-noselect &#34;~/Dropbox/org/notes.org&#34;))) (global-set-key (kbd &#34;C-c n&#34;) #&#39;my/notes-open) Theme Specific Settings I use the Solarized Dark theme; it has some tweaks for Org-mode.
+;; Don&#39;t change size of Org-mode headlines (but keep other size-changes) (setq solarized-scale-org-headlines nil) ;; Avoid all font-size changes (setq solarized-height-minus-1 1.0) (setq solarized-height-plus-1 1.0) (setq solarized-height-plus-2 1.0) (setq solarized-height-plus-3 1.0) (setq solarized-height-plus-4 1.0) Some Custom Face Settings for Org-mode I prefer to have a very dark background in code blocks. Your theme may require a different color set.
+(custom-set-faces &#39;(org-block ((t (:background &#34;gray10&#34;)))) &#39;(org-document-title ((t (:foreground &#34;red&#34; :weight bold)))) &#39;(org-level-1 ((t (:inherit outline-1 :weight bold)))) &#39;(org-level-2 ((t (:inherit outline-2 :weight normal :slant italic)))) &#39;(org-level-3 ((t (:inherit outline-3 :slant italic)))) &#39;(org-level-4 ((t (:inherit outline-4 :slant italic))))) Screenshots Org mode w/ code blocks. Click or tap to view the full-size picture. Org agenda w/ diary. Click or tap to view the full-size picture. Happy emacsing!
+— The Emacs Cat.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-07-24T10:41:06+01:00">
+    <meta property="article:modified_time" content="2025-07-24T10:41:06+01:00">
+    <meta property="article:tag" content="Emacs">
+    <meta property="article:tag" content="Config">
+    <meta property="article:tag" content="Org-Mode">
+
+		
+  <meta itemprop="name" content="My Emacs Org Configuration">
+  <meta itemprop="description" content="These days, I’ve come across numerous posts and Reddit threads praising Org mode as one of the most compelling features of Emacs. There’s no doubt this is true, and I’m amazed by how many people use Emacs solely for Org-mode. As a software developer, I rely on Org every day for note-taking, maintaining my knowledge database (org-roam), agenda management (org-agenda, synchronized with beorg on my iPhone and iPad via Dropbox), and, of course, blogging.
+So, I’ve decided to share my Org configuration in the hope that it will be useful to someone.
+Org-mode Org-mode is now included with Emacs, so we don’t need to install it separately—except for org-roam, which is an external package.
+Common Settings ;; When at a URL, pressing the &lt;Enter&gt; opens the link in a browser. (setq org-return-follows-link t) ;; To prevent M-RET splitting the line. ;; https://irreal.org/blog/?p=6297 (setq org-M-RET-may-split-line &#39;((item . nil))) ;; To hide drawers, e.g. PROPERTIES. (setq org-startup-folded &#39;fold) Hide Emphasis Characters From Org as a Word Processor.
+;; Non-nil means font-lock should hide ;; the emphasis marker characters. (setq org-hide-emphasis-markers t) Keep in mind that the slash characters (and asterisks for bold, etc) are still there, but aren’t displayed.
+;; Make invisible parts of Org elements appear visible. (use-package org-appear :ensure t :init (setq org-appear-delay 0.2) :hook org-mode ) The org-appear package is very helpful when using org-hide-emphasis-markers, as described above. Hidden element parts appear when the cursor enters an element and disappear when it leaves—with some delay.
+Better List Bullets From Org as a Word Processor.
+;; Better list bullets. (font-lock-add-keywords &#39;org-mode &#39;((&#34;^ &#43;\\([-*]\\) &#34; (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) &#34;•&#34;)))))) Replace the initial - with a Unicode bullet symbol •.
+Better Header Bullets I prefer using Unicode circled digit symbols as header bullets to indicate the header level.
+(use-package org-bullets :ensure t) (add-hook &#39;org-mode-hook (lambda () (org-bullets-mode 1))) (setq org-bullets-bullet-list &#39;(&#34;①&#34; &#34;②&#34; &#34;③&#34; &#34;④&#34; &#34;⑤&#34; &#34;⑥&#34; &#34;⑦&#34; &#34;⑧&#34; &#34;⑨&#34; &#34;⑩&#34;)) ;; Indent levels. (add-hook &#39;org-mode-hook &#39;org-indent-mode) ;; Use this character(s) for ellipsis. (setq org-ellipsis &#34;...&#34;) Source Code Blocks ;; Pretty fontification of source code blocks. (setq org-src-fontify-natively t) ;; Use `bash&#39; instead of `sh&#39; in the `shell&#39; code block. (setq org-babel-sh-command &#34;bash&#34;) ;; Use C&#43;&#43;17. (setq org-babel-C&#43;&#43;-compiler &#34;g&#43;&#43; -std=c&#43;&#43;17&#34;) ;; `org-babel&#39; languages. (require &#39;ob-tangle) (org-babel-do-load-languages &#39;org-babel-load-languages &#39;( (shell . t) (python . t) (C . t) ; C and C&#43;&#43; (calc . t) (latex . t) (gnuplot . t) (sqlite . t))) ;; No confirmation on block execution. (setq org-confirm-babel-evaluate nil) Org Agenda ;; Open the current agenda. (global-set-key (kbd &#34;C-c a&#34;) &#39;org-agenda) ;; View the agenda in the current window. (setq org-agenda-window-setup &#39;current-window) ;; A file to store the agenda. I use Dropbox to be able to view/edit ;; the agenda on other devices (phones, tablets). ;; In particular, I use the `beorg&#39; app on both iPhone and iPad. (setq org-agenda-files &#39;(&#34;~/Dropbox/org/refile-beorg.org&#34;)) ;; View diary for the current week. (setq org-agenda-include-diary t) ;; Set priority range from A to C with default A. (setq org-highest-priority ?A) (setq org-lowest-priority ?C) (setq org-default-priority ?A) ;; Optional. Set custom colors for priorities (for Solarized Dark theme). ;; Your theme may require a different color set. (setq org-priority-faces &#39;((?A . (:foreground &#34;#F0DFAF&#34; :weight bold)) (?B . (:foreground &#34;LightSteelBlue&#34;)) (?C . (:foreground &#34;OliveDrab&#34;)))) ;; Capture items using &lt;C-c c&gt;. (define-key global-map (kbd &#34;C-c c&#34;) &#39;org-capture) (setq org-capture-templates &#39;( (&#34;t&#34; &#34;TODO item in refile-beorg&#34; entry (file &#34;~/Dropbox/org/refile-beorg.org&#34;) &#34;* TODO %?\n%U&#34; ) (&#34;n&#34; &#34;Notes in notes.org&#34; entry (file &#34;~/Dropbox/org/notes.org&#34;) &#34;\n* %T %?\n%i&#34; ))) ;; https://github.com/harrybournis/org-fancy-priorities (use-package org-fancy-priorities :ensure t :hook (org-mode . org-fancy-priorities-mode) :config (setq org-fancy-priorities-list &#39;(&#34;⚡&#34; &#34;⏰&#34; &#34;☕&#34;))) ;; A timestamp or a note will be recorded when an entry has been refiled. (setq org-log-refile t) ;; Add &#34;CLOSED: [timestamp]&#34; when a task is marked as DONE. (setq org-log-done t) (defun my/notes-open () (interactive) (switch-to-buffer (find-file-noselect &#34;~/Dropbox/org/notes.org&#34;))) (global-set-key (kbd &#34;C-c n&#34;) #&#39;my/notes-open) Theme Specific Settings I use the Solarized Dark theme; it has some tweaks for Org-mode.
+;; Don&#39;t change size of Org-mode headlines (but keep other size-changes) (setq solarized-scale-org-headlines nil) ;; Avoid all font-size changes (setq solarized-height-minus-1 1.0) (setq solarized-height-plus-1 1.0) (setq solarized-height-plus-2 1.0) (setq solarized-height-plus-3 1.0) (setq solarized-height-plus-4 1.0) Some Custom Face Settings for Org-mode I prefer to have a very dark background in code blocks. Your theme may require a different color set.
+(custom-set-faces &#39;(org-block ((t (:background &#34;gray10&#34;)))) &#39;(org-document-title ((t (:foreground &#34;red&#34; :weight bold)))) &#39;(org-level-1 ((t (:inherit outline-1 :weight bold)))) &#39;(org-level-2 ((t (:inherit outline-2 :weight normal :slant italic)))) &#39;(org-level-3 ((t (:inherit outline-3 :slant italic)))) &#39;(org-level-4 ((t (:inherit outline-4 :slant italic))))) Screenshots Org mode w/ code blocks. Click or tap to view the full-size picture. Org agenda w/ diary. Click or tap to view the full-size picture. Happy emacsing!
+— The Emacs Cat.">
+  <meta itemprop="datePublished" content="2025-07-24T10:41:06+01:00">
+  <meta itemprop="dateModified" content="2025-07-24T10:41:06+01:00">
+  <meta itemprop="wordCount" content="783">
+  <meta itemprop="keywords" content="Emacs,Config,Org-Mode">
+		
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="My Emacs Org Configuration">
+  <meta name="twitter:description" content="These days, I’ve come across numerous posts and Reddit threads praising Org mode as one of the most compelling features of Emacs. There’s no doubt this is true, and I’m amazed by how many people use Emacs solely for Org-mode. As a software developer, I rely on Org every day for note-taking, maintaining my knowledge database (org-roam), agenda management (org-agenda, synchronized with beorg on my iPhone and iPad via Dropbox), and, of course, blogging.
+So, I’ve decided to share my Org configuration in the hope that it will be useful to someone.
+Org-mode Org-mode is now included with Emacs, so we don’t need to install it separately—except for org-roam, which is an external package.
+Common Settings ;; When at a URL, pressing the &lt;Enter&gt; opens the link in a browser. (setq org-return-follows-link t) ;; To prevent M-RET splitting the line. ;; https://irreal.org/blog/?p=6297 (setq org-M-RET-may-split-line &#39;((item . nil))) ;; To hide drawers, e.g. PROPERTIES. (setq org-startup-folded &#39;fold) Hide Emphasis Characters From Org as a Word Processor.
+;; Non-nil means font-lock should hide ;; the emphasis marker characters. (setq org-hide-emphasis-markers t) Keep in mind that the slash characters (and asterisks for bold, etc) are still there, but aren’t displayed.
+;; Make invisible parts of Org elements appear visible. (use-package org-appear :ensure t :init (setq org-appear-delay 0.2) :hook org-mode ) The org-appear package is very helpful when using org-hide-emphasis-markers, as described above. Hidden element parts appear when the cursor enters an element and disappear when it leaves—with some delay.
+Better List Bullets From Org as a Word Processor.
+;; Better list bullets. (font-lock-add-keywords &#39;org-mode &#39;((&#34;^ &#43;\\([-*]\\) &#34; (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) &#34;•&#34;)))))) Replace the initial - with a Unicode bullet symbol •.
+Better Header Bullets I prefer using Unicode circled digit symbols as header bullets to indicate the header level.
+(use-package org-bullets :ensure t) (add-hook &#39;org-mode-hook (lambda () (org-bullets-mode 1))) (setq org-bullets-bullet-list &#39;(&#34;①&#34; &#34;②&#34; &#34;③&#34; &#34;④&#34; &#34;⑤&#34; &#34;⑥&#34; &#34;⑦&#34; &#34;⑧&#34; &#34;⑨&#34; &#34;⑩&#34;)) ;; Indent levels. (add-hook &#39;org-mode-hook &#39;org-indent-mode) ;; Use this character(s) for ellipsis. (setq org-ellipsis &#34;...&#34;) Source Code Blocks ;; Pretty fontification of source code blocks. (setq org-src-fontify-natively t) ;; Use `bash&#39; instead of `sh&#39; in the `shell&#39; code block. (setq org-babel-sh-command &#34;bash&#34;) ;; Use C&#43;&#43;17. (setq org-babel-C&#43;&#43;-compiler &#34;g&#43;&#43; -std=c&#43;&#43;17&#34;) ;; `org-babel&#39; languages. (require &#39;ob-tangle) (org-babel-do-load-languages &#39;org-babel-load-languages &#39;( (shell . t) (python . t) (C . t) ; C and C&#43;&#43; (calc . t) (latex . t) (gnuplot . t) (sqlite . t))) ;; No confirmation on block execution. (setq org-confirm-babel-evaluate nil) Org Agenda ;; Open the current agenda. (global-set-key (kbd &#34;C-c a&#34;) &#39;org-agenda) ;; View the agenda in the current window. (setq org-agenda-window-setup &#39;current-window) ;; A file to store the agenda. I use Dropbox to be able to view/edit ;; the agenda on other devices (phones, tablets). ;; In particular, I use the `beorg&#39; app on both iPhone and iPad. (setq org-agenda-files &#39;(&#34;~/Dropbox/org/refile-beorg.org&#34;)) ;; View diary for the current week. (setq org-agenda-include-diary t) ;; Set priority range from A to C with default A. (setq org-highest-priority ?A) (setq org-lowest-priority ?C) (setq org-default-priority ?A) ;; Optional. Set custom colors for priorities (for Solarized Dark theme). ;; Your theme may require a different color set. (setq org-priority-faces &#39;((?A . (:foreground &#34;#F0DFAF&#34; :weight bold)) (?B . (:foreground &#34;LightSteelBlue&#34;)) (?C . (:foreground &#34;OliveDrab&#34;)))) ;; Capture items using &lt;C-c c&gt;. (define-key global-map (kbd &#34;C-c c&#34;) &#39;org-capture) (setq org-capture-templates &#39;( (&#34;t&#34; &#34;TODO item in refile-beorg&#34; entry (file &#34;~/Dropbox/org/refile-beorg.org&#34;) &#34;* TODO %?\n%U&#34; ) (&#34;n&#34; &#34;Notes in notes.org&#34; entry (file &#34;~/Dropbox/org/notes.org&#34;) &#34;\n* %T %?\n%i&#34; ))) ;; https://github.com/harrybournis/org-fancy-priorities (use-package org-fancy-priorities :ensure t :hook (org-mode . org-fancy-priorities-mode) :config (setq org-fancy-priorities-list &#39;(&#34;⚡&#34; &#34;⏰&#34; &#34;☕&#34;))) ;; A timestamp or a note will be recorded when an entry has been refiled. (setq org-log-refile t) ;; Add &#34;CLOSED: [timestamp]&#34; when a task is marked as DONE. (setq org-log-done t) (defun my/notes-open () (interactive) (switch-to-buffer (find-file-noselect &#34;~/Dropbox/org/notes.org&#34;))) (global-set-key (kbd &#34;C-c n&#34;) #&#39;my/notes-open) Theme Specific Settings I use the Solarized Dark theme; it has some tweaks for Org-mode.
+;; Don&#39;t change size of Org-mode headlines (but keep other size-changes) (setq solarized-scale-org-headlines nil) ;; Avoid all font-size changes (setq solarized-height-minus-1 1.0) (setq solarized-height-plus-1 1.0) (setq solarized-height-plus-2 1.0) (setq solarized-height-plus-3 1.0) (setq solarized-height-plus-4 1.0) Some Custom Face Settings for Org-mode I prefer to have a very dark background in code blocks. Your theme may require a different color set.
+(custom-set-faces &#39;(org-block ((t (:background &#34;gray10&#34;)))) &#39;(org-document-title ((t (:foreground &#34;red&#34; :weight bold)))) &#39;(org-level-1 ((t (:inherit outline-1 :weight bold)))) &#39;(org-level-2 ((t (:inherit outline-2 :weight normal :slant italic)))) &#39;(org-level-3 ((t (:inherit outline-3 :slant italic)))) &#39;(org-level-4 ((t (:inherit outline-4 :slant italic))))) Screenshots Org mode w/ code blocks. Click or tap to view the full-size picture. Org agenda w/ diary. Click or tap to view the full-size picture. Happy emacsing!
+— The Emacs Cat.">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -780,14 +294,14 @@ Your theme may require a different color set.</p>
 </span></span><span style="display:flex;"><span> <span style="color:#f92672">&#39;</span>(org-level-3 ((<span style="color:#66d9ef">t</span> (:inherit outline-3 :slant italic))))
 </span></span><span style="display:flex;"><span> <span style="color:#f92672">&#39;</span>(org-level-4 ((<span style="color:#66d9ef">t</span> (:inherit outline-4 :slant italic)))))
 </span></span></code></pre></div><h3 id="screenshots">Screenshots</h3>
-<figure><a href="/img/org-mode.png"><img src="/img/org-mode.png"/></a><figcaption>
-            <h4>Org mode w/ code blocks. Click or tap to view the full-size picture.</h4>
-        </figcaption>
+<figure><a href="/img/org-mode.png"><img src="/img/org-mode.png"></a><figcaption>
+      <h4>Org mode w/ code blocks. Click or tap to view the full-size picture.</h4>
+    </figcaption>
 </figure>
 
-<figure><a href="/img/org-agenda.png"><img src="/img/org-agenda.png"/></a><figcaption>
-            <h4>Org agenda w/ diary. Click or tap to view the full-size picture.</h4>
-        </figcaption>
+<figure><a href="/img/org-agenda.png"><img src="/img/org-agenda.png"></a><figcaption>
+      <h4>Org agenda w/ diary. Click or tap to view the full-size picture.</h4>
+    </figcaption>
 </figure>
 
 <p>Happy emacsing!</p>

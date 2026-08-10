@@ -7,21 +7,29 @@
 	<title>Debugging in Emacs - The Emacs Cat</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="Debugging in Emacs is straightforward, effective, and easier than you might expect.">
-		<meta property="og:title" content="Debugging in Emacs" />
-<meta property="og:description" content="Debugging in Emacs is straightforward, effective, and easier than you might expect." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://olddeuteronomy.github.io/post/debugging-in-emacs/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2026-08-04T11:47:40+03:00" />
-<meta property="article:modified_time" content="2026-08-04T11:47:40+03:00" />
+		<meta property="og:url" content="https://olddeuteronomy.github.io/post/debugging-in-emacs/">
+  <meta property="og:site_name" content="The Emacs Cat">
+  <meta property="og:title" content="Debugging in Emacs">
+  <meta property="og:description" content="Debugging in Emacs is straightforward, effective, and easier than you might expect.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2026-08-04T11:47:40+03:00">
+    <meta property="article:modified_time" content="2026-08-04T11:47:40+03:00">
+    <meta property="article:tag" content="Emacs">
+    <meta property="article:tag" content="Programming">
 
-
-		<meta itemprop="name" content="Debugging in Emacs">
-<meta itemprop="description" content="Debugging in Emacs is straightforward, effective, and easier than you might expect."><meta itemprop="datePublished" content="2026-08-04T11:47:40+03:00" />
-<meta itemprop="dateModified" content="2026-08-04T11:47:40+03:00" />
-<meta itemprop="wordCount" content="906">
-<meta itemprop="keywords" content="emacs,programming," />
-		<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Debugging in Emacs"/>
-<meta name="twitter:description" content="Debugging in Emacs is straightforward, effective, and easier than you might expect."/>
+		
+  <meta itemprop="name" content="Debugging in Emacs">
+  <meta itemprop="description" content="Debugging in Emacs is straightforward, effective, and easier than you might expect.">
+  <meta itemprop="datePublished" content="2026-08-04T11:47:40+03:00">
+  <meta itemprop="dateModified" content="2026-08-04T11:47:40+03:00">
+  <meta itemprop="wordCount" content="911">
+  <meta itemprop="keywords" content="Emacs,Programming">
+		
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Debugging in Emacs">
+  <meta name="twitter:description" content="Debugging in Emacs is straightforward, effective, and easier than you might expect.">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -109,25 +117,26 @@ editor.</li>
 <p>In Emacs, I open a source code file (<code>timepoint.c</code> in this example) and
 run <code>M-x gdb</code>. GDB then prompts in the minibuffer for the path to the
 corresponding executable, as shown below.</p>
-<figure><a href="/img/gud-gdb.png"><img src="/img/gud-gdb.png"/></a><figcaption>
-            <h4>Loading a program to debug. Click or tap to view the full-size picture.</h4>
-        </figcaption>
+<figure><a href="/img/gud-gdb.png"><img src="/img/gud-gdb.png"></a><figcaption>
+      <h4>Loading a program to debug. Click or tap to view the full-size picture.</h4>
+    </figcaption>
 </figure>
 
 <p>After you enter the path to the executable&mdash;assuming it was built
 with the <code>-g</code> flag (i.e., compiled with debug information)&mdash;and press
-<!-- raw HTML omitted -->Enter<!-- raw HTML omitted -->, GDB prints some initial output and may ask whether
+<kbd>Enter</kbd>
+, GDB prints some initial output and may ask whether
 it should automatically download missing debugging information from
 trusted online servers.</p>
-<figure><a href="/img/gud-debuginfo.png"><img src="/img/gud-debuginfo.png"/></a><figcaption>
-            <h4>Downloading missing debugging information. Click or tap to view the full-size picture.</h4>
-        </figcaption>
+<figure><a href="/img/gud-debuginfo.png"><img src="/img/gud-debuginfo.png"></a><figcaption>
+      <h4>Downloading missing debugging information. Click or tap to view the full-size picture.</h4>
+    </figcaption>
 </figure>
 
 <p>Because I don&rsquo;t intend to debug system or third-party libraries, I
-simply press <!-- raw HTML omitted -->n<!-- raw HTML omitted --> to skip this step, which can occasionally
+simply press <kbd>n</kbd> to skip this step, which can occasionally
 freeze Emacs for a while.</p>
-<p>The GUD <em>dashboard</em> appears. It usually consists of nine windows.</p>
+<p>The GUD <em>dashboard</em> appears. It usually consists of 6 windows.</p>
 <ul>
 <li><strong>Debugger</strong>, the GUD interaction buffer (or GDB shell);</li>
 <li><strong>C/</strong>*, the source code buffer;</li>
@@ -136,17 +145,17 @@ freeze Emacs for a while.</p>
 <li><strong>Inferior I/O</strong>, the input/output buffer (usually associated with <code>stdin</code>/<code>stdout</code>);</li>
 <li><strong>Breakpoints</strong>, the breakpoints/threads list.</li>
 </ul>
-<figure><a href="/img/gud-dashboard.png"><img src="/img/gud-dashboard.png"/></a><figcaption>
-            <h4>GUD dashboard. Click or tap to view the full-size picture.</h4>
-        </figcaption>
+<figure><a href="/img/gud-dashboard.png"><img src="/img/gud-dashboard.png"></a><figcaption>
+      <h4>GUD dashboard. Click or tap to view the full-size picture.</h4>
+    </figcaption>
 </figure>
 
 <p>In my usual workflow, I type <code>break main</code> (or simply <code>b main</code>) in the GUD
 interaction buffer (<strong>Debugger</strong>) to set a breakpoint at the start of my
 program.</p>
-<figure><a href="/img/gud-bmain.png"><img src="/img/gud-bmain.png"/></a><figcaption>
-            <h4>Setting initial breakpoint. Click or tap to view the full-size picture.</h4>
-        </figcaption>
+<figure><a href="/img/gud-bmain.png"><img src="/img/gud-bmain.png"></a><figcaption>
+      <h4>Setting initial breakpoint. Click or tap to view the full-size picture.</h4>
+    </figcaption>
 </figure>
 
 <p>The new breakpoint shows up right away: as a red fringe marker next to
@@ -158,10 +167,10 @@ then stop at the first breakpoint (line 20 in this example).</p>
 <p>Frankly, I find the <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Commands-of-GUD.html">default GUD keybindings</a> somewhat complex. For
 example, <code>C-x C-a C-n</code> is the globally defined key chord for <code>gud-next</code> &mdash; one
 of the most frequently used debugging commands. Having to type
-three keys while holding the <!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted --> key feels excessive to me, so I
+three keys while holding the <kbd>Ctrl</kbd> key feels excessive to me, so I
 prefer a single keystroke for this operation.</p>
 <p>So, in my <code>~/.emacs</code>, I’ve rebound the most frequently used
-GUD commands to <!-- raw HTML omitted -->F6<!-- raw HTML omitted --> and its derivatives.</p>
+GUD commands to <kbd>F6</kbd> and its derivatives.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-elisp" data-lang="elisp"><span style="display:flex;"><span>(global-set-key [(f6)] <span style="color:#a6e22e">#&#39;</span>gud-next) <span style="color:#75715e">;; Execute the next single line.</span>
 </span></span><span style="display:flex;"><span>(global-set-key [(control f6)] <span style="color:#a6e22e">#&#39;</span>gud-step) <span style="color:#75715e">;; Enter the called function.</span>
 </span></span><span style="display:flex;"><span>(global-set-key [(shift f6)] <span style="color:#a6e22e">#&#39;</span>gud-cont) <span style="color:#75715e">;; Continue execution until hitting a breakpoint.</span>
@@ -180,13 +189,13 @@ keybinding in GUD, at least in Emacs 29.3.</p>
 to step through the function <code>print_timepoint</code> line by line. In the
 source code buffer, I move the cursor to line 9 and set a new
 breakpoint with <code>C-x C-a C-b</code> (<code>gud-break</code>). Then I continue execution
-with <!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->F6<!-- raw HTML omitted --> (<code>gud-cont</code>) until the new
+with <kbd>Shift</kbd> + <kbd>F6</kbd> (<code>gud-cont</code>) until the new
 breakpoint is hit.</p>
-<p>After stepping through the function line by line with <!-- raw HTML omitted -->F6<!-- raw HTML omitted -->
+<p>After stepping through the function line by line with <kbd>F6</kbd>
 (<code>gud-next</code>) until the end (line 16), I get the following output:</p>
-<figure><a href="/img/gud-step.png"><img src="/img/gud-step.png"/></a><figcaption>
-            <h4>Debugging a function. Click or tap to view the full-size picture.</h4>
-        </figcaption>
+<figure><a href="/img/gud-step.png"><img src="/img/gud-step.png"></a><figcaption>
+      <h4>Debugging a function. Click or tap to view the full-size picture.</h4>
+    </figcaption>
 </figure>
 
 <p>In the <strong>Locals</strong> buffer, you can see all local variables and their
@@ -194,7 +203,7 @@ current values. The <strong>Inferior I/O</strong> buffer shows the program outpu
 Everything looks correct: the tpoint variable has the value 0, which
 corresponds to the beginning of the Unix epoch (January 1, 1970).</p>
 <p>Indeed, we could have inspected the <code>print_timepoint</code> function by simply
-stepping into it (<code>gud-step</code>, <!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->F6<!-- raw HTML omitted -->) directly
+stepping into it (<code>gud-step</code>, <kbd>Ctrl</kbd> + <kbd>F6</kbd>) directly
 from the first line of main, where the initial breakpoint was set. I
 used this example to demonstrate more GUD commands in action.</p>
 <p>Now we can quit the debugging session by typing <code>quit</code> (or simply <code>q</code>) in
